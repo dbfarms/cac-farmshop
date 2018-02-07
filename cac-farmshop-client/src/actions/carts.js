@@ -20,6 +20,13 @@ const setCarts = carts => {
   }
 }
 
+const addCart = cart => {
+  return {
+    type: 'CREATE_CART_SUCCESS',
+    cart
+  }
+}
+
 // ** async actions **
 export const getCarts = () => {
   return dispatch => {
@@ -28,5 +35,21 @@ export const getCarts = () => {
       .then(response => response.json())
       .then(carts => dispatch(setCarts(carts)))
       .catch(error => console.log(error));
+  }
+}
+
+export const createCart = cart => {
+  return dispatch => {
+    return fetch('http://localhost:3000/carts', {
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ cart: cart })
+    })
+    .then(response => response.json())
+    .then(cart => dispatch(addCart(cart)))
+    .catch(error => console.log(error))
   }
 }

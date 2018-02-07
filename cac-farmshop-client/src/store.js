@@ -4,10 +4,13 @@ import {
   combineReducers
 } from 'redux'
 import thunk from 'redux-thunk';
+
 import carts from './reducers/carts';
+import cartFormData from './reducers/cartFormData';
 
 const reducers = combineReducers({
-  carts
+  carts,
+  cartFormData
 });
 
 const middleware = [thunk];

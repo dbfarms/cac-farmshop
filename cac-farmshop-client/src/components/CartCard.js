@@ -8,4 +8,4 @@ const CartCard = ({ cart }) =>
     <p>{cart.status}</p>
 </div>
 
-export default CartCard 
+export default CartCard
