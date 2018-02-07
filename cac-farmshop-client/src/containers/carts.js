@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
+import CartCard from '../components/CartCard';
+import CartForm from './CartForm';
 import './Carts.css';
 
-const Carts = (props) => (
-  <div className="CartsContainer">
-    <h1>Carts </h1>
-    {props.carts.map(cart => 
-        <div key={cart.id} className="CartsCard">
-            <h3>{cart.user_id}</h3>
-            <img className="CartImage" src={cart.img_url} alt={cart.user_id} />
-            <p>{cart.status}</p>
-        </div>
-    )}
-  </div>
- );
- 
+class Carts extends Component {
+
+  render() {
+    return (
+    <div className="CartsContainer">
+      <h1>Carts </h1>
+      {this.props.carts.map(cart => <CartCard  key={cart.id} cart={cart} />)}
+      <CartForm />
+    </div>
+   )
+  }
+}
+
+
  export default Carts;

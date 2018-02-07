@@ -2,16 +2,27 @@ import React, { Component } from 'react';
 //difference between react and react, component??
 import './App.css';
 import Carts from './carts'
-import 'whatwg-fetch';
 
-const API_URL = process.env.REACT_APP_API_URL;
 
-debugger
+//const API_URL = process.env.REACT_APP_API_URL;
+
+//debugger
+
+let header = new Headers({
+  'Access-Control-Allow-Origin':'',
+  'Content-Type': 'multipart/form-data'
+});
+
+let sentData={
+    method: 'GET',
+    mode: 'cors',
+    header: header
+};
 
 class App extends Component {
   constructor(props) {
     super(props)
-    
+
     this.state = {
       carts: []
     }
@@ -19,14 +30,14 @@ class App extends Component {
 
   componentDidMount() {
     //debugger
-    //fetch('https://localhost:8081/api/carts')
-      fetch(`${API_URL}/carts`)
+    fetch('http://localhost:3000/api/carts', header)
+      //fetch(`${API_URL}/carts`)
       .then(response => response.json())
       .then(carts => this.setState({ carts }))
   }
-  
+
   render() {
-    
+
     return (
       <div className="App">
       <Carts carts={this.state.carts}/>
@@ -39,7 +50,7 @@ export default App;
 
 /*
 
-    var obj = {  
+    var obj = {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -47,9 +58,9 @@ export default App;
         'Origin': '',
         'Host': 'localhost:8081'
     },
-    
+
     }
-    fetch('https://localhost:8081/api/carts', obj)  
+    fetch('https://localhost:8081/api/carts', obj)
   .then(function(res) {
     return res.json();
    })
