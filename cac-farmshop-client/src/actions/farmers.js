@@ -27,12 +27,15 @@ const addCart = cart => {
 */
 
 // ** async actions **
+
+//debugger
+
 export const getFarmers = () => {
   return dispatch => {
     return fetch('http://localhost:3000/api/farmers', header)
       //fetch(`${API_URL}/carts`)
       .then(response => response.json())
-      .then(carts => dispatch(setFarmers(farmers)))
+      .then(farmers => dispatch(setFarmers(farmers)))
       .catch(error => console.log(error));
   }
 }

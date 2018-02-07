@@ -13,12 +13,16 @@ import FarmerShow from './containers/FarmerShow';
 
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <Route path="/" component={App} />
-      <Route path='/farmers' component={FarmersPage}>
-        <Route path="/farmers/:id" component={FarmerShow} />
-      </Route>
+  <Provider store={store} >
+    <BrowserRouter >
+      <div>
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route exact path='/farmers' component={FarmersPage}>
+            <Route path='/farmers/:id' component={FarmerShow} />
+          </Route>
+        </Switch>
+      </div>
     </BrowserRouter>
   </Provider>,
     document.getElementById('root')

@@ -5,12 +5,14 @@ import {
 } from 'redux'
 import thunk from 'redux-thunk';
 
+import farmers from './reducers/farmersReducer'
 import carts from './reducers/carts';
 import cartFormData from './reducers/cartFormData';
 
 const reducers = combineReducers({
   carts,
-  cartFormData
+  cartFormData,
+  farmers
 });
 
 const middleware = [thunk];
