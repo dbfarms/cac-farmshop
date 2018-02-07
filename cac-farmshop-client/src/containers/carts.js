@@ -28,4 +28,4 @@ const mapStateToProps = (state) => {
   })
 }
 
- export default connect(mapStateToProps, { getCarts })(Carts);
+export default connect(mapStateToProps, { getCarts })(Carts);

@@ -6,3 +6,9 @@ export const updateCartFormData = cartFormData => {
     cartFormData
   }
 }
+
+export const resetCartForm = () => {
+  return {
+    type: 'RESET_CART_FORM'
+  }
+}

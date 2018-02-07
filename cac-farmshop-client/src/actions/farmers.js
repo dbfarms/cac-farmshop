@@ -1,7 +1,3 @@
-import { resetCartForm } from './cartForm'
-
-//const API_URL = process.env.REACT_APP_API_URL;
-
 let header = new Headers({
   'Access-Control-Allow-Origin':'',
   'Content-Type': 'multipart/form-data'
@@ -14,31 +10,34 @@ let sentData={
 };
 
 // ** action creators **
-const setCarts = carts => {
+const setFarmers = farmers => {
   return {
-    type: 'GET_CART_SUCCESS',
-    carts
+    type: 'GET_FARMER_SUCCESS',
+    farmers
   }
 }
 
+/*
 const addCart = cart => {
   return {
     type: 'CREATE_CART_SUCCESS',
     cart
   }
 }
+*/
 
 // ** async actions **
-export const getCarts = () => {
+export const getFarmers = () => {
   return dispatch => {
-    return fetch('http://localhost:3000/api/carts', header)
+    return fetch('http://localhost:3000/api/farmers', header)
       //fetch(`${API_URL}/carts`)
       .then(response => response.json())
-      .then(carts => dispatch(setCarts(carts)))
+      .then(carts => dispatch(setFarmers(farmers)))
       .catch(error => console.log(error));
   }
 }
 
+/*
 export const createCart = cart => {
   return dispatch => {
     return fetch('http://localhost:3000/api/carts', {
@@ -57,3 +56,4 @@ export const createCart = cart => {
     .catch(error => console.log(error))
   }
 }
+*/
