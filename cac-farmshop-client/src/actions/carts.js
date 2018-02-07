@@ -40,7 +40,7 @@ export const getCarts = () => {
 
 export const createCart = cart => {
   return dispatch => {
-    return fetch('http://localhost:3000/carts', {
+    return fetch('http://localhost:3000/api/carts', {
       headers: {
         'Access-Control-Allow-Origin':'',
         'Content-Type': 'application/json'
