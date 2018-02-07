@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import CartCard from '../components/CartCard';
 import CartForm from './CartForm';
+import { getCarts } from '../actions/carts'
 import './Carts.css';
 
 class Carts extends Component {
+
+  componentDidMount(){
+    this.props.getCarts()
+  }
 
   render() {
     return (
@@ -16,5 +22,10 @@ class Carts extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return ({
+      carts: state.carts
+  })
+}
 
- export default Carts;
+ export default connect(mapStateToProps, { getCarts })(Carts);

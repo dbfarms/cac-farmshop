@@ -3,21 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Carts from './carts'
 
-
-//const API_URL = process.env.REACT_APP_API_URL;
-
 //debugger
-
-let header = new Headers({
-  'Access-Control-Allow-Origin':'',
-  'Content-Type': 'multipart/form-data'
-});
-
-let sentData={
-    method: 'GET',
-    mode: 'cors',
-    header: header
-};
 
 class App extends Component {
   constructor(props) {
@@ -29,18 +15,20 @@ class App extends Component {
   }
 
   componentDidMount() {
+    //this.props.getCarts()
     //debugger
-    fetch('http://localhost:3000/api/carts', header)
+    //fetch('http://localhost:3000/api/carts', header)
       //fetch(`${API_URL}/carts`)
-      .then(response => response.json())
-      .then(carts => this.setState({ carts }))
+      //.then(response => response.json())
+
   }
+  
 
   render() {
 
     return (
       <div className="App">
-      <Carts carts={this.state.carts}/>
+      <Carts/>
       </div>
     );
   }
