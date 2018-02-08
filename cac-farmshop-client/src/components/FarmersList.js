@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import FarmerCard from './FarmerCard'
 
 export default (props) => {
-  //debugger
+  debugger
   const farmers = props.farmers.map(farmer =>
     <div>
       <li key={farmer.id}>
