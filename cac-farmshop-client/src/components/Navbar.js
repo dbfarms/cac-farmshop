@@ -1,8 +1,9 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import '../containers/App.css'
 
 const Navbar = () =>
-    <div>
+    <div className="navbar">
       <Route render={({history}) => (
         <div>
           <button

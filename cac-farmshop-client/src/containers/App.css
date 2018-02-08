@@ -22,7 +22,39 @@
   font-size: large;
 }
 
+body {
+  background: lightsteelblue;
+  text-align: center;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.nav-button {
+ font-size: 18px;
+ background: #E9967A;
+ border-radius: 1px;
+ display: inline-block;
+ height: 75px;
+ margin: 1.5rem;
+ position: relative;
+ width: 300px;
+}
+
+.nav-button:hover {
+     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.navbar {
+        background-color: LightSlateGray;
+        background-image: none;
+        background-repeat: repeat;
+        background-attachment: scroll;
+        background-clip: border-box;
+        background-origin: padding-box;
+        background-position-x: 0%;
+        background-position-y: 0%;
+        background-size: auto auto;
 }

@@ -35,7 +35,7 @@ class App extends Component {
 
     return (
       <BrowserRouter >
-        <div>
+        <div className="background-here">
 
           <Navbar />
           <Route exact path="/" render={() => <div>Home For Now</div>} />
