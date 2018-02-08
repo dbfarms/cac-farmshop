@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import CartCard from '../components/CartCard';
 import CartForm from './CartForm';
 import { getCarts } from '../actions/carts'
+import Navbar from '../components/Navbar'
 import './Carts.css';
 
 class Carts extends Component {
@@ -13,11 +14,14 @@ class Carts extends Component {
 
   render() {
     return (
-    <div className="CartsContainer">
-      <h1>Carts </h1>
-      {this.props.carts.map(cart => <CartCard  key={cart.id} cart={cart} />)}
-      <CartForm />
-    </div>
+      <div>
+      <Navbar />
+      <div className="CartsContainer">
+        <h1>Carts </h1>
+        {this.props.carts.map(cart => <CartCard  key={cart.id} cart={cart} />)}
+        <CartForm />
+      </div>
+      </div>
    )
   }
 }

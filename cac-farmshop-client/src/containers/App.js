@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar'
 //difference between react and react, component??
+import { BrowserRouter, Switch, Route, Router } from 'react-router-dom';
 import { connect } from 'react-redux'
 import './App.css';
-import Carts from './carts'
+
 //import { Link } from 'react-router-dom'
-import { changeRoute } from '../actions/routeAction';
+
+import FarmersPage from './FarmersPage';
+import FarmerShow from './FarmerShow';
+import Carts from './carts'
 
 
 class App extends Component {
@@ -24,27 +28,29 @@ class App extends Component {
     });
   }
 
-  handleRouteChange = routeName => {
-    //debugger
-    this.props.changeRoute({ routeName: routeName })
-  }
-
   render() {
 
-    const { routeName } = this.props
-
     return (
+      <div>
+      <BrowserRouter >
+      <Switch>
+      <Navbar />
+      <Route exact path="/" component={App} />
+      <Route exact path='/farmers' component={FarmersPage} >
+        <Route path="/farmers/:id" component={FarmerShow} />
+      </Route>
+
+      <Route exact path="/cart" component={Carts} />
+
+      </Switch>
+      </BrowserRouter >
       <div className="App">
-      <Navbar changeRoute={this.handleRouteChange} />
-      
-      <Carts/>
+      <h1>Some kinda homepage, maybe</h1>
+
+      </div>
       </div>
     );
   }
 }
 
-export default connect(
-  state => ({
-    routeName: state.route.routeName
-  }),
-  { changeRoute })(App);
+export default App
