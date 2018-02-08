@@ -19,7 +19,7 @@ const Navbar = () =>
           </button>
           <button
             className="nav-button"
-            onClick={() => { history.push('/farmgoods')}}
+            onClick={() => { history.push('/farm-goods')}}
             >
               Farm Goods
           </button>
