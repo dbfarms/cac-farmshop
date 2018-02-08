@@ -31,24 +31,18 @@ class App extends Component {
   render() {
 
     return (
-      <div>
       <BrowserRouter >
-      <Switch>
-      <Navbar />
-      <Route exact path="/" component={App} />
-      <Route exact path='/farmers' component={FarmersPage} >
-        <Route path="/farmers/:id" component={FarmerShow} />
-      </Route>
+        <div>
 
-      <Route exact path="/cart" component={Carts} />
+          <Navbar />
+          <Route exact path="/" render={() => <div>Home For Now</div>} />
+          <Route path='/farmers' component={FarmersPage} >
+            <Route path="/farmers/:id" component={FarmerShow} />
+          </Route>
+          <Route exact path="/cart" component={Carts} />
 
-      </Switch>
+        </div>
       </BrowserRouter >
-      <div className="App">
-      <h1>Some kinda homepage, maybe</h1>
-
-      </div>
-      </div>
     );
   }
 }
