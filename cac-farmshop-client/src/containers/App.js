@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar'
 //difference between react and react, component??
+import { connect } from 'react-redux'
 import './App.css';
 import Carts from './carts'
+//import { Link } from 'react-router-dom'
+import { changeRoute } from '../actions/routeAction';
 
 
 class App extends Component {
@@ -11,7 +14,6 @@ class App extends Component {
 
     this.state = {
       carts: [],
-      viewKey: ''
     }
   }
 
@@ -22,17 +24,27 @@ class App extends Component {
     });
   }
 
-  handleViewChange = viewKey => this.setState({ viewKey: viewKey })
+  handleRouteChange = routeName => {
+    //debugger
+    this.props.changeRoute({ routeName: routeName })
+  }
 
   render() {
 
+    const { routeName } = this.props
+
     return (
       <div className="App">
-      <Navbar changeView={this.handleViewChange} />
+      <Navbar changeRoute={this.handleRouteChange} />
+      
       <Carts/>
       </div>
     );
   }
 }
 
-export default App;
+export default connect(
+  state => ({
+    routeName: state.route.routeName
+  }),
+  { changeRoute })(App);
