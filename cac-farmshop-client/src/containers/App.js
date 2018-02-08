@@ -10,8 +10,8 @@ import FarmersPage from './FarmersPage';
 import FarmerShow from './FarmerShow';
 import Carts from './carts'
 
-
 class App extends Component {
+/* MOVED TO REDUX METHOD FOR STATE
   constructor(props) {
     super(props)
 
@@ -19,15 +19,17 @@ class App extends Component {
       carts: [],
       farmers: [],
       farmGoods: [],
+      test: ''
     }
   }
-
+*/
   componentDidMount() {
     //to find the nearest pickup location
     navigator.geolocation.getCurrentPosition(position => {
       const { latitude, longitude } = position.coords
     });
   }
+
 
   render() {
 

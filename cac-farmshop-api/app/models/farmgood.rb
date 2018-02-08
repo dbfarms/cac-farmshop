@@ -1,0 +1,2 @@
+class Farmgood < ApplicationRecord
+end
