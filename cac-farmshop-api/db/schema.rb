@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180208204321) do
+ActiveRecord::Schema.define(version: 20180209145234) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "user_id"
     t.string "status", default: "not submited"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "farmerfarmgoods", force: :cascade do |t|
+    t.integer "farmer_id"
+    t.integer "farmgood_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,6 +38,8 @@ ActiveRecord::Schema.define(version: 20180208204321) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "img_url"
+    t.integer "farmer_id"
   end
 
 end
