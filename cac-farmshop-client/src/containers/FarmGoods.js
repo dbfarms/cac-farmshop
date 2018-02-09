@@ -16,10 +16,11 @@ class FarmGoods extends Component {
   render() {
     return (
       <div>
-      <div className="Farm-Goods-Container">
-        <h1>For sale: </h1>
-        {this.props.farmGoods.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} />)}
-      </div>
+        <div className="Farm-Goods-Container">
+          <h1>For sale: </h1>
+          {this.props.farmGoods.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} />)}
+        </div>
+        <FarmgoodForm />
       </div>
    )
   }
