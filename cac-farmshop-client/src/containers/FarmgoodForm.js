@@ -26,7 +26,7 @@ class FarmgoodForm extends Component {
 
   render() {
     //debugger 
-    const { name } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
+    const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
 
     return (
       <div>
@@ -41,6 +41,13 @@ class FarmgoodForm extends Component {
               value={name}
             />
           </div>
+            <label htmlFor="farmgood_quantity">Farmer ID now (but eventually quantity)":</label>
+          <input
+            type="number"
+            onChange={this.handleOnChange}
+            name="farmer"
+            value={farmer}
+          />
          
           <button type="submit">Add Farmgood</button>
         </form>

@@ -24,10 +24,10 @@ class App extends Component {
   }
 */
   componentDidMount() {
-    //to find the nearest pickup location
-    navigator.geolocation.getCurrentPosition(position => {
-      const { latitude, longitude } = position.coords
-    });
+    //to find the nearest pickup location - UNCOMMENT BELOW 
+  //  navigator.geolocation.getCurrentPosition(position => {
+  //    const { latitude, longitude } = position.coords
+  //  });
   }
 
 

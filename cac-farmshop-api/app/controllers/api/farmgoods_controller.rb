@@ -7,8 +7,12 @@ class Api::FarmgoodsController < ApplicationController
     end
 
     def create
-      byebug
+      #byebug
+        farmerID = params["farmGood"]["farmer"].to_i
         farmgood = Farmgood.new(farmgood_params)
+        
+        #byebug
+        farmgood.farmer = Farmer.find(farmerID)
         if farmgood.save
             render json: farmgood
         else
@@ -43,7 +47,8 @@ class Api::FarmgoodsController < ApplicationController
     end
 
     def farmgood_params
-        params.require(:farmgood).permit(:name)
+        #byebug
+        params.require(:farmGood).permit(:name)
     end
 
 end
