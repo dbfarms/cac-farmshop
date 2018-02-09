@@ -8,7 +8,10 @@ import { createFarmgood } from '../actions/farmGoods'; //
 
 class FarmgoodForm extends Component {
 
+  //debugger
+
   handleOnChange = event => {
+      //debugger
     const { name, value } = event.target;
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
       [name]: value
@@ -22,30 +25,23 @@ class FarmgoodForm extends Component {
   }
 
   render() {
-
-    const { user_id, status } = this.props.FarmgoodFormData;
+    //debugger 
+    const { name } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
 
     return (
       <div>
         Add a Farmgood...
         <form onSubmit={this.handleOnSubmit}>
           <div>
-            <label htmlFor="user_id">User ID:</label>
-            <input
-              type="number"
-              onChange={this.handleOnChange}
-              name="user_id"
-              value={user_id}
-            />
-          </div>
-          <div>
+            <label htmlFor="farmgood_name">Name of Farm Good:</label>
             <input
               type="text"
               onChange={this.handleOnChange}
-              name="status"
-              value={status}
+              name="name"
+              value={name}
             />
           </div>
+         
           <button type="submit">Add Farmgood</button>
         </form>
       </div>

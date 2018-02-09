@@ -1,4 +1,4 @@
-
+import { resetFarmGoodForm } from './FarmgoodForm';
 //const API_URL = process.env.REACT_APP_API_URL;
 
 let header = new Headers({
@@ -26,7 +26,7 @@ const setFarmGoods = farmGoods => {
 const addFarmGoods = farmGood => {
   return {
     type: 'CREATE_FARMGOOD_SUCCESS',
-    farmGoods
+    farmGood
   }
 }
 
@@ -41,7 +41,7 @@ export const getFarmGoods = () => {
 }
 
 
-export const createFarmGoods = farmGood => {
+export const createFarmgood = farmGood => {
   return dispatch => {
     return fetch('http://localhost:3000/api/farmgoods', {
       headers: {

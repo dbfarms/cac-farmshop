@@ -7,7 +7,7 @@ class Api::FarmgoodsController < ApplicationController
     end
 
     def create
-      #byebug
+      byebug
         farmgood = Farmgood.new(farmgood_params)
         if farmgood.save
             render json: farmgood

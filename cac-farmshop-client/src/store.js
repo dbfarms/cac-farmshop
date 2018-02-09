@@ -9,13 +9,14 @@ import farmGoods from './reducers/farmGoodsReducer'
 import farmers from './reducers/farmersReducer'
 import carts from './reducers/carts';
 import cartFormData from './reducers/cartFormData';
-//import route from './reducers/routeReducer';
+import FarmgoodFormData from './reducers/farmGoodFormData'
 
 const reducers = combineReducers({
   carts,
   cartFormData,
   farmers,
-  farmGoods
+  farmGoods,
+  FarmgoodFormData
   //route
 });
 

@@ -2,12 +2,12 @@
 
 export const updateFarmgoodFormData = FarmgoodFormData => {
     return {
-      type: 'UPDATED_DATA',
+      type: 'UPDATED_FARMGOOD_DATA',
       FarmgoodFormData
     }
   }
   
-  export const resetFarmgoodForm = () => {
+  export const resetFarmGoodForm = () => {
     return {
       type: 'RESET_FARMGOOD_FORM'
     }
