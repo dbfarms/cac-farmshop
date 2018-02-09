@@ -1,22 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import FarmerCard from '../components/farmerCard'
+import './FarmerCard.css';
 
 //debugger
 
 const FarmerShow = ({farmer}) =>
 
       <div>
-        <h2>Farmer Show Page In Progress</h2>
+        <FarmerCard farmer={farmer} />
       </div>
 
-const mapStateToProps = (state, ownProps) => {
-  const farmer = state.farmers.find(farmer => farmer.id == ownProps.match.params.farmerId)
 
-  if (farmer) {
-    return { farmer }
-  } else {
-    return { farmer: {} }
-  }
-}
 
-export default connect(mapStateToProps)(FarmerShow)
+export default FarmerShow 
+

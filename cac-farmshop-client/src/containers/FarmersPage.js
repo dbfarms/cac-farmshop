@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 //import { bindActionCreators}  from 'redux';
 import { getFarmers } from '../actions/farmers'; //
@@ -14,19 +14,26 @@ class FarmersPage extends Component {
 
   render() {
 
+
+    //debugger
     const { match } = this.props
     //debugger
     return (
       <div>
         <FarmersList farmers={this.props.farmers} />
-        {this.props.children}
+       
         <Switch>
-          <Route path={`${match.url}/:farmerId`} component={FarmerShow} />
+          
+        <Route path={`${match.url}/:farmerId`} component={FarmerShow} />
+          
         </Switch>
+        
       </div>
     )
   }
 }
+
+// <Route path="/:name" component={FarmerShow} />
 
 const mapStateToProps = (state) => {
   return {
