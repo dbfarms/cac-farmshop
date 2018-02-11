@@ -93,11 +93,29 @@ class FarmGoods extends Component {
     //debugger
     return (
       <div className="page-tree">
-        <div className="Farm-Goods-Container">
+      {this.state.isEditing === true &&
+        <div>
+          <h1>edit farmgood</h1>
+          <FarmgoodForm
+            farmgood={this.state.farmgood}
+            //daysAvailable-{this.state.checkBoxDaysAvailable}
+            onSave={this.saveFarmgood}
+            onChange={this.updateFarmgoodState}
+            //onDaysAvailableChange={this.updateFarmgoodDaysAvailable}
+            />
+          <FarmGoodCard farmGood={this.state.farmgood}/>
+          <button name="cancel edit" onClick={() => this.setState({isEditing: false})}>cancel edit</button>
+        </div>
+      }
+      {this.state.isEditing === false && 
+        <div>
+           <div className="Farm-Goods-Container">
             <h1>For sale: </h1>
             {this.props.farmGoods.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
           <FarmgoodForm />
+        </div>
+      }
       </div>
     )
   }
@@ -122,33 +140,6 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, { getFarmGoods })(FarmGoods); // 
 
 /*
-
-
-      {this.state.isEditing === true &&
-        <div>
-          <h1>edit farmgood</h1>
-          <FarmgoodForm
-            farmgood={this.state.farmgood}
-            //daysAvailable-{this.state.checkBoxDaysAvailable}
-            onSave={this.saveFarmgood}
-            onChange={this.updateFarmgoodState}
-            //onDaysAvailableChange={this.updateFarmgoodDaysAvailable}
-            />
-          <FarmGoodCard farmGood={this.state.farmgood}/>
-          <button name="cancel edit" onClick={() => this.setState({isEditing: false})}>cancel edit</button>
-        </div>
-      }
-      {this.state.isEditing === false && 
-        <div>
-          <h1>you are not editing</h1>
-          <div className="Farm-Goods-Container">
-            <h1>For sale: </h1>
-            {this.props.farmGoods.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing(farmGood)}  />)}
-          </div>
-          <FarmgoodForm />
-        </div>
-      }
-
 
 --
 function daysAvailableCheckBoxes(daysAvailable, farmgood=null) {  
@@ -179,5 +170,44 @@ function mapStateToProps(state, ownProps) {
   } 
     return {farmgood: farmgood, checkBoxHobbies: checkBoxHobbies, farmgoodHobbies: farmgoodHobbies};
 }
+
+/// probably junk
+
+
+ <div className="Farm-Goods-Container">
+            <h1>For sale: </h1>
+            {this.props.farmGoods.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+          </div>
+          <FarmgoodForm />
+
+/////
+
+
+      {this.state.isEditing === true &&
+        <div>
+          <h1>edit farmgood</h1>
+          <FarmgoodForm
+            farmgood={this.state.farmgood}
+            //daysAvailable-{this.state.checkBoxDaysAvailable}
+            onSave={this.saveFarmgood}
+            onChange={this.updateFarmgoodState}
+            //onDaysAvailableChange={this.updateFarmgoodDaysAvailable}
+            />
+          <FarmGoodCard farmGood={this.state.farmgood}/>
+          <button name="cancel edit" onClick={() => this.setState({isEditing: false})}>cancel edit</button>
+        </div>
+      }
+      {this.state.isEditing === false && 
+        <div>
+          <h1>you are not editing</h1>
+           <div className="Farm-Goods-Container">
+            <h1>For sale: </h1>
+            {this.props.farmGoods.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+          </div>
+          <FarmgoodForm />
+        </div>
+      }
+
+
 
 */

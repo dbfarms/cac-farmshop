@@ -1,22 +1,24 @@
 //accessible for individual farmers to create a new farm good that belongs to them 
+//
+//
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updateFarmgoodFormData } from '../actions/FarmgoodForm';
 import { createFarmgood } from '../actions/farmGoods'; //
-//import TextInput from '../common/TextInput';  
+//import TextInput from '../components/common/TextInput';  
 //import CheckBox from '../common/CheckBox';
 
 
 class FarmgoodForm extends Component {
-/* for days available 
-
+// for days available 
+  
   constructor(props) {
     super(props);
-    this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
+    //this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
   }
-
+/*
   makeCheckBoxes() {
     return this.props.daysAvailable.map(dayAvailable => {
       return (
@@ -46,10 +48,12 @@ class FarmgoodForm extends Component {
   }
 
   render() {
+    console.log(this.props)
     //const boxes = this.makeCheckBoxes();
     //debugger 
     const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
-
+    //console.log("name: " + name)
+    //console.log("farmer: " + farmer)
     return (
       <div>
         Add a Farmgood...
