@@ -30,6 +30,14 @@ const addFarmGoods = farmGood => {
   }
 }
 
+
+const updateFarmgood = farmGood => {
+  return {
+    type: 'UPDATE_FARMGOOD_SUCCESS', 
+    farmGood
+  }
+}
+
 // ** async actions **
 export const getFarmGoods = () => {
   return dispatch => {
@@ -54,6 +62,25 @@ export const createFarmgood = farmGood => {
     .then(response => response.json())
     .then(farmGood => {
       dispatch(addFarmGoods(farmGood))
+      dispatch(resetFarmGoodForm())
+    })
+    .catch(error => console.log(error))
+  }
+}
+
+export const callToEditFarmgood = farmGood => {
+  return dispatch => {
+    return fetch('http://localhost:3000/api/farmgoods', {
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json'
+      },
+      method: "PUT",
+      body: JSON.stringify({ farmGood: farmGood })
+    })
+    .then(response => response.json())
+    .then(farmGood => {
+      dispatch(updateFarmgood(farmGood))
       dispatch(resetFarmGoodForm())
     })
     .catch(error => console.log(error))

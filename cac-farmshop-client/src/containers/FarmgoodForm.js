@@ -5,9 +5,30 @@ import { connect } from 'react-redux';
 
 import { updateFarmgoodFormData } from '../actions/FarmgoodForm';
 import { createFarmgood } from '../actions/farmGoods'; //
+//import TextInput from '../common/TextInput';  
+//import CheckBox from '../common/CheckBox';
+
 
 class FarmgoodForm extends Component {
+/* for days available 
 
+  constructor(props) {
+    super(props);
+    this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
+  }
+
+  makeCheckBoxes() {
+    return this.props.daysAvailable.map(dayAvailable => {
+      return (
+        <CheckBox 
+          item={dayAvailable} 
+          handleChange={this.props.onDayAvailableChange} 
+          key={dayAvailable.id}/>
+      )
+    })
+  }
+
+*/
   //debugger
 
   handleOnChange = event => {
@@ -25,6 +46,7 @@ class FarmgoodForm extends Component {
   }
 
   render() {
+    //const boxes = this.makeCheckBoxes();
     //debugger 
     const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
 

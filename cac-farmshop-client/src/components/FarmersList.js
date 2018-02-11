@@ -36,6 +36,15 @@ export default FarmersList;
 
 /*
 
+export default (  
+  <Route path="/" component={App}>
+    <IndexRoute component={HomePage} />
+    <Route path="/cats" component={CatsPage} >
+      <Route path="/cats/:id" component={CatPage} />
+    </Route>
+  </Route>
+);
+
 <div>
               <Navbar changeForecast={this.handleForecastChange} />
               {forecastKey === 'currently' &&

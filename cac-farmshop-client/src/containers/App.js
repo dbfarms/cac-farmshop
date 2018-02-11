@@ -50,3 +50,16 @@ class App extends Component {
 }
 
 export default App
+
+/*
+
+export default (  
+  <Route path="/" component={App}>
+    <IndexRoute component={HomePage} />
+    <Route path="/cats" component={CatsPage} >
+      <Route path="/cats/:id" component={CatPage} />
+    </Route>
+  </Route>
+);
+
+*/
