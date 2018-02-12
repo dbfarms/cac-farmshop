@@ -9,6 +9,8 @@ export default (state = [], action) => {
       return action.farmGoods
     case 'CREATE_FARMGOOD_SUCCESS':
       return state.concat(action.farmGood);
+    case 'DELETE_FARMGOOD_SUCCESS':
+      return 
     default:
       return state
   }

@@ -11,6 +11,9 @@ export default (state = initialState, action) => {
     case 'RESET_FARMGOOD_FORM':
       return initialState;
 
+    case 'EDIT_FARMGOOD_DATA':
+      return action.EditedFarmgoodFormData
+
     default:
       return state;
   }

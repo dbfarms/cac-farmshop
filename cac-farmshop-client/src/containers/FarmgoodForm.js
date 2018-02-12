@@ -4,11 +4,17 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { bindActionCreators } from 'redux';
 import { updateFarmgoodFormData } from '../actions/FarmgoodForm';
+import { editFarmgoodFormData } from '../actions/FarmgoodForm';
+import * as FarmgoodFormActions from '../actions/FarmgoodForm';
+import * as farmgoodActions from '../actions/farmGoods';
 import { createFarmgood } from '../actions/farmGoods'; //
+import { callToEditFarmgood } from '../actions/farmGoods'
 //import TextInput from '../components/common/TextInput';  
 //import CheckBox from '../common/CheckBox';
+
+
 
 
 class FarmgoodForm extends Component {
@@ -17,6 +23,12 @@ class FarmgoodForm extends Component {
   constructor(props) {
     super(props);
     //this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
+     //this.updateFarmgoodDaysAvailable = this.updateFarmgoodDaysAvailable.bind(this); // this has to happen but not here
+
+    ///probably garbage below 
+    //this.updateFarmgoodState = this.updateFarmgoodState.bind(this);
+    //this.toggleEdit = this.toggleEdit.bind(this);
+    //this.saveFarmgood - this.saveFarmgood.bind(this);
   }
 /*
   makeCheckBoxes() {
@@ -33,6 +45,51 @@ class FarmgoodForm extends Component {
 */
   //debugger
 
+  /////////////////////// EDITING FARMGOOD FUNCTIONS BELOW
+
+  /*
+  saveFarmgood(event){
+    event.preventDefault();
+    this.props.actions.updateFarmgoodState((this.state.farmgood));
+  }
+
+  updateFarmgoodState(event) {
+    const field = event.target.name;
+   // debugger
+    const farmgood = this.state.farmgood;
+    farmgood[field] = event.target.value;
+    return this.setState({farmgood: farmgood});
+
+  }
+  */
+
+ componentWillReceiveProps(nextProps) {
+  //debugger 
+  if (this.props.farmgood.id != nextProps.farmgood.id) {
+    this.setState({farmgood: nextProps.farmgood});
+  }
+  //if (this.props.checkBoxDaysAvailable.length < nextProps.checkBoxHobbies.length) {
+  //  this.setState({farmgoodDaysAvailable: nextProps.farmgoodDaysAvailable, checkBoxDaysAvailable: nextProps.checkBoxDaysAvailable});
+  //})
+ }
+
+  handleOnChange = event => {
+      //debugger
+    const { name, value } = event.target;
+    const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
+      [name]: value
+    })
+    this.props.editFarmgoodFormData(currentFarmgoodFormData)
+  }
+
+  handleOnSubmit = event => {
+    event.preventDefault();
+    this.props.callToEditFarmgood(this.props.FarmgoodFormData)
+  }
+
+
+
+  ///////////////////////////// ADDING FARMGOOD FUNCTIONS BELOW
   handleOnChange = event => {
       //debugger
     const { name, value } = event.target;
@@ -49,11 +106,7 @@ class FarmgoodForm extends Component {
 
   render() {
     //const boxes = this.makeCheckBoxes();
-    //debugger 
     const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
-    console.log("this.props.farmgood: " + this.props.farmgood)
-    //debugger
-    //console.log("farmer: " + farmer)
     return (
       <div>
         {this.props.isEditing &&
@@ -78,7 +131,7 @@ class FarmgoodForm extends Component {
                 value={farmer}
               />
             
-              <button type="submit">Add Farmgood</button>
+              <button type="submit">Edit Farmgood</button>
             </form>
           </div>
         }
@@ -118,7 +171,40 @@ const mapStateToProps = state => {
   }
 }
 
+/*
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(FarmgoodFormActions, dispatch) //farmgoodActions
+  }
+}
+*/
+
+
 export default connect(mapStateToProps, {
   updateFarmgoodFormData,
   createFarmgood
- })(FarmgoodForm);
+})(FarmgoodForm);
+
+/*
+export default connect(mapStateToProps, {
+  updateFarmgoodFormData,
+  createFarmgood
+ }, mapDispatchToProps, { 
+   editFarmgoodFormData, 
+   callToEditFarmgood
+  })(FarmgoodForm); 
+
+
+*/
+
+
+/* 
+/// junk
+
+
+
+const mapDispatchToProps = (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch)};
+}
+
+*/

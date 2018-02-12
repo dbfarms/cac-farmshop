@@ -12,4 +12,11 @@ export const updateFarmgoodFormData = FarmgoodFormData => {
       type: 'RESET_FARMGOOD_FORM'
     }
   }
+
+  export const editFarmgoodFormData = FarmgoodFormData => {
+    return {
+      type: 'EDIT_FARMGOOD_DATA', 
+      FarmgoodFormData
+    }
+  }
   

@@ -38,6 +38,13 @@ const updateFarmgood = farmGood => {
   }
 }
 
+const deletingFarmgood = farmGood => {
+  return {
+    type: 'DELETE_FARMGOOD_SUCCESS',
+    farmGood
+  }
+}
+
 // ** async actions **
 export const getFarmGoods = () => {
   return dispatch => {
@@ -85,4 +92,20 @@ export const callToEditFarmgood = farmGood => {
     })
     .catch(error => console.log(error))
   }
+}
+
+export const deleteFarmGoods = farmGood => {
+  return dispatch => {
+    return fetch('http://localhost:3000/api/farmgoods', {
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json'
+      },
+      method: "DELETE",
+      body: JSON.stringify({ farmGood: farmGood })
+    })
+    .then(farmGood => {
+      dispatch(deletingFarmgood(farmGood))
+    })
+   }
 }

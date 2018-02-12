@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import FarmGoodsCard from '../components/FarmGoodsCard';
 import FarmGoodCard from '../components/farmGoodCard';
-import { getFarmGoods } from '../actions/farmGoods'
+import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoods from server
+import { deleteFarmGoods } from '.../actions/farmGoods';
 import FarmgoodForm from './FarmgoodForm';
 import { bindActionCreators } from 'redux';
-import { callToEditFarmgood } from '../actions/farmGoods'
+import { callToEditFarmgood } from '../actions/farmGoods' // might not need this here... 
 import './FarmGoods.css';
 
 class FarmGoods extends Component {
@@ -17,10 +18,9 @@ class FarmGoods extends Component {
       //daysAvailable: this.props.daysAvailable,
       //checkBoxDaysAvailable: this.props.checkBoxDaysAvailable
     };
-    this.updateFarmgoodState = this.updateFarmgoodState.bind(this);
+    //this.updateFarmgoodState = this.updateFarmgoodState.bind(this);
     //this.updateFarmgoodDaysAvailable = this.updateFarmgoodDaysAvailable.bind(this);
-    //this.toggleEdit = this.toggleEdit.bind(this);
-    this.saveFarmgood - this.saveFarmgood.bind(this);
+    //this.saveFarmgood - this.saveFarmgood.bind(this);
   }
   /*
   updateFarmgoodDaysAvailable(event) {
@@ -38,20 +38,6 @@ class FarmGoods extends Component {
     }
   }
   */
-
-  saveFarmgood(event){
-    event.preventDefault();
-    this.props.actions.updateFarmgood((this.state.farmgood));
-  }
-
-  updateFarmgoodState(event) {
-    const field = event.target.name;
-    debugger
-    const farmgood = this.state.farmgood;
-    farmgood[field] = event.target.value;
-    return this.setState({farmgood: farmgood});
-
-  }
 
 
   toggleEdit(){
@@ -83,9 +69,11 @@ class FarmGoods extends Component {
       farmgood: farmGood,
       isEditing: true,
     })
- //*/
 
- //   handleIsEditing = farmGood => console.log(this.state)
+  handleDelete(farmGood){
+    this.props.deleteFarmGoods();
+  }
+
 
   render() {
     console.log("this is the state I hope: " + this.state.farmgood)
@@ -105,6 +93,7 @@ class FarmGoods extends Component {
             />
           <FarmGoodCard farmGood={this.state.farmgood}/>
           <button name="cancel edit" onClick={() => this.setState({isEditing: false})}>cancel edit</button>
+          <button name="remove item" onClick={() => this.handleDelete(this.state.farmgood) }>remove item</button> 
         </div>
       }
       {this.state.isEditing === false && 
@@ -129,14 +118,6 @@ const mapStateToProps = (state) => {
   })
 }
 
-function mapDispatchToProps(dispatch) {
-  //console.log(dispatch)
-  return {
-    actions: bindActionCreators(callToEditFarmgood, dispatch)
-  }
-}
-
-//export default connect(mapStateToProps, { getFarmGoods })(FarmGoods);
 export default connect(mapStateToProps, { getFarmGoods })(FarmGoods); // 
 
 /*
