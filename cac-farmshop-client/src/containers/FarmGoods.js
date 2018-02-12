@@ -9,12 +9,11 @@ import { callToEditFarmgood } from '../actions/farmGoods'
 import './FarmGoods.css';
 
 class FarmGoods extends Component {
-  constructor(props, context) {
-    super(props, context);
-     
+  constructor(props) {
+    super(props);
     this.state = {
       isEditing: false,
-      farmgood: 0,
+      farmgood: null,
       //daysAvailable: this.props.daysAvailable,
       //checkBoxDaysAvailable: this.props.checkBoxDaysAvailable
     };
@@ -89,7 +88,7 @@ class FarmGoods extends Component {
  //   handleIsEditing = farmGood => console.log(this.state)
 
   render() {
-    console.log(this.state)
+    console.log("this is the state I hope: " + this.state.farmgood)
     //debugger
     return (
       <div className="page-tree">
@@ -97,10 +96,11 @@ class FarmGoods extends Component {
         <div>
           <h1>edit farmgood</h1>
           <FarmgoodForm
-            farmgood={this.state.farmgood}
+            farmgood={this.state.farmgood.name}
             //daysAvailable-{this.state.checkBoxDaysAvailable}
             onSave={this.saveFarmgood}
             onChange={this.updateFarmgoodState}
+            isEditing={this.state.isEditing}
             //onDaysAvailableChange={this.updateFarmgoodDaysAvailable}
             />
           <FarmGoodCard farmGood={this.state.farmgood}/>
@@ -113,7 +113,7 @@ class FarmGoods extends Component {
             <h1>For sale: </h1>
             {this.props.farmGoods.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
-          <FarmgoodForm />
+          <FarmgoodForm isEditing={this.state.isEditing} />
         </div>
       }
       </div>
