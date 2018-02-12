@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import FarmGoodsCard from '../components/FarmGoodsCard';
 import FarmGoodCard from '../components/farmGoodCard';
 import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoods from server
-import { deleteFarmGoods } from '.../actions/farmGoods';
+import { deleteFarmGoods } from '../actions/farmGoods';
 import FarmgoodForm from './FarmgoodForm';
 import { bindActionCreators } from 'redux';
 import { callToEditFarmgood } from '../actions/farmGoods' // might not need this here... 
@@ -44,14 +44,11 @@ class FarmGoods extends Component {
     this.setState({isEditing: !this.state.isEditing})
   }
 
-  //SEE BELOW FOR DAYS AVAILABLE, TO BE ADDED LATER
-
   componentDidMount(){
-    //debugger
-    //this.state.isEditing = false 
     this.props.getFarmGoods()
   }
   
+  //SEE BELOW FOR DAYS AVAILABLE, TO BE ADDED LATER
   /*
   componentWillReceiveProps(nextProps) {
     //debugger 
@@ -71,7 +68,7 @@ class FarmGoods extends Component {
     })
 
   handleDelete(farmGood){
-    this.props.deleteFarmGoods();
+    deleteFarmGoods(farmGood);
   }
 
 

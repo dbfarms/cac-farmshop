@@ -10,7 +10,9 @@ export default (state = [], action) => {
     case 'CREATE_FARMGOOD_SUCCESS':
       return state.concat(action.farmGood);
     case 'DELETE_FARMGOOD_SUCCESS':
-      return 
+      return [
+        ...state.filter(farmgood => farmgood.id !== action.farmGood.id)
+      ]
     default:
       return state
   }
