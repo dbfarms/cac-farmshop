@@ -68,6 +68,7 @@ class FarmGoods extends Component {
     })
 
   handleDelete(farmGood){
+    //debugger 
     deleteFarmGoods(farmGood);
   }
 

@@ -73,7 +73,7 @@ class FarmgoodForm extends Component {
   //})
  }
 
-  handleOnChange = event => {
+  handleEditChange = event => {
       //debugger
     const { name, value } = event.target;
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
@@ -82,9 +82,10 @@ class FarmgoodForm extends Component {
     this.props.editFarmgoodFormData(currentFarmgoodFormData)
   }
 
-  handleOnSubmit = event => {
+  handleEditSubmit = event => {
     event.preventDefault();
-    this.props.callToEditFarmgood(this.props.FarmgoodFormData)
+    debugger
+    callToEditFarmgood(this.props.FarmgoodFormData)
   }
 
 
@@ -101,7 +102,17 @@ class FarmgoodForm extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    this.props.createFarmgood(this.props.FarmgoodFormData)
+    //debugger
+    const decider = this.props.isEditing 
+    //debugger
+    if (decider) {
+      //debugger
+      callToEditFarmgood(this.props.FarmgoodFormData)
+    } else {
+      //debugger
+      createFarmgood(this.props.FarmgoodFormData)
+    }
+    //this.props.createFarmgood(this.props.FarmgoodFormData)
   }
 
   render() {
@@ -109,10 +120,10 @@ class FarmgoodForm extends Component {
     const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
       <div>
-        {this.props.isEditing &&
+        {!this.props.isEditing &&
           <div>
             Edit a Farmgood...
-            <form onSubmit={this.handleOnSubmit}>
+            <form onSubmit={this.handleEditSubmit}>
               <div>
                 <label htmlFor="farmgood_name">Name of Farm Good:</label>
                 <input
@@ -126,7 +137,7 @@ class FarmgoodForm extends Component {
                 <label htmlFor="farmgood_quantity">Farmer ID now (but eventually quantity)":</label>
               <input
                 type="number"
-                onChange={this.handleOnChange}
+                onChange={this.handleEditChange}
                 name="farmer"
                 value={farmer}
               />
@@ -135,7 +146,7 @@ class FarmgoodForm extends Component {
             </form>
           </div>
         }
-        {!this.props.isEditing && 
+        {this.props.isEditing && 
           <div>
             Add a Farmgood...
             <form onSubmit={this.handleOnSubmit}>

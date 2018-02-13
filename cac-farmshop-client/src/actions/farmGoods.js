@@ -76,7 +76,7 @@ export const createFarmgood = farmGood => {
   }
 }
 
-export const callToEditFarmgood = farmGood => {
+export const callToEditFarmgood = (farmGood) => {
   return dispatch => {
     return fetch('http://localhost:3000/api/farmgoods', {
       headers: {
@@ -95,7 +95,43 @@ export const callToEditFarmgood = farmGood => {
   }
 }
 
-function deleteRequest(farmGood) {
+
+//THIS BREAKS BUT I DON'T KNOW WHERE
+export const deleteFarmGoods = farmGood => {
+  //debugger 
+  return dispatch => {
+    //console.log('i dont think this works')
+    return fetch(`http://localhost:3000/api/farmgoods/${farmGood.id}`, {
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json'
+      },
+      method: 'DELETE',
+      body: JSON.stringify({ farmGood: farmGood}),
+      credentials: "same-origin"
+    })
+    .then((response) => {
+      if (!response.ok) {
+        console.error(response.statusText)
+      } else {
+        console.log('????')
+      }
+      return response.json();
+    }).then(() => {
+      console.log(`Deleted ${farmGood.id}`)
+      dispatch(deletingFarmgood(farmGood));
+      return
+    }).catch(error => {
+      return error;
+    });
+    }
+  }
+  
+
+/*
+function deleteRequest(farmGood){
+  debugger 
+  console.log("deleteRequest function")
   const request = new Request(`http://localhost:3000/api/farmgoods/${farmGood.id}`, {
     headers: {
       'Access-Control-Allow-Origin':'',
@@ -103,7 +139,8 @@ function deleteRequest(farmGood) {
     },
     method: 'DELETE'
   });
-
+  debugger 
+  
   return fetch(request).then(response => {
     return response.json();
   }).catch(error => {
@@ -113,7 +150,10 @@ function deleteRequest(farmGood) {
 }
 
 export function deleteFarmGoods(farmGood) {  
-  return function(dispatch) {
+  //debugger -- still works through here 
+  return dispatch => {
+    //console.log("deleteFarmGoods" + dispatch)
+    // debugger doesn't work here, unclear if dispatch is defined 
     return deleteRequest(farmGood).then(() => {
       console.log(`Deleted ${farmGood.id}`)
       dispatch(deletingFarmgood(farmGood));
@@ -125,7 +165,7 @@ export function deleteFarmGoods(farmGood) {
 }
 
 /*
-export const deleteFarmGoods = farmGood => {
+export const deleteRequest = farmGood => {
   return dispatch => {
     return fetch(`http://localhost:3000/api/farmgoods/${farmGood.id}`, {
       headers: {
@@ -142,44 +182,4 @@ export const deleteFarmGoods = farmGood => {
 }
 ////////////////
   
-export function deleteCat(cat) {  
-  return function(dispatch) {
-    return catApi.deleteCat(cat).then(() => {
-      console.log(`Deleted ${cat.id}`)
-      dispatch(deleteCatSuccess(cat));
-      return;
-    }).catch(error => {
-      throw(error);
-    })
-  }
-
-...
-   static deleteCat(cat) {
-    const request = new Request(`http://localhost:5000/api/v1/cats/${cat.id}`, {
-      method: 'DELETE'
-    });
-
-    return fetch(request).then(response => {
-      return response.json();
-    }).catch(error => {
-      return error;
-    });
-  }
-}
-
-//////
-export const deleteFarmGoods = farmGood => {
-  const request = new Request(`http://localhost:3000/api/farmgoods/${farmGood.id}`, {
-    method: 'DELETE'
-  });
-
-
-  return fetch(request).then(response => {
-    return response.json();
-  }).catch(error => {
-    return error;
-  });
-
-}
-
 */
