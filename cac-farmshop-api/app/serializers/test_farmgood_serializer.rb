@@ -1,11 +1,14 @@
 class FarmgoodSerializer < ActiveModel::Serializer
-  attributes :id, :name, :price, :inventory
+    attributes :id, :name, :price, :inventory
 
-  has_many :farmerfarmgoods
-  belongs_to :farmer #s, through: :farmerfarmgoods
-  has_many :days_available
-  has_many :days, through: :days_available
+    has_many :farmerfarmgoods
+    belongs_to :farmer #s, through: :farmerfarmgoods
+    has_many :days_available
+    has_many :days, through: :days_available
+end
 
+
+  
   def days
     
     days_array = []
@@ -16,6 +19,6 @@ class FarmgoodSerializer < ActiveModel::Serializer
     #binding.pry
     return days_array
   end
-
+  
 end
 

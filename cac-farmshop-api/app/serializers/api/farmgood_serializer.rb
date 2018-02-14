@@ -1,4 +1,4 @@
-class FarmgoodSerializer < ActiveModel::Serializer
+class Api::FarmgoodSerializer < ActiveModel::Serializer
   attributes :id, :name, :price, :inventory
 
   has_many :farmerfarmgoods
