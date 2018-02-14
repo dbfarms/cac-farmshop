@@ -74,8 +74,6 @@ class FarmGoods extends Component {
 
 
   render() {
-    console.log("this is the state I hope: " + this.state.farmgood)
-    //debugger
     return (
       <div className="page-tree">
       {this.state.isEditing === true &&

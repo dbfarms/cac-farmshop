@@ -80,6 +80,7 @@ class FarmgoodForm extends Component {
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
       [name]: value
     })
+    ///NOT HITTING FUNCTION BELOW, WHY?
     this.props.editFarmgoodFormData(currentFarmgoodFormData)
   }
 
@@ -120,7 +121,7 @@ class FarmgoodForm extends Component {
     const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
       <div>
-        {!this.props.isEditing &&
+        {this.props.isEditing &&
           <div>
             Edit a Farmgood...
             <form onSubmit={this.handleEditSubmit}>
@@ -129,7 +130,7 @@ class FarmgoodForm extends Component {
                 <input
                   type="text"
                   placeholder={this.props.farmgood}
-                  onChange={this.handleOnChange}
+                  onChange={this.handleOnChange.bind(this)}
                   name="name"
                   value={name}
                 />
@@ -137,7 +138,7 @@ class FarmgoodForm extends Component {
                 <label htmlFor="farmgood_quantity">Farmer ID now (but eventually quantity)":</label>
               <input
                 type="number"
-                onChange={this.handleEditChange}
+                onChange={this.handleOnChange}
                 name="farmer"
                 value={farmer}
               />
@@ -146,7 +147,7 @@ class FarmgoodForm extends Component {
             </form>
           </div>
         }
-        {this.props.isEditing && 
+        {!this.props.isEditing && 
           <div>
             Add a Farmgood...
             <form onSubmit={this.handleOnSubmit}>

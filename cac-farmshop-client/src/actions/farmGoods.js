@@ -39,7 +39,6 @@ const updateFarmgood = farmGood => {
 }
 
 const deletingFarmgood = farmGood => {
-  debugger 
   return {
     type: 'DELETE_FARMGOOD_SUCCESS',
     farmGood
@@ -97,18 +96,16 @@ export const callToEditFarmgood = (farmGood) => {
 
 
 //THIS BREAKS BUT I DON'T KNOW WHERE
-export const deleteFarmGoods = farmGood => {
-  //debugger 
+export const deleteFarmGoods = (farmGood) => {
   return dispatch => {
-    //console.log('i dont think this works')
     return fetch(`http://localhost:3000/api/farmgoods/${farmGood.id}`, {
       headers: {
         'Access-Control-Allow-Origin':'',
         'Content-Type': 'application/json'
       },
       method: 'DELETE',
-      body: JSON.stringify({ farmGood: farmGood}),
-      credentials: "same-origin"
+      //body: JSON.stringify({ farmGood: farmGood}),
+      //credentials: "same-origin"
     })
     .then((response) => {
       if (!response.ok) {

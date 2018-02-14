@@ -1,9 +1,6 @@
-import { Route } from 'react-router-dom'
+import { Route } from 'react-router-dom';
 
 export default (state = [], action) => {
-  //if (action.farmGood){
-  //  debugger 
-  //}
   switch(action.type) {
     case 'UPDATE_FARMGOOD_SUCCESS':
       const editedFarmgood = Object.assign({}, action.farmGood)
