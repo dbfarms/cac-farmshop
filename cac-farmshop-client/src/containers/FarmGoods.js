@@ -51,7 +51,7 @@ class FarmGoods extends Component {
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      farmGoods_array: nextProps.farmGoods.data
+      farmGoods_array: nextProps.farmGoods.data 
     })
   }
   
@@ -81,6 +81,12 @@ class FarmGoods extends Component {
 
 
   render() {
+    /*
+    var test_array = []
+    for (let i = 0; i< this.state.farmGoods_array.length; i++) {
+        test_array.push(this.state.farmGoods.data[i])
+    }
+    */
     return (
       <div className="page-tree">
       {this.state.isEditing === true &&
@@ -113,7 +119,6 @@ class FarmGoods extends Component {
   }
 }
 //ORIGINALLY: {this.props.farmGoods.data.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
-//this.props.farmGoods.data[0].relationships.days.data[0]
 // ** this was in the FarmGoodsCard tag above
 
 const mapStateToProps = (state) => {
