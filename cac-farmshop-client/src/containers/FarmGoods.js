@@ -15,27 +15,13 @@ class FarmGoods extends Component {
     this.state = {
       isEditing: false,
       farmgood: null,
-      farmGoods_array: [] 
+      farmGoods_array: [],
       //daysAvailable: this.props.daysAvailable,
-      //checkBoxDaysAvailable: this.props.checkBoxDaysAvailable
+      checkBoxDaysAvailable: this.props.checkBoxDaysAvailable
     };
     //this.updateFarmgoodState = this.updateFarmgoodState.bind(this);
     //this.updateFarmgoodDaysAvailable = this.updateFarmgoodDaysAvailable.bind(this);
     //this.saveFarmgood - this.saveFarmgood.bind(this);
-  }
-  
-  updateFarmgoodDaysAvailable(event) {
-    const farmgood = this.state.farmgood;
-    const daysAvailableId = event.target.value;
-    const dayAvailable = this.state.checkBoxDaysAvailable.filter(day => day.id === daysAvailableId)[0];
-    const checked = !dayAvailable.checked;
-    dayAvailable['checked'] = !dayAvailable.checked;
-    if (checked) {
-      farmgood.daysAvailable_ids.push(dayAvailable.id);
-    } else {  
-      farmgood.daysAvailable_ids.splice(farmgood.daysAvailable_ids.indexOf(dayAvailable.id));
-    }
-    this.setState({dayAvailable: dayAvailable});
   }
 
   toggleEdit(){
@@ -85,7 +71,7 @@ class FarmGoods extends Component {
           <h1>edit farmgood</h1>
           <FarmgoodForm
             farmgood={this.state.farmgood.attributes.name}
-            //daysAvailable-{this.state.checkBoxDaysAvailable}
+            //daysAvailable={this.state.checkBoxDaysAvailable}
             onSave={this.saveFarmgood}
             onChange={this.updateFarmgoodState}
             isEditing={this.state.isEditing}
@@ -102,7 +88,10 @@ class FarmGoods extends Component {
             <h1>For sale: </h1>
             {this.state.farmGoods_array.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
-          <FarmgoodForm isEditing={this.state.isEditing} />
+          <FarmgoodForm 
+            isEditing={this.state.isEditing} 
+            daysAvailable={this.state.checkBoxDaysAvailable}
+          />
         </div>
       }
       </div>

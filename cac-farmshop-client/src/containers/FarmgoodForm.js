@@ -44,6 +44,21 @@ class FarmgoodForm extends Component {
     })
   }
 
+  //moved this from containers/FarmGoods
+  updateFarmgoodDaysAvailable(event) {
+    const farmgood = this.state.farmgood;
+    const daysAvailableId = event.target.value;
+    const dayAvailable = this.state.checkBoxDaysAvailable.filter(day => day.id === daysAvailableId)[0];
+    const checked = !dayAvailable.checked;
+    dayAvailable['checked'] = !dayAvailable.checked;
+    if (checked) {
+      farmgood.daysAvailable_ids.push(dayAvailable.id);
+    } else {  
+      farmgood.daysAvailable_ids.splice(farmgood.daysAvailable_ids.indexOf(dayAvailable.id));
+    }
+    this.setState({dayAvailable: dayAvailable});
+  }
+
 /*
   //debugger
 
