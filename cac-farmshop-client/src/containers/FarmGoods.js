@@ -15,6 +15,7 @@ class FarmGoods extends Component {
     this.state = {
       isEditing: false,
       farmgood: null,
+      farmGoods_array: [] 
       //daysAvailable: this.props.daysAvailable,
       //checkBoxDaysAvailable: this.props.checkBoxDaysAvailable
     };
@@ -46,6 +47,12 @@ class FarmGoods extends Component {
 
   componentDidMount(){
     this.props.getFarmGoods()
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      farmGoods_array: nextProps.farmGoods.data
+    })
   }
   
   //SEE BELOW FOR DAYS AVAILABLE, TO BE ADDED LATER
@@ -96,7 +103,7 @@ class FarmGoods extends Component {
         <div>
            <div className="Farm-Goods-Container">
             <h1>For sale: </h1>
-            {this.props.farmGoods.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+            {this.state.farmGoods_array.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
           <FarmgoodForm isEditing={this.state.isEditing} />
         </div>
@@ -105,6 +112,8 @@ class FarmGoods extends Component {
     )
   }
 }
+//ORIGINALLY: {this.props.farmGoods.data.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+//this.props.farmGoods.data[0].relationships.days.data[0]
 // ** this was in the FarmGoodsCard tag above
 
 const mapStateToProps = (state) => {
