@@ -11,8 +11,9 @@ import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
 import { createFarmgood } from '../actions/farmGoods'; //
 import { callToEditFarmgood } from '../actions/farmGoods'
+//import CheckBox from '../components/common/CheckBox'
+
 //import TextInput from '../components/common/TextInput';  
-//import CheckBox from '../common/CheckBox';
 
 
 
@@ -30,9 +31,10 @@ class FarmgoodForm extends Component {
     //this.toggleEdit = this.toggleEdit.bind(this);
     //this.saveFarmgood - this.saveFarmgood.bind(this);
   }
-/*
+
+  /*
   makeCheckBoxes() {
-    return this.props.daysAvailable.map(dayAvailable => {
+    return this.props.farmGood.daysAvailable.map(dayAvailable => {
       return (
         <CheckBox 
           item={dayAvailable} 
@@ -42,7 +44,7 @@ class FarmgoodForm extends Component {
     })
   }
 
-*/
+/*
   //debugger
 
   /////////////////////// EDITING FARMGOOD FUNCTIONS BELOW
@@ -130,7 +132,7 @@ class FarmgoodForm extends Component {
                 <input
                   type="text"
                   placeholder={this.props.farmgood}
-                  onChange={this.handleOnChange.bind(this)}
+                  onChange={this.handleOnChange}
                   name="name"
                   value={name}
                 />
