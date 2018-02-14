@@ -18,9 +18,11 @@ class CheckBox extends React.Component {
   }
 }
 
+/*
 CheckBox.propTypes = {  
   item: PropTypes.object.isRequired, 
   handleChange: PropTypes.func.isRequired
 };
+*/
 
 export default CheckBox; 

@@ -11,7 +11,7 @@ import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
 import { createFarmgood } from '../actions/farmGoods'; //
 import { callToEditFarmgood } from '../actions/farmGoods'
-//import CheckBox from '../components/common/CheckBox'
+import CheckBox from '../components/common/CheckBox'
 
 //import TextInput from '../components/common/TextInput';  
 
@@ -32,7 +32,7 @@ class FarmgoodForm extends Component {
     //this.saveFarmgood - this.saveFarmgood.bind(this);
   }
 
-  /*
+  
   makeCheckBoxes() {
     return this.props.farmGood.daysAvailable.map(dayAvailable => {
       return (

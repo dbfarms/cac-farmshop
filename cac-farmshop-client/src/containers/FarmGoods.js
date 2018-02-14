@@ -23,11 +23,11 @@ class FarmGoods extends Component {
     //this.updateFarmgoodDaysAvailable = this.updateFarmgoodDaysAvailable.bind(this);
     //this.saveFarmgood - this.saveFarmgood.bind(this);
   }
-  /*
+  
   updateFarmgoodDaysAvailable(event) {
     const farmgood = this.state.farmgood;
     const daysAvailableId = event.target.value;
-    const dayAvailable = this.state.checkBoxDaysAvailable.filter(day => day.id  daysAvailableId)[0];
+    const dayAvailable = this.state.checkBoxDaysAvailable.filter(day => day.id === daysAvailableId)[0];
     const checked = !dayAvailable.checked;
     dayAvailable['checked'] = !dayAvailable.checked;
     if (checked) {
@@ -36,10 +36,7 @@ class FarmGoods extends Component {
       farmgood.daysAvailable_ids.splice(farmgood.daysAvailable_ids.indexOf(dayAvailable.id));
     }
     this.setState({dayAvailable: dayAvailable});
-    }
   }
-  */
-
 
   toggleEdit(){
     this.setState({isEditing: !this.state.isEditing})
@@ -81,26 +78,20 @@ class FarmGoods extends Component {
 
 
   render() {
-    /*
-    var test_array = []
-    for (let i = 0; i< this.state.farmGoods_array.length; i++) {
-        test_array.push(this.state.farmGoods.data[i])
-    }
-    */
     return (
       <div className="page-tree">
       {this.state.isEditing === true &&
         <div>
           <h1>edit farmgood</h1>
           <FarmgoodForm
-            farmgood={this.state.farmgood.name}
+            farmgood={this.state.farmgood.attributes.name}
             //daysAvailable-{this.state.checkBoxDaysAvailable}
             onSave={this.saveFarmgood}
             onChange={this.updateFarmgoodState}
             isEditing={this.state.isEditing}
             //onDaysAvailableChange={this.updateFarmgoodDaysAvailable}
             />
-          <FarmGoodCard farmGood={this.state.farmgood}/>
+          <FarmGoodCard farmGood={this.state.farmgood.attributes}/>
           <button name="cancel edit" onClick={() => this.setState({isEditing: false})}>cancel edit</button>
           <button name="remove item" onClick={() => this.handleDelete(this.state.farmgood) }>remove item</button> 
         </div>
