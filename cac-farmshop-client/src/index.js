@@ -10,10 +10,11 @@ import store from './store.js'
 ReactDOM.render(
   <Provider store={store} >
       <div>
-        <Login />
+        
         <App />
       </div>
   </Provider>,
     document.getElementById('root')
 );
 registerServiceWorker();
+//<Login />

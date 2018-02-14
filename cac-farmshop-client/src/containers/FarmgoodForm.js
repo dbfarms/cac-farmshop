@@ -61,7 +61,7 @@ class FarmgoodForm extends Component {
     return this.setState({farmgood: farmgood});
 
   }
-  */
+  
 
  componentWillReceiveProps(nextProps) {
   //debugger 
@@ -72,6 +72,7 @@ class FarmgoodForm extends Component {
   //  this.setState({farmgoodDaysAvailable: nextProps.farmgoodDaysAvailable, checkBoxDaysAvailable: nextProps.checkBoxDaysAvailable});
   //})
  }
+*/
 
   handleEditChange = event => {
       //debugger
@@ -84,7 +85,6 @@ class FarmgoodForm extends Component {
 
   handleEditSubmit = event => {
     event.preventDefault();
-    debugger
     callToEditFarmgood(this.props.FarmgoodFormData)
   }
 
