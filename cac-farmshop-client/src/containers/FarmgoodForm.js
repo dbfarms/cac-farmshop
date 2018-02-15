@@ -47,15 +47,19 @@ class FarmgoodForm extends Component {
   
   makeCheckBoxes() {
     //return this.state.daysAvailable.map(dayAvailable => {
-    return Object.keys(this.state.daysAvailable).map(function(keyName, keyIndex) {
+    return Object.entries(this.state.daysAvailable).map(function(keyName, keyValue) {
     return (
         <CheckBox 
           item={keyName} 
-          //handleChange={this.props.onDayAvailableChange} 
+          handleChange={this.props.onDayAvailableChange} 
           //key={dayAvailable.id}
         />
       )
     })
+  }
+
+  onDayAvailableChange(){
+    console.log('i am here')
   }
 
   //the below isn't used yet and may be an unnecessary addition

@@ -1,16 +1,21 @@
 import React, {PropTypes} from 'react';
 
 class CheckBox extends React.Component {  
+  constructor(props){
+    super(props)
+  }
+
   render() {
+    
     return (
      <div className="field">
         <div>
-          <label>{this.props.item.name}</label>
+          <label>{this.props.item[0]}</label>
           <input 
             type="checkbox" 
-            name={this.props.item.name} 
-            value={this.props.item.id} 
-            checked={this.props.item.checked} 
+            name={this.props.item[0]} 
+            value={this.props.item[1]} 
+            checked={this.props.item[1]} 
             onChange={this.props.handleChange}/>
         </div>
       </div>
