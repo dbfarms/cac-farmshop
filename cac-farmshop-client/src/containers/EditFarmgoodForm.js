@@ -24,7 +24,17 @@ class EditFarmgoodForm extends Component {
   constructor(props) {
     super(props)
 
-  
+    this.state = {
+        theWeek: {
+          Monday: false,
+          Tuesday: false,
+          Wednesday: false,
+          Thursday: false,
+          Friday: false,
+          Saturday: false,
+          Sunday: false,
+        }
+      }
 
     this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
      //this.updateFarmgoodDaysAvailable = this.updateFarmgoodDaysAvailable.bind(this); // this has to happen but not here
@@ -41,11 +51,21 @@ class EditFarmgoodForm extends Component {
 
   
   makeCheckBoxes() {
-    //return this.state.daysAvailable.map(dayAvailable => {
-    return Object.entries(this.props.daysAvailable).map(function(keyName, keyValue) {
+    var oldDays = Object.entries(this.state.theWeek).map(function(keyName, keyIndex) { return keyName })
+
+    var test = this.props.daysAvailable.filter(day => {
+        for (let i = 0; i< oldDays.length; i++) {
+            if (day.name === oldDays[i][0]) {
+                oldDays[i][1] = true 
+            }
+        }
+    })
+
+   
+    return oldDays.map(day => {
       return (
           <CheckBox 
-            item={keyName} 
+            item={day} 
             //handleChange={this.onDayAvailableChange} 
             //key={dayAvailable.id}
           />
