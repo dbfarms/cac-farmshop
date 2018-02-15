@@ -4,7 +4,8 @@ import FarmGoodsCard from '../components/FarmGoodsCard';
 import FarmGoodCard from '../components/farmGoodCard';
 import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoods from server
 import { deleteFarmGoods } from '../actions/farmGoods';
-import FarmgoodForm from './FarmgoodForm';
+import NewFarmgoodForm from './NewFarmgoodForm';
+import EditFarmgoodForm from './EditFarmgoodForm';
 import { bindActionCreators } from 'redux';
 import { callToEditFarmgood } from '../actions/farmGoods' // might not need this here... 
 import './FarmGoods.css';
@@ -69,7 +70,7 @@ class FarmGoods extends Component {
       {this.state.isEditing === true &&
         <div>
           <h1>edit farmgood</h1>
-          <FarmgoodForm
+          <EditFarmgoodForm
             farmgood={this.state.farmgood.attributes.name}
             //daysAvailable={this.state.checkBoxDaysAvailable}
             onSave={this.saveFarmgood}
@@ -88,7 +89,7 @@ class FarmGoods extends Component {
             <h1>For sale: </h1>
             {this.state.farmGoods_array.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
-          <FarmgoodForm 
+          <NewFarmgoodForm 
             isEditing={this.state.isEditing} 
             daysAvailable={this.state.checkBoxDaysAvailable}
           />

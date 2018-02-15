@@ -5,6 +5,9 @@ class CheckBox extends React.Component {
     super(props)
   }
 
+  handleChange = (event) => 
+    event.target.value = !event.target.value
+
   render() {
     
     return (
@@ -16,7 +19,7 @@ class CheckBox extends React.Component {
             name={this.props.item[0]} 
             value={this.props.item[1]} 
             checked={this.props.item[1]} 
-            onChange={this.props.handleChange}/>
+            onChange={this.handleChange}/>
         </div>
       </div>
     );

@@ -18,49 +18,41 @@ import CheckBox from '../components/common/CheckBox'
 
 
 
-class FarmgoodForm extends Component {
+class EditFarmgoodForm extends Component {
 // the state is added for days available 
   
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.state = {
-      daysAvailable: {
-        mon: false,
-        tues: false,
-        wed: false,
-        thu: false,
-        fri: false,
-        sat: false,
-        sun: false,
-      }
-    }
+  
+
     this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
      //this.updateFarmgoodDaysAvailable = this.updateFarmgoodDaysAvailable.bind(this); // this has to happen but not here
 
     ///probably garbage below 
     //this.updateFarmgoodState = this.updateFarmgoodState.bind(this);
-    //this.toggleEdit = this.toggleEdit.bind(this);
     //this.saveFarmgood - this.saveFarmgood.bind(this);
+  }
+
+
+  onDayAvailableChange(){
+    console.log('i am here')
   }
 
   
   makeCheckBoxes() {
     //return this.state.daysAvailable.map(dayAvailable => {
     return Object.entries(this.state.daysAvailable).map(function(keyName, keyValue) {
-    return (
-        <CheckBox 
-          item={keyName} 
-          handleChange={this.props.onDayAvailableChange} 
-          //key={dayAvailable.id}
-        />
-      )
-    })
+      return (
+          <CheckBox 
+            item={keyName} 
+            //handleChange={this.onDayAvailableChange} 
+            //key={dayAvailable.id}
+          />
+        )
+      })
   }
 
-  onDayAvailableChange(){
-    console.log('i am here')
-  }
 
   //the below isn't used yet and may be an unnecessary addition
   editCheckBoxes() {
@@ -244,7 +236,7 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, {
   updateFarmgoodFormData,
   createFarmgood
-})(FarmgoodForm);
+})(EditFarmgoodForm);
 
 /*
 export default connect(mapStateToProps, {
