@@ -6,6 +6,13 @@ export const updateFarmgoodFormData = FarmgoodFormData => {
       FarmgoodFormData
     }
   }
+
+  export const updateEditedFarmgoodFormData = FarmgoodFormData => {
+    return {
+      type: 'UPDATED_FARMGOOD_DATA',
+      FarmgoodFormData
+    }
+  }
   
   export const resetFarmGoodForm = () => {
     return {

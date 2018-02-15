@@ -5,11 +5,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { updateFarmgoodFormData } from '../actions/FarmgoodForm';
+import { updateEditedFarmgoodFormData } from '../actions/FarmgoodForm';
 import { editFarmgoodFormData } from '../actions/FarmgoodForm';
 import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
-import { createFarmgood } from '../actions/farmGoods'; //
 import { callToEditFarmgood } from '../actions/farmGoods'
 import CheckBox from '../components/common/CheckBox'
 //import TextInput from '../components/common/TextInput';  
@@ -64,8 +63,6 @@ class EditFarmgoodForm extends Component {
   }
 
 /*
-  //debugger
-
   /////////////////////// EDITING FARMGOOD FUNCTIONS BELOW
 
   /*
@@ -101,7 +98,6 @@ class EditFarmgoodForm extends Component {
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
       [name]: value
     })
-    ///NOT HITTING FUNCTION BELOW, WHY?
     this.props.editFarmgoodFormData(currentFarmgoodFormData)
   }
 
@@ -110,24 +106,7 @@ class EditFarmgoodForm extends Component {
     callToEditFarmgood(this.props.FarmgoodFormData)
   }
 
-
-
-  ///////////////////////////// ADDING FARMGOOD FUNCTIONS BELOW
-  handleOnChange = (event) => {
-      //debugger
-    const { name, value } = event.target;
-    const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-      [name]: value
-    })
-    this.props.updateFarmgoodFormData(currentFarmgoodFormData)
-  }
-
-  handleOnSubmit = event => {
-    event.preventDefault();
-    callToEditFarmgood(this.props.FarmgoodFormData)
-    //this.props.createFarmgood(this.props.FarmgoodFormData)
-  }
-
+  
   render() {
     const boxes = this.makeCheckBoxes();
     const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
@@ -140,7 +119,7 @@ class EditFarmgoodForm extends Component {
             <input
                 type="text"
                 placeholder={this.props.farmgood}
-                onChange={this.handleOnChange}
+                onChange={this.handleEditChange.bind(this)}
                 name="name"
                 value={name}
             />
@@ -178,8 +157,8 @@ function mapDispatchToProps(dispatch) {
 
 
 export default connect(mapStateToProps, {
-  updateFarmgoodFormData,
-  createFarmgood
+  updateEditedFarmgoodFormData,
+  editFarmgoodFormData,
 })(EditFarmgoodForm);
 
 /*
