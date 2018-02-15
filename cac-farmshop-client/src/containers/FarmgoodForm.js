@@ -23,7 +23,19 @@ class FarmgoodForm extends Component {
   
   constructor(props) {
     super(props);
-    //this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
+
+    this.state = {
+      daysAvailable: {
+        mon: false,
+        tues: false,
+        wed: false,
+        thu: false,
+        fri: false,
+        sat: false,
+        sun: false,
+      }
+    }
+    this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
      //this.updateFarmgoodDaysAvailable = this.updateFarmgoodDaysAvailable.bind(this); // this has to happen but not here
 
     ///probably garbage below 
@@ -34,6 +46,20 @@ class FarmgoodForm extends Component {
 
   
   makeCheckBoxes() {
+    //return this.state.daysAvailable.map(dayAvailable => {
+    return Object.keys(this.state.daysAvailable).map(function(keyName, keyIndex) {
+    return (
+        <CheckBox 
+          item={keyName} 
+          //handleChange={this.props.onDayAvailableChange} 
+          //key={dayAvailable.id}
+        />
+      )
+    })
+  }
+
+  //the below isn't used yet and may be an unnecessary addition
+  editCheckBoxes() {
     return this.props.farmGood.daysAvailable.map(dayAvailable => {
       return (
         <CheckBox 
@@ -43,6 +69,7 @@ class FarmgoodForm extends Component {
       )
     })
   }
+
 
   //moved this from containers/FarmGoods
   updateFarmgoodDaysAvailable(event) {
@@ -134,7 +161,7 @@ class FarmgoodForm extends Component {
   }
 
   render() {
-    //const boxes = this.makeCheckBoxes();
+    const boxes = this.makeCheckBoxes();
     const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
       <div>
@@ -159,7 +186,8 @@ class FarmgoodForm extends Component {
                 name="farmer"
                 value={farmer}
               />
-            
+              {boxes}
+              
               <button type="submit">Edit Farmgood</button>
             </form>
           </div>
@@ -235,5 +263,14 @@ export default connect(mapStateToProps, {
 const mapDispatchToProps = (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch)};
 }
+
+
+
+{Object.keys(this.state.daysAvailable).map(function(keyName, keyIndex) {
+                <div>
+                {this.makeCheckBoxes(keyName, keyIndex)}
+                </div>
+                })
+              }
 
 */

@@ -16,7 +16,7 @@ class FarmGoods extends Component {
       isEditing: false,
       farmgood: null,
       farmGoods_array: [],
-      //daysAvailable: this.props.daysAvailable,
+//      daysAvailable: this.props.farmgood.attributes.daysAvailable,
       checkBoxDaysAvailable: this.props.checkBoxDaysAvailable
     };
     //this.updateFarmgoodState = this.updateFarmgoodState.bind(this);

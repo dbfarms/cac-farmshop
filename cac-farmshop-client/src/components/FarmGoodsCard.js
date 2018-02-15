@@ -7,6 +7,7 @@ const FarmGoodsCard = ({ farmGood, isEditing }) =>
       <h3>{farmGood.attributes.name}</h3>
       <img className="farmGoodImage" src={farmGood.img_url} alt={farmGood.user_id} />
       <p>{farmGood.price}</p>
+      
   </button>
 
 export default FarmGoodsCard
