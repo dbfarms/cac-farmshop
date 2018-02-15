@@ -3,14 +3,11 @@ import React, {PropTypes} from 'react';
 class CheckBox extends React.Component {  
   constructor(props){
     super(props)
+  
   }
 
-  handleChange = (event) => 
-    event.target.value = !event.target.value
 
   render() {
-    
-    
 
     return (
      <div className="field">
@@ -21,7 +18,7 @@ class CheckBox extends React.Component {
             name={this.props.item[0]} 
             value={this.props.item[1]} 
             checked={this.props.item[1]} 
-            onChange={this.handleChange}/>
+            onChange={this.props.handleChange}/>
         </div>
       </div>
     );

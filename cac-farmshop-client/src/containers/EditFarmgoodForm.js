@@ -12,11 +12,7 @@ import * as farmgoodActions from '../actions/farmGoods';
 import { createFarmgood } from '../actions/farmGoods'; //
 import { callToEditFarmgood } from '../actions/farmGoods'
 import CheckBox from '../components/common/CheckBox'
-
 //import TextInput from '../components/common/TextInput';  
-
-
-
 
 class EditFarmgoodForm extends Component {
 // the state is added for days available 
@@ -35,21 +31,9 @@ class EditFarmgoodForm extends Component {
           Sunday: false,
         }
       }
-
-    this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
-     //this.updateFarmgoodDaysAvailable = this.updateFarmgoodDaysAvailable.bind(this); // this has to happen but not here
-
-    ///probably garbage below 
-    //this.updateFarmgoodState = this.updateFarmgoodState.bind(this);
-    //this.saveFarmgood - this.saveFarmgood.bind(this);
   }
 
 
-  onDayAvailableChange(){
-    console.log('i am here')
-  }
-
-  
   makeCheckBoxes() {
     var oldDays = Object.entries(this.state.theWeek).map(function(keyName, keyIndex) { return keyName })
 
@@ -60,46 +44,23 @@ class EditFarmgoodForm extends Component {
             }
         }
     })
-
    
     return oldDays.map(day => {
       return (
           <CheckBox 
             item={day} 
-            //handleChange={this.onDayAvailableChange} 
+            handleChange={this.updateFarmgoodDaysAvailable.bind(this)} 
             //key={dayAvailable.id}
           />
         )
       })
   }
 
-
-  //the below isn't used yet and may be an unnecessary addition
-  editCheckBoxes() {
-    return this.props.farmGood.daysAvailable.map(dayAvailable => {
-      return (
-        <CheckBox 
-          item={dayAvailable} 
-          handleChange={this.props.onDayAvailableChange} 
-          key={dayAvailable.id}/>
-      )
-    })
-  }
-
-
   //moved this from containers/FarmGoods
-  updateFarmgoodDaysAvailable(event) {
-    const farmgood = this.state.farmgood;
+  updateFarmgoodDaysAvailable = event => {
+    const farmgood = this.props.farmgood;
     const daysAvailableId = event.target.value;
-    const dayAvailable = this.state.checkBoxDaysAvailable.filter(day => day.id === daysAvailableId)[0];
-    const checked = !dayAvailable.checked;
-    dayAvailable['checked'] = !dayAvailable.checked;
-    if (checked) {
-      farmgood.daysAvailable_ids.push(dayAvailable.id);
-    } else {  
-      farmgood.daysAvailable_ids.splice(farmgood.daysAvailable_ids.indexOf(dayAvailable.id));
-    }
-    this.setState({dayAvailable: dayAvailable});
+    
   }
 
 /*
@@ -121,18 +82,18 @@ class EditFarmgoodForm extends Component {
     return this.setState({farmgood: farmgood});
 
   }
-  
+
 
  componentWillReceiveProps(nextProps) {
   //debugger 
   if (this.props.farmgood.id != nextProps.farmgood.id) {
     this.setState({farmgood: nextProps.farmgood});
   }
-  //if (this.props.checkBoxDaysAvailable.length < nextProps.checkBoxHobbies.length) {
-  //  this.setState({farmgoodDaysAvailable: nextProps.farmgoodDaysAvailable, checkBoxDaysAvailable: nextProps.checkBoxDaysAvailable});
-  //})
+  if (this.props.checkBoxDaysAvailable.length < nextProps.checkBoxHobbies.length) {
+    this.setState({farmgoodDaysAvailable: nextProps.farmgoodDaysAvailable, checkBoxDaysAvailable: nextProps.checkBoxDaysAvailable});
+  }
  }
-*/
+ */
 
   handleEditChange = event => {
       //debugger
@@ -152,7 +113,7 @@ class EditFarmgoodForm extends Component {
 
 
   ///////////////////////////// ADDING FARMGOOD FUNCTIONS BELOW
-  handleOnChange = event => {
+  handleOnChange = (event) => {
       //debugger
     const { name, value } = event.target;
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
@@ -163,16 +124,7 @@ class EditFarmgoodForm extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    //debugger
-    const decider = this.props.isEditing 
-    //debugger
-    if (decider) {
-      //debugger
-      callToEditFarmgood(this.props.FarmgoodFormData)
-    } else {
-      //debugger
-      createFarmgood(this.props.FarmgoodFormData)
-    }
+    callToEditFarmgood(this.props.FarmgoodFormData)
     //this.props.createFarmgood(this.props.FarmgoodFormData)
   }
 

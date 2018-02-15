@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import FarmGoodsCard from '../components/FarmGoodsCard';
 import FarmGoodCard from '../components/farmGoodCard';
 import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoods from server
+import { getDays } from '../actions/farmGoods'; // requests list of farmgoods from server
 import { deleteFarmGoods } from '../actions/farmGoods';
 import NewFarmgoodForm from './NewFarmgoodForm';
 import EditFarmgoodForm from './EditFarmgoodForm';
@@ -35,6 +36,7 @@ class FarmGoods extends Component {
 
   componentDidMount(){
     this.props.getFarmGoods()
+    this.props.getDays();
   }
 
   componentWillReceiveProps(nextProps){
