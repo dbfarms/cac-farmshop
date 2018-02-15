@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import FarmGoodsCard from '../components/FarmGoodsCard';
 import FarmGoodCard from '../components/farmGoodCard';
 import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoods from server
-import { getDays } from '../actions/farmGoods'; // requests list of farmgoods from server
+import { getDays } from '../actions/days'; // requests list of farmgoods from server
 import { deleteFarmGoods } from '../actions/farmGoods';
 import NewFarmgoodForm from './NewFarmgoodForm';
 import EditFarmgoodForm from './EditFarmgoodForm';
@@ -22,6 +22,7 @@ class FarmGoods extends Component {
         days_available_ids: [],
       },
       farmGoods_array: [],
+      days_array: [],
 //      daysAvailable: this.props.farmgood.attributes.daysAvailable,
       checkBoxDaysAvailable: this.props.checkBoxDaysAvailable
     };
@@ -35,13 +36,18 @@ class FarmGoods extends Component {
   }
 
   componentDidMount(){
-    this.props.getFarmGoods()
-    this.props.getDays();
+    this.props.getFarmGoods();
+    //WHEN I PUT ANOTHER GET REQUEST HERE IT BREAKS THE PROGRAM. BUT WHY?
+  }
+
+  componentWilMount(){
+    this.props.getDays()
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      farmGoods_array: nextProps.farmGoods.data 
+      farmGoods_array: nextProps.farmGoods.data,
+     //days_array: nextProps.days.data
     })
   }
   
@@ -82,6 +88,7 @@ class FarmGoods extends Component {
             onSave={this.saveFarmgood}
             onChange={this.updateFarmgoodState}
             isEditing={this.state.isEditing}
+            days={this.state.days}
             //onDaysAvailableChange={this.updateFarmgoodDaysAvailable}
             />
           <FarmGoodCard farmGood={this.state.farmgood.attributes}/>
@@ -98,7 +105,7 @@ class FarmGoods extends Component {
           <NewFarmgoodForm 
             farmgood={this.state.farmgood}
             daysAvailable={this.state.checkBoxDaysAvailable} //unclear we're using this here... 
-            
+            days={this.state.days}
           />
         </div>
       }
@@ -112,11 +119,12 @@ class FarmGoods extends Component {
 const mapStateToProps = (state) => {
   //console.log(state)
   return ({
-      farmGoods: state.farmGoods
+      farmGoods: state.farmGoods,
+      days: state.days 
   })
 }
 
-export default connect(mapStateToProps, { getFarmGoods })(FarmGoods); // 
+export default connect(mapStateToProps, { getFarmGoods, getDays })(FarmGoods); // 
 
 /*
 

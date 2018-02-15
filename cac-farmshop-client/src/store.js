@@ -12,6 +12,7 @@ import carts from './reducers/carts';
 import cartFormData from './reducers/cartFormData';
 import FarmgoodFormData from './reducers/farmGoodFormData';
 import EditedFarmgoodFormData from './reducers/farmGoodFormData';
+import days from './reducers/daysReducer';
 
 const reducers = combineReducers({
   carts,
@@ -21,6 +22,7 @@ const reducers = combineReducers({
   FarmgoodFormData,
   farmGood,
   EditedFarmgoodFormData,
+  days,
   //route
 });
 
