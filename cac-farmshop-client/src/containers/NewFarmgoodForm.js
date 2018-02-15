@@ -10,11 +10,7 @@ import * as farmgoodActions from '../actions/farmGoods';
 import { createFarmgood } from '../actions/farmGoods'; //
 import { callToEditFarmgood } from '../actions/farmGoods'
 import CheckBox from '../components/common/CheckBox'
-
 //import TextInput from '../components/common/TextInput';  
-
-
-
 
 class NewFarmgoodForm extends Component {
 // the state is added for days available 
@@ -59,19 +55,6 @@ class NewFarmgoodForm extends Component {
           />
         )
       })
-  }
-
-
-  //the below isn't used yet and may be an unnecessary addition
-  editCheckBoxes() {
-    return this.props.farmGood.daysAvailable.map(dayAvailable => {
-      return (
-        <CheckBox 
-          item={dayAvailable} 
-          handleChange={this.props.onDayAvailableChange} 
-          key={dayAvailable.id}/>
-      )
-    })
   }
 
 
@@ -136,16 +119,7 @@ class NewFarmgoodForm extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    //debugger
-    const decider = this.props.isEditing 
-    //debugger
-    if (decider) {
-      //debugger
-      callToEditFarmgood(this.props.FarmgoodFormData)
-    } else {
-      //debugger
-      createFarmgood(this.props.FarmgoodFormData)
-    }
+    createFarmgood(this.props.FarmgoodFormData)
     //this.props.createFarmgood(this.props.FarmgoodFormData)
   }
 

@@ -15,7 +15,11 @@ class FarmGoods extends Component {
     super(props);
     this.state = {
       isEditing: false,
-      farmgood: null,
+      farmgood: {
+        name: '',
+        farmer: '', //EVENTUALLY THIS WILL DEFAULT TO THE LOGGED IN FARMER BUT FOR NOW YOU CAN CHOOSE
+        days_available_ids: [],
+      },
       farmGoods_array: [],
 //      daysAvailable: this.props.farmgood.attributes.daysAvailable,
       checkBoxDaysAvailable: this.props.checkBoxDaysAvailable
@@ -71,8 +75,8 @@ class FarmGoods extends Component {
         <div>
           <h1>edit farmgood</h1>
           <EditFarmgoodForm
-            farmgood={this.state.farmgood.attributes.name}
-            //daysAvailable={this.state.checkBoxDaysAvailable}
+            farmgood={this.state.farmgood.attributes.name} //THIS IS NO LONGER CORRECT*****************************
+            daysAvailable={this.state.farmgood.relationships.days.data}
             onSave={this.saveFarmgood}
             onChange={this.updateFarmgoodState}
             isEditing={this.state.isEditing}
@@ -90,8 +94,9 @@ class FarmGoods extends Component {
             {this.state.farmGoods_array.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
           <NewFarmgoodForm 
-            isEditing={this.state.isEditing} 
-            daysAvailable={this.state.checkBoxDaysAvailable}
+            farmgood={this.state.farmgood}
+            daysAvailable={this.state.checkBoxDaysAvailable} //unclear we're using this here... 
+            
           />
         </div>
       }

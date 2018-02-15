@@ -42,7 +42,7 @@ class EditFarmgoodForm extends Component {
   
   makeCheckBoxes() {
     //return this.state.daysAvailable.map(dayAvailable => {
-    return Object.entries(this.state.daysAvailable).map(function(keyName, keyValue) {
+    return Object.entries(this.props.daysAvailable).map(function(keyName, keyValue) {
       return (
           <CheckBox 
             item={keyName} 
@@ -161,58 +161,30 @@ class EditFarmgoodForm extends Component {
     const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
       <div>
-        {this.props.isEditing &&
-          <div>
-            Edit a Farmgood...
-            <form onSubmit={this.handleEditSubmit}>
-              <div>
-                <label htmlFor="farmgood_name">Name of Farm Good:</label>
-                <input
-                  type="text"
-                  placeholder={this.props.farmgood}
-                  onChange={this.handleOnChange}
-                  name="name"
-                  value={name}
-                />
-              </div>
-                <label htmlFor="farmgood_quantity">Farmer ID now (but eventually quantity)":</label>
-              <input
-                type="number"
+        Edit a Farmgood...
+        <form onSubmit={this.handleEditSubmit}>
+            <div>
+            <label htmlFor="farmgood_name">Name of Farm Good:</label>
+            <input
+                type="text"
+                placeholder={this.props.farmgood}
                 onChange={this.handleOnChange}
-                name="farmer"
-                value={farmer}
-              />
-              {boxes}
-              
-              <button type="submit">Edit Farmgood</button>
-            </form>
-          </div>
-        }
-        {!this.props.isEditing && 
-          <div>
-            Add a Farmgood...
-            <form onSubmit={this.handleOnSubmit}>
-              <div>
-                <label htmlFor="farmgood_name">Name of Farm Good:</label>
-                <input
-                  type="text"
-                  onChange={this.handleOnChange}
-                  name="name"
-                  value={name}
-                />
-              </div>
-                <label htmlFor="farmgood_quantity">Farmer ID now (but eventually quantity)":</label>
-              <input
-                type="number"
-                onChange={this.handleOnChange}
-                name="farmer"
-                value={farmer}
-              />
+                name="name"
+                value={name}
+            />
+            </div>
+            <label htmlFor="farmgood_quantity">Farmer ID now (but eventually quantity)":</label>
+            <input
+            type="number"
+            onChange={this.handleOnChange}
+            name="farmer"
+            value={farmer}
+            />
+            {boxes}
             
-              <button type="submit">Add Farmgood</button>
-            </form>
-          </div>
-        }
+            <button type="submit">Edit Farmgood</button>
+        </form>
+       
       </div>
     )
   }
