@@ -115,11 +115,11 @@ class NewFarmgoodForm extends Component {
       [name]: value
     })
     this.props.updateFarmgoodFormData(currentFarmgoodFormData)
-  }
+  } //not necessary for this to be redux
 
   handleOnSubmit = event => {
     event.preventDefault();
-    createFarmgood(this.props.FarmgoodFormData)
+    this.props.createFarmgood(this.props.FarmgoodFormData)
     //this.props.createFarmgood(this.props.FarmgoodFormData)
   }
 

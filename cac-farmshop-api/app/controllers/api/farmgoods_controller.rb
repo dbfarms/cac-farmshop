@@ -3,12 +3,11 @@ class Api::FarmgoodsController < ApplicationController
     before_action :set_farmgood, only: [:show, :edit, :destroy]
 
     def index
-        #byebug
-        
         render json: Farmgood.all
     end
 
     def create
+        #byebug
         farmerID = params["farmGood"]["farmer"].to_i
         farmgood = Farmgood.new(farmgood_params)
         
@@ -47,7 +46,6 @@ class Api::FarmgoodsController < ApplicationController
     end
 
     def farmgood_params
-        #byebug
         params.require(:farmGood).permit(:name)
     end
 
