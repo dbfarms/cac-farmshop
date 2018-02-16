@@ -45,12 +45,14 @@ class NewFarmgoodForm extends Component {
     this.selectedCheckboxes = new Set();
   }
 
+  /*
   componentWillReceiveProps(nextProps){
     this.setState({
       days_array: nextProps.days.data
       //days_array: nextProps.days.data
     })
   }
+  */
 
   toggleCheckbox = label => {
     if (this.selectedCheckboxes.has(label)) {
@@ -142,7 +144,6 @@ class NewFarmgoodForm extends Component {
     for (const checkbox of this.selectedCheckboxes) {
       console.log(checkbox, 'is selected.');
     }
-    this.props.getFarmGoods(); //IN ORDER TO RESET THE LIST OF FARMGOODS ON THE PAGE, IS THERE A BETTER WAY?
     //this.props.createFarmgood(this.props.FarmgoodFormData)
   }
 

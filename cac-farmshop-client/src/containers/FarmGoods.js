@@ -51,6 +51,7 @@ class FarmGoods extends Component {
       farmGoods_array: nextProps.farmGoods.data
       //days_array: nextProps.days.data
     })
+    this.props.getFarmGoods()
   }
   
   //SEE BELOW FOR DAYS AVAILABLE, TO BE ADDED LATER
