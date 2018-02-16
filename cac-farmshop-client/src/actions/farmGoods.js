@@ -67,8 +67,8 @@ export const createFarmgood = farmGood => {
     })
     .then(response => response.json())
     .then(farmGood => {
+      dispatch(resetFarmGoodForm()),
       dispatch(addFarmGoods(farmGood))
-      dispatch(resetFarmGoodForm())
     })
     .catch(error => console.log(error))
   }
@@ -86,8 +86,8 @@ export const callToEditFarmgood = (farmGood) => {
     })
     .then(response => response.json())
     .then(farmGood => {
+      dispatch(resetFarmGoodForm()),
       dispatch(updateFarmgood(farmGood))
-      dispatch(resetFarmGoodForm())
     })
     .catch(error => console.log(error))
   }
@@ -114,7 +114,8 @@ export const deleteFarmGoods = (farmGood) => {
       }
       return response.json();
     }).then(() => {
-      console.log(`Deleted ${farmGood.id}`)
+      console.log(`Deleted ${farmGood.id}`),
+      dispatch(resetFarmGoodForm()),
       dispatch(deletingFarmgood(farmGood));
       return
     }).catch(error => {

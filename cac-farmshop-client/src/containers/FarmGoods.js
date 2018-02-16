@@ -39,9 +39,9 @@ class FarmGoods extends Component {
     this.props.getFarmGoods();
     //WHEN I PUT ANOTHER GET REQUEST HERE IT BREAKS THE PROGRAM. BUT WHY?
   }
-
   componentWilMount(){
     this.props.getDays()
+    //SEE ABOVE COMMENT ABOUT HAVING TO SEPARATE OUT THESE REQUESTS
   }
 
   componentWillReceiveProps(nextProps){
