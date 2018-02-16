@@ -1,5 +1,6 @@
 const initialState = {
-    name: ''
+    name: '',
+    farmer: '',
 }
 
 export default (state = initialState, action) => {
