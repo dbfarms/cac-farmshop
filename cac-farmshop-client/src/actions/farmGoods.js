@@ -49,6 +49,7 @@ const deletingFarmgood = farmGood => {
 export const getFarmGoods = () => {
   return dispatch => {
     return fetch('http://localhost:3000/api/farmgoods', header)
+   // fetch('http://localhost:3000/api/days', header) ///
       .then(response => response.json())
       .then(farmGoods => dispatch(setFarmGoods(farmGoods)))
       .catch(error => console.log(error));

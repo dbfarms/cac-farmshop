@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateEditedFarmgoodFormData } from '../actions/FarmgoodForm';
-import { editFarmgoodFormData } from '../actions/FarmgoodForm';
+import { updateFarmgoodFormData } from '../actions/FarmgoodForm';
 import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
 import { callToEditFarmgood } from '../actions/farmGoods'
@@ -90,6 +90,16 @@ class EditFarmgoodForm extends Component {
     this.setState({farmgoodDaysAvailable: nextProps.farmgoodDaysAvailable, checkBoxDaysAvailable: nextProps.checkBoxDaysAvailable});
   }
  }
+
+   handleOnChange = event => {
+      //debugger
+    const { name, value } = event.target;
+    const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
+      [name]: value
+    })
+    this.props.updateFarmgoodFormData(currentFarmgoodFormData)
+  } //not necessary for this to be redux
+
  */
 
   handleEditChange = event => {
@@ -98,12 +108,12 @@ class EditFarmgoodForm extends Component {
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
       [name]: value
     })
-    this.props.editFarmgoodFormData(currentFarmgoodFormData)
+    this.props.updateFarmgoodFormData(currentFarmgoodFormData)
   }
 
   handleEditSubmit = event => {
     event.preventDefault();
-    callToEditFarmgood(this.props.FarmgoodFormData)
+    this.props.callToEditFarmgood(this.props.FarmgoodFormData)
   }
 
   
@@ -119,7 +129,7 @@ class EditFarmgoodForm extends Component {
             <input
                 type="text"
                 placeholder={this.props.farmgood}
-                onChange={this.handleEditChange.bind(this)}
+                onChange={this.handleEditChange}
                 name="name"
                 value={name}
             />
@@ -158,7 +168,7 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, {
   updateEditedFarmgoodFormData,
-  editFarmgoodFormData,
+  updateFarmgoodFormData,
 })(EditFarmgoodForm);
 
 /*

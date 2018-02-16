@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateFarmgoodFormData } from '../actions/FarmgoodForm';
-//import { editFarmgoodFormData } from '../actions/FarmgoodForm';
 import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoods from server
 import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
@@ -29,6 +28,7 @@ class NewFarmgoodForm extends Component {
         Saturday: false,
         Sunday: false,
       }],
+      days_array: []
     }
     this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
      //this.updateFarmgoodDaysAvailable = this.updateFarmgoodDaysAvailable.bind(this); // this has to happen but not here
@@ -40,9 +40,16 @@ class NewFarmgoodForm extends Component {
   }
 
 
-  componentWillMount = () => {
-    this.props.getDays()
+  componentDidMount = () => {
+    //this.props.getDays()
     this.selectedCheckboxes = new Set();
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      days_array: nextProps.days.data
+      //days_array: nextProps.days.data
+    })
   }
 
   toggleCheckbox = label => {
@@ -120,9 +127,6 @@ class NewFarmgoodForm extends Component {
  }
 */
 
-
-
-  ///////////////////////////// ADDING FARMGOOD FUNCTIONS BELOW
   handleOnChange = event => {
       //debugger
     const { name, value } = event.target;
@@ -150,13 +154,11 @@ class NewFarmgoodForm extends Component {
         />
   )
 
-
   createCheckboxes = () => {////////////////////////////////////////////////////////////////////////////////////
     //var theWeek = Object.entries(this.state.theWeek).map(function(keyName, keyIndex) { return keyName })
     (
       this.state.theWeek.map(this.createCheckbox)
     )}
-
 
   render() {
     const boxes = this.makeCheckBoxes();
