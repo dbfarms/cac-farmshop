@@ -4,11 +4,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateFarmgoodFormData } from '../actions/FarmgoodForm';
-import { editFarmgoodFormData } from '../actions/FarmgoodForm';
+//import { editFarmgoodFormData } from '../actions/FarmgoodForm';
+import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoods from server
 import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
 import { createFarmgood } from '../actions/farmGoods'; //
-import { callToEditFarmgood } from '../actions/farmGoods'
+//import { callToEditFarmgood } from '../actions/farmGoods'
 import CheckBox from '../components/common/CheckBox'
 //import TextInput from '../components/common/TextInput';  
 
@@ -120,6 +121,7 @@ class NewFarmgoodForm extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     this.props.createFarmgood(this.props.FarmgoodFormData)
+    this.props.getFarmGoods();
     //this.props.createFarmgood(this.props.FarmgoodFormData)
   }
 
@@ -171,7 +173,8 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, {
   updateFarmgoodFormData,
-  createFarmgood
+  createFarmgood,
+  getFarmGoods,
 })(NewFarmgoodForm);
 
 /*

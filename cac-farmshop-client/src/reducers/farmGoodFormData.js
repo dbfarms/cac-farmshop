@@ -1,6 +1,7 @@
 const initialState = {
     name: '',
     farmer: '',
+    isEditing: false,
 }
 
 export default (state = initialState, action) => {

@@ -71,8 +71,13 @@ class FarmGoods extends Component {
     })
 
   handleDelete(farmGood){
-    //debugger 
+    //TAKES A SECOND TO REFRESH PAGE.... HOW TO SPEED UP?
     this.props.deleteFarmGoods(farmGood);
+    this.props.getFarmGoods();
+    alert('deleting')
+    this.setState({
+      isEditing: false,
+    })
   }
 
 
