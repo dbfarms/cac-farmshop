@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import FarmGoodsCard from '../components/FarmGoodsCard';
 import FarmGoodCard from '../components/farmGoodCard';
 import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoods from server
-import { getDays } from '../actions/days'; // requests list of farmgoods from server
+import { getDays } from '../actions/days'; // requests from server
 import { deleteFarmGoods } from '../actions/farmGoods';
 import NewFarmgoodForm from './NewFarmgoodForm';
 import EditFarmgoodForm from './EditFarmgoodForm';
@@ -35,19 +35,21 @@ class FarmGoods extends Component {
     this.setState({isEditing: !this.state.isEditing})
   }
 
-  componentDidMount(){
-    this.props.getFarmGoods();
+  componentWillMount(){
+    this.props.getFarmGoods()
+    
     //WHEN I PUT ANOTHER GET REQUEST HERE IT BREAKS THE PROGRAM. BUT WHY?
   }
-  componentWilMount(){
-    this.props.getDays()
+  
+  //componentWillMount(){
+  //  this.props.getDays()
     //SEE ABOVE COMMENT ABOUT HAVING TO SEPARATE OUT THESE REQUESTS
-  }
+  //}
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      farmGoods_array: nextProps.farmGoods.data,
-     //days_array: nextProps.days.data
+      farmGoods_array: nextProps.farmGoods.data
+      //days_array: nextProps.days.data
     })
   }
   
@@ -123,6 +125,7 @@ class FarmGoods extends Component {
 
 const mapStateToProps = (state) => {
   //console.log(state)
+  //const stateDays = Object.assign([], state.days)
   return ({
       farmGoods: state.farmGoods,
       days: state.days 

@@ -9,9 +9,9 @@ import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoo
 import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
 import { createFarmgood } from '../actions/farmGoods'; //
-//import { callToEditFarmgood } from '../actions/farmGoods'
+import { getDays } from '../actions/days'; // requests from server
+import Checkbox from './Checkbox';
 import CheckBox from '../components/common/CheckBox'
-//import TextInput from '../components/common/TextInput';  
 
 class NewFarmgoodForm extends Component {
 // the state is added for days available 
@@ -20,15 +20,15 @@ class NewFarmgoodForm extends Component {
     super(props);
 
     this.state = {
-      daysAvailable: {
-        mon: false,
-        tues: false,
-        wed: false,
-        thu: false,
-        fri: false,
-        sat: false,
-        sun: false,
-      }
+      theWeek: [{ 
+        Monday: false,
+        Tuesday: false,
+        Wednesday: false,
+        Thursday: false,
+        Friday: false,
+        Saturday: false,
+        Sunday: false,
+      }],
     }
     this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
      //this.updateFarmgoodDaysAvailable = this.updateFarmgoodDaysAvailable.bind(this); // this has to happen but not here
@@ -40,6 +40,20 @@ class NewFarmgoodForm extends Component {
   }
 
 
+  componentWillMount = () => {
+    this.props.getDays()
+    this.selectedCheckboxes = new Set();
+  }
+
+  toggleCheckbox = label => {
+    if (this.selectedCheckboxes.has(label)) {
+      this.selectedCheckboxes.delete(label);
+    } else {
+      this.selectedCheckboxes.add(label);
+    }
+  }
+
+
   onDayAvailableChange(){
     console.log('i am here')
   }
@@ -47,7 +61,7 @@ class NewFarmgoodForm extends Component {
   
   makeCheckBoxes() {
     //return this.state.daysAvailable.map(dayAvailable => {
-    return Object.entries(this.state.daysAvailable).map(function(keyName, keyValue) {
+    return Object.entries(this.state.theWeek).map(function(keyName, keyValue) {
       return (
           <CheckBox 
             item={keyName} 
@@ -121,15 +135,35 @@ class NewFarmgoodForm extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     this.props.createFarmgood(this.props.FarmgoodFormData)
-    this.props.getFarmGoods();
+    for (const checkbox of this.selectedCheckboxes) {
+      console.log(checkbox, 'is selected.');
+    }
+    this.props.getFarmGoods(); //IN ORDER TO RESET THE LIST OF FARMGOODS ON THE PAGE, IS THERE A BETTER WAY?
     //this.props.createFarmgood(this.props.FarmgoodFormData)
   }
+
+  createCheckbox = label => (
+    <Checkbox
+            label={label}
+            handleCheckboxChange={this.toggleCheckbox}
+            key={label}
+        />
+  )
+
+
+  createCheckboxes = () => {////////////////////////////////////////////////////////////////////////////////////
+    //var theWeek = Object.entries(this.state.theWeek).map(function(keyName, keyIndex) { return keyName })
+    (
+      this.state.theWeek.map(this.createCheckbox)
+    )}
+
 
   render() {
     const boxes = this.makeCheckBoxes();
     const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
       <div>
+        {this.createCheckboxes()}
         Add a Farmgood...
         <form onSubmit={this.handleOnSubmit}>
           <div>
@@ -175,6 +209,7 @@ export default connect(mapStateToProps, {
   updateFarmgoodFormData,
   createFarmgood,
   getFarmGoods,
+  getDays
 })(NewFarmgoodForm);
 
 /*
