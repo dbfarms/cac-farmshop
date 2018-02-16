@@ -124,7 +124,7 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getFarmGoods, getDays })(FarmGoods); // 
+export default connect(mapStateToProps, { getFarmGoods, getDays, deleteFarmGoods })(FarmGoods); // 
 
 /*
 
