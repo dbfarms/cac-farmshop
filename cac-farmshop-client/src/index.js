@@ -4,10 +4,10 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import './index.css';
 import App from './containers/App';
-import Login from './containers/Login'
+//import Login from './containers/Login'
 import registerServiceWorker from './registerServiceWorker';
 import store from './store.js'
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css'; // for dropdown
 
 ReactDOM.render(
   <Provider store={store} >
