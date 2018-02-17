@@ -27,7 +27,7 @@ class App extends Component {
   componentDidMount() {
     let that = this 
     
-    axios.get('/users/check_for_user',{
+    axios.get('http://localhost:3000/users/check_for_user',{
     })
     .then(function(response){
       if(response.data.email){

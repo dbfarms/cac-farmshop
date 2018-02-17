@@ -22,6 +22,7 @@ class Header extends React.Component {
           page: newPage
         })
       }
+    
     render() {
         switch(this.state.page) {
           case "signup":
