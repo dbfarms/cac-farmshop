@@ -15,7 +15,7 @@ configureFakeBackend();
 ReactDOM.render(
   <Provider store={store} >
       <div>
-        <AppLogin />
+        <App />
       </div>
   </Provider>,
     document.getElementById('root')
