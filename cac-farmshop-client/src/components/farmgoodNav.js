@@ -2,6 +2,12 @@ import React from 'react'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import '../containers/farmgoodNav.css';
 
+//
+//
+// PROBABLY GOING TO MOVE THIS DROPDOWN TO BE MAIN NAV BAR
+//
+//
+
 export default class FarmgoodNav extends React.Component {
     constructor(props){
         super(props);
@@ -25,11 +31,10 @@ export default class FarmgoodNav extends React.Component {
             Dropdown
             </DropdownToggle>
             <DropdownMenu>
-                <DropdownItem header>Header</DropdownItem>
-                <DropdownItem disabled>Action</DropdownItem>
-                <DropdownItem>Another Action</DropdownItem>
+                <DropdownItem header>Farm Goods</DropdownItem>
+                <DropdownItem>By Day</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>Another Action</DropdownItem>
+                <DropdownItem>By Category</DropdownItem>
             </DropdownMenu>
         </Dropdown>
         )
@@ -37,6 +42,7 @@ export default class FarmgoodNav extends React.Component {
 }
 
 /*
+<DropdownItem disabled>Action</DropdownItem>
 const FarmgoodNav = ({ changeShow }) => 
     <div>
         <button className="farmnav-button" onClick={() => changeShow('farmGoods')}>Farm Goods</button>

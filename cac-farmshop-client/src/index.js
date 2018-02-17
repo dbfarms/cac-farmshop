@@ -11,7 +11,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 ReactDOM.render(
   <Provider store={store} >
       <div>
-        
         <App />
       </div>
   </Provider>,
