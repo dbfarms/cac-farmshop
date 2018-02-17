@@ -7,19 +7,30 @@ import { getDays } from '../actions/days'; // requests from server
 import { deleteFarmGoods } from '../actions/farmGoods';
 import NewFarmgoodForm from './NewFarmgoodForm';
 import EditFarmgoodForm from './EditFarmgoodForm';
+import FarmgoodNav from '../components/farmgoodNav'
 import { bindActionCreators } from 'redux';
-import { callToEditFarmgood } from '../actions/farmGoods' // might not need this here... 
 import './FarmGoods.css';
 
 class FarmGoods extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showKey: 'farmgoodsHome',
+      days: [],
       isEditing: false,
       farmgood: {
         name: '',
         farmer: '', //EVENTUALLY THIS WILL DEFAULT TO THE LOGGED IN FARMER BUT FOR NOW YOU CAN CHOOSE
         days_available_ids: [],
+        theWeek: [ 
+          ["Monday", false],
+          ["Tuesday", false],
+          ["Wednesday", false],
+          ["Thursday", false],
+          ["Friday", false],
+          ["Saturday", false],
+          ["Sunday", false],
+        ],
       },
       farmGoods_array: [],
       days_array: [],
@@ -51,7 +62,7 @@ class FarmGoods extends Component {
       farmGoods_array: nextProps.farmGoods.data
       //days_array: nextProps.days.data
     })
-    this.props.getFarmGoods()
+    //  this.props.getFarmGoods() // RE-UPS FARMGOODS AFTER ADD
   }
   
   //SEE BELOW FOR DAYS AVAILABLE, TO BE ADDED LATER
@@ -83,10 +94,17 @@ class FarmGoods extends Component {
     })
   }
 
+  handleSubmit(){
+    this.props.getFarmGoods();
+  }
+
+  handleShowChange = showKey => this.setState({ showKey: showKey })
+
 
   render() {
     return (
       <div className="page-tree">
+      <FarmgoodNav changeShow={this.handleShowChange} />
       {this.state.isEditing === true &&
         <div>
           <h1>edit farmgood</h1>
@@ -114,6 +132,7 @@ class FarmGoods extends Component {
             farmgood={this.state.farmgood}
             daysAvailable={this.state.checkBoxDaysAvailable} //unclear we're using this here... 
             days={this.state.days}
+            onSubmit={this.handleSubmit}
           />
         </div>
       }

@@ -1,0 +1,10 @@
+.farmnav-button {
+    font-size: 18px;
+    background: green;
+    border-radius: 1px;
+    display: inline-block;
+    height: 75px;
+    margin: 1.5rem;
+    position: relative;
+    width: 150px;
+}

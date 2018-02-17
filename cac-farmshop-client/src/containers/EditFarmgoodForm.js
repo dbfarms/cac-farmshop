@@ -113,6 +113,7 @@ class EditFarmgoodForm extends Component {
 
   handleEditSubmit = event => {
     event.preventDefault();
+    //this.props.isEditing = false
     this.props.callToEditFarmgood(this.props.FarmgoodFormData)
   }
 
@@ -137,7 +138,7 @@ class EditFarmgoodForm extends Component {
             <label htmlFor="farmgood_quantity">Farmer ID now (but eventually quantity)":</label>
             <input
             type="number"
-            onChange={this.handleOnChange}
+            onChange={this.handleEditChange}
             name="farmer"
             value={farmer}
             />
@@ -168,6 +169,7 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, {
   updateEditedFarmgoodFormData,
+  callToEditFarmgood,
   updateFarmgoodFormData,
 })(EditFarmgoodForm);
 

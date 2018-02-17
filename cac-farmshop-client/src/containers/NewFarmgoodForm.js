@@ -9,7 +9,6 @@ import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
 import { createFarmgood } from '../actions/farmGoods'; //
 import { getDays } from '../actions/days'; // requests from server
-import Checkbox from './Checkbox';
 import CheckBox from '../components/common/CheckBox'
 
 class NewFarmgoodForm extends Component {
@@ -19,7 +18,8 @@ class NewFarmgoodForm extends Component {
     super(props);
 
     this.state = {
-      theWeek: [{ 
+      /*
+      theWeek: { 
         Monday: false,
         Tuesday: false,
         Wednesday: false,
@@ -27,21 +27,22 @@ class NewFarmgoodForm extends Component {
         Friday: false,
         Saturday: false,
         Sunday: false,
-      }],
+      },
+      */
+      theWeek: [ 
+        ["Monday", false],
+        ["Tuesday", false],
+        ["Wednesday", false],
+        ["Thursday", false],
+        ["Friday", false],
+        ["Saturday", false],
+        ["Sunday", false],
+      ],
       days_array: []
     }
-    this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
-     //this.updateFarmgoodDaysAvailable = this.updateFarmgoodDaysAvailable.bind(this); // this has to happen but not here
-
-    ///probably garbage below 
-    //this.updateFarmgoodState = this.updateFarmgoodState.bind(this);
-    //this.toggleEdit = this.toggleEdit.bind(this);
-    //this.saveFarmgood - this.saveFarmgood.bind(this);
   }
 
-
-  componentDidMount = () => {
-    //this.props.getDays()
+  componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   }
 
@@ -55,26 +56,32 @@ class NewFarmgoodForm extends Component {
   */
 
   toggleCheckbox = label => {
+    //const target = label.target;
+    //const value = target.type === 'checkbox' ? target.checked : target.value;
     if (this.selectedCheckboxes.has(label)) {
       this.selectedCheckboxes.delete(label);
+      const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
+       // [name]: value
+       
+      })
+      this.props.updateFarmgoodFormData(currentFarmgoodFormData)
     } else {
       this.selectedCheckboxes.add(label);
+      const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
+        //[name]: value
+      })
+      this.props.updateFarmgoodFormData(currentFarmgoodFormData)
     }
+    //event.target.ownerDocument.activeElement.attributes[1].ownerElement.labels["0"].innerText
   }
-
-
-  onDayAvailableChange(){
-    console.log('i am here')
-  }
-
   
   makeCheckBoxes() {
-    //return this.state.daysAvailable.map(dayAvailable => {
-    return Object.entries(this.state.theWeek).map(function(keyName, keyValue) {
+    return this.state.theWeek.map(keyName => { 
       return (
           <CheckBox 
-            item={keyName} 
-            //handleChange={this.onDayAvailableChange} 
+            item={keyName[0]} 
+            handleChange={this.toggleCheckbox.bind(this)} 
+            value={keyName[0]} 
             //key={dayAvailable.id}
           />
         )
@@ -82,43 +89,10 @@ class NewFarmgoodForm extends Component {
   }
 
 
-  //moved this from containers/FarmGoods
-  updateFarmgoodDaysAvailable(event) {
-    const farmgood = this.state.farmgood;
-    const daysAvailableId = event.target.value;
-    const dayAvailable = this.state.checkBoxDaysAvailable.filter(day => day.id === daysAvailableId)[0];
-    const checked = !dayAvailable.checked;
-    dayAvailable['checked'] = !dayAvailable.checked;
-    if (checked) {
-      farmgood.daysAvailable_ids.push(dayAvailable.id);
-    } else {  
-      farmgood.daysAvailable_ids.splice(farmgood.daysAvailable_ids.indexOf(dayAvailable.id));
-    }
-    this.setState({dayAvailable: dayAvailable});
-  }
-
 /*
   //debugger
 
-  /////////////////////// EDITING FARMGOOD FUNCTIONS BELOW
-
-  /*
-  saveFarmgood(event){
-    event.preventDefault();
-    this.props.actions.updateFarmgoodState((this.state.farmgood));
-  }
-
-  updateFarmgoodState(event) {
-    const field = event.target.name;
-   // debugger
-    const farmgood = this.state.farmgood;
-    farmgood[field] = event.target.value;
-    return this.setState({farmgood: farmgood});
-
-  }
-  
-
- componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
   //debugger 
   if (this.props.farmgood.id != nextProps.farmgood.id) {
     this.setState({farmgood: nextProps.farmgood});
@@ -141,32 +115,15 @@ class NewFarmgoodForm extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     this.props.createFarmgood(this.props.FarmgoodFormData)
-    for (const checkbox of this.selectedCheckboxes) {
-      console.log(checkbox, 'is selected.');
-    }
-    //this.props.createFarmgood(this.props.FarmgoodFormData)
+    
   }
 
-  createCheckbox = label => (
-    <Checkbox
-            label={label}
-            handleCheckboxChange={this.toggleCheckbox}
-            key={label}
-        />
-  )
-
-  createCheckboxes = () => {////////////////////////////////////////////////////////////////////////////////////
-    //var theWeek = Object.entries(this.state.theWeek).map(function(keyName, keyIndex) { return keyName })
-    (
-      this.state.theWeek.map(this.createCheckbox)
-    )}
 
   render() {
     const boxes = this.makeCheckBoxes();
-    const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
+    const { name, farmer, theWeek } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
       <div>
-        {this.createCheckboxes()}
         Add a Farmgood...
         <form onSubmit={this.handleOnSubmit}>
           <div>
@@ -185,7 +142,7 @@ class NewFarmgoodForm extends Component {
             name="farmer"
             value={farmer}
           />
-          {boxes}
+          {this.makeCheckBoxes()}
           <button type="submit">Add Farmgood</button>
         </form>
       </div>
@@ -245,5 +202,23 @@ const mapDispatchToProps = (dispatch) => {
                 </div>
                 })
               }
+
+
+
+
+  //moved this from containers/FarmGoods
+  updateFarmgoodDaysAvailable(event) {
+    const farmgood = this.state.farmgood;
+    const daysAvailableId = event.target.value;
+    const dayAvailable = this.state.checkBoxDaysAvailable.filter(day => day.id === daysAvailableId)[0];
+    const checked = !dayAvailable.checked;
+    dayAvailable['checked'] = !dayAvailable.checked;
+    if (checked) {
+      farmgood.daysAvailable_ids.push(dayAvailable.id);
+    } else {  
+      farmgood.daysAvailable_ids.splice(farmgood.daysAvailable_ids.indexOf(dayAvailable.id));
+    }
+    this.setState({dayAvailable: dayAvailable});
+  }
 
 */

@@ -1,5 +1,50 @@
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 
+class CheckBox extends Component {
+  state = {
+    isChecked: false,
+  }
+
+  toggleCheckboxChange = () => {
+    const { handleChange, label } = this.props;
+
+    this.setState(({ isChecked }) => (
+      {
+        isChecked: !isChecked,
+      }
+    ));
+
+    handleChange(label);
+  }
+
+  render() {
+    const { label } = this.props.item;
+    const { isChecked } = this.state;
+
+    return (
+      <div className="checkbox">
+        <label>
+          {this.props.item}
+          <input
+                            type="checkbox"
+                            name={label}
+                            value={label}
+                            checked={isChecked}
+                            ref={(input) => { this.test = input; }}
+                            onChange={this.toggleCheckboxChange.bind(this)}
+                        />
+
+          {label}
+        </label>
+      </div>
+    );
+  }
+}
+
+
+export default CheckBox;
+
+/*
 class CheckBox extends React.Component {  
   constructor(props){
     super(props)
@@ -25,6 +70,8 @@ class CheckBox extends React.Component {
   }
 }
 
+export default CheckBox; 
+
 /*
 CheckBox.propTypes = {  
   item: PropTypes.object.isRequired, 
@@ -32,4 +79,3 @@ CheckBox.propTypes = {
 };
 */
 
-export default CheckBox; 
