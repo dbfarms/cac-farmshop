@@ -2,12 +2,15 @@ import React from 'react';
 
 const FarmGoodCard = ({ farmGood }) =>
   <div key={farmGood.id} className="FarmGoodsCard" >
-      <h3>{farmGood.name}</h3>
+      <h4>{farmGood.name}</h4>
       <img className="farmGoodImage" src={farmGood.img_url} alt={farmGood.user_id} />
       <p>{farmGood.price}</p>
-      <p>{farmGood.inventory}</p>
-      <p>justtesting</p>
-      <br />
+      {farmGood.inventory > 0 &&
+      <p>Available: {farmGood.attributes.inventory}</p>
+      }
+      {farmGood.inventory <= 0 &&
+        <p>No longer available. Check back soon</p>
+      }
       
   </div>
 
