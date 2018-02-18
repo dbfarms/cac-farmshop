@@ -6,8 +6,18 @@ const FarmGoodsCard = ({ farmGood, isEditing }) =>
   <button key={farmGood.id} className="FarmGoodsCard" onClick={() => isEditing(farmGood)}>
       <h3>{farmGood.attributes.name}</h3>
       <img className="farmGoodImage" src={farmGood.img_url} alt={farmGood.user_id} />
-      <p>{farmGood.price}</p>
-      
+      <p>{farmGood.attributes.price}</p>
+      <p>Available: {farmGood.attributes.inventory}</p>
   </button>
 
 export default FarmGoodsCard
+
+/*
+
+{if ({farmGood.attributes.inventory > 0 }) {
+      <p>Available: {farmGood.attributes.inventory}</p>
+      } else {
+        <p>Out of stock; check back soon</p>
+      }
+
+*/

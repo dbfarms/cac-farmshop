@@ -5,6 +5,8 @@ const FarmGoodCard = ({ farmGood }) =>
       <h3>{farmGood.name}</h3>
       <img className="farmGoodImage" src={farmGood.img_url} alt={farmGood.user_id} />
       <p>{farmGood.price}</p>
+      <p>{farmGood.inventory}</p>
+      <p>justtesting</p>
       <br />
       
   </div>

@@ -10,6 +10,7 @@ import * as farmgoodActions from '../actions/farmGoods';
 import { createFarmgood } from '../actions/farmGoods'; //
 import { getDays } from '../actions/days'; // requests from server
 import CheckBox from '../components/common/CheckBox'
+import './FarmgoodForm.css'
 
 class NewFarmgoodForm extends Component {
 // the state is added for days available 
@@ -121,9 +122,9 @@ class NewFarmgoodForm extends Component {
 
   render() {
     const boxes = this.makeCheckBoxes();
-    const { name, farmer, theWeek } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
+    const { name, farmer, quantity, theWeek } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
-      <div>
+      <div className="formFarmgood">
         Add a Farmgood...
         <form onSubmit={this.handleOnSubmit}>
           <div>
@@ -135,12 +136,19 @@ class NewFarmgoodForm extends Component {
               value={name}
             />
           </div>
-            <label htmlFor="farmgood_quantity">Farmer ID now (but eventually quantity)":</label>
+          <label htmlFor="farmgood_quantity">Farmer ID now (but eventually this won't exist)":</label>
           <input
             type="number"
             onChange={this.handleOnChange}
             name="farmer"
             value={farmer}
+          />
+          <label htmlFor="farmgood_quantity">Quantity available":</label>
+          <input
+            type="number"
+            onChange={this.handleOnChange}
+            name="quantity"
+            value={quantity}
           />
           {this.makeCheckBoxes()}
           <button type="submit">Add Farmgood</button>

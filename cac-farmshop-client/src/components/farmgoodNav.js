@@ -14,41 +14,33 @@ export default class FarmgoodNav extends React.Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            dropdownOpen: false
+            dropdownOpen: false,
         };
     }
 
     toggle(){
         this.setState({
-            dropdownOpen: !this.state.dropdownOpen
+            dropdownOpen: !this.state.dropdownOpen,
         });
     }
 
+
     render(){
         return(
-        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+        
+        <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
             Dropdown
             </DropdownToggle>
-            <DropdownMenu>
+            <DropdownMenu >
                 <DropdownItem header>Farm Goods</DropdownItem>
-                <DropdownItem>By Day</DropdownItem>
+                <DropdownItem onClick={() => this.props.changeShow('day')}>By Day</DropdownItem>
+                <DropdownItem onClick={() => this.props.changeShow('category')}>By Category</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>By Category</DropdownItem>
+                <DropdownItem onClick={() => this.props.changeShow('new')}>New</DropdownItem>
             </DropdownMenu>
         </Dropdown>
         )
     }
 }
 
-/*
-<DropdownItem disabled>Action</DropdownItem>
-const FarmgoodNav = ({ changeShow }) => 
-    <div>
-        <button className="farmnav-button" onClick={() => changeShow('farmGoods')}>Farm Goods</button>
-        <button className="farmnav-button" onClick={() => changeShow('dailyGoods')}>Daily</button>
-        <button className="farmnav-button" onClick={() => changeShow('category')}>Category</button>
-    </div>
-
-export default FarmgoodNav
-*/

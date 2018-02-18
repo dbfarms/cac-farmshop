@@ -10,6 +10,7 @@ import FarmGoods from './FarmGoods';
 import FarmersPage from './FarmersPage';
 import FarmerShow from './FarmerShow';
 import Carts from './carts'
+import NewFarmgoodForm from './NewFarmgoodForm';
 
 class App extends Component {
   constructor() {
@@ -72,6 +73,7 @@ class App extends Component {
           <Route exact path="/" render={() => <div>Home For Now</div>} />
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmGoods} />
+          <Route exact path="/farm-goods/new" component={NewFarmgoodForm} />
           <Route exact path="/cart" component={Carts} />
           <Route path="*" render={() => <div>Page Not Found</div>} />
         </div>

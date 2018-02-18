@@ -8,3 +8,7 @@
     position: relative;
     width: 150px;
 }
+
+.dropdown {
+    text-align: left;
+}

@@ -105,6 +105,9 @@ class FarmGoods extends Component {
     return (
       <div className="page-tree">
       <FarmgoodNav changeShow={this.handleShowChange} />
+      {this.state.showKey === "day" &&
+        <h2>day</h2>
+      }
       {this.state.isEditing === true &&
         <div>
           <h1>edit farmgood</h1>

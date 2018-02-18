@@ -122,7 +122,7 @@ class EditFarmgoodForm extends Component {
     const boxes = this.makeCheckBoxes();
     const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
-      <div>
+      <div className="formFarmgood">
         Edit a Farmgood...
         <form onSubmit={this.handleEditSubmit}>
             <div>
