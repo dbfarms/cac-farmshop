@@ -1,19 +1,41 @@
 import React from 'react'
 import axios from 'axios'
+import Vue from 'vue'
+
+/*
+      var FormCsrfInput = React.createClass({
+        render() {
+          const token = $('meta[name="csrf-token"]').attr('content');
+      
+          return (
+            <input type="hidden" name="authenticity_token" value={token} readOnly={true} />
+          )
+        }
+      });
+
+
+*/
 
 class Signup extends React.Component {
     constructor(props){
       super(props);
       this.handleSignup = this.handleSignup.bind(this);
     }
-  handleSignup(e) {
+
+    handleSignup(e) {
       e.preventDefault();
       let that = this
+      //
+      let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
+      axios.defaults.headers.common['X-CSRF-Token'] = token
+      axios.defaults.headers.common['Accept'] = 'application/json'
+      //
       axios.post('http://localhost:3000/users', {
         user: {
           email: document.getElementById("email").value,
           password: document.getElementById("password").value,
-          password_confirmation: document.getElementById("password_confirmation").value
+          password_confirmation: document.getElementById("password_confirmation").value,
+          //authenticity_token: ''
         }
       })
       .then(function(response){
@@ -24,11 +46,15 @@ class Signup extends React.Component {
         console.log(error)
       })
   }
+
+  
+
+
   render() {
     return (
         <div>
           <h2>Signup</h2>
-          <form>
+          <form >
             <input id="email" placeholder="email"/>
             <input id="password" placeholder="password"/>
             <input id="password_confirmation" placeholder="retype password"/>
