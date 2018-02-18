@@ -122,7 +122,7 @@ class NewFarmgoodForm extends Component {
 
   render() {
     const boxes = this.makeCheckBoxes();
-    const { name, farmer, quantity, theWeek } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
+    const { name, farmer, inventory, price, theWeek } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
       <div className="formFarmgood">
         Add a Farmgood...
@@ -143,12 +143,18 @@ class NewFarmgoodForm extends Component {
             name="farmer"
             value={farmer}
           />
-          <label htmlFor="farmgood_quantity">Quantity available":</label>
+          <label htmlFor="farmgood_inventory">Quantity available":</label>
           <input
             type="number"
             onChange={this.handleOnChange}
-            name="quantity"
-            value={quantity}
+            name="inventory"
+            value={inventory}
+          />
+          <input
+            type="number"
+            onChange={this.handleOnChange}
+            name="price"
+            value={price}
           />
           {this.makeCheckBoxes()}
           <button type="submit">Add Farmgood</button>

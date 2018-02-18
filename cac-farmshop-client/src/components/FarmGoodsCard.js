@@ -6,9 +6,11 @@ const FarmGoodsCard = ({ farmGood, isEditing }) =>
   <button key={farmGood.id} className="FarmGoodsCard" onClick={() => isEditing(farmGood)}>
       <h4>{farmGood.attributes.name}</h4>
       <img className="farmGoodImage" src={farmGood.img_url} alt={farmGood.user_id} />
-      <p>{farmGood.attributes.price}</p>
       {farmGood.attributes.inventory > 0 &&
-      <p>Available: {farmGood.attributes.inventory}</p>
+      <div>
+      <p>Available: {farmGood.attributes.inventory} at ${farmGood.attributes.price} each</p>
+      
+      </div>
       }
       {farmGood.attributes.inventory <= 0 &&
         <p>No longer available. Check back soon</p>

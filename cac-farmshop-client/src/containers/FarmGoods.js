@@ -15,7 +15,8 @@ class FarmGoods extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showKey: 'farmgoodsHome',
+      showKey: 'show all',
+      showDay: '',
       days: [],
       isEditing: false,
       farmgood: {
@@ -99,14 +100,17 @@ class FarmGoods extends Component {
   }
 
   handleShowChange = showKey => this.setState({ showKey: showKey })
-
+  handleDay = showDay => this.setState({ showDay: showDay })
 
   render() {
     return (
       <div className="page-tree">
-      <FarmgoodNav changeShow={this.handleShowChange} />
-      {this.state.showKey === "day" &&
-        <h2>day</h2>
+      <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay}/>
+      {this.state.showKey === "day"  &&
+          <div>
+            <h1>{this.showDay}</h1>
+            {this.state.farmGoods_array.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+          </div>
       }
       {this.state.isEditing === true &&
         <div>
@@ -125,7 +129,7 @@ class FarmGoods extends Component {
           <button name="remove item" onClick={() => this.handleDelete(this.state.farmgood) }>remove item</button> 
         </div>
       }
-      {this.state.isEditing === false && 
+      {this.state.showKey === "show all" && 
         <div>
            <div className="Farm-Goods-Container">
             <h1>For sale: </h1>
