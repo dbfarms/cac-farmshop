@@ -16,7 +16,7 @@ class App extends Component {
     super()
 
     this.state = {
-      currentUser: null
+      currentUser: 'user'
       
     }
     //this.updateCurrentUser = this.updateCurrentUser.bind(this);

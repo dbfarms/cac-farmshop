@@ -1,5 +1,5 @@
 class Api::FarmgoodsController < ApplicationController
-    before_action :authenticate_user!
+    #before_action :authenticate_user!
     before_action :set_farmgood, only: [:show, :edit, :destroy]
 
     def index
