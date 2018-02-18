@@ -10,7 +10,7 @@ class Logout extends React.Component {
         e.preventDefault();
         let that = this
         let email = this.props.currentUser
-        axios.delete('/users/sign_out', {
+        axios.delete('http://localhost:3000/users/sign_out', {
         })
         .then(function(response){
           that.props.changePage("login")

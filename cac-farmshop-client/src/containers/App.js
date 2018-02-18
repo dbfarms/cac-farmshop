@@ -19,14 +19,13 @@ class App extends Component {
       currentUser: null
       
     }
-    this.updateCurrentUser = this.updateCurrentUser.bind(this);
+    //this.updateCurrentUser = this.updateCurrentUser.bind(this);
   }
   //Vue.use(axios)
   
-  
+  /*
   componentDidMount() {
     let that = this 
-    
     axios.get('http://localhost:3000/users/check_for_user',{
     })
     .then(function(response){
@@ -54,7 +53,7 @@ class App extends Component {
   //  navigator.geolocation.getCurrentPosition(position => {
   //    const { latitude, longitude } = position.coords
   //  });
-  
+  */
 
 
   render() {

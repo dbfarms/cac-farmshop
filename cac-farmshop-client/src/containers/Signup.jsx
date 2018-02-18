@@ -9,7 +9,7 @@ class Signup extends React.Component {
   handleSignup(e) {
       e.preventDefault();
       let that = this
-      axios.post('/users', {
+      axios.post('http://localhost:3000/users', {
         user: {
           email: document.getElementById("email").value,
           password: document.getElementById("password").value,
