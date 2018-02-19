@@ -104,6 +104,7 @@ class FarmGoods extends Component {
   handleDay = showDay => this.setState({ showDay: showDay })
 
   render() {
+    var objectToArrayDays = []
     var thisDay = []
     return (
       <div className="page-tree">
@@ -111,8 +112,15 @@ class FarmGoods extends Component {
       {this.state.showKey === "day"  &&
           <div>
             <h1>{this.state.showDay}</h1>
-            {thisDay = this.state.farmGoods_array.filter(farmGood => { farmGood.relationships.days.data["0"].name === this.state.showDay })}
-            {thisDay.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+            {this.state.farmGoods_array.map(farmGood => {
+              for (let i=0; i<farmGood.relationships.days.data.length; i++) {
+                if (farmGood.relationships.days.data[i].name === this.state.showDay) {
+                  thisDay.push(farmGood)
+                }
+              }
+            })
+            }
+             {thisDay.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
       }
       {this.state.isEditing === true &&
@@ -165,6 +173,14 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, { getFarmGoods, getDays, deleteFarmGoods })(FarmGoods); // 
 
 /*
+
+
+{this.state.farmGoods_array.map(farmGood => {
+              objectToArrayDays = Object.entries(farmGood.relationships.days.data).map(function(keyName) {return keyName })
+              thisDay = objectToArrayDays.filter(day => day[1].name === this.state.showDay)
+            })}
+            {thisDay.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+          </div>
 
 --
 function daysAvailableCheckBoxes(daysAvailable, farmgood=null) {  
