@@ -5,3 +5,8 @@
   background-color: gray;
   box-shadow: 0px 5px 20px #555;
 }
+
+.form-dropdown {
+  text-align: center;
+  float: center 
+}

@@ -24,10 +24,6 @@ export default class FarmgoodNav extends React.Component {
         });
     }
 
-    dayFunction(){
-        
-    }
-
 
     render(){
         return(
@@ -96,4 +92,3 @@ export default class FarmgoodNav extends React.Component {
         )
     }
 }
-

@@ -10,6 +10,7 @@ import * as farmgoodActions from '../actions/farmGoods';
 import { createFarmgood } from '../actions/farmGoods'; //
 import { getDays } from '../actions/days'; // requests from server
 import CheckBox from '../components/common/CheckBox'
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import './FarmgoodForm.css'
 
 class NewFarmgoodForm extends Component {
@@ -18,18 +19,10 @@ class NewFarmgoodForm extends Component {
   constructor(props) {
     super(props);
 
+    this.changeCategory = this.changeCategory.bind(this);
+    this.toggle = this.toggle.bind(this);
     this.state = {
-      /*
-      theWeek: { 
-        Monday: false,
-        Tuesday: false,
-        Wednesday: false,
-        Thursday: false,
-        Friday: false,
-        Saturday: false,
-        Sunday: false,
-      },
-      */
+      category: 'Category',
       theWeek: [ 
         ["Monday", false],
         ["Tuesday", false],
@@ -39,8 +32,17 @@ class NewFarmgoodForm extends Component {
         ["Saturday", false],
         ["Sunday", false],
       ],
-      days_array: []
+      dropdownOpen: false,
+      value: "Category",
+      days_array: [],
+      
     }
+  }
+
+  toggle(){
+    this.setState({
+        dropdownOpen: !this.state.dropdownOpen,
+    });
   }
 
   componentWillMount = () => {
@@ -116,9 +118,14 @@ class NewFarmgoodForm extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     this.props.createFarmgood(this.props.FarmgoodFormData)
-    
   }
 
+  changeCategory = event => {
+    this.setState({
+      category: event,
+      value: event
+    })
+  }
 
   render() {
     const boxes = this.makeCheckBoxes();
@@ -160,7 +167,27 @@ class NewFarmgoodForm extends Component {
             name="price"
             value={price}
           />
-          <label htmlFor="farmgood_category">Category:</label>
+          <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <DropdownToggle caret>
+            {this.state.value}
+            </DropdownToggle>
+            <DropdownMenu >
+                <DropdownItem header>Category</DropdownItem>
+                <DropdownItem onClick={() => {
+                    this.changeCategory('Vegetables/Fruit')
+                    }}>Fruit & Vegetables</DropdownItem>
+                <DropdownItem onClick={() => {
+                    this.changeCategory('Meat')
+                    }}>Meat</DropdownItem>
+                 <DropdownItem onClick={() => {
+                    this.changeCategory('Dairy')
+                    }}>Dairy</DropdownItem>
+                 <DropdownItem onClick={() => {
+                    this.changeCategory('Eggs')
+                    }}>Eggs</DropdownItem>
+            </DropdownMenu>
+        </Dropdown>
+        <label htmlFor="farmgood_category">Category:</label>
           <input
             type="text"
             onChange={this.handleOnChange}
