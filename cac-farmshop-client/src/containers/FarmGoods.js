@@ -17,6 +17,7 @@ class FarmGoods extends Component {
     this.state = {
       showKey: 'show all',
       showDay: '',
+      thisDay: [],
       days: [],
       isEditing: false,
       farmgood: {
@@ -103,13 +104,15 @@ class FarmGoods extends Component {
   handleDay = showDay => this.setState({ showDay: showDay })
 
   render() {
+    var thisDay = []
     return (
       <div className="page-tree">
       <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay}/>
       {this.state.showKey === "day"  &&
           <div>
-            <h1>{this.showDay}</h1>
-            {this.state.farmGoods_array.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+            <h1>{this.state.showDay}</h1>
+            {thisDay = this.state.farmGoods_array.filter(farmGood => { farmGood.relationships.days.data["0"].name === this.state.showDay })}
+            {thisDay.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
       }
       {this.state.isEditing === true &&
