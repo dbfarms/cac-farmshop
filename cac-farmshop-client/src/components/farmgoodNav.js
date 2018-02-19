@@ -66,11 +66,11 @@ export default class FarmgoodNav extends React.Component {
                  <DropdownItem onClick={() => {
                     this.props.changeShow('day')
                     this.props.changeDay('Sunday')
-                    }}>Monday</DropdownItem>
+                    }}>Sunday</DropdownItem>
                  <DropdownItem onClick={() => {
                     this.props.changeShow('show all')
                     this.props.changeDay('Any Day')
-                    }}>Monday</DropdownItem>
+                    }}>Show All</DropdownItem>
                 
                 <DropdownItem divider />
                 <DropdownItem onClick={() => this.props.changeShow('category')}>By Category</DropdownItem>
