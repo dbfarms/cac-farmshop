@@ -1,3 +1,3 @@
-class Cart < ApplicationRecord::Base
+class Category < ApplicationRecord
     has_many :farmgoods
 end
