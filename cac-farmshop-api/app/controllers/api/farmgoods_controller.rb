@@ -9,7 +9,7 @@ class Api::FarmgoodsController < ApplicationController
     def create
         #byebug
         farmerID = params["farmGood"]["farmer"].to_i
-        category_name = params["farmGood"]["category"]
+        category_name = params["farmGood"]["Category"]
 
         farmgood = Farmgood.new(farmgood_params)
         #byebug

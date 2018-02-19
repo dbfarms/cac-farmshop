@@ -125,6 +125,12 @@ class NewFarmgoodForm extends Component {
       category: event,
       value: event
     })
+    const name = this.state.category 
+    const value = event 
+    const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
+      [name]: value
+    })
+    this.props.updateFarmgoodFormData(currentFarmgoodFormData)
   }
 
   render() {
@@ -133,7 +139,7 @@ class NewFarmgoodForm extends Component {
     return (
       <div className="formFarmgood">
         Add a Farmgood...
-        <form onSubmit={this.handleOnSubmit}>
+        <form onSubmit={this.handleOnSubmit.bind(this)}>
           <div>
             <label htmlFor="farmgood_name">Name of Farm Good:</label>
             <input
@@ -171,7 +177,7 @@ class NewFarmgoodForm extends Component {
             <DropdownToggle caret>
             {this.state.value}
             </DropdownToggle>
-            <DropdownMenu >
+            <DropdownMenu value="category" >
                 <DropdownItem header>Category</DropdownItem>
                 <DropdownItem onClick={() => {
                     this.changeCategory('Vegetables/Fruit')
@@ -187,13 +193,6 @@ class NewFarmgoodForm extends Component {
                     }}>Eggs</DropdownItem>
             </DropdownMenu>
         </Dropdown>
-        <label htmlFor="farmgood_category">Category:</label>
-          <input
-            type="text"
-            onChange={this.handleOnChange}
-            name="category"
-            value={category}
-          />
           <br />
           {this.makeCheckBoxes()}
           <button type="submit">Add Farmgood</button>
