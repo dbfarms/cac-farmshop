@@ -64,7 +64,6 @@ class FarmGoods extends Component {
       farmGoods_array: nextProps.farmGoods.data
       //days_array: nextProps.days.data
     })
-    //  this.props.getFarmGoods() // RE-UPS FARMGOODS AFTER ADD
   }
   
   //SEE BELOW FOR DAYS AVAILABLE, TO BE ADDED LATER
@@ -131,12 +130,9 @@ class FarmGoods extends Component {
             <h1>{this.state.showCategory}</h1>
             
             {this.state.farmGoods_array.map(farmGood => {
-              for (let i=0; i<farmGood.relationships.days.data.length; i++) {
                 if (farmGood.attributes.category.title === this.state.showCategory) {
-                  
                   thisFilter.push(farmGood)
                 }
-              }
             })
             }
              {thisFilter.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
@@ -199,12 +195,6 @@ export default connect(mapStateToProps, { getFarmGoods, getDays, deleteFarmGoods
 /*
 
 
-{this.state.farmGoods_array.map(farmGood => {
-              objectToArrayDays = Object.entries(farmGood.relationships.days.data).map(function(keyName) {return keyName })
-              thisDay = objectToArrayDays.filter(day => day[1].name === this.state.showDay)
-            })}
-            {thisDay.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
-          </div>
 
 --
 function daysAvailableCheckBoxes(daysAvailable, farmgood=null) {  
