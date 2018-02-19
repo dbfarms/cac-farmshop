@@ -17,7 +17,7 @@ class FarmGoods extends Component {
     this.state = {
       showKey: 'show all',
       showDay: '',
-      thisDay: [],
+      showCategory: '',
       days: [],
       isEditing: false,
       farmgood: {
@@ -100,18 +100,16 @@ class FarmGoods extends Component {
     this.props.getFarmGoods();
   }
 
-  handleShowChange = showKey => this.setState({ 
-    showKey: showKey,
-    thisDay: [],
-  })
+  handleShowChange = showKey => this.setState({ showKey: showKey })
   handleDay = showDay => this.setState({ showDay: showDay  })
+  handleCategory = showCategory => this.setState({ showCategory: showCategory })
 
   render() {
     var objectToArrayDays = []
-    var thisDay = []
+    var thisFilter = []
     return (
       <div className="page-tree">
-      <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} state={this.state}/>
+      <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
       {this.state.showKey === "day"  &&
           <div>
             <h1>{this.state.showDay}</h1>
@@ -120,12 +118,28 @@ class FarmGoods extends Component {
               for (let i=0; i<farmGood.relationships.days.data.length; i++) {
                 if (farmGood.relationships.days.data[i].name === this.state.showDay) {
                   
-                  thisDay.push(farmGood)
+                  thisFilter.push(farmGood)
                 }
               }
             })
             }
-             {thisDay.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+             {thisFilter.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+          </div>
+      }
+      {this.state.showKey === "category"  &&
+          <div>
+            <h1>{this.state.showCategory}</h1>
+            
+            {this.state.farmGoods_array.map(farmGood => {
+              for (let i=0; i<farmGood.relationships.days.data.length; i++) {
+                if (farmGood.attributes.category.title === this.state.showCategory) {
+                  
+                  thisFilter.push(farmGood)
+                }
+              }
+            })
+            }
+             {thisFilter.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
       }
       {this.state.isEditing === true &&

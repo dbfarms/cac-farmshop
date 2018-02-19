@@ -71,9 +71,24 @@ export default class FarmgoodNav extends React.Component {
                     this.props.changeShow('show all')
                     this.props.changeDay('Any Day')
                     }}>Show All</DropdownItem>
-                
                 <DropdownItem divider />
-                <DropdownItem onClick={() => this.props.changeShow('category')}>By Category</DropdownItem>
+                <DropdownItem header>By Category</DropdownItem>
+                <DropdownItem onClick={() => {
+                    this.props.changeShow('category')
+                    this.props.changeCategory('Vegetables/Fruit')
+                    }}>Fruit & Vegetables</DropdownItem>
+                <DropdownItem onClick={() => {
+                    this.props.changeShow('category')
+                    this.props.changeCategory('Meat')
+                    }}>Meat</DropdownItem>
+                 <DropdownItem onClick={() => {
+                    this.props.changeShow('category')
+                    this.props.changeCategory('Dairy')
+                    }}>Dairy</DropdownItem>
+                 <DropdownItem onClick={() => {
+                    this.props.changeShow('category')
+                    this.props.changeCategory('Eggs')
+                    }}>Eggs</DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem onClick={() => this.props.changeShow('new')}>New</DropdownItem>
             </DropdownMenu>
