@@ -113,13 +113,15 @@ export const deleteFarmGoods = (farmGood) => {
       } else {
         console.log('????')
       }
-      return response.json();
+      //return response.json();
     }).then(() => {
-      console.log(`Deleted ${farmGood.id}`),
-      dispatch(resetFarmGoodForm()),
+      debugger
+      console.log(`Deleted ${farmGood.id}`)
+      dispatch(resetFarmGoodForm())
       dispatch(deletingFarmgood(farmGood));
       return
     }).catch(error => {
+      debugger
       return error;
     });
     }

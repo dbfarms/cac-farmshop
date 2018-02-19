@@ -9,11 +9,10 @@ class LoginHere extends React.Component {
     handleLogin(e) {
         e.preventDefault();
         let that = this
-        axios.post('http://localhost:3000/users', {
+        axios.post('http://localhost:3000/users/sign_in', {
           user: {
             email: document.getElementById("email").value,
             password: document.getElementById("password").value,
-            password_confirmation: document.getElementById("password_confirmation").value
           }
         })
         .then(function(response){
@@ -37,7 +36,6 @@ class LoginHere extends React.Component {
           <form>
             <input id="email" placeholder="email"/>
             <input id="password" placeholder="password"/>
-            <input id="password_confirmation" placeholder="retype password"/>
             <button onClick={this.handleLogin}>Submit</button>
           </form>
           <button onClick={() => this.props.changePage("login")}>Back to Login</button>

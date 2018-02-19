@@ -16,7 +16,7 @@ class Api::FarmgoodsController < ApplicationController
         params["farmGood"]["daysAvailable"].each do |day|
             farmgood.days << Day.find_by(name: day)
         end 
-        byebug
+        byebug #doesn't delete unchecked days yet
         farmgood.category = Category.find_by(title: category_name)
         farmgood.farmer = Farmer.find(farmerID)
         

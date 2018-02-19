@@ -22,8 +22,9 @@ export default (state = [], action) => {
     case 'CREATE_FARMGOOD_SUCCESS':
       return state.concat(action.farmGood);
     case 'DELETE_FARMGOOD_SUCCESS':
-      return
+    debugger
         const newState = Object.assign([], state);
+        debugger //doesn't like state.findIndex, possibly state isn't array (consider something other than findIndex)
         const indexOfFarmgoodToDelete = state.findIndex(farmGood => {
         return farmGood.id == action.farmGood.id
         })
