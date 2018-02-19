@@ -136,6 +136,7 @@ class NewFarmgoodForm extends Component {
               value={name}
             />
           </div>
+          <br />
           <label htmlFor="farmgood_quantity">Farmer ID now (but eventually this won't exist)":</label>
           <input
             type="number"
@@ -143,14 +144,17 @@ class NewFarmgoodForm extends Component {
             name="farmer"
             value={farmer}
           />
-          <label htmlFor="farmgood_inventory">Quantity available":</label>
+          <br />
+          <label htmlFor="farmgood_inventory">Quantity available:</label>
           <input
             type="number"
             onChange={this.handleOnChange}
             name="inventory"
             value={inventory}
           />
-          <input
+          <br />
+          <label htmlFor="farmgood_price">Price:</label>
+          <input 
             type="number"
             onChange={this.handleOnChange}
             name="price"

@@ -142,6 +142,17 @@ class FarmGoods extends Component {
              {thisFilter.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
       }
+      {this.state.showKey === "new"  &&
+          <div>
+            <h1>New Farm Good</h1>
+            <NewFarmgoodForm 
+            farmgood={this.state.farmgood}
+            daysAvailable={this.state.checkBoxDaysAvailable} //unclear we're using this here... 
+            days={this.state.days}
+            onSubmit={this.handleSubmit}
+          />
+            </div>
+      }
       {this.state.isEditing === true &&
         <div>
           <h1>edit farmgood</h1>
@@ -165,12 +176,6 @@ class FarmGoods extends Component {
             <h1>For sale: </h1>
             {this.state.farmGoods_array.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
-          <NewFarmgoodForm 
-            farmgood={this.state.farmgood}
-            daysAvailable={this.state.checkBoxDaysAvailable} //unclear we're using this here... 
-            days={this.state.days}
-            onSubmit={this.handleSubmit}
-          />
         </div>
       }
       </div>

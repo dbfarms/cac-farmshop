@@ -1,7 +1,7 @@
 .formFarmgood {
-  width: 300px;
+  width: 500px;
   margin: 0px auto;
-  float: right;
+  float: center;
   background-color: gray;
   box-shadow: 0px 5px 20px #555;
 }
