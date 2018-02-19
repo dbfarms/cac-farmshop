@@ -17,7 +17,7 @@ class App extends Component {
     super()
 
     this.state = {
-      currentUser: 'user'
+      currentUser: null
       
     }
     //this.updateCurrentUser = this.updateCurrentUser.bind(this);
@@ -61,11 +61,11 @@ class App extends Component {
 
     return (
       <div>
-      {this.state.currentUser === null &&
+      {this.state.currentUser !== null &&
         <Header updateCurrentUser={this.updateCurrentUser}/>
         //eventually a homepage or something here
       }
-      {this.state.currentUser !== null &&
+      {this.state.currentUser === null &&
       <BrowserRouter >
         <div className="background-here">
         

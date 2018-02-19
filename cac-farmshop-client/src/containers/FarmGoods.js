@@ -173,7 +173,7 @@ class FarmGoods extends Component {
       {this.state.showKey === "show all" && 
         <div>
            <div className="Farm-Goods-Container">
-            <h1>For sale: </h1>
+            <h1>For sale (click on farmgood to edit): </h1>
             {this.state.farmGoods_array.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
         </div>

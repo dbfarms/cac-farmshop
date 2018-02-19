@@ -9,9 +9,13 @@ class Api::FarmgoodsController < ApplicationController
     def create
         #byebug
         farmerID = params["farmGood"]["farmer"].to_i
+        category_name = params["farmGood"]["category"]
+
         farmgood = Farmgood.new(farmgood_params)
-        
+        byebug
+        farmgood.category = Category.find_by(title: category_name)
         farmgood.farmer = Farmer.find(farmerID)
+        
         if farmgood.save
             render json: farmgood
         else
@@ -46,7 +50,7 @@ class Api::FarmgoodsController < ApplicationController
     end
 
     def farmgood_params
-        params.require(:farmGood).permit(:name)
+        params.require(:farmGood).permit(:name, :inventory, :price)
     end
 
 end
