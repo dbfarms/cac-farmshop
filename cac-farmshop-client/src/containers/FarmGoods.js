@@ -100,21 +100,26 @@ class FarmGoods extends Component {
     this.props.getFarmGoods();
   }
 
-  handleShowChange = showKey => this.setState({ showKey: showKey })
-  handleDay = showDay => this.setState({ showDay: showDay })
+  handleShowChange = showKey => this.setState({ 
+    showKey: showKey,
+    thisDay: [],
+  })
+  handleDay = showDay => this.setState({ showDay: showDay  })
 
   render() {
     var objectToArrayDays = []
     var thisDay = []
     return (
       <div className="page-tree">
-      <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay}/>
+      <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} state={this.state}/>
       {this.state.showKey === "day"  &&
           <div>
             <h1>{this.state.showDay}</h1>
+            
             {this.state.farmGoods_array.map(farmGood => {
               for (let i=0; i<farmGood.relationships.days.data.length; i++) {
                 if (farmGood.relationships.days.data[i].name === this.state.showDay) {
+                  
                   thisDay.push(farmGood)
                 }
               }
