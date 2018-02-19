@@ -12,7 +12,11 @@ class Api::FarmgoodsController < ApplicationController
         category_name = params["farmGood"]["Category"]
 
         farmgood = Farmgood.new(farmgood_params)
-        #byebug
+        
+        params["farmGood"]["daysAvailable"].each do |day|
+            farmgood.days << Day.find_by(name: day)
+        end 
+        byebug
         farmgood.category = Category.find_by(title: category_name)
         farmgood.farmer = Farmer.find(farmerID)
         

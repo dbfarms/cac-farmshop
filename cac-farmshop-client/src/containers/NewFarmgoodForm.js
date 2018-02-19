@@ -18,7 +18,8 @@ class NewFarmgoodForm extends Component {
   
   constructor(props) {
     super(props);
-
+    
+    //this.toggleCheckBox = this.toggleCheckBox.bind(this);
     this.changeCategory = this.changeCategory.bind(this);
     this.toggle = this.toggle.bind(this);
     this.state = {
@@ -35,6 +36,7 @@ class NewFarmgoodForm extends Component {
       dropdownOpen: false,
       value: "Category",
       days_array: [],
+      days:"daysAvailable"
       
     }
   }
@@ -58,20 +60,22 @@ class NewFarmgoodForm extends Component {
   }
   */
 
-  toggleCheckbox = label => {
+  toggleCheckbox = (event) => {
     //const target = label.target;
     //const value = target.type === 'checkbox' ? target.checked : target.value;
-    if (this.selectedCheckboxes.has(label)) {
-      this.selectedCheckboxes.delete(label);
+    if (this.selectedCheckboxes.has(event)) {
+      this.selectedCheckboxes.delete(event);
+      this.days_array = this.state.days_array.filter(day => day !== event)
       const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-       // [name]: value
+       [this.state.days]: this.days_array
        
       })
       this.props.updateFarmgoodFormData(currentFarmgoodFormData)
     } else {
-      this.selectedCheckboxes.add(label);
+      this.selectedCheckboxes.add(event);
+      this.state.days_array.push(event)
       const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-        //[name]: value
+        [this.state.days]: this.state.days_array
       })
       this.props.updateFarmgoodFormData(currentFarmgoodFormData)
     }
