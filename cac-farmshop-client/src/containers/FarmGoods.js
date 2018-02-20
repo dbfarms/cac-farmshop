@@ -150,22 +150,20 @@ class FarmGoods extends Component {
             </div>
       }
       {this.state.isEditing === true &&
-        <div>
-          <h1>edit farmgood</h1>
-          <EditFarmgoodForm
-            farmgood={this.state.farmgood} 
-            daysAvailable={this.state.farmgood.relationships.days.data}
-            onSave={this.saveFarmgood}
-            onChange={this.updateFarmgoodState}
-            isEditing={this.state.isEditing}
-            days={this.state.days}
-            //onDaysAvailableChange={this.updateFarmgoodDaysAvailable}
-            />
-          <FarmGoodCard farmGood={this.state.farmgood.attributes}/>
-          <button name="cancel edit" onClick={() => this.setState({isEditing: false})}>cancel edit</button>
-          <button name="remove item" onClick={() => this.handleDelete(this.state.farmgood) }>remove item</button> 
-        </div>
-      }
+          <div>
+            <h1>edit farmgood</h1>
+            <EditFarmgoodForm
+              farmgood={this.state.farmgood} 
+              daysAvailable={this.state.farmgood.relationships.days.data}
+              onSave={this.saveFarmgood}
+              onChange={this.updateFarmgoodState}
+              isEditing={this.state.isEditing}
+              days={this.state.days}
+              />
+            <FarmGoodCard farmGood={this.state.farmgood.attributes}/>
+            <button name="cancel edit" onClick={() => this.setState({isEditing: false})}>cancel edit</button>
+            <button name="remove item" onClick={() => this.handleDelete(this.state.farmgood) }>remove item</button> 
+          </div>}
       {this.state.showKey === "show all" && 
         <div>
            <div className="Farm-Goods-Container">

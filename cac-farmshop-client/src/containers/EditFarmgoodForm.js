@@ -33,6 +33,7 @@ class EditFarmgoodForm extends Component {
         value: "Category",
         category: 'Category',
         days:"daysAvailable", //THIS IS FOR RAILS PARAMS
+        name: props.farmgood.attributes.name 
       }
   }
 
@@ -45,6 +46,16 @@ class EditFarmgoodForm extends Component {
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   }
+
+  /*
+  shouldComponentUpdate = (nextProps, ownProps) => {
+    if (nextProps !== ownProps ) {
+      return true
+    } else {
+      return false 
+    }
+  }
+  //*/
 
   changeCategory = event => {
     this.setState({
@@ -135,7 +146,7 @@ class EditFarmgoodForm extends Component {
                 //placeholder={this.props.farmgood.attributes.name}
                 onChange={this.handleEditChange}
                 name="name"
-                value={this.props.farmgood.attributes.name}
+                value={this.state.name}
             />
             </div>
             {/* eventually the id will only be available for admin users to change things for farmers*/}

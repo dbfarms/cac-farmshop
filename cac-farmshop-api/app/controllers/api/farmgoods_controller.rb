@@ -28,7 +28,7 @@ class Api::FarmgoodsController < ApplicationController
     end
 
     def show
-        render json: @farmgood, each_serializer: FarmgoodSerializer
+        render json: @farmgood #, each_serializer: FarmgoodSerializer
     end
 
     def update
