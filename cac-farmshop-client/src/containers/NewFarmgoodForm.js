@@ -4,11 +4,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateFarmgoodFormData } from '../actions/FarmgoodForm';
-import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoods from server
 import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
 import { createFarmgood } from '../actions/farmGoods'; //
-import { getDays } from '../actions/days'; // requests from server
 import CheckBox from '../components/common/CheckBox'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Route } from 'react-router-dom'
@@ -20,7 +18,6 @@ class NewFarmgoodForm extends Component {
   constructor(props) {
     super(props);
     
-    //this.toggleCheckBox = this.toggleCheckBox.bind(this);
     this.changeCategory = this.changeCategory.bind(this);
     this.toggle = this.toggle.bind(this);
     this.state = {
@@ -36,8 +33,8 @@ class NewFarmgoodForm extends Component {
       ],
       dropdownOpen: false,
       value: "Category",
-      days_array: [],
-      days:"daysAvailable"
+      days_array: []
+      //days:"daysAvailable"
       
     }
   }
@@ -51,15 +48,6 @@ class NewFarmgoodForm extends Component {
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   }
-
-  /*
-  componentWillReceiveProps(nextProps){
-    this.setState({
-      days_array: nextProps.days.data
-      //days_array: nextProps.days.data
-    })
-  }
-  */
 
   toggleCheckbox = (event) => {
     if (this.selectedCheckboxes.has(event)) {
@@ -96,21 +84,6 @@ class NewFarmgoodForm extends Component {
         )
       })
   }
-
-
-/*
-  //debugger
-
-  componentWillReceiveProps(nextProps) {
-  //debugger 
-  if (this.props.farmgood.id != nextProps.farmgood.id) {
-    this.setState({farmgood: nextProps.farmgood});
-  }
-  //if (this.props.checkBoxDaysAvailable.length < nextProps.checkBoxHobbies.length) {
-  //  this.setState({farmgoodDaysAvailable: nextProps.farmgoodDaysAvailable, checkBoxDaysAvailable: nextProps.checkBoxDaysAvailable});
-  //})
- }
-*/
 
   handleOnChange = event => {
       //debugger
@@ -231,8 +204,7 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, {
   updateFarmgoodFormData,
   createFarmgood,
-  getFarmGoods,
-  getDays
+  //getFarmGoods,
 })(NewFarmgoodForm);
 
 /*
