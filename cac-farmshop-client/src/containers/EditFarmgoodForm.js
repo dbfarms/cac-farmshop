@@ -32,6 +32,7 @@ class EditFarmgoodForm extends Component {
         dropdownOpen: false,
         value: "Category",
         category: 'Category',
+        days:"daysAvailable", //THIS IS FOR RAILS PARAMS
       }
   }
 
@@ -149,7 +150,7 @@ class EditFarmgoodForm extends Component {
           <label htmlFor="farmgood_inventory">Quantity available:</label>
           <input
             type="number"
-            onChange={this.handleOnChange}
+            onChange={this.handleEditChange}
             name="inventory"
             value={this.props.farmgood.attributes.inventory}
           />
@@ -157,7 +158,7 @@ class EditFarmgoodForm extends Component {
           <label htmlFor="farmgood_price">Price:</label>
           <input 
             type="number"
-            onChange={this.handleOnChange}
+            onChange={this.handleEditChange}
             name="price"
             value={this.props.farmgood.attributes.price}
           />

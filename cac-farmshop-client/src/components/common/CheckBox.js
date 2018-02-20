@@ -34,7 +34,7 @@ class CheckBox extends Component {
                             type="checkbox"
                             name={label[0]}
                             value={label[0]}
-                            checked={isChecked}
+                            checked={checked}
                             ref={(input) => { this.test = input; }}
                             onChange={this.toggleCheckboxChange.bind(this)}
                         />

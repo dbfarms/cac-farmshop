@@ -33,8 +33,8 @@ class NewFarmgoodForm extends Component {
       ],
       dropdownOpen: false,
       value: "Category",
-      days_array: []
-      //days:"daysAvailable"
+      days_array: [],
+      days:"daysAvailable" //THIS IS FOR RAILS PARAMS
       
     }
   }
