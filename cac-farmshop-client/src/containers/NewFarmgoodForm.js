@@ -11,6 +11,7 @@ import { createFarmgood } from '../actions/farmGoods'; //
 import { getDays } from '../actions/days'; // requests from server
 import CheckBox from '../components/common/CheckBox'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Route } from 'react-router-dom'
 import './FarmgoodForm.css'
 
 class NewFarmgoodForm extends Component {
@@ -124,7 +125,12 @@ class NewFarmgoodForm extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    this.props.createFarmgood(this.props.FarmgoodFormData)
+    this.props.createFarmgood(this.props.FarmgoodFormData);
+    //
+
+    <Route render={({history}) => (
+      history.push('/'))}
+    />
   }
 
   changeCategory = event => {
