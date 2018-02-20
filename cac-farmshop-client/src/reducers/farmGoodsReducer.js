@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 export default (state = [], action) => {
   switch(action.type) {
     case 'UPDATE_FARMGOOD_SUCCESS':
+      debugger
       const editedFarmgood = Object.assign({}, action.farmGood)
       const editState = [...state.farmGoods.filter(farmgood => farmgood.id !== action.farmGood.id)]
       editState.push(editedFarmgood)

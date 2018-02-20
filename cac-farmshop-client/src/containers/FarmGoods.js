@@ -153,7 +153,7 @@ class FarmGoods extends Component {
         <div>
           <h1>edit farmgood</h1>
           <EditFarmgoodForm
-            farmgood={this.state.farmgood.attributes.name} //THIS IS NO LONGER CORRECT*****************************
+            farmgood={this.state.farmgood} 
             daysAvailable={this.state.farmgood.relationships.days.data}
             onSave={this.saveFarmgood}
             onChange={this.updateFarmgoodState}

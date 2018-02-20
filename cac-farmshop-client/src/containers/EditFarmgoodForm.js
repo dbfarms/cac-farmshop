@@ -11,7 +11,7 @@ import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
 import { callToEditFarmgood } from '../actions/farmGoods'
 import CheckBox from '../components/common/CheckBox'
-//import TextInput from '../components/common/TextInput';  
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class EditFarmgoodForm extends Component {
 // the state is added for days available 
@@ -19,6 +19,8 @@ class EditFarmgoodForm extends Component {
   constructor(props) {
     super(props)
 
+    this.changeCategory = this.changeCategory.bind(this);
+    this.toggle = this.toggle.bind(this);
     this.state = {
         theWeek: {
           Monday: false,
@@ -28,10 +30,31 @@ class EditFarmgoodForm extends Component {
           Friday: false,
           Saturday: false,
           Sunday: false,
-        }
+        },
+        dropdownOpen: false,
+        value: "Category",
+        category: 'Category',
       }
   }
 
+  toggle(){
+    this.setState({
+        dropdownOpen: !this.state.dropdownOpen,
+    });
+  }
+
+  changeCategory = event => {
+    this.setState({
+      category: event,
+      value: event
+    })
+    const name = this.state.category 
+    const value = event 
+    const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
+      [name]: value
+    })
+    this.props.updateFarmgoodFormData(currentFarmgoodFormData)
+  }
 
   makeCheckBoxes() {
     var oldDays = Object.entries(this.state.theWeek).map(function(keyName, keyIndex) { return keyName })
@@ -62,45 +85,6 @@ class EditFarmgoodForm extends Component {
     
   }
 
-/*
-  /////////////////////// EDITING FARMGOOD FUNCTIONS BELOW
-
-  /*
-  saveFarmgood(event){
-    event.preventDefault();
-    this.props.actions.updateFarmgoodState((this.state.farmgood));
-  }
-
-  updateFarmgoodState(event) {
-    const field = event.target.name;
-   // debugger
-    const farmgood = this.state.farmgood;
-    farmgood[field] = event.target.value;
-    return this.setState({farmgood: farmgood});
-
-  }
-
-
- componentWillReceiveProps(nextProps) {
-  //debugger 
-  if (this.props.farmgood.id != nextProps.farmgood.id) {
-    this.setState({farmgood: nextProps.farmgood});
-  }
-  if (this.props.checkBoxDaysAvailable.length < nextProps.checkBoxHobbies.length) {
-    this.setState({farmgoodDaysAvailable: nextProps.farmgoodDaysAvailable, checkBoxDaysAvailable: nextProps.checkBoxDaysAvailable});
-  }
- }
-
-   handleOnChange = event => {
-      //debugger
-    const { name, value } = event.target;
-    const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-      [name]: value
-    })
-    this.props.updateFarmgoodFormData(currentFarmgoodFormData)
-  } //not necessary for this to be redux
-
- */
 
   handleEditChange = event => {
       //debugger
@@ -120,7 +104,7 @@ class EditFarmgoodForm extends Component {
   
   render() {
     const boxes = this.makeCheckBoxes();
-    const { name, farmer } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
+    const { name, farmer, inventory, price, category } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
       <div className="formFarmgood">
         Edit a Farmgood...
@@ -129,19 +113,56 @@ class EditFarmgoodForm extends Component {
             <label htmlFor="farmgood_name">Name of Farm Good:</label>
             <input
                 type="text"
-                placeholder={this.props.farmgood}
+                //placeholder={this.props.farmgood.attributes.name}
                 onChange={this.handleEditChange}
                 name="name"
-                value={name}
+                value={this.props.farmgood.attributes.name}
             />
             </div>
+            {/* eventually the id will only be available for admin users to change things for farmers*/}
             <label htmlFor="farmgood_quantity">Farmer ID now (but eventually quantity)":</label>
             <input
             type="number"
             onChange={this.handleEditChange}
             name="farmer"
-            value={farmer}
+            value={this.props.farmgood.attributes.farmer.id}
             />
+            <br />
+          <label htmlFor="farmgood_inventory">Quantity available:</label>
+          <input
+            type="number"
+            onChange={this.handleOnChange}
+            name="inventory"
+            value={this.props.farmgood.attributes.inventory}
+          />
+          <br />
+          <label htmlFor="farmgood_price">Price:</label>
+          <input 
+            type="number"
+            onChange={this.handleOnChange}
+            name="price"
+            value={this.props.farmgood.attributes.price}
+          />
+          <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <DropdownToggle caret>
+            {this.props.farmgood.attributes.category.title}
+            </DropdownToggle>
+            <DropdownMenu value="category" >
+                <DropdownItem header>Category</DropdownItem>
+                <DropdownItem onClick={() => {
+                    this.changeCategory('Vegetables/Fruit')
+                    }}>Fruit & Vegetables</DropdownItem>
+                <DropdownItem onClick={() => {
+                    this.changeCategory('Meat')
+                    }}>Meat</DropdownItem>
+                 <DropdownItem onClick={() => {
+                    this.changeCategory('Dairy')
+                    }}>Dairy</DropdownItem>
+                 <DropdownItem onClick={() => {
+                    this.changeCategory('Eggs')
+                    }}>Eggs</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
             {boxes}
             
             <button type="submit">Edit Farmgood</button>
@@ -185,6 +206,46 @@ export default connect(mapStateToProps, {
 
 */
 
+
+/*
+  /////////////////////// EDITING FARMGOOD FUNCTIONS BELOW
+
+  /*
+  saveFarmgood(event){
+    event.preventDefault();
+    this.props.actions.updateFarmgoodState((this.state.farmgood));
+  }
+
+  updateFarmgoodState(event) {
+    const field = event.target.name;
+   // debugger
+    const farmgood = this.state.farmgood;
+    farmgood[field] = event.target.value;
+    return this.setState({farmgood: farmgood});
+
+  }
+
+
+ componentWillReceiveProps(nextProps) {
+  //debugger 
+  if (this.props.farmgood.id != nextProps.farmgood.id) {
+    this.setState({farmgood: nextProps.farmgood});
+  }
+  if (this.props.checkBoxDaysAvailable.length < nextProps.checkBoxHobbies.length) {
+    this.setState({farmgoodDaysAvailable: nextProps.farmgoodDaysAvailable, checkBoxDaysAvailable: nextProps.checkBoxDaysAvailable});
+  }
+ }
+
+   handleOnChange = event => {
+      //debugger
+    const { name, value } = event.target;
+    const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
+      [name]: value
+    })
+    this.props.updateFarmgoodFormData(currentFarmgoodFormData)
+  } //not necessary for this to be redux
+
+ */
 
 /* 
 /// junk
