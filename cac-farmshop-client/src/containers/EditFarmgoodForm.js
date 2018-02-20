@@ -71,6 +71,12 @@ class EditFarmgoodForm extends Component {
   }
 
   makeCheckBoxes() {
+    /*    
+    var newTest = this.props.daysAvailable.filter(day => { 
+      this.selectedCheckboxes.add(day)
+    })
+    */
+
     var thisWeek = this.state.theWeek
     var oldDays = this.props.daysAvailable.filter(day => {
         for (let i = 0; i< thisWeek.length; i++) {
@@ -86,6 +92,8 @@ class EditFarmgoodForm extends Component {
             item={day} 
             handleChange={this.toggleCheckbox.bind(this)} 
             value={day}
+            checkedBoxes={this.selectedCheckboxes}
+            isEditing={this.props.isEditing}
             //key={dayAvailable.id}
           />
         )
@@ -93,9 +101,10 @@ class EditFarmgoodForm extends Component {
   }
 
   toggleCheckbox = (event) => {
-    if (this.selectedCheckboxes.has(event)) {
-      this.selectedCheckboxes.delete(event);
-      this.days_array = this.state.days_array.filter(day => day !== event)
+    
+    if (this.selectedCheckboxes.has(event[0])) {
+      this.selectedCheckboxes.delete(event[0]);
+      this.days_array = this.state.days_array.filter(day => day !== event[0])
       this.setState({
         days_array: this.days_array 
       })
@@ -105,8 +114,8 @@ class EditFarmgoodForm extends Component {
       })
       this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
     } else {
-      this.selectedCheckboxes.add(event);
-      this.state.days_array.push(event)
+      this.selectedCheckboxes.add(event[0]);
+      this.state.days_array.push(event[0])
       const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
         [this.state.days]: this.state.days_array
       })
@@ -123,6 +132,12 @@ class EditFarmgoodForm extends Component {
       [name]: value
     })
     this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
+    
+    /* DOESN'T WORK BUT WHY?
+    this.setState =({
+      name: value,
+    })
+    */
   }
 
   handleEditSubmit = event => {
@@ -144,9 +159,9 @@ class EditFarmgoodForm extends Component {
             <input
                 type="text"
                 //placeholder={this.props.farmgood.attributes.name}
-                onChange={this.handleEditChange}
+                onChange={this.handleEditChange.bind(this)}
                 name="name"
-                value={this.state.name}
+                value={name}
             />
             </div>
             {/* eventually the id will only be available for admin users to change things for farmers*/}
@@ -155,7 +170,7 @@ class EditFarmgoodForm extends Component {
             type="number"
             onChange={this.handleEditChange}
             name="farmer"
-            value={this.props.farmgood.attributes.farmer.id}
+            value={farmer}
             />
             <br />
           <label htmlFor="farmgood_inventory">Quantity available:</label>
@@ -163,7 +178,7 @@ class EditFarmgoodForm extends Component {
             type="number"
             onChange={this.handleEditChange}
             name="inventory"
-            value={this.props.farmgood.attributes.inventory}
+            value={inventory}
           />
           <br />
           <label htmlFor="farmgood_price">Price:</label>
@@ -171,11 +186,11 @@ class EditFarmgoodForm extends Component {
             type="number"
             onChange={this.handleEditChange}
             name="price"
-            value={this.props.farmgood.attributes.price}
+            value={price}
           />
           <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
-            {this.props.farmgood.attributes.category.title}
+            {this.state.value}
             </DropdownToggle>
             <DropdownMenu value="category" >
                 <DropdownItem header>Category</DropdownItem>

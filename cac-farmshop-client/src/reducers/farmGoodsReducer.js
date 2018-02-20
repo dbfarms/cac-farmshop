@@ -1,4 +1,5 @@
-import { Route } from 'react-router-dom';
+import { browserHistory } from 'react-router-dom';
+//import {withRouter} from "react-router-dom";
 
 export default (state = [], action) => {
   switch(action.type) {
@@ -14,10 +15,7 @@ export default (state = [], action) => {
         Object.assign({}, action.farmGood),
       ]
       */
-      //<Route render={({history}) => 
-      //  { history.push('/')}}
-      //  </Route>
-      //history.pushState('/')
+     
     case 'GET_FARMGOOD_SUCCESS':
       return action.farmGoods
     case 'CREATE_FARMGOOD_SUCCESS':
@@ -33,9 +31,9 @@ export default (state = [], action) => {
         return farmGood.id == action.farmGood.id
         })
         newState.splice(indexOfFarmgoodToDelete, 1)
-
-        //browserHistory.push('/farm-goods');
-        return newState;
+        return (
+          newState
+        );
     default:
       return state
   }

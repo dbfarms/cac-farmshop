@@ -22,9 +22,29 @@ class CheckBox extends Component {
     const label = this.props.item;
     const { isChecked } = this.state;
     let checked = this.state.isChecked
-    if (label[1] === true) {
-      checked = true 
+
+    if (this.props.isEditing === true ) {  
+      if (label[1] === true) {
+        checked = true 
+        this.props.checkedBoxes.add(label[0])
+      }
     }
+
+    /*
+    
+    ////
+    this.selectedCheckboxes.forEach(day => {
+      if (day.name === event[0]) {
+        this.selectedCheckboxes.add(event)
+      }
+    })
+    ///
+    this.props.checkedBoxes.forEach(day => {
+        if (label[0] === day.name) {
+          checked = true 
+        }
+      })
+    */
 
     return (
       <div className="checkbox">
@@ -35,11 +55,9 @@ class CheckBox extends Component {
                             name={label[0]}
                             value={label[0]}
                             checked={checked}
-                            ref={(input) => { this.test = input; }}
                             onChange={this.toggleCheckboxChange.bind(this)}
                         />
 
-          {label}
         </label>
       </div>
     );

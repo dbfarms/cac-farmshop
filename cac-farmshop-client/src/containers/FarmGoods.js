@@ -88,8 +88,8 @@ class FarmGoods extends Component {
   handleDelete(farmGood){
     //TAKES A SECOND TO REFRESH PAGE.... HOW TO SPEED UP?
     this.props.deleteFarmGoods(farmGood);
-    this.props.getFarmGoods();
     alert('deleting')
+    //DOESN'T SHOW ITEM IS DELETED UNTIL AFTER REFRESH.. MAYBE MAKE EDIT ITS OWN PAGE?
     this.setState({
       isEditing: false,
     })
@@ -97,6 +97,7 @@ class FarmGoods extends Component {
 
   handleSubmit(){
     this.props.getFarmGoods();
+    this.props.history.push('/farm-goods')
   }
 
   handleShowChange = showKey => this.setState({ showKey: showKey })
