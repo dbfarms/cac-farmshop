@@ -25,7 +25,7 @@ class CheckBox extends Component {
 
     if (this.props.isEditing === true ) {  
       if (label[1] === true) {
-        checked = true 
+        //checked = true 
         this.props.checkedBoxes.add(label[0])
       }
     }
