@@ -66,6 +66,9 @@ class NewFarmgoodForm extends Component {
     if (this.selectedCheckboxes.has(event)) {
       this.selectedCheckboxes.delete(event);
       this.days_array = this.state.days_array.filter(day => day !== event)
+      this.setState({
+        days_array: this.days_array 
+      })
       const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
        [this.state.days]: this.days_array
        
