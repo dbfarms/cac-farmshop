@@ -8,6 +8,7 @@ import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
 import { callToEditFarmgood } from '../actions/farmGoods'
 import CheckBox from '../components/common/CheckBox'
+import { Route } from 'react-router-dom'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class EditFarmgoodForm extends Component {
@@ -144,7 +145,9 @@ class EditFarmgoodForm extends Component {
   handleEditSubmit = event => {
     event.preventDefault();
     //this.props.isEditing = false
+    //this.props.history.push('/farm-goods')
     this.props.callToEditFarmgood(this.props.FarmgoodFormData)
+    
   }
 
   
@@ -154,7 +157,7 @@ class EditFarmgoodForm extends Component {
     return (
       <div className="formFarmgood">
         Edit a Farmgood...
-        <form onSubmit={this.handleEditSubmit}>
+        <form onSubmit={this.handleEditSubmit.bind(this)}>
             <div>
             <label htmlFor="farmgood_id" />
             <input type="hidden" 
