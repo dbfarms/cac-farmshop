@@ -129,7 +129,8 @@ class EditFarmgoodForm extends Component {
       //debugger
     const { name, value } = event.target;
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-      [name]: value
+      [name]: value,
+      id: this.props.farmgood.id
     })
     this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
     
@@ -149,23 +150,29 @@ class EditFarmgoodForm extends Component {
   
   render() {
     const boxes = this.makeCheckBoxes();
-    const { name, farmer, inventory, price, category } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
+    const { name, farmer, inventory, price, category, id } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
       <div className="formFarmgood">
         Edit a Farmgood...
         <form onSubmit={this.handleEditSubmit}>
             <div>
+            <label htmlFor="farmgood_id" />
+            <input type="hidden" 
+                    name={this.props.farmgood.id}
+                    value={this.props.farmgood.id}
+                    ref={(input) => { this.actionInput = input }} 
+            />
             <label htmlFor="farmgood_name">Name of Farm Good:</label>
             <input
                 type="text"
-                //placeholder={this.props.farmgood.attributes.name}
+                placeholder={this.props.farmgood.attributes.name}
                 onChange={this.handleEditChange.bind(this)}
                 name="name"
                 value={name}
             />
             </div>
             {/* eventually the id will only be available for admin users to change things for farmers*/}
-            <label htmlFor="farmgood_quantity">Farmer ID now (but eventually quantity)":</label>
+            <label htmlFor="farmgood_quantity">Farmer for now (but eventually quantity)":</label>
             <input
             type="number"
             onChange={this.handleEditChange}
@@ -209,7 +216,6 @@ class EditFarmgoodForm extends Component {
             </DropdownMenu>
           </Dropdown>
             {boxes}
-            
             <button type="submit">Edit Farmgood</button>
         </form>
        
@@ -238,76 +244,3 @@ export default connect(mapStateToProps, {
   callToEditFarmgood,
   //updateFarmgoodFormData,
 })(EditFarmgoodForm);
-
-/*
-export default connect(mapStateToProps, {
-  updateFarmgoodFormData,
-  createFarmgood
- }, mapDispatchToProps, { 
-   editFarmgoodFormData, 
-   callToEditFarmgood
-  })(FarmgoodForm); 
-
-
-*/
-
-
-/*
-  /////////////////////// EDITING FARMGOOD FUNCTIONS BELOW
-
-  /*
-  saveFarmgood(event){
-    event.preventDefault();
-    this.props.actions.updateFarmgoodState((this.state.farmgood));
-  }
-
-  updateFarmgoodState(event) {
-    const field = event.target.name;
-   // debugger
-    const farmgood = this.state.farmgood;
-    farmgood[field] = event.target.value;
-    return this.setState({farmgood: farmgood});
-
-  }
-
-
- componentWillReceiveProps(nextProps) {
-  //debugger 
-  if (this.props.farmgood.id != nextProps.farmgood.id) {
-    this.setState({farmgood: nextProps.farmgood});
-  }
-  if (this.props.checkBoxDaysAvailable.length < nextProps.checkBoxHobbies.length) {
-    this.setState({farmgoodDaysAvailable: nextProps.farmgoodDaysAvailable, checkBoxDaysAvailable: nextProps.checkBoxDaysAvailable});
-  }
- }
-
-   handleOnChange = event => {
-      //debugger
-    const { name, value } = event.target;
-    const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-      [name]: value
-    })
-    this.props.updateFarmgoodFormData(currentFarmgoodFormData)
-  } //not necessary for this to be redux
-
- */
-
-/* 
-/// junk
-
-
-
-const mapDispatchToProps = (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch)};
-}
-
-
-
-{Object.keys(this.state.daysAvailable).map(function(keyName, keyIndex) {
-                <div>
-                {this.makeCheckBoxes(keyName, keyIndex)}
-                </div>
-                })
-              }
-
-*/
