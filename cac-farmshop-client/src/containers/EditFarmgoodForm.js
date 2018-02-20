@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateEditedFarmgoodFormData } from '../actions/FarmgoodForm';
-import { updateFarmgoodFormData } from '../actions/FarmgoodForm';
+//import { updateFarmgoodFormData } from '../actions/FarmgoodForm';
 import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
 import { callToEditFarmgood } from '../actions/farmGoods'
@@ -22,15 +22,15 @@ class EditFarmgoodForm extends Component {
     this.changeCategory = this.changeCategory.bind(this);
     this.toggle = this.toggle.bind(this);
     this.state = {
-        theWeek: {
-          Monday: false,
-          Tuesday: false,
-          Wednesday: false,
-          Thursday: false,
-          Friday: false,
-          Saturday: false,
-          Sunday: false,
-        },
+        theWeek: [ 
+          ["Monday", false],
+          ["Tuesday", false],
+          ["Wednesday", false],
+          ["Thursday", false],
+          ["Friday", false],
+          ["Saturday", false],
+          ["Sunday", false],
+        ],
         dropdownOpen: false,
         value: "Category",
         category: 'Category',
@@ -53,21 +53,22 @@ class EditFarmgoodForm extends Component {
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
       [name]: value
     })
-    this.props.updateFarmgoodFormData(currentFarmgoodFormData)
+    this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
   }
 
   makeCheckBoxes() {
-    var oldDays = Object.entries(this.state.theWeek).map(function(keyName, keyIndex) { return keyName })
+    var thisWeek = this.state.theWeek
 
-    var test = this.props.daysAvailable.filter(day => {
-        for (let i = 0; i< oldDays.length; i++) {
-            if (day.name === oldDays[i][0]) {
-                oldDays[i][1] = true 
+
+    var oldDays = this.props.daysAvailable.filter(day => {
+        for (let i = 0; i< thisWeek.length; i++) {
+            if (day.name === thisWeek[i][0]) {
+                thisWeek[i][1] = true 
             }
         }
     })
    
-    return oldDays.map(day => {
+    return thisWeek.map(day => {
       return (
           <CheckBox 
             item={day} 
@@ -92,7 +93,7 @@ class EditFarmgoodForm extends Component {
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
       [name]: value
     })
-    this.props.updateFarmgoodFormData(currentFarmgoodFormData)
+    this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
   }
 
   handleEditSubmit = event => {
@@ -191,7 +192,7 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, {
   updateEditedFarmgoodFormData,
   callToEditFarmgood,
-  updateFarmgoodFormData,
+  //updateFarmgoodFormData,
 })(EditFarmgoodForm);
 
 /*

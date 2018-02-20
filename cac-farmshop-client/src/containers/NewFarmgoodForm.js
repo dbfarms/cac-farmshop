@@ -62,8 +62,6 @@ class NewFarmgoodForm extends Component {
   */
 
   toggleCheckbox = (event) => {
-    //const target = label.target;
-    //const value = target.type === 'checkbox' ? target.checked : target.value;
     if (this.selectedCheckboxes.has(event)) {
       this.selectedCheckboxes.delete(event);
       this.days_array = this.state.days_array.filter(day => day !== event)
@@ -90,9 +88,9 @@ class NewFarmgoodForm extends Component {
     return this.state.theWeek.map(keyName => { 
       return (
           <CheckBox 
-            item={keyName[0]} 
+            item={keyName} 
             handleChange={this.toggleCheckbox.bind(this)} 
-            value={keyName[0]} 
+            value={keyName} 
             //key={dayAvailable.id}
           />
         )
