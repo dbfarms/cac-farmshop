@@ -32,18 +32,20 @@ class Api::FarmgoodsController < ApplicationController
     end
 
     def update
-        byebug
+        #byebug
         set_farmgood 
         farmerID = params["farmGood"]["farmer"].to_i
         category_name = params["farmGood"]["Category"]
         @farmgood.days = []
+        #byebug
         params["farmGood"]["daysAvailable"].each do |day|
             @farmgood.days << Day.find_by(name: day)
         end 
-        
+        #byebug
         @farmgood.category = Category.find_by(title: category_name)
         @farmgood.farmer = Farmer.find(farmerID)
-        byebug
+        #byebug
+        @farmgood.update(farmgood_params)
         if @farmgood.update(farmgood_params)
             render json: @farmgood
         else
