@@ -114,6 +114,7 @@ class NewFarmgoodForm extends Component {
   }
 
   render() {
+    console.log('now i am in the new form')
     const boxes = this.makeCheckBoxes();
     const { name, farmer, inventory, price, category, theWeek } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (

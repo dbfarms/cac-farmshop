@@ -129,6 +129,9 @@ class EditFarmgoodForm extends Component {
   handleEditChange = event => {
       //debugger
     const { name, value } = event.target;
+    this.setState({
+      name: value
+    })
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
       [name]: value,
       id: this.props.farmgood.id
@@ -168,10 +171,9 @@ class EditFarmgoodForm extends Component {
             <label htmlFor="farmgood_name">Name of Farm Good:</label>
             <input
                 type="text"
-                placeholder={this.props.farmgood.attributes.name}
                 onChange={this.handleEditChange.bind(this)}
                 name="name"
-                value={name}
+                value={this.state.name}
             />
             </div>
             {/* eventually the id will only be available for admin users to change things for farmers*/}
