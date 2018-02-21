@@ -23,10 +23,10 @@ class Header extends React.Component {
           <IndexLink to="/" 
             activeClassName="active">Home</IndexLink>
           {" | "}
-          <Link to="/cats" activeClassName="active">Cats</Link>
+          <Link to="/farm-goods" activeClassName="active">Farm Goods</Link>
           {" | "}
-          <Link to="/about" 
-            activeClassName="active">About</Link>
+          <Link to="/farmers" 
+            activeClassName="active">Farmers</Link>
           {" | "}
           <a href="/logout" onClick={this.logOut}>log out</a>
         </nav>
@@ -37,10 +37,10 @@ class Header extends React.Component {
           <IndexLink to="/" 
             activeClassName="active">Home</IndexLink>
           {" | "}
-          <Link to="/cats" activeClassName="active">Cats</Link>
+          <Link to="/farm-goods" activeClassName="active">Farmgoods</Link>
           {" | "}
-          <Link to="/about" 
-            activeClassName="active">About</Link>
+          <Link to="/farmers" 
+            activeClassName="active">Farmers</Link>
           {" | "}
           <Link to="/login" activeClassName="active">
             log in</Link>

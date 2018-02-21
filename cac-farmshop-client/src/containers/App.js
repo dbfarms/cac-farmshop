@@ -11,6 +11,7 @@ import FarmerShow from './FarmerShow';
 import Carts from './carts'
 import NewFarmgoodForm from './NewFarmgoodForm';
 import LogInPage from '../components/LogInPage';
+import SignUpPage from '../components/SignUp';
 
 class App extends Component {
   constructor() {
@@ -22,7 +23,53 @@ class App extends Component {
     }
     //this.updateCurrentUser = this.updateCurrentUser.bind(this);
   }
-  //Vue.use(axios)
+  
+    //to find the nearest pickup location - UNCOMMENT BELOW 
+  //  navigator.geolocation.getCurrentPosition(position => {
+  //    const { latitude, longitude } = position.coords
+  //  });
+
+
+  render() {
+
+    return (
+      <div>
+      
+      {this.state.currentUser === null &&
+      <BrowserRouter >
+        <div className="background-here">
+        
+          <Navbar />
+          <Route path="/login" component={LogInPage} />
+          <Route path="/signup" component={SignUpPage} />
+          <Route exact path="/" render={() => <div>Home For Now</div>} />
+          <Route exact path='/farmers' component={FarmersPage} />
+          <Route exact path="/farm-goods" component={FarmGoods} />
+          <Route exact path="/farm-goods/new" component={NewFarmgoodForm} />
+          <Route exact path="/cart" component={Carts} />
+          <Route path="*" render={() => <div>Page Not Found</div>} />
+        </div>
+      </BrowserRouter >
+      }
+      </div>
+    );
+  }
+}
+
+export default App
+
+/*
+
+<Route path="/login" component={LogInPage} />
+          <Route exact path="/" render={() => <div>Home For Now</div>} />
+          <Route exact path='/farmers' component={FarmersPage} />
+          <Route exact path="/farm-goods" component={FarmGoods} />
+          <Route exact path="/farm-goods/new" component={NewFarmgoodForm} />
+          <Route exact path="/cart" component={Carts} />
+          <Route path="*" render={() => <div>Page Not Found</div>} />
+
+
+//Vue.use(axios)
   
   /*
   componentDidMount() {
@@ -50,49 +97,7 @@ class App extends Component {
             currentUser: email
           })
       }
-    //to find the nearest pickup location - UNCOMMENT BELOW 
-  //  navigator.geolocation.getCurrentPosition(position => {
-  //    const { latitude, longitude } = position.coords
-  //  });
-  */
 
-
-  render() {
-
-    return (
-      <div>
-      
-      {this.state.currentUser === null &&
-      <BrowserRouter >
-        <div className="background-here">
-        
-          <Navbar />
-          <Route path="/login" component={LogInPage} />
-          <Route exact path="/" render={() => <div>Home For Now</div>} />
-          <Route exact path='/farmers' component={FarmersPage} />
-          <Route exact path="/farm-goods" component={FarmGoods} />
-          <Route exact path="/farm-goods/new" component={NewFarmgoodForm} />
-          <Route exact path="/cart" component={Carts} />
-          <Route path="*" render={() => <div>Page Not Found</div>} />
-        </div>
-      </BrowserRouter >
-      }
-      </div>
-    );
-  }
-}
-
-export default App
-
-/*
-
-<Route path="/login" component={LogInPage} />
-          <Route exact path="/" render={() => <div>Home For Now</div>} />
-          <Route exact path='/farmers' component={FarmersPage} />
-          <Route exact path="/farm-goods" component={FarmGoods} />
-          <Route exact path="/farm-goods/new" component={NewFarmgoodForm} />
-          <Route exact path="/cart" component={Carts} />
-          <Route path="*" render={() => <div>Page Not Found</div>} />
 
 export default (  
   <Route path="/" component={App}>

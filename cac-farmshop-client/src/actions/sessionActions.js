@@ -21,9 +21,8 @@ export function signUpSuccess() {
 }
 
 export function signUpUser(credentials) {
-  debugger   
   return function(dispatch) {
-    return sessionApi.login(credentials).then(response => {
+    return sessionApi.signup(credentials).then(response => {
       sessionStorage.setItem('jwt', response.jwt);
       dispatch(signUpSuccess());
     }).catch(error => {

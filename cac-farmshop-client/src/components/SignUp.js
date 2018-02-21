@@ -4,13 +4,13 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';  
 import * as sessionActions from '../actions/sessionActions';
 
-class LogInPage extends React.Component {  
+class SignUpPage extends React.Component {  
     
   constructor(props) {
     super(props);
-    this.state = {credentials: {email: '', password: ''}}
+    this.state = {credentials: {email: '', password: '', password_confirmation: ''}}
     this.onChange = this.onChange.bind(this);
-    this.onSave = this.onSave.bind(this);
+    this.onSignUp = this.onSignUp.bind(this);
   }
 
   onChange(event) {
@@ -20,16 +20,17 @@ class LogInPage extends React.Component {
     return this.setState({credentials: credentials});
   }
 
-  onSave(event) {
-    event.preventDefault();
-    this.props.actions.logInUser(this.state.credentials);
+  onSignUp(event) {
+      event.preventDefault();
+      this.props.actions.signUpUser(this.state.credentials);
   }
 
   render() {
     return (
       < div>
+
         < form>
-          <label>LOG-IN</label>
+          <label>SIGN-UP</label>
           < TextInput
             name="email"
             label="email"
@@ -43,10 +44,17 @@ class LogInPage extends React.Component {
             value={this.state.credentials.password}
             onChange={this.onChange}/>
 
+             < TextInput
+            name="password_confirmation"
+            label="password_confirmation"
+            type="password"
+            value={this.state.credentials.password_confirmation}
+            onChange={this.onChange}/>
+
           < input
             type="submit"
             className="btn btn-primary"
-            onClick={this.onSave}/>
+            onClick={this.onSignUp}/>
         
         </form>
 
@@ -61,4 +69,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(LogInPage);
+export default connect(null, mapDispatchToProps)(SignUpPage);
