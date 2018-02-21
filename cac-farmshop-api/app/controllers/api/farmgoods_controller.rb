@@ -19,7 +19,7 @@ class Api::FarmgoodsController < ApplicationController
         
         farmgood.category = Category.find_by(title: category_name)
         farmgood.farmer = Farmer.find(farmerID)
-        byebug 
+        #byebug 
         if farmgood.save
             render json: farmgood
         else
