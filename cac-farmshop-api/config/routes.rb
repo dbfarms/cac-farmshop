@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
+  get '/users/current-user', to: "current_user#show"
+  resources :users
   post '/login', to: "sessions#create"
-  #root 'home#index'
 
   namespace :api do
     resources :carts
