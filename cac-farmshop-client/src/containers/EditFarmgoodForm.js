@@ -31,10 +31,12 @@ class EditFarmgoodForm extends Component {
         ],
         days_array: [],
         dropdownOpen: false,
-        value: "Category",
+        //value: "Category",
         category: 'Category',
         days:"daysAvailable", //THIS IS FOR RAILS PARAMS
-        name: props.farmgood.attributes.name 
+        name: props.farmgood.attributes.name, 
+        inventory: props.farmgood.attributes.inventory,
+        price: props.farmgood.attributes.price, 
       }
   }
 
@@ -182,7 +184,7 @@ class EditFarmgoodForm extends Component {
             type="number"
             onChange={this.handleEditChange}
             name="farmer"
-            value={farmer}
+            value={this.props.farmgood.attributes.farmer.id}
             />
             <br />
           <label htmlFor="farmgood_inventory">Quantity available:</label>
@@ -190,7 +192,7 @@ class EditFarmgoodForm extends Component {
             type="number"
             onChange={this.handleEditChange}
             name="inventory"
-            value={inventory}
+            value={this.props.farmgood.attributes.inventory}
           />
           <br />
           <label htmlFor="farmgood_price">Price:</label>
@@ -198,11 +200,11 @@ class EditFarmgoodForm extends Component {
             type="number"
             onChange={this.handleEditChange}
             name="price"
-            value={price}
+            value={this.props.farmgood.attributes.price}
           />
           <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
-            {this.state.value}
+            {this.state.category}
             </DropdownToggle>
             <DropdownMenu value="category" >
                 <DropdownItem header>Category</DropdownItem>

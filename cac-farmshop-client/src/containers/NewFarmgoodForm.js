@@ -96,8 +96,8 @@ class NewFarmgoodForm extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    this.props.createFarmgood(this.props.FarmgoodFormData);
-    this.props.history.push('/farm-goods')
+    this.props.createFarmgood(this.props.FarmgoodFormData, this.props.history);
+    //this.props.history.push('/farm-goods')
   }
 
   changeCategory = event => {
@@ -114,7 +114,6 @@ class NewFarmgoodForm extends Component {
   }
 
   render() {
-    console.log('now i am in the new form')
     const boxes = this.makeCheckBoxes();
     const { name, farmer, inventory, price, category, theWeek } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (

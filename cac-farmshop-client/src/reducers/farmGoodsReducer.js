@@ -18,9 +18,11 @@ export default (state = [], action) => {
     case 'GET_FARMGOOD_SUCCESS':
       return action.farmGoods
     case 'CREATE_FARMGOOD_SUCCESS':
+    //debugger 
+    const newState1 = Object.assign([], state)
+    //debugger
       return (
-        state.concat(action.farmGood),
-        this.props.history.push('/farm-goods')
+        newState1.data.concat(action.farmGood.data)
       )
     case 'DELETE_FARMGOOD_SUCCESS':
         const newState = Object.assign([], state);

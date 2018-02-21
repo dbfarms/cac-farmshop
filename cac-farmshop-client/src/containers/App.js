@@ -4,14 +4,16 @@ import Navbar from '../components/Navbar'
 import { BrowserRouter, Switch, Route, Router } from 'react-router-dom';
 //import { connect } from 'react-redux'
 import './App.css';
-import axios from 'axios'
 import FarmGoods from './FarmGoods';
 import FarmersPage from './FarmersPage';
 import FarmerShow from './FarmerShow';
+import { getFarmGoods } from '../actions/farmGoods';
 import Carts from './carts'
 import NewFarmgoodForm from './NewFarmgoodForm';
 import LogInPage from '../components/LogInPage';
 import SignUpPage from '../components/SignUp';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
 
 class App extends Component {
   constructor() {
@@ -28,6 +30,18 @@ class App extends Component {
   //  navigator.geolocation.getCurrentPosition(position => {
   //    const { latitude, longitude } = position.coords
   //  });
+
+  componentWillMount(){
+    this.props.getFarmGoods()
+    //WHEN I PUT ANOTHER GET REQUEST HERE IT BREAKS THE PROGRAM. BUT WHY?
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      farmGoods_array: nextProps.farmGoods.data
+      //days_array: nextProps.days.data
+    })
+  }
 
 
   render() {
@@ -56,7 +70,17 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = (state) => {
+  //console.log(state)
+  //const stateDays = Object.assign([], state.days)
+  return ({
+      farmGoods: state.farmGoods,
+      days: state.days 
+  })
+}
+
+export default connect(mapStateToProps, { getFarmGoods })(App); // 
+
 
 /*
 
