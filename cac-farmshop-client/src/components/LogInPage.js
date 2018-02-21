@@ -25,10 +25,17 @@ class LogInPage extends React.Component {
     this.props.actions.logInUser(this.state.credentials);
   }
 
+  onSignUp(event) {
+      event.preventDefault();
+      debugger
+      this.props.actions.signUpUser(this.state.credentials);
+  }
+
   render() {
     return (
       < div>
         < form>
+          <label>LOG-IN</label>
           < TextInput
             name="email"
             label="email"
@@ -48,6 +55,29 @@ class LogInPage extends React.Component {
             onClick={this.onSave}/>
         
         </form>
+
+        < form>
+          <label>SIGN-UP</label>
+          < TextInput
+            name="email"
+            label="email"
+            value={this.state.credentials.email}
+            onChange={this.onChange}/>
+
+          < TextInput
+            name="password"
+            label="password"
+            type="password"
+            value={this.state.credentials.password}
+            onChange={this.onChange}/>
+
+          < input
+            type="submit"
+            className="btn btn-primary"
+            onClick={this.onSignUp}/>
+        
+        </form>
+
      </div> 
     );
   }
