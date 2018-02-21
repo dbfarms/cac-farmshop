@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users #, controllers: { registrations: 'registrations' }
 
+  post '/login', to: "sessions#create"
   #root 'home#index'
 
   namespace :api do
