@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
     #respond_to :html, :json
     
-    before_action :authenticate 
+    #before_action :authenticate 
     
     def logged_in?
       !!current_user
