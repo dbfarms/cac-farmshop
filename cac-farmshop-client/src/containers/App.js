@@ -4,13 +4,13 @@ import Navbar from '../components/Navbar'
 import { BrowserRouter, Switch, Route, Router } from 'react-router-dom';
 //import { connect } from 'react-redux'
 import './App.css';
-import Header from './Header'
 import axios from 'axios'
 import FarmGoods from './FarmGoods';
 import FarmersPage from './FarmersPage';
 import FarmerShow from './FarmerShow';
 import Carts from './carts'
 import NewFarmgoodForm from './NewFarmgoodForm';
+import LogInPage from '../components/LogInPage';
 
 class App extends Component {
   constructor() {
@@ -61,15 +61,13 @@ class App extends Component {
 
     return (
       <div>
-      {this.state.currentUser !== null &&
-        <Header updateCurrentUser={this.updateCurrentUser}/>
-        //eventually a homepage or something here
-      }
+      
       {this.state.currentUser === null &&
       <BrowserRouter >
         <div className="background-here">
         
           <Navbar />
+          <Route path="/login" component={LogInPage} />
           <Route exact path="/" render={() => <div>Home For Now</div>} />
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmGoods} />
@@ -87,6 +85,14 @@ class App extends Component {
 export default App
 
 /*
+
+<Route path="/login" component={LogInPage} />
+          <Route exact path="/" render={() => <div>Home For Now</div>} />
+          <Route exact path='/farmers' component={FarmersPage} />
+          <Route exact path="/farm-goods" component={FarmGoods} />
+          <Route exact path="/farm-goods/new" component={NewFarmgoodForm} />
+          <Route exact path="/cart" component={Carts} />
+          <Route path="*" render={() => <div>Page Not Found</div>} />
 
 export default (  
   <Route path="/" component={App}>

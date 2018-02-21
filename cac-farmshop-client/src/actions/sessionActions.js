@@ -1,5 +1,5 @@
 import * as types from './actionTypes';  
-import sessionApi from '../api/SessionApi';
+import sessionApi from '../api/sessionApi';
 
 export function loginSuccess() {  
   return {type: types.LOG_IN_SUCCESS}
@@ -15,3 +15,8 @@ export function logInUser(credentials) {
     });
   };
 }
+
+export function logOutUser() {  
+    sessionStorage.removeItem('jwt');
+    return {type: types.LOG_OUT}
+  }

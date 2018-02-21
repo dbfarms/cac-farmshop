@@ -1,4 +1,3 @@
-
 import React, {PropTypes} from 'react';  
 import TextInput from './common/TextInput';  
 import {bindActionCreators} from 'redux';  
@@ -6,6 +5,7 @@ import {connect} from 'react-redux';
 import * as sessionActions from '../actions/sessionActions';
 
 class LogInPage extends React.Component {  
+    
   constructor(props) {
     super(props);
     this.state = {credentials: {email: '', password: ''}}

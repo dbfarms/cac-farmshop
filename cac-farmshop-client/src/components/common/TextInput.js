@@ -23,6 +23,7 @@ const TextInput = ({name, label, onChange, placeholder, value, error, type="text
   );
 };
 
+/*
 TextInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
@@ -31,5 +32,6 @@ TextInput.propTypes = {
   value: PropTypes.string,
   error: PropTypes.string
 };
+*/
 
 export default TextInput;
