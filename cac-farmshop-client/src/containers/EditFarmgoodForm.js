@@ -158,7 +158,7 @@ class EditFarmgoodForm extends Component {
     event.preventDefault();
     //this.props.isEditing = false
     //this.props.history.push('/farm-goods')
-    this.props.callToEditFarmgood(this.props.FarmgoodFormData)
+    this.props.callToEditFarmgood(this.props.FarmgoodFormData, this.props.history)
     
   }
 

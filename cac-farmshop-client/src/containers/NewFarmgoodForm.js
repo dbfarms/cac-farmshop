@@ -188,14 +188,6 @@ const mapStateToProps = state => {
   }
 }
 
-/*
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(FarmgoodFormActions, dispatch) //farmgoodActions
-  }
-}
-*/
-
 
 export default connect(mapStateToProps, {
   updateFarmgoodFormData,

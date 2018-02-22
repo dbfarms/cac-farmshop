@@ -73,13 +73,13 @@ export const createFarmgood = (farmGood, history) => {
       dispatch(resetFarmGoodForm())
       dispatch(addFarmGoods(farmGood));
       //debugger 
-      history.push('/farm-goods')
+      //history.push('/farm-goods')
     })
     .catch(error => console.log(error))
   }
 }
 
-export const callToEditFarmgood = (farmGood) => {
+export const callToEditFarmgood = (farmGood, history) => {
   return dispatch => {
     return fetch(`http://localhost:3000/api/farmgoods/${farmGood.id}`, {
       headers: {
@@ -95,6 +95,7 @@ export const callToEditFarmgood = (farmGood) => {
     .then(farmGood => {
       dispatch(resetFarmGoodForm())
       dispatch(updateFarmgood(farmGood))
+      history.push('/farm-goods')
     })
     .catch(error => console.log(error))
   }
