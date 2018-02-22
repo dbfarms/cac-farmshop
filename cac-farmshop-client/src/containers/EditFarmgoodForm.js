@@ -7,7 +7,7 @@ import { updateEditedFarmgoodFormData } from '../actions/FarmgoodForm';
 import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
 import { callToEditFarmgood } from '../actions/farmGoods'
-import FarmGoodCard from '../components/farmGoodCard';
+import EditFarmGoodCard from '../components/EditFarmGoodCard';
 import CheckBox from '../components/common/CheckBox'
 import { Route } from 'react-router-dom'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
@@ -135,7 +135,7 @@ class EditFarmgoodForm extends Component {
   handleEditChange = event => {
 
     const { name, value } = event.target;
-    const id = this.props.farmgood.id 
+    const id = this.props.location.farmGood.id
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
       [name]: value, 
       id: id 
@@ -164,11 +164,12 @@ class EditFarmgoodForm extends Component {
 
   
   render() {
+    //<EditFarmGoodCard farmGood={this.props.location.farmGood}/> //THIS MIGHT REPLACE CURRENTLY USED FARMGOODCARD ONE DAY I DUNNO
     const boxes = this.makeCheckBoxes();
     const { name, farmer, inventory, price, category, id } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
       <div className="formFarmgood">
-        <FarmGoodCard farmGood={this.props.location.farmGood}/>
+        
         Edit a Farmgood...
         <form onSubmit={this.handleEditSubmit.bind(this)}>
             <div>
