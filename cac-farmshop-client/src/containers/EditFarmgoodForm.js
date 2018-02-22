@@ -34,10 +34,10 @@ class EditFarmgoodForm extends Component {
         //value: "Category",
         category: 'Category',
         days:"daysAvailable", //THIS IS FOR RAILS PARAMS
-        name1: props.farmgood.attributes.name, 
-        inventory: props.farmgood.attributes.inventory,
-        price: props.farmgood.attributes.price, 
-        editedCategory: props.farmgood.attributes.category.title
+        name1: props.location.state.farmgood.attributes.name, 
+        inventory: props.location.state.farmgood.attributes.inventory,
+        price: props.location.state.farmgood.attributes.price, 
+        editedCategory: props.location.state.farmgood.attributes.category.title
       }
   }
 
@@ -83,8 +83,9 @@ class EditFarmgoodForm extends Component {
     */
 
     var thisWeek = this.state.theWeek
-    var oldDays = this.props.daysAvailable.filter(day => {
-      //debugger 
+    //var oldDays = this.props.location.state.farmgood.attributes.daysAvailable.filter(day => {
+    var oldDays = this.props.location.state.farmgood.relationships.days.data.filter(day => {
+    //debugger 
         for (let i = 0; i< thisWeek.length; i++) {
             if (day.name === thisWeek[i][0]) {
                 thisWeek[i][1] = true 
@@ -130,18 +131,6 @@ class EditFarmgoodForm extends Component {
     //event.target.ownerDocument.activeElement.attributes[1].ownerElement.labels["0"].innerText
   }
 
- /*   
-  componentWillReceiveProps(nextProps) {
-    debugger 
-    const { id, value } = nextProps.search   
-    if(id && this.props.editing !== nextProps.editing) {
-        this.setState({
-          id: id,
-          
-        })
-    }
-  }
-  */
    
   handleEditChange = event => {
 
@@ -184,8 +173,8 @@ class EditFarmgoodForm extends Component {
             <div>
             <label htmlFor="farmgood_id" />
             <input type="hidden" 
-                    name={this.props.farmgood.id}
-                    value={this.props.farmgood.id}
+                    name={this.props.location.state.farmgood.id}
+                    value={this.props.location.state.farmgood.id}
                     ref={(input) => { this.actionInput = input }} 
             />
             <label htmlFor="farmgood_name">Name of Farm Good:</label>
@@ -202,7 +191,7 @@ class EditFarmgoodForm extends Component {
             type="number"
             onChange={this.handleEditChange.bind(this)}
             name="farmer"
-            value={this.props.farmgood.attributes.farmer.id}
+            value={this.props.location.state.farmgood.attributes.farmer.id}
             />
             <br />
           <label htmlFor="farmgood_inventory">Quantity available:</label>

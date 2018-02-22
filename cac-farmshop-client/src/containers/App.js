@@ -62,7 +62,7 @@ class App extends Component {
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmGoods} />
           <Route exact path="/farm-goods/new" component={NewFarmgoodForm} />
-          <Route exact path="/farm-goods/edit" component={EditFarmgoodForm} />
+          <Route exact path="/farm-goods/:id/edit" component={EditFarmgoodForm} />
           <Route path ="/farm-goods/:id" component={FarmGoodCard} />
           <Route exact path="/cart" component={Carts} />
           <Route path="*" render={() => <div>Page Not Found</div>} />

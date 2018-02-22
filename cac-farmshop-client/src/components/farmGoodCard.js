@@ -21,11 +21,20 @@ const FarmGoodCard = (props) =>
   {props.location.farmGood.farmGood.attributes <= 0 &&
     <p>No longer available. Check back soon</p>
   }
-    <Link to={"/farm-goods/edit"}> edit farmgood </Link>
+    <Link to={{
+      pathname: `/farm-goods/${props.location.farmGood.farmGood.id}/edit`,
+      state: {
+        farmgood: props.location.farmGood.farmGood
+      }
+    }}> edit farmgood </Link>
   </div>
 }
 </div>
  
+ 
+
+
+
 
 export default FarmGoodCard
 
