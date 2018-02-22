@@ -6,26 +6,28 @@ import { Redirect, Link } from 'react-router-dom';
 const FarmGoodCard = (props) =>
   
 <div className="FarmGoodsCard" >
-{props.location.farmGood === undefined &&
-  <Redirect to="/farm-goods" />
-
-}
-{props.location.farmGood !== undefined &&
+{ /*
+{props.location.farmGood === undefined && // 
   <div>
-  <h4>{props.location.farmGood.farmGood.attributes.name}</h4>
-  <img className="farmGoodImage" src={props.location.farmGood.farmGood.attributes.img_url} alt={props.location.farmGood.farmGood.id} />
-  { props.location.farmGood.farmGood.attributes.inventory > 0 &&
-  <p>Available: {props.location.farmGood.farmGood.attributes.inventory} at ${props.location.farmGood.farmGood.attributes.price} each</p>
+  {console.log('redirecting from farmgoods card page') }
+  <Redirect to="/farm-goods" />
+  </div>
+
+} */}
+{//props.location.farmGood !== undefined &&
+  <div>
+  <h4>{props.location.farmGood.attributes.name}</h4>
+  <img className="farmGoodImage" src={props.location.farmGood.attributes.img_url} alt={props.location.farmGood.id} />
+  { props.location.farmGood.attributes.inventory > 0 &&
+  <p>Available: {props.location.farmGood.attributes.inventory} at ${props.location.farmGood.attributes.price} each</p>
   }
 
-  {props.location.farmGood.farmGood.attributes <= 0 &&
+  {props.location.farmGood.attributes <= 0 &&
     <p>No longer available. Check back soon</p>
   }
     <Link to={{
-      pathname: `/farm-goods/${props.location.farmGood.farmGood.id}/edit`,
-      state: {
-        farmgood: props.location.farmGood.farmGood
-      }
+      pathname: `/farm-goods/${props.location.farmGood.id}/edit`,
+      farmGood: props.location.farmGood
     }}> edit farmgood </Link>
   </div>
 }

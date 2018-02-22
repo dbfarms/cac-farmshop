@@ -64,7 +64,7 @@ class FarmGoods extends Component {
   handleIsEditing = farmGood => {
     this.props.history.push({
       pathname: `/farm-goods/${farmGood.id}`,
-      farmGood: { farmGood },
+      farmGood,
     })
   }
   

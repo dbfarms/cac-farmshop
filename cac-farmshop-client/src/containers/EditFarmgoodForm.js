@@ -7,6 +7,7 @@ import { updateEditedFarmgoodFormData } from '../actions/FarmgoodForm';
 import * as FarmgoodFormActions from '../actions/FarmgoodForm';
 import * as farmgoodActions from '../actions/farmGoods';
 import { callToEditFarmgood } from '../actions/farmGoods'
+import FarmGoodCard from '../components/farmGoodCard';
 import CheckBox from '../components/common/CheckBox'
 import { Route } from 'react-router-dom'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
@@ -34,10 +35,10 @@ class EditFarmgoodForm extends Component {
         //value: "Category",
         category: 'Category',
         days:"daysAvailable", //THIS IS FOR RAILS PARAMS
-        name1: props.location.state.farmgood.attributes.name, 
-        inventory: props.location.state.farmgood.attributes.inventory,
-        price: props.location.state.farmgood.attributes.price, 
-        editedCategory: props.location.state.farmgood.attributes.category.title
+        name1: props.location.farmGood.attributes.name, 
+        inventory: props.location.farmGood.attributes.inventory,
+        price: props.location.farmGood.attributes.price, 
+        editedCategory: props.location.farmGood.attributes.category.title
       }
   }
 
@@ -83,8 +84,7 @@ class EditFarmgoodForm extends Component {
     */
 
     var thisWeek = this.state.theWeek
-    //var oldDays = this.props.location.state.farmgood.attributes.daysAvailable.filter(day => {
-    var oldDays = this.props.location.state.farmgood.relationships.days.data.filter(day => {
+    var oldDays = this.props.location.farmGood.relationships.days.data.filter(day => {
     //debugger 
         for (let i = 0; i< thisWeek.length; i++) {
             if (day.name === thisWeek[i][0]) {
@@ -168,13 +168,14 @@ class EditFarmgoodForm extends Component {
     const { name, farmer, inventory, price, category, id } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (
       <div className="formFarmgood">
+        <FarmGoodCard farmGood={this.props.location.farmGood}/>
         Edit a Farmgood...
         <form onSubmit={this.handleEditSubmit.bind(this)}>
             <div>
             <label htmlFor="farmgood_id" />
             <input type="hidden" 
-                    name={this.props.location.state.farmgood.id}
-                    value={this.props.location.state.farmgood.id}
+                    name={this.props.location.farmGood.id}
+                    value={this.props.location.farmGood.id}
                     ref={(input) => { this.actionInput = input }} 
             />
             <label htmlFor="farmgood_name">Name of Farm Good:</label>
@@ -191,7 +192,7 @@ class EditFarmgoodForm extends Component {
             type="number"
             onChange={this.handleEditChange.bind(this)}
             name="farmer"
-            value={this.props.location.state.farmgood.attributes.farmer.id}
+            value={this.props.location.farmGood.attributes.farmer.id}
             />
             <br />
           <label htmlFor="farmgood_inventory">Quantity available:</label>
