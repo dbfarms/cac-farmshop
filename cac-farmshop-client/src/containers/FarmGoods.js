@@ -48,12 +48,14 @@ class FarmGoods extends Component {
     if (this.props.farmgood === undefined ){
       this.props.getFarmGoods()
     }
+    if (this.state.farmGoods_array === undefined){
+      this.props.getFarmGoods()
+    }
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
       farmGoods_array: nextProps.farmGoods.data
-      //days_array: nextProps.days.data
     })
   }
 
@@ -83,10 +85,6 @@ class FarmGoods extends Component {
       isEditing: false,
       showKey: 'show all',
     })
-  }
-
-  handleSubmit(){
-    this.props.history.push('/farm-goods')
   }
 
   handleShowChange = showKey => this.setState({ showKey: showKey })
@@ -136,7 +134,7 @@ class FarmGoods extends Component {
             farmgood={this.state.farmgood}
             daysAvailable={this.state.checkBoxDaysAvailable} //unclear we're using this here... 
             days={this.state.days}
-            onSubmit={this.handleSubmit}
+            changeShow={this.handleShowChange}
           />
             </div>
       }

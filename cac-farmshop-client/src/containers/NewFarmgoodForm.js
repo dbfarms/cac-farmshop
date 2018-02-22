@@ -97,7 +97,7 @@ class NewFarmgoodForm extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     this.props.createFarmgood(this.props.FarmgoodFormData, this.props.history);
-    //this.props.history.push('/farm-goods')
+    this.props.changeShow('show all')
   }
 
   changeCategory = event => {

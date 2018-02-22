@@ -11,6 +11,8 @@ import EditFarmGoodCard from '../components/EditFarmGoodCard';
 import CheckBox from '../components/common/CheckBox'
 import { Route } from 'react-router-dom'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import deleteFarmgood from './deleteFarmgood'
+import { deleteFarmGoods } from '../actions/farmGoods';
 
 class EditFarmgoodForm extends Component {
 // the state is added for days available 
@@ -128,7 +130,6 @@ class EditFarmgoodForm extends Component {
       })
       this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
     }
-    //event.target.ownerDocument.activeElement.attributes[1].ownerElement.labels["0"].innerText
   }
 
    
@@ -156,12 +157,17 @@ class EditFarmgoodForm extends Component {
 
   handleEditSubmit = event => {
     event.preventDefault();
-    //this.props.isEditing = false
-    //this.props.history.push('/farm-goods')
     this.props.callToEditFarmgood(this.props.FarmgoodFormData, this.props.history)
-    
   }
 
+  handleDelete(farmGood){
+    this.props.deleteFarmGoods(farmGood);
+    alert('deleting')
+    this.setState({
+      isEditing: false,
+      showKey: 'show all',
+    })
+  }
   
   render() {
     //<EditFarmGoodCard farmGood={this.props.location.farmGood}/> //THIS MIGHT REPLACE CURRENTLY USED FARMGOODCARD ONE DAY I DUNNO
@@ -234,6 +240,7 @@ class EditFarmgoodForm extends Component {
             {boxes}
             <button type="submit">Edit Farmgood</button>
         </form>
+        <button name="remove item" onClick={() => this.handleDelete(this.state.farmgood) }>remove item</button> 
        
       </div>
     )
@@ -258,5 +265,6 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, {
   updateEditedFarmgoodFormData,
   callToEditFarmgood,
+  deleteFarmgood,
   //updateFarmgoodFormData,
 })(EditFarmgoodForm);
