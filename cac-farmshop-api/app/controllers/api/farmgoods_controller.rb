@@ -45,7 +45,7 @@ class Api::FarmgoodsController < ApplicationController
         #byebug
         @farmgood.category = Category.find_by(title: category_name)
         #@farmgood.farmer = Farmer.find(farmerID)
-        byebug
+        #byebug
         @farmgood.update(farmgood_params)
         if @farmgood.update(farmgood_params)
             render json: @farmgood

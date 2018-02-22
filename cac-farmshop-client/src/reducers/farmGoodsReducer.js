@@ -4,10 +4,14 @@ import { browserHistory } from 'react-router-dom';
 export default (state = [], action) => {
   switch(action.type) {
     case 'UPDATE_FARMGOOD_SUCCESS':
+    //debugger
       const editedFarmgood = Object.assign({}, action.farmGood)
-      const editState = [...state.farmGoods.filter(farmgood => farmgood.id !== action.farmGood.id)]
+      const editState = [...state.data.filter(farmgood => farmgood.id !== action.farmGood.data.id)]
       editState.push(editedFarmgood)
-      return editState 
+      debugger 
+      return (
+        editState 
+      );
       /*
       [
         ...state.farmGoods.filter(farmgood => farmgood.id !== action.farmGood.id), 
