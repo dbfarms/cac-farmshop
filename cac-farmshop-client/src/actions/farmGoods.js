@@ -3,18 +3,14 @@ import { resetFarmGoodForm } from './FarmgoodForm';
 
 let header = new Headers({
   'Access-Control-Allow-Origin':'',
-  'Content-Type': 'multipart/form-data',
-  'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
+  'Content-Type': 'multipart/form-data'
 });
 
-
-/*
 let sentData={
     method: 'GET',
     mode: 'cors',
     header: header
 };
-*/
 
 // ** action creators **
 
@@ -53,13 +49,14 @@ const deletingFarmgood = farmGood => {
 export const getFarmGoods = () => {
   return dispatch => {
     return fetch('http://localhost:3000/api/farmgoods', header)
+   // fetch('http://localhost:3000/api/days', header) ///
       .then(response => response.json())
       .then(farmGoods => dispatch(setFarmGoods(farmGoods)))
       .catch(error => console.log(error));
   }
 }
 
-export const createFarmgood = farmGood => {
+export const createFarmgood = (farmGood, history) => {
   return dispatch => {
     return fetch('http://localhost:3000/api/farmgoods', {
       headers: {
@@ -75,7 +72,8 @@ export const createFarmgood = farmGood => {
     .then(farmGood => {
       dispatch(resetFarmGoodForm())
       dispatch(addFarmGoods(farmGood));
-      //this.props.history.push('/farm-goods')
+      debugger 
+        history.push('/farm-goods')
     })
     .catch(error => console.log(error))
   }

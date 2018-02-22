@@ -18,9 +18,7 @@ export default (state = [], action) => {
     case 'GET_FARMGOOD_SUCCESS':
       return action.farmGoods
     case 'CREATE_FARMGOOD_SUCCESS':
-    //debugger 
     const newState1 = Object.assign([], state)
-    //debugger
       return (
         newState1.data.concat(action.farmGood.data)
       )
@@ -29,7 +27,11 @@ export default (state = [], action) => {
         const indexOfFarmgoodToDelete = state.data.findIndex(farmGood => {
         return farmGood.id == action.farmGood.id
         })
-        newState.splice(indexOfFarmgoodToDelete, 1)
+        //debugger 
+        if (indexOfFarmgoodToDelete > -1) {
+        newState.data.splice(indexOfFarmgoodToDelete, 1)
+        }
+        //debugger 
         return (
           newState
         );

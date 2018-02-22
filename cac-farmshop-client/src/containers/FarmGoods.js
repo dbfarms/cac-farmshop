@@ -14,6 +14,7 @@ import './FarmGoods.css';
 class FarmGoods extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showKey: 'show all',
       showDay: '',
@@ -39,25 +40,8 @@ class FarmGoods extends Component {
 //      daysAvailable: this.props.farmgood.attributes.daysAvailable,
       checkBoxDaysAvailable: this.props.checkBoxDaysAvailable
     };
-    //this.updateFarmgoodState = this.updateFarmgoodState.bind(this);
-    //this.updateFarmgoodDaysAvailable = this.updateFarmgoodDaysAvailable.bind(this);
-    //this.saveFarmgood - this.saveFarmgood.bind(this);
-  }
-
-  toggleEdit(){
-    this.setState({isEditing: !this.state.isEditing})
-  }
-
-  componentWillMount(){
-    this.props.getFarmGoods()
     
-    //WHEN I PUT ANOTHER GET REQUEST HERE IT BREAKS THE PROGRAM. BUT WHY?
   }
-  
-  //componentWillMount(){
-  //  this.props.getDays()
-    //SEE ABOVE COMMENT ABOUT HAVING TO SEPARATE OUT THESE REQUESTS
-  //}
 
   componentWillReceiveProps(nextProps){
     this.setState({
@@ -65,19 +49,10 @@ class FarmGoods extends Component {
       //days_array: nextProps.days.data
     })
   }
-  
-  //SEE BELOW FOR DAYS AVAILABLE, TO BE ADDED LATER
-  /*
-  componentWillReceiveProps(nextProps) {
-    //debugger 
-    if (this.props.farmgood.id != nextProps.farmgood.id) {
-      this.setState({farmgood: nextProps.farmgood});
-    }
-    //if (this.props.checkBoxDaysAvailable.length < nextProps.checkBoxHobbies.length) {
-    //  this.setState({farmgoodDaysAvailable: nextProps.farmgoodDaysAvailable, checkBoxDaysAvailable: nextProps.checkBoxDaysAvailable});
-    //})
+
+  toggleEdit(){
+    this.setState({isEditing: !this.state.isEditing})
   }
-  */
 
   handleIsEditing = farmGood => this.setState(
     {
@@ -86,17 +61,15 @@ class FarmGoods extends Component {
     })
 
   handleDelete(farmGood){
-    //TAKES A SECOND TO REFRESH PAGE.... HOW TO SPEED UP?
     this.props.deleteFarmGoods(farmGood);
     alert('deleting')
-    //DOESN'T SHOW ITEM IS DELETED UNTIL AFTER REFRESH.. MAYBE MAKE EDIT ITS OWN PAGE?
     this.setState({
       isEditing: false,
+      showKey: 'show all',
     })
   }
 
   handleSubmit(){
-    this.props.getFarmGoods();
     this.props.history.push('/farm-goods')
   }
 
@@ -105,6 +78,7 @@ class FarmGoods extends Component {
   handleCategory = showCategory => this.setState({ showCategory: showCategory })
 
   render() {
+    //debugger
     var objectToArrayDays = []
     var thisFilter = []
     return (
@@ -189,7 +163,7 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getFarmGoods, getDays, deleteFarmGoods })(FarmGoods); // 
+export default connect(mapStateToProps, { getFarmGoods, deleteFarmGoods })(FarmGoods); // 
 
 /*
 
