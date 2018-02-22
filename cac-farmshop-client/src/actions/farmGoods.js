@@ -81,7 +81,7 @@ export const createFarmgood = (farmGood, history) => {
 
 export const callToEditFarmgood = (farmGood) => {
   return dispatch => {
-    return fetch(`http://localhost:3000/api/farmgoods/${farmGood.farmer}`, {
+    return fetch(`http://localhost:3000/api/farmgoods/${farmGood.id}`, {
       headers: {
         'Access-Control-Allow-Origin':'',
         'Content-Type': 'application/json'

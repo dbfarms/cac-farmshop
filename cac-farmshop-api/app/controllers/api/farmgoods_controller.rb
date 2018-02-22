@@ -1,6 +1,6 @@
 class Api::FarmgoodsController < ApplicationController
     #before_action :authenticate_user!
-    before_action :set_farmgood, only: [:show, :edit, :destroy]
+    before_action :set_farmgood, only: [:edit, :destroy]
 
     def index
         render json: Farmgood.all
@@ -28,13 +28,14 @@ class Api::FarmgoodsController < ApplicationController
     end
 
     def show
+        @farmgood = Farmgood.find(params["id"])
         render json: @farmgood #, each_serializer: FarmgoodSerializer
     end
 
     def update
         #byebug
         set_farmgood 
-        farmerID = params["farmGood"]["farmer"].to_i
+        #farmerID = params["farmGood"]["farmer"].to_i
         category_name = params["farmGood"]["Category"]
         @farmgood.days = []
         #byebug
@@ -43,8 +44,8 @@ class Api::FarmgoodsController < ApplicationController
         end 
         #byebug
         @farmgood.category = Category.find_by(title: category_name)
-        @farmgood.farmer = Farmer.find(farmerID)
-        #byebug
+        #@farmgood.farmer = Farmer.find(farmerID)
+        byebug
         @farmgood.update(farmgood_params)
         if @farmgood.update(farmgood_params)
             render json: @farmgood

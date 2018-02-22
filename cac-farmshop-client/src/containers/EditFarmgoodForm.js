@@ -144,7 +144,17 @@ class EditFarmgoodForm extends Component {
   */
    
   handleEditChange = event => {
-      
+
+    const { name, value } = event.target;
+    const id = this.props.farmgood.id 
+    const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
+      [name]: value, 
+      id: id 
+    })
+    this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
+
+
+    /*
     const { name, value } = event.target;
     //debugger
     this.setState({
@@ -152,10 +162,6 @@ class EditFarmgoodForm extends Component {
     })
     //debugger 
     
-    /* DOESN'T WORK BUT WHY?
-    this.setState =({
-      name: value,
-    })
     */
   }
 
@@ -186,8 +192,8 @@ class EditFarmgoodForm extends Component {
             <input
                 type="text"
                 onChange={this.handleEditChange.bind(this)}
-                name="name1"
-                value={this.state.name1}
+                name="name"
+                value={name}
             />
             </div>
             {/* eventually the id will only be available for admin users to change things for farmers*/}
@@ -204,7 +210,7 @@ class EditFarmgoodForm extends Component {
             type="number"
             onChange={this.handleEditChange}
             name="inventory"
-            value={this.state.inventory}
+            value={inventory}
           />
           <br />
           <label htmlFor="farmgood_price">Price:</label>
@@ -212,7 +218,7 @@ class EditFarmgoodForm extends Component {
             type="number"
             onChange={this.handleEditChange}
             name="price"
-            value={this.state.price}
+            value={price}
           />
           <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
