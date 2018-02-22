@@ -9,6 +9,7 @@ import NewFarmgoodForm from './NewFarmgoodForm';
 import EditFarmgoodForm from './EditFarmgoodForm';
 import FarmgoodNav from '../components/farmgoodNav'
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import './FarmGoods.css';
 
 class FarmGoods extends Component {
@@ -60,11 +61,20 @@ class FarmGoods extends Component {
     this.setState({isEditing: !this.state.isEditing})
   }
 
-  handleIsEditing = farmGood => this.setState(
+  handleIsEditing = farmGood => {
+    this.props.history.push({
+      pathname: `/farm-goods/${farmGood.id}`,
+      farmGood: { farmGood },
+    })
+  }
+  
+  /*
+  this.setState(
     {
       farmgood: farmGood,
       isEditing: true,
     })
+  */
 
   handleDelete(farmGood){
     this.props.deleteFarmGoods(farmGood);

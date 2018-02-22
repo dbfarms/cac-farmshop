@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndexRoute, Route } from 'react-router-dom';
+import { IndexRoute, Route, Link } from 'react-router-dom';
 
 const FarmGoodsCard = ({ farmGood, isEditing }) =>
   //FUNCTION WILL DEPEND ON HOW USER IS SIGNED IN, I.E. CUSTOMER OR FARMER OR ADMIN
@@ -15,12 +15,13 @@ const FarmGoodsCard = ({ farmGood, isEditing }) =>
       {farmGood.attributes.inventory <= 0 &&
         <p>No longer available. Check back soon</p>
       }
+      
   </button>
 
 export default FarmGoodsCard
 
 /*
-
+<Link to={`/farm-goods/${farmGood.id}`}>{farmGood.name}</Link>
 {if ({farmGood.attributes.inventory > 0 }) {
       <p>Available: {farmGood.attributes.inventory}</p>
       } else {

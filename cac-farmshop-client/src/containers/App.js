@@ -12,6 +12,7 @@ import Carts from './carts'
 import NewFarmgoodForm from './NewFarmgoodForm';
 import LogInPage from '../components/LogInPage';
 import SignUpPage from '../components/SignUp';
+import FarmGoodCard from '../components/farmGoodCard'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
@@ -59,6 +60,7 @@ class App extends Component {
           <Route exact path="/" render={() => <div>Home For Now</div>} />
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmGoods} />
+          <Route path ="/farm-goods/:id" component={FarmGoodCard} />
           <Route exact path="/farm-goods/new" component={NewFarmgoodForm} />
           <Route exact path="/cart" component={Carts} />
           <Route path="*" render={() => <div>Page Not Found</div>} />
@@ -71,11 +73,8 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  //console.log(state)
-  //const stateDays = Object.assign([], state.days)
   return ({
       farmGoods: state.farmGoods,
-      days: state.days 
   })
 }
 
