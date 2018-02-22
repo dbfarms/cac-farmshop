@@ -72,8 +72,8 @@ export const createFarmgood = (farmGood, history) => {
     .then(farmGood => {
       dispatch(resetFarmGoodForm())
       dispatch(addFarmGoods(farmGood));
-      debugger 
-        history.push('/farm-goods')
+      //debugger 
+      history.push('/farm-goods')
     })
     .catch(error => console.log(error))
   }

@@ -43,6 +43,12 @@ class FarmGoods extends Component {
     
   }
 
+  componentWillMount(){
+    if (this.props.farmgood === undefined ){
+      this.props.getFarmGoods()
+    }
+  }
+
   componentWillReceiveProps(nextProps){
     this.setState({
       farmGoods_array: nextProps.farmGoods.data

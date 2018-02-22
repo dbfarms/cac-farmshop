@@ -34,9 +34,10 @@ class EditFarmgoodForm extends Component {
         //value: "Category",
         category: 'Category',
         days:"daysAvailable", //THIS IS FOR RAILS PARAMS
-        name: props.farmgood.attributes.name, 
+        name1: props.farmgood.attributes.name, 
         inventory: props.farmgood.attributes.inventory,
         price: props.farmgood.attributes.price, 
+        editedCategory: props.farmgood.attributes.category.title
       }
   }
 
@@ -127,10 +128,23 @@ class EditFarmgoodForm extends Component {
     //event.target.ownerDocument.activeElement.attributes[1].ownerElement.labels["0"].innerText
   }
 
-
+ /*   
+  componentWillReceiveProps(nextProps) {
+    debugger 
+    const { id, searchTerm } = nextProps.search   
+    if(id && this.props.editing !== nextProps.editing) {
+        this.setState({
+          id: id,
+          searchTerm: searchTerm 
+        })
+    }
+  }
+  */
+   
   handleEditChange = event => {
-      //debugger
+      
     const { name, value } = event.target;
+    //debugger
     this.setState({
       name: value
     })
@@ -175,14 +189,14 @@ class EditFarmgoodForm extends Component {
                 type="text"
                 onChange={this.handleEditChange.bind(this)}
                 name="name"
-                value={this.state.name}
+                value={this.state.name1}
             />
             </div>
             {/* eventually the id will only be available for admin users to change things for farmers*/}
             <label htmlFor="farmgood_quantity">Farmer for now (but eventually quantity)":</label>
             <input
             type="number"
-            onChange={this.handleEditChange}
+            onChange={this.handleEditChange.bind(this)}
             name="farmer"
             value={this.props.farmgood.attributes.farmer.id}
             />
@@ -204,7 +218,7 @@ class EditFarmgoodForm extends Component {
           />
           <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
-            {this.state.category}
+            {this.state.editedCategory}
             </DropdownToggle>
             <DropdownMenu value="category" >
                 <DropdownItem header>Category</DropdownItem>
