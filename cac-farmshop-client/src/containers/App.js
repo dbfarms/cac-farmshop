@@ -10,6 +10,7 @@ import FarmerShow from './FarmerShow';
 import { getFarmGoods } from '../actions/farmGoods';
 import Carts from './carts'
 import NewFarmgoodForm from './NewFarmgoodForm';
+import EditFarmgoodForm from './EditFarmgoodForm';
 import LogInPage from '../components/LogInPage';
 import SignUpPage from '../components/SignUp';
 import FarmGoodCard from '../components/farmGoodCard'
@@ -60,8 +61,9 @@ class App extends Component {
           <Route exact path="/" render={() => <div>Home For Now</div>} />
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmGoods} />
-          <Route path ="/farm-goods/:id" component={FarmGoodCard} />
           <Route exact path="/farm-goods/new" component={NewFarmgoodForm} />
+          <Route exact path="/farm-goods/edit" component={EditFarmgoodForm} />
+          <Route path ="/farm-goods/:id" component={FarmGoodCard} />
           <Route exact path="/cart" component={Carts} />
           <Route path="*" render={() => <div>Page Not Found</div>} />
         </div>

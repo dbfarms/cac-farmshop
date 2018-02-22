@@ -1,5 +1,7 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router'
+//import { Redirect } from 'react-router'
+import EditFarmgoodForm from '../containers/EditFarmgoodForm';
+import { Redirect, Link } from 'react-router-dom';
 
 const FarmGoodCard = (props) =>
   
@@ -19,6 +21,7 @@ const FarmGoodCard = (props) =>
   {props.location.farmGood.farmGood.attributes <= 0 &&
     <p>No longer available. Check back soon</p>
   }
+    <Link to={"/farm-goods/edit"}> edit farmgood </Link>
   </div>
 }
 </div>
@@ -27,6 +30,11 @@ const FarmGoodCard = (props) =>
 export default FarmGoodCard
 
 /*
+
+<button onClick={() => {
+    <Link to={"/farm-goods/edit"}/>
+    }}> edit farmgood
+  </button>
  <div key={farmGood.id} className="FarmGoodsCard" >
       <h4>{farmGood.name}</h4>
       <img className="farmGoodImage" src={farmGood.img_url} alt={farmGood.user_id} />
