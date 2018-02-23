@@ -19,7 +19,7 @@ class Api::FarmgoodsController < ApplicationController
         
         farmgood.category = Category.find_by(title: category_name)
         farmgood.farmer = Farmer.find(farmerID)
-        #byebug 
+        byebug 
         if farmgood.save
             render json: farmgood
         else
@@ -36,7 +36,7 @@ class Api::FarmgoodsController < ApplicationController
         #byebug
         set_farmgood 
         #farmerID = params["farmGood"]["farmer"].to_i
-        category_name = params["farmGood"]["Category"]
+        category_name = params["farmGood"]["category"]
         @farmgood.days = []
         #byebug
         params["farmGood"]["daysAvailable"].each do |day|
