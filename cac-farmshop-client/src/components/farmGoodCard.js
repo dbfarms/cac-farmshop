@@ -9,41 +9,50 @@ class FarmGoodCard extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+  }
 
-    }
+  daysAvailable = () => {
+
+    const orderedDays = this.props.location.farmGood.relationships.days.data.sort().reverse()
+
+    return orderedDays.map(day=> {
+      return (
+        <li>{day.name}</li>
+      )
+    })
   }
 
 //const FarmGoodCard = (props) =>
-render() {
-return (
-<div className="FarmGoodsCard" >
+  render() {
+    const displayDays = this.daysAvailable();
+    return (
+      <div className="FarmGoodsCard" >
 
-{//props.location.farmGood !== undefined &&
-  <div>
-  <h4>{this.props.location.farmGood.attributes.name}</h4>
-  <img className="farmGoodImage" src={this.props.location.farmGood.attributes.img_url} alt={this.props.location.farmGood.id} />
-  { this.props.location.farmGood.attributes.inventory > 0 &&
-  <p>Available: {this.props.location.farmGood.attributes.inventory} at ${this.props.location.farmGood.attributes.price} each</p>
+      {//props.location.farmGood !== undefined &&
+        <div>
+        <h4>{this.props.location.farmGood.attributes.name}</h4>
+        <img className="farmGoodImage" src={this.props.location.farmGood.attributes.img_url} alt={this.props.location.farmGood.id} />
+        { this.props.location.farmGood.attributes.inventory > 0 &&
+        <p>Available: {this.props.location.farmGood.attributes.inventory} at ${this.props.location.farmGood.attributes.price} each</p>
+        }
+
+        {this.props.location.farmGood.attributes <= 0 &&
+          <p>No longer available. Check back soon</p>
+        }
+        <h3>Days Available</h3>
+        <ul>{displayDays}</ul>
+        <br />
+
+        <Link to={{
+            pathname: `/farm-goods/${this.props.location.farmGood.id}/edit`,
+            farmGood: this.props.location.farmGood
+        }}> edit farmgood </Link>
+
+        </div>
+      }
+      </div>
+    )
   }
-
-  {this.props.location.farmGood.attributes <= 0 &&
-    <p>No longer available. Check back soon</p>
-  }
-
-  <Link to={{
-      pathname: `/farm-goods/${this.props.location.farmGood.id}/edit`,
-      farmGood: this.props.location.farmGood
-  }}> edit farmgood </Link>
-
-
-
-  </div>
-
-}
-
-</div>)}
- 
 }
  
  export default FarmGoodCard
