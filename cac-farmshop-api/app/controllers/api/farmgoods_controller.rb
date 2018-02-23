@@ -50,6 +50,7 @@ class Api::FarmgoodsController < ApplicationController
         if @farmgood.update(farmgood_params)
             render json: @farmgood
         else
+            #byebug 
             render json: { message: @farmgood.errors }, status: 400
         end
     end

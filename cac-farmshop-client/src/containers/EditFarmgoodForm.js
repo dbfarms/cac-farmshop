@@ -12,13 +12,15 @@ import CheckBox from '../components/common/CheckBox'
 import { Route } from 'react-router-dom'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { deleteFarmGoods } from '../actions/farmGoods';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class EditFarmgoodForm extends Component {
 // the state is added for days available 
   
   constructor(props) {
     super(props)
+
+    //debugger  -- possible place to catch problem
 
     this.changeCategory = this.changeCategory.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -34,13 +36,15 @@ class EditFarmgoodForm extends Component {
         ],
         days_array: [],
         dropdownOpen: false,
-        //value: "Category",
-        category: 'Category',
+        category: 'category',
         days:"daysAvailable", //THIS IS FOR RAILS PARAMS
-        name1: props.location.farmGood.attributes.name, 
-        inventory: props.location.farmGood.attributes.inventory,
-        price: props.location.farmGood.attributes.price, 
-        editedCategory: props.location.farmGood.attributes.category.title
+        initialFarmgood: {
+          id: props.location.farmGood.id,
+          name: props.location.farmGood.attributes.name, 
+          inventory: props.location.farmGood.attributes.inventory,
+          price: props.location.farmGood.attributes.price, 
+          category: props.location.farmGood.attributes.category.title
+        }
       }
   }
 
@@ -51,7 +55,10 @@ class EditFarmgoodForm extends Component {
   }
 
   componentWillMount = () => {
+    //debugger 
     this.selectedCheckboxes = new Set();
+    this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
+    
   }
 
   /*
@@ -67,7 +74,9 @@ class EditFarmgoodForm extends Component {
   changeCategory = event => {
     //debugger 
     this.setState({
-      editedCategory: event
+      initialFarmgood: {
+        category: event
+      }
       //value: event
     })
     const name = this.state.category 
@@ -94,7 +103,7 @@ class EditFarmgoodForm extends Component {
             }
         }
     })
-   
+   //debugger 
     return thisWeek.map(day => {
       return (
           <CheckBox 
@@ -136,10 +145,10 @@ class EditFarmgoodForm extends Component {
   handleEditChange = event => {
 
     const { name, value } = event.target;
-    const id = this.props.location.farmGood.id
+    //const id = this.props.location.farmGood.id
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-      [name]: value, 
-      id: id 
+      [name]: value //, 
+      //id: id 
     })
     this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
 
@@ -157,6 +166,7 @@ class EditFarmgoodForm extends Component {
 
   handleEditSubmit = event => {
     event.preventDefault();
+    
     this.props.callToEditFarmgood(this.props.FarmgoodFormData, this.props.history)
   }
 
@@ -220,7 +230,7 @@ class EditFarmgoodForm extends Component {
           />
           <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
-            {this.state.editedCategory}
+            {category}
             </DropdownToggle>
             <DropdownMenu value="category" >
                 <DropdownItem header>Category</DropdownItem>
