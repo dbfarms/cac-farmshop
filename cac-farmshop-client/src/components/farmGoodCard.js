@@ -12,9 +12,13 @@ class FarmGoodCard extends Component {
 
   daysAvailable = () => {
 
-    const orderedDays = this.props.location.farmGood.relationships.days.data.sort().reverse()
+    const days = this.props.location.farmGood.relationships.days.data
 
-    return orderedDays.map(day=> {
+    const daysArray = days.sort(function(a, b) {
+      return a.id - b.id;
+    });
+
+    return daysArray.map(day=> {
       return (
         <li>{day.name}</li>
       )
