@@ -111,7 +111,7 @@ class FarmGoods extends Component {
               }
             })
             }
-             {thisFilter.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+             {thisFilter.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing} />)}
           </div>
       }
       {this.state.showKey === "category"  &&

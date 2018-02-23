@@ -9,8 +9,6 @@ class FarmGoodCard extends Component {
   constructor(props) {
     super(props);
 
-    debugger 
-
     this.state = {
 
     }
@@ -33,16 +31,12 @@ return (
     <p>No longer available. Check back soon</p>
   }
 
-  
+  <Link to={{
+      pathname: `/farm-goods/${this.props.location.farmGood.id}/edit`,
+      farmGood: this.props.location.farmGood
+  }}> edit farmgood </Link>
 
 
-  <button onClick={() => {
-
-  }}>Like?</button>
-
-  <button onClick={() => {
-
-}}>Dislike?</button>
 
   </div>
 
