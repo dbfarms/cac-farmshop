@@ -127,32 +127,6 @@ class FarmGoods extends Component {
              {thisFilter.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
       }
-      {this.state.showKey === "new"  &&
-          <div>
-            <h1>New Farm Good</h1>
-            <NewFarmgoodForm 
-            farmgood={this.state.farmgood}
-            daysAvailable={this.state.checkBoxDaysAvailable} //unclear we're using this here... 
-            days={this.state.days}
-            changeShow={this.handleShowChange}
-          />
-            </div>
-      }
-      {this.state.isEditing === true &&
-          <div>
-            <h1>edit farmgood</h1>
-            <EditFarmgoodForm
-              farmgood={this.state.farmgood} 
-              daysAvailable={this.state.farmgood.relationships.days.data}
-              onSave={this.saveFarmgood}
-              onChange={this.updateFarmgoodState}
-              isEditing={this.state.isEditing}
-              days={this.state.days}
-              />
-            <FarmGoodCard farmGood={this.state.farmgood.attributes}/>
-            <button name="cancel edit" onClick={() => this.setState({isEditing: false})}>cancel edit</button>
-            <button name="remove item" onClick={() => this.handleDelete(this.state.farmgood) }>remove item</button> 
-          </div>}
       {this.state.showKey === "show all" && 
         <div>
            <div className="Farm-Goods-Container">
@@ -181,7 +155,32 @@ export default connect(mapStateToProps, { getFarmGoods, deleteFarmGoods })(FarmG
 
 /*
 
-
+{this.state.showKey === "new"  &&
+          <div>
+            <h1>New Farm Good</h1>
+            <NewFarmgoodForm 
+            farmgood={this.state.farmgood}
+            daysAvailable={this.state.checkBoxDaysAvailable} //unclear we're using this here... 
+            days={this.state.days}
+            changeShow={this.handleShowChange}
+          />
+            </div>
+      }
+      {this.state.isEditing === true &&
+          <div>
+            <h1>edit farmgood</h1>
+            <EditFarmgoodForm
+              farmgood={this.state.farmgood} 
+              daysAvailable={this.state.farmgood.relationships.days.data}
+              onSave={this.saveFarmgood}
+              onChange={this.updateFarmgoodState}
+              isEditing={this.state.isEditing}
+              days={this.state.days}
+              />
+            <FarmGoodCard farmGood={this.state.farmgood.attributes}/>
+            <button name="cancel edit" onClick={() => this.setState({isEditing: false})}>cancel edit</button>
+            <button name="remove item" onClick={() => this.handleDelete(this.state.farmgood) }>remove item</button> 
+          </div>}
 
 --
 function daysAvailableCheckBoxes(daysAvailable, farmgood=null) {  

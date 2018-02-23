@@ -35,7 +35,6 @@ class NewFarmgoodForm extends Component {
       value: "Category",
       days_array: [],
       days:"daysAvailable" //THIS IS FOR RAILS PARAMS
-      
     }
   }
 
@@ -86,13 +85,12 @@ class NewFarmgoodForm extends Component {
   }
 
   handleOnChange = event => {
-      //debugger
     const { name, value } = event.target;
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
       [name]: value
     })
     this.props.updateFarmgoodFormData(currentFarmgoodFormData)
-  } //not necessary for this to be redux
+  } 
 
   handleOnSubmit = event => {
     event.preventDefault();
@@ -192,7 +190,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   updateFarmgoodFormData,
   createFarmgood,
-  //getFarmGoods,
 })(NewFarmgoodForm);
 
 /*

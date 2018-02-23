@@ -1,6 +1,7 @@
 import React from 'react'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, NavLink } from 'reactstrap';
 import '../containers/farmgoodNav.css';
+import { Link, Redirect } from 'react-router-dom';
 
 //
 //
@@ -22,6 +23,10 @@ export default class FarmgoodNav extends React.Component {
         this.setState({
             dropdownOpen: !this.state.dropdownOpen,
         });
+    }
+
+    farmgoodNew = () => {
+        this.context.router.push('/new-farm-good');
     }
 
 
@@ -86,7 +91,7 @@ export default class FarmgoodNav extends React.Component {
                     this.props.changeCategory('Eggs')
                     }}>Eggs</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem onClick={() => this.props.changeShow('new')}>New</DropdownItem>
+                <DropdownItem href="/new-farm-good">New</DropdownItem>
             </DropdownMenu>
         </Dropdown>
         )
