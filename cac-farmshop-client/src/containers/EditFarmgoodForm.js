@@ -13,6 +13,7 @@ import { Route } from 'react-router-dom'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import deleteFarmgood from './deleteFarmgood'
 import { deleteFarmGoods } from '../actions/farmGoods';
+import { Redirect, Link } from 'react-router-dom';
 
 class EditFarmgoodForm extends Component {
 // the state is added for days available 
@@ -168,6 +169,10 @@ class EditFarmgoodForm extends Component {
       showKey: 'show all',
     })
   }
+
+  handleCancel = () =>{
+    this.props.history.push('/farm-goods') 
+  }
   
   render() {
     //<EditFarmGoodCard farmGood={this.props.location.farmGood}/> //THIS MIGHT REPLACE CURRENTLY USED FARMGOODCARD ONE DAY I DUNNO
@@ -241,7 +246,7 @@ class EditFarmgoodForm extends Component {
             <button type="submit">Edit Farmgood</button>
         </form>
         <button name="remove item" onClick={() => this.handleDelete(this.state.farmgood) }>remove item</button> 
-       
+        <button name="cancel edit" onClick={() => this.handleCancel() }>cancel edit</button>
       </div>
     )
   }
