@@ -44,7 +44,8 @@ class EditFarmgoodForm extends Component {
           inventory: props.location.farmGood.attributes.inventory,
           price: props.location.farmGood.attributes.price, 
           category: props.location.farmGood.attributes.category.title
-        }
+        },
+        testDays: this.props.location.farmGood.relationships.days.data,
       }
   }
 
@@ -57,19 +58,13 @@ class EditFarmgoodForm extends Component {
   componentWillMount = () => {
     //debugger 
     this.selectedCheckboxes = new Set();
+    this.state.testDays.map(day => {
+      this.selectedCheckboxes.add(day.name)
+    })
+
     this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
     
   }
-
-  /*
-  shouldComponentUpdate = (nextProps, ownProps) => {
-    if (nextProps !== ownProps ) {
-      return true
-    } else {
-      return false 
-    }
-  }
-  //*/
 
   changeCategory = event => {
     //debugger 
@@ -88,21 +83,27 @@ class EditFarmgoodForm extends Component {
   }
 
   makeCheckBoxes() {
-    /*    
-    var newTest = this.props.daysAvailable.filter(day => { 
-      this.selectedCheckboxes.add(day)
-    })
-    */
 
     var thisWeek = this.state.theWeek
     var oldDays = this.props.location.farmGood.relationships.days.data.filter(day => {
-    //debugger 
-        for (let i = 0; i< thisWeek.length; i++) {
-            if (day.name === thisWeek[i][0]) {
-                thisWeek[i][1] = true 
-            }
-        }
+      for (let i = 0; i< thisWeek.length; i++) {
+          if (day.name === thisWeek[i][0]) {
+            thisWeek[i][1] = true 
+          } else {
+            thisWeek[i][1] = false 
+          }
+      }
     })
+    
+
+    /*
+    thisWeek.map(day => { 
+      if (day[1] === true ) {
+        this.selectedCheckBoxes.add(day[0])
+      }
+    })
+    */
+
    //debugger 
     return thisWeek.map(day => {
       return (
@@ -111,7 +112,7 @@ class EditFarmgoodForm extends Component {
             handleChange={this.toggleCheckbox.bind(this)} 
             value={day}
             checkedBoxes={this.selectedCheckboxes}
-            isEditing={this.props.isEditing}
+            isEditing={true} 
             key={day[0]}
           />
         )
@@ -126,6 +127,19 @@ class EditFarmgoodForm extends Component {
       this.setState({
         days_array: this.days_array 
       })
+
+      const indexOfDay = this.state.theWeek.map((day, index) => {
+        if (event[0] === day[0]) {
+          return index 
+        }
+      })
+
+      /*
+      let updatedWeek = this.state.theWeek.slice(); 
+      updatedWeek[indexOfDay] = false ;
+      this.setState({theWeek: updatedWeek});
+      */
+      
       const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
        [this.state.days]: this.days_array
        
@@ -134,6 +148,13 @@ class EditFarmgoodForm extends Component {
     } else {
       this.selectedCheckboxes.add(event[0]);
       this.state.days_array.push(event[0])
+
+      const updatedWeek = this.state.theWeek 
+
+      this.setState({
+        theWeek: updatedWeek 
+      })
+
       const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
         [this.state.days]: this.state.days_array
       })
@@ -182,6 +203,8 @@ class EditFarmgoodForm extends Component {
   
   render() {
     //<EditFarmGoodCard farmGood={this.props.location.farmGood}/> //THIS MIGHT REPLACE CURRENTLY USED FARMGOODCARD ONE DAY I DUNNO
+    
+    
     const boxes = this.makeCheckBoxes();
     const { name, farmer, inventory, price, category, id } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
     return (

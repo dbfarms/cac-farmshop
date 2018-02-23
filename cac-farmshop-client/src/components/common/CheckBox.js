@@ -23,28 +23,18 @@ class CheckBox extends Component {
     const { isChecked } = this.state;
     let checked = this.state.isChecked
 
+    //debugger 
     if (this.props.isEditing === true ) {  
-      if (label[1] === true) {
-        //checked = true 
-        this.props.checkedBoxes.add(label[0])
+      //if (label[1] === true) {
+      //  checked = true 
+        //this.props.checkedBoxes.add(label[0])
+      //}
+      if (this.props.checkedBoxes.has(label[0])) {
+        checked = true 
+      } else {
+        checked = false 
       }
     }
-
-    /*
-    
-    ////
-    this.selectedCheckboxes.forEach(day => {
-      if (day.name === event[0]) {
-        this.selectedCheckboxes.add(event)
-      }
-    })
-    ///
-    this.props.checkedBoxes.forEach(day => {
-        if (label[0] === day.name) {
-          checked = true 
-        }
-      })
-    */
 
     return (
       <div className="checkbox">
