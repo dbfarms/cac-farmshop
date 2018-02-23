@@ -11,7 +11,6 @@ import EditFarmGoodCard from '../components/EditFarmGoodCard';
 import CheckBox from '../components/common/CheckBox'
 import { Route } from 'react-router-dom'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import deleteFarmgood from './deleteFarmgood'
 import { deleteFarmGoods } from '../actions/farmGoods';
 import { Redirect, Link } from 'react-router-dom';
 
@@ -162,12 +161,9 @@ class EditFarmgoodForm extends Component {
   }
 
   handleDelete(farmGood){
-    this.props.deleteFarmGoods(farmGood);
+    this.props.deleteFarmGoods(farmGood, this.props.history);
     alert('deleting')
-    this.setState({
-      isEditing: false,
-      showKey: 'show all',
-    })
+    
   }
 
   handleCancel = () =>{
@@ -245,7 +241,7 @@ class EditFarmgoodForm extends Component {
             {boxes}
             <button type="submit">Edit Farmgood</button>
         </form>
-        <button name="remove item" onClick={() => this.handleDelete(this.state.farmgood) }>remove item</button> 
+        <button name="remove item" onClick={() => this.handleDelete(this.props.location.farmGood) }>remove item</button> 
         <button name="cancel edit" onClick={() => this.handleCancel() }>cancel edit</button>
       </div>
     )
@@ -270,6 +266,6 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, {
   updateEditedFarmgoodFormData,
   callToEditFarmgood,
-  deleteFarmgood,
+  deleteFarmGoods,
   //updateFarmgoodFormData,
 })(EditFarmgoodForm);

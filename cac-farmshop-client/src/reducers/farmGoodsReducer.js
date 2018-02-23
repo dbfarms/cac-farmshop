@@ -24,7 +24,6 @@ export default (state = [], action) => {
         const indexOfFarmgoodToDelete = state.data.findIndex(farmGood => {
         return farmGood.id == action.farmGood.id
         })
-        //debugger 
         if (indexOfFarmgoodToDelete > -1) {
         newState.data.splice(indexOfFarmgoodToDelete, 1)
         }

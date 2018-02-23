@@ -2,7 +2,6 @@ import React, {Component } from 'react';
 //import { Redirect } from 'react-router'
 import EditFarmgoodForm from '../containers/EditFarmgoodForm';
 import { Redirect, Link } from 'react-router-dom';
-import deleteFarmgood from '../containers/deleteFarmgood'
 import { connect } from 'react-redux'
 
 class FarmGoodCard extends Component {

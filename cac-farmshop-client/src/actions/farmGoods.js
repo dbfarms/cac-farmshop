@@ -101,7 +101,7 @@ export const callToEditFarmgood = (farmGood, history) => {
   }
 }
 
-export const deleteFarmGoods = (farmGood) => {
+export const deleteFarmGoods = (farmGood, history) => {
   return dispatch => {
     return fetch(`http://localhost:3000/api/farmgoods/${farmGood.id}`, {
       headers: {
@@ -122,7 +122,8 @@ export const deleteFarmGoods = (farmGood) => {
       console.log(`Deleted ${farmGood.id}`)
       dispatch(resetFarmGoodForm())
       dispatch(deletingFarmgood(farmGood));
-      return
+      history.push('/farm-goods')
+      //return
     }).catch(error => {
       return error;
     });
