@@ -20,8 +20,6 @@ class EditFarmgoodForm extends Component {
   constructor(props) {
     super(props)
 
-    //debugger  -- possible place to catch problem
-
     this.changeCategory = this.changeCategory.bind(this);
     this.toggle = this.toggle.bind(this);
     this.state = {
@@ -43,9 +41,9 @@ class EditFarmgoodForm extends Component {
           name: props.location.farmGood.attributes.name, 
           inventory: props.location.farmGood.attributes.inventory,
           price: props.location.farmGood.attributes.price, 
-          category: props.location.farmGood.attributes.category.title
+          category: props.location.farmGood.attributes.category.title,
+          daysAvailable: this.props.location.farmGood.relationships.days.data
         },
-        testDays: this.props.location.farmGood.relationships.days.data,
       }
   }
 
@@ -58,12 +56,20 @@ class EditFarmgoodForm extends Component {
   componentWillMount = () => {
     //debugger 
     this.selectedCheckboxes = new Set();
-    this.state.testDays.map(day => {
-      this.selectedCheckboxes.add(day.name)
+    let daysA = []
+    this.state.initialFarmgood.daysAvailable.map(day => {
+      this.selectedCheckboxes.add(day.name);
+      daysA.push(day.name)
     })
 
-    this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
     
+    this.setState({
+      days_array: daysA //[...this.state.days_array.concat(day.name)]
+    })
+
+    debugger 
+
+    this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
   }
 
   changeCategory = event => {
@@ -116,7 +122,7 @@ class EditFarmgoodForm extends Component {
             key={day[0]}
           />
         )
-      })
+      }) 
   }
 
   toggleCheckbox = (event) => {
@@ -200,6 +206,7 @@ class EditFarmgoodForm extends Component {
   handleCancel = () =>{
     this.props.history.push('/farm-goods') 
   }
+
   
   render() {
     //<EditFarmGoodCard farmGood={this.props.location.farmGood}/> //THIS MIGHT REPLACE CURRENTLY USED FARMGOODCARD ONE DAY I DUNNO

@@ -33,7 +33,7 @@ class Api::FarmgoodsController < ApplicationController
     end
 
     def update
-        #byebug
+        byebug
         set_farmgood 
         #farmerID = params["farmGood"]["farmer"].to_i
         category_name = params["farmGood"]["category"]
