@@ -67,7 +67,6 @@ class EditFarmgoodForm extends Component {
     //console.log(days_array)
     this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
 
-    debugger 
     const currentFarmgoodFormData = Object.assign({}, this.state.initialFarmgood, {
       days_array: days_array 
      })
@@ -132,7 +131,7 @@ class EditFarmgoodForm extends Component {
     
     if (this.selectedCheckboxes.has(event[0])) {
       this.selectedCheckboxes.delete(event[0]);
-      this.days_array = this.state.initialFarmgood.days_array.filter(day => day !== event[0])
+      this.days_array = this.props.FarmgoodFormData.days_array.filter(day => day !== event[0])
       
       //is the below even necessary?
       this.setState({
@@ -161,15 +160,19 @@ class EditFarmgoodForm extends Component {
       })
       this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
     } else {
+      
       this.selectedCheckboxes.add(event[0]);
+      
 
+      /*
       this.setState({
         initialFarmgood: {
           days_array: this.state.initialFarmgood.daysAvailable.concat(event[0])
         }
       })
+      */
       //this.state.days_array.push(event[0])
-      this.days_array = this.state.initialFarmgood.daysAvailable.concat(event[0])
+      this.days_array = this.props.FarmgoodFormData.days_array.concat(event[0])
       
       /*
       const updatedWeek = this.state.theWeek.daysAvailable.concat(event[0])
