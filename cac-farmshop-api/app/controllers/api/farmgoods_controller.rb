@@ -33,13 +33,12 @@ class Api::FarmgoodsController < ApplicationController
     end
 
     def update
-        byebug
+        #byebug
         set_farmgood 
-        #farmerID = params["farmGood"]["farmer"].to_i
         category_name = params["farmGood"]["category"]
         @farmgood.days = []
         #byebug
-        params["farmGood"]["daysAvailable"].each do |day|
+        params["farmGood"]["days_array"].each do |day|
             @farmgood.days << Day.find_by(name: day)
         end 
         #byebug
