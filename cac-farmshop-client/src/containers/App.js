@@ -85,6 +85,7 @@ export default connect(mapStateToProps, { getFarmGoods })(App); //
 
 /*
 
+
 <Route path="/login" component={LogInPage} />
           <Route exact path="/" render={() => <div>Home For Now</div>} />
           <Route exact path='/farmers' component={FarmersPage} />

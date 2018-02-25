@@ -56,23 +56,13 @@ class EditFarmgoodForm extends Component {
   }
 
   componentWillMount = () => {
-    //debugger
-    let days_array = []
+    //debugger 
     this.selectedCheckboxes = new Set();
     this.state.initialFarmgood.daysAvailable.map(day => {
       this.selectedCheckboxes.add(day.name);
-      days_array.push(day.name)
     })
-    
-    //console.log(days_array)
+
     this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
-
-    debugger 
-    const currentFarmgoodFormData = Object.assign({}, this.state.initialFarmgood, {
-      days_array: days_array 
-     })
-     this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
-
 
   }
 
@@ -132,12 +122,10 @@ class EditFarmgoodForm extends Component {
     
     if (this.selectedCheckboxes.has(event[0])) {
       this.selectedCheckboxes.delete(event[0]);
-      this.days_array = this.state.initialFarmgood.days_array.filter(day => day !== event[0])
-      
-      //is the below even necessary?
+      //this.days_array = this.state.days_array.filter(day => day !== event[0])
       this.setState({
         initialFarmgood: {
-          days_array: this.days_array
+          days_array: this.selectedCheckboxes
         }
       })
 
@@ -156,7 +144,7 @@ class EditFarmgoodForm extends Component {
       const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
        //[this.state.days]: this.days_array
        daysAvailable: this.selectedCheckboxes,
-       days_array: this.days_array 
+       days_array: this.selectedCheckboxes 
        
       })
       this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
@@ -165,23 +153,20 @@ class EditFarmgoodForm extends Component {
 
       this.setState({
         initialFarmgood: {
-          days_array: this.state.initialFarmgood.daysAvailable.concat(event[0])
+          days_array: this.selectedCheckboxes
         }
       })
       //this.state.days_array.push(event[0])
-      this.days_array = this.state.initialFarmgood.daysAvailable.concat(event[0])
-      
-      /*
-      const updatedWeek = this.state.theWeek.daysAvailable.concat(event[0])
+
+      const updatedWeek = this.state.theWeek 
 
       this.setState({
         theWeek: updatedWeek 
       })
-      */
 
       const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
         daysAvailable: this.selectedCheckboxes, //[this.state.days]
-        days_array: this.days_array
+        days_array: this.selectedCheckboxes 
       })
       this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
     }
