@@ -146,14 +146,7 @@ class EditFarmgoodForm extends Component {
         }
       })
 
-      /*
-      let updatedWeek = this.state.theWeek.slice(); 
-      updatedWeek[indexOfDay] = false ;
-      this.setState({theWeek: updatedWeek});
-      */
-      
       const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-       //[this.state.days]: this.days_array
        daysAvailable: this.selectedCheckboxes,
        days_array: this.days_array 
        
@@ -164,24 +157,8 @@ class EditFarmgoodForm extends Component {
       this.selectedCheckboxes.add(event[0]);
       
 
-      /*
-      this.setState({
-        initialFarmgood: {
-          days_array: this.state.initialFarmgood.daysAvailable.concat(event[0])
-        }
-      })
-      */
-      //this.state.days_array.push(event[0])
       this.days_array = this.props.FarmgoodFormData.days_array.concat(event[0])
       
-      /*
-      const updatedWeek = this.state.theWeek.daysAvailable.concat(event[0])
-
-      this.setState({
-        theWeek: updatedWeek 
-      })
-      */
-
       const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
         daysAvailable: this.selectedCheckboxes, //[this.state.days]
         days_array: this.days_array
@@ -218,30 +195,9 @@ class EditFarmgoodForm extends Component {
     this.props.history.push('/farm-goods') 
   }
 
-  setInitialDays = () => {
-    
-    this.setState({
-      days_array: this.selectedCheckboxes,
-      firstDayPush: 1
-    })
-    this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
-
-
-    /*
-      params["farmGood"]["daysAvailable"]
-[<ActionController::Parameters {"id"=>2, "name"=>"Tuesday"} permitted: false>]
-
-    */
-    
-  }
-
   
   render() {
     //<EditFarmGoodCard farmGood={this.props.location.farmGood}/> //THIS MIGHT REPLACE CURRENTLY USED FARMGOODCARD ONE DAY I DUNNO
-    if (this.state.firstDayPush === 0 ) {
-     //this.setInitialDays() 
-    }
-
 
     const boxes = this.makeCheckBoxes();
     const { name, farmer, inventory, price, category, id } = this.props.FarmgoodFormData; //eventually need to add category? anything else?

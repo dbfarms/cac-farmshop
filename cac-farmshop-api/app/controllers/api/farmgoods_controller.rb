@@ -41,15 +41,12 @@ class Api::FarmgoodsController < ApplicationController
         params["farmGood"]["days_array"].each do |day|
             @farmgood.days << Day.find_by(name: day)
         end 
-        #byebug
         @farmgood.category = Category.find_by(title: category_name)
-        #@farmgood.farmer = Farmer.find(farmerID)
         #byebug
         @farmgood.update(farmgood_params)
         if @farmgood.update(farmgood_params)
             render json: @farmgood
         else
-            #byebug 
             render json: { message: @farmgood.errors }, status: 400
         end
     end
