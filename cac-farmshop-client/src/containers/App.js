@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar'
 //difference between react and react, component??
-import { BrowserRouter, Switch, Route, Router } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Router, Redirect } from 'react-router-dom';
 //import { connect } from 'react-redux'
 import './App.css';
 import FarmGoods from './FarmGoods';
@@ -45,13 +45,21 @@ class App extends Component {
     })
   }
 
+  requireAuth(nextState, replace) {  
+    
+    if (!sessionStorage.jwt) {
+      return <Redirect to='/login' />
+      //state: { nextPathname: nextState.location.pathname } //********************** for when you want to go back to this page
+    }
+  }
+  
+
 
   render() {
 
     return (
       <div>
       
-      {this.state.currentUser === null &&
       <BrowserRouter >
         <div className="background-here">
         
@@ -61,14 +69,20 @@ class App extends Component {
           <Route exact path="/" render={() => <div>Home For Now</div>} />
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmGoods} />
-          <Route exact path="/new-farm-good" component={NewFarmgoodForm} />
+          <Route exact path="/new-farm-good" render={() => ( 
+            this.requireAuth() ? (
+              <Redirect to="/login"/>
+            ) : (
+              <NewFarmgoodForm />
+            )
+          )}/>
+            
           <Route exact path="/farm-goods/:id/edit" component={EditFarmgoodForm} />
           <Route exact path ="/farm-goods/:id" component={FarmGoodCard} />
           <Route exact path="/cart" component={Carts} />
           <Route path="*" render={() => <div></div>} />
         </div>
       </BrowserRouter >
-      }
       </div>
     );
   }
@@ -84,54 +98,6 @@ export default connect(mapStateToProps, { getFarmGoods })(App); //
 
 
 /*
-
-
-<Route path="/login" component={LogInPage} />
-          <Route exact path="/" render={() => <div>Home For Now</div>} />
-          <Route exact path='/farmers' component={FarmersPage} />
-          <Route exact path="/farm-goods" component={FarmGoods} />
-          <Route exact path="/farm-goods/new" component={NewFarmgoodForm} />
-          <Route exact path="/cart" component={Carts} />
-          <Route path="*" render={() => <div>Page Not Found</div>} />
-
-
-//Vue.use(axios)
-  
-  /*
-  componentDidMount() {
-    let that = this 
-    axios.get('http://localhost:3000/users/check_for_user',{
-    })
-    .then(function(response){
-      if(response.data.email){
-        that.setState({
-          currentUser: response.data.email
-        })
-      } else {
-        that.setState({
-          currentUser: null
-        })
-      }
-      })
-      .catch(function(error){
-        console.log(error);
-        })
-      }
-
-      updateCurrentUser(email) {
-          this.setState({
-            currentUser: email
-          })
-      }
-
-
-export default (  
-  <Route path="/" component={App}>
-    <IndexRoute component={HomePage} />
-    <Route path="/cats" component={CatsPage} >
-      <Route path="/cats/:id" component={CatPage} />
-    </Route>
-  </Route>
-);
+component={NewFarmgoodForm} 
 
 */
