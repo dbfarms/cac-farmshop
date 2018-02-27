@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react';  
-import { Link, IndexLink } from 'react-router';  
+import { Link, NavLink } from 'react-router';  
 import {connect} from 'react-redux';  
 import {bindActionCreators} from 'redux';  
 import * as sessionActions from '../../actions/sessionActions';
-
+ 
 
 class Header extends React.Component {  
   constructor(props) {
@@ -20,8 +20,8 @@ class Header extends React.Component {
     if (this.props.logged_in) {
       return (
         <nav>
-          <IndexLink to="/" 
-            activeClassName="active">Home</IndexLink>
+          <NavLink to="/" 
+            activeClassName="active">Home</NavLink>
           {" | "}
           <Link to="/farm-goods" activeClassName="active">Farm Goods</Link>
           {" | "}
@@ -34,8 +34,8 @@ class Header extends React.Component {
     } else {
       return (
         <nav>
-          <IndexLink to="/" 
-            activeClassName="active">Home</IndexLink>
+          <NavLink to="/" 
+            activeClassName="active">Homes</NavLink>
           {" | "}
           <Link to="/farm-goods" activeClassName="active">Farmgoods</Link>
           {" | "}

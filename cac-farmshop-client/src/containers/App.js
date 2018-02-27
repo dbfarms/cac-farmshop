@@ -65,13 +65,12 @@ class App extends Component {
       
       <BrowserRouter >
         <div className="background-here">
-        
           <Navbar />
           <Route path="/login" component={LogInPage} />
           <Route path="/signup" component={SignUpPage} />
-          <Route exact path="/" 
-                 component={Authorization(Home, ['admin'])}
-                 render={() => <div>Home For Now</div>} />
+          
+          <Route exact path="/home" 
+                 component={Authorization(Home, ['admin'])}/>
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmGoods} />
           <Route exact path="/new-farm-good" render={() => ( 
@@ -92,6 +91,8 @@ class App extends Component {
     );
   }
 }
+
+//<Route path="/logout" component={LogOut} />
 
 const mapStateToProps = (state) => {
   return ({
