@@ -16,6 +16,9 @@ import SignUpPage from '../components/SignUp';
 import FarmGoodCard from '../components/farmGoodCard'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
+import Authorization from './authorization'
+import Home from './Home'
+
 
 class App extends Component {
   constructor() {
@@ -66,7 +69,9 @@ class App extends Component {
           <Navbar />
           <Route path="/login" component={LogInPage} />
           <Route path="/signup" component={SignUpPage} />
-          <Route exact path="/" render={() => <div>Home For Now</div>} />
+          <Route exact path="/" 
+                 component={Authorization(Home, ['admin'])}
+                 render={() => <div>Home For Now</div>} />
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmGoods} />
           <Route exact path="/new-farm-good" render={() => ( 
