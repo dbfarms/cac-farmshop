@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router';
 import {connect} from 'react-redux';  
 import {bindActionCreators} from 'redux';  
 import * as sessionActions from '../../actions/sessionActions';
- 
+    
 
 class Header extends React.Component {  
   constructor(props) {
@@ -17,6 +17,7 @@ class Header extends React.Component {
   }
 
   render() {
+    <p>test</p>
     if (this.props.logged_in) {
       return (
         <nav>

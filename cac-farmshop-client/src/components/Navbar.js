@@ -30,8 +30,21 @@ const Navbar = () =>
             >
               Cart
           </button>
+          
         </div>
        )} />
     </div>
 
 export default Navbar
+
+/*
+
+<button
+            className="nav-button"
+            onClick={() => { history.push('/signout')}}
+            >
+              Sign Out
+          </button>
+
+
+*/
