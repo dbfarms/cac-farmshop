@@ -58,6 +58,8 @@ class SignUpPage extends React.Component {
             value={this.state.credentials.authorization}
             onChange={this.onChange}/>
 
+            
+
           < input
             type="submit"
             className="btn btn-primary"
