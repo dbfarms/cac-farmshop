@@ -42,12 +42,10 @@ class App extends Component {
   componentWillReceiveProps(nextProps){
     this.setState({
       farmGoods_array: nextProps.farmGoods.data
-      //days_array: nextProps.days.data
     })
   }
 
   requireAuth(nextState, replace) {  
-    
     if (!sessionStorage.jwt) {
       return <Redirect to='/login' />
       //state: { nextPathname: nextState.location.pathname } //********************** for when you want to go back to this page

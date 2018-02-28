@@ -17,7 +17,9 @@ class Header extends React.Component {
   }
 
   render() {
+    
     if (this.props.logged_in) {
+      //debugger 
       return (
         <nav className="background">
           <NavLink to="/" 
@@ -32,6 +34,7 @@ class Header extends React.Component {
         </nav>
       );
     } else {
+      debugger 
       return (
         <nav className="background">
           <NavLink to="/" 

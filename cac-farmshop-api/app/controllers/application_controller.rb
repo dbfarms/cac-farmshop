@@ -1,13 +1,14 @@
 class ApplicationController < ActionController::API
     #respond_to :html, :json
     
-    #before_action :authenticate  #no because only some pages aren't available
+    before_action :authenticate  #no because only some pages aren't available
     
     def logged_in?
       !!current_user
     end
     
     def current_user
+      byebug
       if auth_present?
         user = User.find(auth["user"])
         if user

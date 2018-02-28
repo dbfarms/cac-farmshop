@@ -5,6 +5,7 @@ class Auth
   ALGORITHM = 'HS256'
 
   def self.issue(payload)
+    #byebug
     JWT.encode(
       payload,
       auth_secret,
