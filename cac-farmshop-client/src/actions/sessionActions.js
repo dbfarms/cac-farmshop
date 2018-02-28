@@ -1,5 +1,6 @@
 import * as types from './actionTypes';  
 import sessionApi from '../api/sessionApi';
+import auth from '../auth/authenticator';
 
 export function loginSuccess() {  
   return {type: types.LOG_IN_SUCCESS}
@@ -33,6 +34,6 @@ export function signUpUser(credentials) {
 
 
 export function logOutUser() {  
-    sessionStorage.removeItem('jwt');
+    auth.logOut();
     return {type: types.LOG_OUT}
   }

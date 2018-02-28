@@ -1,6 +1,7 @@
 class SessionApi {  
 
     static login(credentials) {
+      //${process.env.API_HOST} instead of localhost... also below
       const request = new Request('http://localhost:3000/login', {
         method: 'POST',
         headers: new Headers({

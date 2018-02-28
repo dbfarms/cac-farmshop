@@ -1,6 +1,14 @@
 import { resetFarmGoodForm } from './FarmgoodForm';
 //const API_URL = process.env.REACT_APP_API_URL;
 
+  //#####################
+  //EVENTUALLY THIS WILL HAVE TO BE INCLUDED IN ORDER TO ENSURE THE AUTHORIZATION WORKS 
+  
+  //static requestHeaders() {
+  //  return {'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`}
+  //}
+  //##########################
+
 let header = new Headers({
   'Access-Control-Allow-Origin':'',
   'Content-Type': 'multipart/form-data'
