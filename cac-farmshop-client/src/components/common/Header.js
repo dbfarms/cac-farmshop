@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import {connect} from 'react-redux';  
 import {bindActionCreators} from 'redux';  
 import * as sessionActions from '../../actions/sessionActions';
-    
+import './header.css';
 
 class Header extends React.Component {  
   constructor(props) {
@@ -17,10 +17,9 @@ class Header extends React.Component {
   }
 
   render() {
-    <p>test</p>
     if (this.props.logged_in) {
       return (
-        <nav>
+        <nav className="background">
           <NavLink to="/" 
             activeClassName="active">Home</NavLink>
           {" | "}
@@ -34,7 +33,7 @@ class Header extends React.Component {
       );
     } else {
       return (
-        <nav>
+        <nav className="background">
           <NavLink to="/" 
             activeClassName="active">Homes</NavLink>
           {" | "}

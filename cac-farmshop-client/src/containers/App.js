@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar'
-//difference between react and react, component??
 import { BrowserRouter, Switch, Route, Router, Redirect } from 'react-router-dom';
-//import { connect } from 'react-redux'
 import './App.css';
 import FarmGoods from './FarmGoods';
 import FarmersPage from './FarmersPage';
@@ -18,7 +15,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import Authorization from './authorization'
 import Home from './Home'
-import Test from './test'
 import Header from '../components/common/Header'
 
 
@@ -64,10 +60,10 @@ class App extends Component {
 
     return (
       <div>
-      
+     
       <BrowserRouter >
         <div className="background-here">
-          <Navbar />
+          <Header />
           <Route path="/login" component={LogInPage} />
           <Route path="/signup" component={SignUpPage} />
           
@@ -82,7 +78,6 @@ class App extends Component {
               <NewFarmgoodForm />
             )
           )}/>
-          <Route exact path="/test" component={Test} />
           <Route exact path="/farm-goods/:id/edit" component={EditFarmgoodForm} />
           <Route exact path ="/farm-goods/:id" component={FarmGoodCard} />
           <Route exact path="/cart" component={Carts} />
