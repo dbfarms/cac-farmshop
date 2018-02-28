@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';  
-import { Link, NavLink } from 'react-router';  
+import { Link, NavLink } from 'react-router-dom';  
 import {connect} from 'react-redux';  
 import {bindActionCreators} from 'redux';  
 import * as sessionActions from '../../actions/sessionActions';
@@ -51,9 +51,11 @@ class Header extends React.Component {
   }
 }
 
+/*
 Header.propTypes = {  
   actions: PropTypes.object.isRequired
 }
+*/
 
 function mapStateToProps(state, ownProps) {  
   return {logged_in: state.session};

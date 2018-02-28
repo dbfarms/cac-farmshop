@@ -18,6 +18,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import Authorization from './authorization'
 import Home from './Home'
+import Test from './test'
+import Header from '../components/common/Header'
 
 
 class App extends Component {
@@ -80,7 +82,7 @@ class App extends Component {
               <NewFarmgoodForm />
             )
           )}/>
-            
+          <Route exact path="/test" component={Test} />
           <Route exact path="/farm-goods/:id/edit" component={EditFarmgoodForm} />
           <Route exact path ="/farm-goods/:id" component={FarmGoodCard} />
           <Route exact path="/cart" component={Carts} />
