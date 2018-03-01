@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     include ErrorSerializer
     skip_before_action :authenticate #, only: [:create]
-    
+    #LIB/AUTH.RB NEEDS TO BE REPAIRED NEXT TIME GIT GETS FUCKED UP
   
     def index
       render json: User.all

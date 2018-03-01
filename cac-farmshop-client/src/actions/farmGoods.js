@@ -15,7 +15,7 @@ let header = new Headers({
   'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
 });
 
-header.append('AUTH_TEST', `Bearer ${sessionStorage.jwt}`)
+//header.append('AUTH_TEST', `Bearer ${sessionStorage.jwt}`)
 
 let sentData={
     method: 'GET',
@@ -62,10 +62,7 @@ export const getFarmGoods = () => {
    // debugger
     return fetch('http://localhost:3000/api/farmgoods', header)
    // fetch('http://localhost:3000/api/days', header) ///
-      .then(response => {
-        //debugger 
-        response.json()
-      })
+      .then(response => response.json())
       .then(farmGoods => dispatch(setFarmGoods(farmGoods)))
       .catch(error => console.log(error));
   }

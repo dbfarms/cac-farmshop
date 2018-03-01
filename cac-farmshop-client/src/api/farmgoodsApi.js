@@ -1,3 +1,4 @@
+/*
 class FarmgoodsApi {
 
     static requestHeaders() {
@@ -66,3 +67,5 @@ class FarmgoodsApi {
   }
   
   export default CatsApi;
+
+  */

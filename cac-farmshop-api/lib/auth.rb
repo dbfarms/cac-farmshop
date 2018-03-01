@@ -5,7 +5,6 @@ class Auth
   ALGORITHM = 'HS256'
 
   def self.issue(payload)
-    byebug
     JWT.encode(
       payload,
       auth_secret,
@@ -20,6 +19,6 @@ class Auth
   end
 
   def self.auth_secret
-    ENV["AUTH_SECRET"]
+    ENV["AUTH_SECRET"] #remember to re-create this next time git gets fucked up
   end
 end  

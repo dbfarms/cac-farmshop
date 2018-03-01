@@ -1,4 +1,4 @@
-import { browserHistory } from 'react-router-dom';
+//import { browserHistory } from 'react-router-dom';
 //import {withRouter} from "react-router-dom";
 
 export default (state = [], action) => {
