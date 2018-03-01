@@ -5,7 +5,8 @@ class SessionApi {
       const request = new Request('http://localhost:3000/login', {
         method: 'POST',
         headers: new Headers({
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
         }), 
         body: JSON.stringify({auth: credentials})
       });
