@@ -9,7 +9,7 @@ export default function sessionReducer(state = initialState.session, action) {
       //browserHistory.push('/')
       return !!sessionStorage.jwt 
     case types.LOG_IN_SUCCESS:
-      debugger 
+      //debugger 
       //browserHistory.push('/farm-goods')
       return !!sessionStorage.jwt
     case types.LOG_OUT:

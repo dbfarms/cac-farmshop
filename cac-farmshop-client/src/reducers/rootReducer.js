@@ -1,3 +1,4 @@
+/*
 //import {combineReducers} from 'redux';  
 import {
   createStore,
@@ -19,3 +20,4 @@ const rootReducer = combineReducers({
 })
 
 export default rootReducer;
+*/

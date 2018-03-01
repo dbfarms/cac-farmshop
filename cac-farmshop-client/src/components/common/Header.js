@@ -19,7 +19,7 @@ class Header extends React.Component {
   render() {
     
     if (this.props.logged_in) {
-      debugger 
+      //debugger 
       return (
         <nav className="background">
           <NavLink to="/" 

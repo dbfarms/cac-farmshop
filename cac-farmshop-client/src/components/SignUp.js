@@ -22,7 +22,7 @@ class SignUpPage extends React.Component {
 
   onSignUp(event) {
       event.preventDefault();
-      this.props.actions.signUpUser(this.state.credentials);
+      this.props.actions.signUpUser(this.state.credentials, this.props.history);
   }
 
   render() {
