@@ -11,8 +11,11 @@ import { resetFarmGoodForm } from './FarmgoodForm';
 
 let header = new Headers({
   'Access-Control-Allow-Origin':'',
-  'Content-Type': 'multipart/form-data'
+  'Content-Type': 'multipart/form-data',
+  'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
 });
+
+header.append('AUTH_TEST', `Bearer ${sessionStorage.jwt}`)
 
 let sentData={
     method: 'GET',
@@ -56,9 +59,13 @@ const deletingFarmgood = farmGood => {
 // ** async actions **
 export const getFarmGoods = () => {
   return dispatch => {
+   // debugger
     return fetch('http://localhost:3000/api/farmgoods', header)
    // fetch('http://localhost:3000/api/days', header) ///
-      .then(response => response.json())
+      .then(response => {
+        //debugger 
+        response.json()
+      })
       .then(farmGoods => dispatch(setFarmGoods(farmGoods)))
       .catch(error => console.log(error));
   }

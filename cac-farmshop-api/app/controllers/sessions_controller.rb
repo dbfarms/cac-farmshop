@@ -1,13 +1,15 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate, only: [:create]
+  skip_before_action :authenticate #, only: [:create]
   
   def create
-    
+    #byebug
     user = User.find_by(email: auth_params[:email])
     if user && user.authenticate(auth_params[:password])
+      #byebug
       jwt = Auth.issue({user: user.id})
       render json: {jwt: jwt}
     else
+      #byebug
       render json: {:errors=>
         [{:detail=>"incorrect email or password", 
           :source=>{:pointer=>"user/err_type"}}

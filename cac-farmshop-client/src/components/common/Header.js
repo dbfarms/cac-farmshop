@@ -34,7 +34,7 @@ class Header extends React.Component {
         </nav>
       );
     } else {
-      debugger 
+      //debugger 
       return (
         <nav className="background">
           <NavLink to="/" 
