@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   
-  before_action :authenticate 
+  #before_action :authenticate 
 
   def logged_in?
     !!current_user
@@ -27,6 +27,7 @@ class ApplicationController < ActionController::API
 
     #byebug 
     if auth_present?
+      #byebug
       user = User.find(auth["user"])
       if user
         @current_user ||= user
@@ -50,7 +51,12 @@ class ApplicationController < ActionController::API
     end
 
     def auth_present?
-      !!request.env.fetch("HTTP_AUTHORIZATION", "") #.scan(/Bearer/).flatten.first
+      #!!request.env.fetch("HTTP_AUTHORIZATION", "") #.scan(/Bearer/).flatten.first
+      if request.env.fetch("HTTP_AUTHORIZATION", "") === ""
+        return false 
+      else 
+        return true
+      end 
     end
 end
 

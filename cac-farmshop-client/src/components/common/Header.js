@@ -13,6 +13,8 @@ class Header extends React.Component {
 
   logOut(event) {
     event.preventDefault();
+    alert('you are logged out')
+    //one day i'd like the redirect to work?
     this.props.actions.logOutUser();
   }
 
@@ -30,11 +32,11 @@ class Header extends React.Component {
           <Link to="/farmers" 
             activeClassName="active">Farmers</Link>
           {" | "}
-          <a href="/logout" onClick={this.logOut}>log out</a>
+          <a href="/" onClick={this.logOut}>log out</a>
         </nav>
       );
     } else {
-      debugger 
+      //debugger 
       return (
         <nav className="background">
           <NavLink to="/" 
@@ -59,8 +61,14 @@ Header.propTypes = {
 }
 */
 
-function mapStateToProps(state, ownProps) {  
+function mapStateToProps(state, ownProps) {
   return {logged_in: state.session};
 }
 
-export default connect(mapStateToProps)(Header); 
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(sessionActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

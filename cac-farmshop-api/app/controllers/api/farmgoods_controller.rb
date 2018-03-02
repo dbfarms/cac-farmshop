@@ -3,6 +3,7 @@ class Api::FarmgoodsController < ApplicationController
     before_action :set_farmgood, only: [:edit, :destroy]
 
     def index
+        #byebug 
         render json: Farmgood.all
     end
 
