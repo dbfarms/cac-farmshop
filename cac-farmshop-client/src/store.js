@@ -14,7 +14,7 @@ import FarmgoodFormData from './reducers/farmGoodFormData';
 import EditedFarmgoodFormData from './reducers/farmGoodFormData';
 import days from './reducers/daysReducer';
 import session from './reducers/sessionReducer';
-
+import user from './reducers/sessionReducer';
 
 const reducers = combineReducers({
   carts,
@@ -25,7 +25,8 @@ const reducers = combineReducers({
   farmGood,
   EditedFarmgoodFormData,
   days,
-  session
+  session,
+  user 
 });
 
 const middleware = [thunk]; //for async actions

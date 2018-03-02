@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  
+  #before_action :authorized_role
   #before_action :authenticate 
 
   def logged_in?
@@ -39,6 +39,18 @@ class ApplicationController < ActionController::API
     #byebug
     render json: {error: "unauthorized"}, status: 404 unless logged_in?
   end
+
+ 
+  def authorized_role
+    if logged_in? 
+
+      #byebug
+    else 
+      session[:Authorized_Role] = "guest"
+      #byebug 
+    end 
+  end 
+
 
   private
 

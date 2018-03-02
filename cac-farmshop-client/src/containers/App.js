@@ -46,6 +46,7 @@ class App extends Component {
   }
 
   requireAuth(nextState, replace) {  
+    debugger
     if (!sessionStorage.jwt) {
       return <Redirect to='/login' />
       //state: { nextPathname: nextState.location.pathname } //********************** for when you want to go back to this page
@@ -66,7 +67,7 @@ class App extends Component {
           <Route path="/signup" component={SignUpPage} />
           
           <Route exact path="/home" 
-                 component={Authorization(Home, ['admin'])}/>
+                 component={Authorization(Home, ['admin', this.props.logged_in, sessionStorage.jwt])} />
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmGoods} />
           <Route exact path="/new-farm-good" render={() => ( 
@@ -87,11 +88,10 @@ class App extends Component {
   }
 }
 
-//<Route path="/logout" component={LogOut} />
-
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return ({
       farmGoods: state.farmGoods,
+      logged_in: state.session
   })
 }
 

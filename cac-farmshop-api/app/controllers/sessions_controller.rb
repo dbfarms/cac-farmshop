@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate #, only: [:create]
+  #skip_before_action :authenticate #, only: [:create]
   
   def create
     #byebug
@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
         ]}, status: 404
     end
   end
+
 
   private
     def auth_params
