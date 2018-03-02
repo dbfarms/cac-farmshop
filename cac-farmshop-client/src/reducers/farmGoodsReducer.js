@@ -11,7 +11,11 @@ export default (state = [], action) => {
       return (
         editState 
       );
-     
+    case 'GET_A_FARMGOOD_SUCCESS':
+      const farmGood = action.farmGood
+      return (
+        farmGood
+      )
     case 'GET_FARMGOOD_SUCCESS':
       return action.farmGoods
     case 'CREATE_FARMGOOD_SUCCESS':
