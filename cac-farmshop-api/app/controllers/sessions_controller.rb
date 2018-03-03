@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       session[:Role] = role
       #byebug
       
-      render json: {jwt: jwt, role: role}
+      render json: {jwt: jwt, role: role} ##DOES ROLE NEED BE ENCRYPTED?
     else
       #byebug
       render json: {:errors=>
