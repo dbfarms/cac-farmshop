@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import FarmGoodModal from '../components/farmGoodModal';
 import FarmGoodsCard from '../components/FarmGoodsCard';
 import FarmGoodCard from '../components/farmGoodCard';
 import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoods from server
@@ -17,7 +18,7 @@ class FarmGoods extends Component {
     super(props);
 
     this.state = {
-      showKey: 'show all',
+      showKey: 'show all', //show all
       showDay: '',
       showCategory: '',
       days: [],
@@ -98,6 +99,14 @@ class FarmGoods extends Component {
     return (
       <div className="page-tree">
       <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
+      {this.state.showKey === "show all" && 
+        <div>
+           <div className="Farm-Goods-Container">
+            <h1>For sale (click on farmgood to edit): </h1>
+            {this.state.farmGoods_array.map(farmGood => <FarmGoodModal  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+          </div>
+        </div>
+      }
       {this.state.showKey === "day"  &&
           <div>
             <h1>{this.state.showDay}</h1>
@@ -111,7 +120,7 @@ class FarmGoods extends Component {
               }
             })
             }
-             {thisFilter.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing} />)}
+             {thisFilter.map(farmGood => <FarmGoodModal  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing} />)}
           </div>
       }
       {this.state.showKey === "category"  &&
@@ -124,17 +133,10 @@ class FarmGoods extends Component {
                 }
             })
             }
-             {thisFilter.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+             {thisFilter.map(farmGood => <FarmGoodModal  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
       }
-      {this.state.showKey === "show all" && 
-        <div>
-           <div className="Farm-Goods-Container">
-            <h1>For sale (click on farmgood to edit): </h1>
-            {this.state.farmGoods_array.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
-          </div>
-        </div>
-      }
+      
       </div>
     )
   }
