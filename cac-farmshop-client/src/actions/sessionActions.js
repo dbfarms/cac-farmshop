@@ -15,6 +15,7 @@ export function logInUser(credentials, history) {
   return function(dispatch) {
     return sessionApi.login(credentials).then(response => {
       sessionStorage.setItem('jwt', response.jwt);
+      sessionStorage.setItem('role', response.role);
       dispatch(loginSuccess());
       history.push('/farm-goods')
     }).catch(error => {
@@ -52,18 +53,18 @@ let header = new Headers({
 });
 
 export const getUser = () => {
-  debugger 
   return dispatch => {
     return fetch('http://localhost:3000/users/current-user', header)
     .then(response=> {
-      debugger
+      debugger 
       response.json()})
-    .then(user => dispatch(setUser(user)))
+    .then(userAuth => dispatch(setUser(userAuth)))
     .catch(error => console.log(error))
   }
 }
 
 const setUser = user => {
+  debugger 
   return {
     type: 'USER_SUCCESS',
     user

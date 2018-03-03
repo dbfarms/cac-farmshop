@@ -5,15 +5,20 @@ class SessionsController < ApplicationController
     #byebug
     user = User.find_by(email: auth_params[:email])
     if user && user.authenticate(auth_params[:password])
-      
+      #byebug
       jwt = Auth.issue({user: user.id})
+      role = user.authorization
       request['Authorization'] = jwt
       request.headers['Authorization'] = jwt
       request.env['Authorization'] = jwt 
       session[:Authorization] = jwt 
+      request['Role'] = role
+      request.headers['Role'] = role
+      request.env['Role'] = role
+      session[:Role] = role
       #byebug
       
-      render json: {jwt: jwt}
+      render json: {jwt: jwt, role: role}
     else
       #byebug
       render json: {:errors=>

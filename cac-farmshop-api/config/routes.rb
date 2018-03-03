@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :users
   post '/login', to: "sessions#create"
   #resources :sessions, only: [:show]
-
+  get '/users/authorized' 
+  
   namespace :api do
     resources :carts
     resources :farmers

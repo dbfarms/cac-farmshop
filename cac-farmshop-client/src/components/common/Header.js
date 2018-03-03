@@ -9,6 +9,7 @@ class Header extends React.Component {
   constructor(props) {
     super();
     this.logOut = this.logOut.bind(this);
+    //debugger 
   }
 
   logOut(event) {

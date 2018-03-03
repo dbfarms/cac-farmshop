@@ -16,6 +16,7 @@ import { connect } from 'react-redux'
 import Authorization from './authorization'
 import Home from './Home'
 import Header from '../components/common/Header'
+import { getUser } from '../actions/sessionActions';
 
 
 class App extends Component {
@@ -52,14 +53,26 @@ class App extends Component {
       //state: { nextPathname: nextState.location.pathname } //********************** for when you want to go back to this page
     }
   }
+
+  authTest() {
+    //this.props.getUser()
+  }
   
 
 
   render() {
-
+    debugger
+    var authLevel = this.authTest()
     return (
       <div>
-     
+      {sessionStorage.length === 0 &&
+        <h3>no one is signed in</h3>
+
+      }
+      {sessionStorage.length === 1 &&
+        
+        <h3>auth level is {authLevel}</h3>
+      }
       <BrowserRouter >
         <div className="background-here">
           <Header />
@@ -89,13 +102,15 @@ class App extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  //debugger 
   return ({
       farmGoods: state.farmGoods,
-      logged_in: state.session
+      logged_in: state.session,
+      users: state.users
   })
 }
 
-export default connect(mapStateToProps, { getFarmGoods })(App); // 
+export default connect(mapStateToProps, { getFarmGoods, getUser })(App); // 
 
 
 /*

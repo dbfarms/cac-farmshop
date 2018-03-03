@@ -3,6 +3,7 @@ class ApplicationController < ActionController::API
   #before_action :authenticate 
 
   def logged_in?
+    #byebug 
     !!current_user
   end
 
@@ -42,13 +43,7 @@ class ApplicationController < ActionController::API
 
  
   def authorized_role
-    if logged_in? 
-
-      #byebug
-    else 
-      session[:Authorized_Role] = "guest"
-      #byebug 
-    end 
+    
   end 
 
 
