@@ -62,8 +62,10 @@ class App extends Component {
     return (
       <div>
       {sessionStorage.length === 0 &&
+        <div>
         <h3>Welcome VISITOR</h3>
-
+        <CustomerRoutes />
+        </div>
       }
       {sessionStorage.role === "admin" &&
         <div>
@@ -72,7 +74,10 @@ class App extends Component {
         </div>
       }
       {sessionStorage.role === "farmer" &&
-      <h3>auth level is {sessionStorage.role}</h3>
+        <div>
+        <h3>auth level is {sessionStorage.role}</h3>
+        <FarmerRoutes />
+        </div>
       }
       
       </div>
