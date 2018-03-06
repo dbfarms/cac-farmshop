@@ -1,15 +1,32 @@
 
 TO DO LIST:
-1) farmgood form if statement (editing or new)- 
-2) in rails more backend, days available for farmgood, then checkboxes in farmgood form
-3) users - farmer and customer inherit login but have different methods
-4) proptypes
-5) what else?
+Bugs
+ -does logging out actuall work re: 'role'?
 
-QUESTIONS:
-1) how to fix this:
-error: object file .git/objects/dd/a3af7a4d7c40ffea7b6c6d3875a94ee1035bf9 is empty
-error: object file .git/objects/dd/a3af7a4d7c40ffea7b6c6d3875a94ee1035bf9 is empty
-fatal: loose object dda3af7a4d7c40ffea7b6c6d3875a94ee1035bf9 (stored in .git/objects/dd/a3af7a4d7c40ffea7b6c6d3875a94ee1035bf9) is corrupt
+1- customer perspective
+ -adding to carts
+ -decreasing quantity available (line_items)
+ -
 
-2) Better to have conditional statements re: state in one file or separate files? 
+2- farmers 
+ -make it so farmers can only edit their own farmgoods etc
+ -list of open orders / accepting orders / rejecting orders
+ -email list to farmer 
+ -client accounts 
+ -wholesale options?
+ -delivery options?
+
+3-navbar
+ -stays along top w/ scroll down
+
+4-admin
+ -ability to add farmers
+ -view orders of all farmers, edit all farmers 
+
+5-design
+ -you know, completely redo 
+
+6-misc 
+ -get input from farmers 
+
+7-outreach 

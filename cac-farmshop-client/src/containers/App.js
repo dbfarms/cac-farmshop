@@ -90,7 +90,7 @@ const mapStateToProps = (state, ownProps) => {
   return ({
       farmGoods: state.farmGoods,
       logged_in: state.session,
-      users: state.users
+      users: state.users // i suspect i no longer need this line... >
   })
 }
 
