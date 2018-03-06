@@ -5,7 +5,7 @@ import FarmGoods from './FarmGoods';
 import FarmersPage from './FarmersPage';
 import FarmerShow from './FarmerShow';
 import LogInPage from '../components/LogInPage';
-import SignUpPage from '../components/SignUp';
+import AdminSignUpPage from '../components/admin/AdminSignUp';
 import FarmGoodCard from '../components/farmGoodCard'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -21,7 +21,7 @@ export default function FarmerRoutes() {
         <div className="background-here">
             <Header />
           <Route path="/login" component={LogInPage} />
-          <Route path="/signup" component={SignUpPage} />
+          <Route path="/signup" component={AdminSignUpPage} />
           
           <Route exact path="/home" />
           <Route exact path='/farmers' component={FarmersPage} />

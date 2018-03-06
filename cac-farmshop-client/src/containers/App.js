@@ -61,6 +61,8 @@ class App extends Component {
       this.setState({ slide: '0px' });
     }
     this.setState({ lastScrollY: currentScrollY });
+
+    console.log(this.state.slide)
   };
 
   componentWillReceiveProps(nextProps){
