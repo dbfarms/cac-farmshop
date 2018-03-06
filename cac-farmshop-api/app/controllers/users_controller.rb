@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     def create
       #byebug
       user = User.new(user_params)
+      byebug
       if user.save
         render json: {}, status: 200
       else
