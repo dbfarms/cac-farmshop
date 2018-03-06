@@ -23,15 +23,15 @@ import CustomerRoutes from './customerRoutes';
 
 
 class App extends Component {
-  state = { hidden: false };
-
   constructor() {
     super()
 
     this.state = {
-      currentUser: null
+      currentUser: null,
+      auth: false,
+      slide: 0,  // How much should the Navbar slide up or down
+      lastScrollY: 0,  // Keep track of current position in state
     }
-    this.handleScroll = this.handleScroll.bind(this);
     //this.updateCurrentUser = this.updateCurrentUser.bind(this);
   }
   
@@ -41,8 +41,9 @@ class App extends Component {
   //  });
 
   componentWillMount(){
-    this.props.getFarmGoods()
+    this.props.getFarmGoods();
     window.addEventListener('scroll', this.handleScroll);
+    //WHEN I PUT ANOTHER GET REQUEST HERE IT BREAKS THE PROGRAM. BUT WHY?
   }
 
   componentWillUnmount() {
@@ -50,19 +51,17 @@ class App extends Component {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
-  handleScroll(e) {
-    let lastScrollTop = 0;
-    const currentScrollTop = Header.scrollTop;
+  handleScroll = () => {
+    const { lastScrollY } = this.state; 
+    const currentScrollY = window.scrollY;
 
-    // Set the state of hidden depending on scroll position
-    // We only change the state if it needs to be changed
-    if (!this.state.hidden && currentScrollTop > lastScrollTop) {
-      this.setState({ hidden: true });
-    } else if(this.state.hidden) {
-      this.setState({ hidden: false });
+    if (currentScrollY > lastScrollY) {
+      this.setState({ slide: '-48px' });
+    } else {
+      this.setState({ slide: '0px' });
     }
-    lastScrollTop = currentScrollTop;
-  }
+    this.setState({ lastScrollY: currentScrollY });
+  };
 
   componentWillReceiveProps(nextProps){
     this.setState({
@@ -87,7 +86,11 @@ class App extends Component {
         <h3>Welcome VISITOR</h3>
         <BrowserRouter>
           <div>
-          <Header hidden={this.state.hidden} />
+          <Header 
+            style={{
+            transform: `translate(0, ${this.state.slide})`,
+            transition: 'transform 90ms linear',
+          }}/>
           <CustomerRoutes />
           </div>
         </BrowserRouter>
