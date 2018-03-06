@@ -22,30 +22,33 @@ class Header extends React.Component {
 
   makeRoutes(routes){
     //debugger
-    const routesLinks = this.props.roleRoutes
-    return Object.entries(routesLinks).map(function(keyName, keyIndex) {
+    const routesLinks = [] 
+    const routesLength = (Object.keys(this.props.roleRoutes).length - 1)
+    Object.entries(this.props.roleRoutes).map(function(keyName, keyIndex) {
+      routesLinks.push(keyName)
+    })
+    return routesLinks.map((route, keyIndex) => {
       //debugger 
       return (
-      <span>
-      {keyIndex === (routesLinks.length - 1) &&
         <span>
-        <NavLink to={`/${keyName[1]}`} 
-        className="navLink"> {keyName[0]} </NavLink>
-        <a href="/" onClick={this.logOut}>log out</a>
+        {keyIndex === routesLength &&
+          <span>
+          <NavLink to={`/${route[1]}`} 
+          className="navLink"> {route[0]} </NavLink>
+          {" | "}
+          <a href="/" onClick={this.logOut}>log out</a>
+          </span>
+        }
+        {keyIndex !== (routesLinks.length-1) &&
+        <span>
+        <NavLink to={`/${route[1]}`}
+        className="navLink"> {route[0]} </NavLink>
+         {" | "}
         </span>
-      }
-      {keyIndex !== (routesLinks.length-1) &&
-      <span>
-      <NavLink to={`/${keyName[1]}`}
-      className="navLink"> {keyName[0]} </NavLink>
-       {" | "}
-      </span>
-      }
-      </span>
-      )
-    })
-    
-
+        }
+        </span>
+        )
+    }) 
   }
 
   render() {
