@@ -21,7 +21,7 @@ export default class AdminRoutes extends Component {
 
     this.state = {
       routes: {
-        signup: 'signup',
+        'create new user': 'signup',
         farmers: 'farmers',
         home: 'home',
         farmgoods: 'farm-goods'
@@ -34,7 +34,7 @@ export default class AdminRoutes extends Component {
     return (  
       <BrowserRouter >
         <div className="background-here">
-            <Header roleRoutes={this.state.routes}/>
+          <Header roleRoutes={this.state.routes}/>
           <Route path="/signup" component={AdminSignUpPage} />
           <Route exact path="/home" />
           <Route exact path='/farmers' component={FarmersPage} />

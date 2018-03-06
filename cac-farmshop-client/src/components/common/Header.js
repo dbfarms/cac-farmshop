@@ -66,7 +66,7 @@ class Header extends React.Component {
       return (
         <nav className="background">
           <NavLink to="/" 
-            activeClassName="active">Homes</NavLink>
+            activeClassName="active">Home</NavLink>
           {" | "}
           <Link to="/farm-goods" activeClassName="active">Farmgoods</Link>
           {" | "}
@@ -75,6 +75,9 @@ class Header extends React.Component {
           {" | "}
           <Link to="/login" activeClassName="active">
             log in</Link>
+          {" | "}
+          <Link to="/signup" activeClassName="active">
+            sign up</Link>
         </nav>
       );
     }

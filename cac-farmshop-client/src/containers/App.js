@@ -86,16 +86,7 @@ class App extends Component {
       {sessionStorage.length === 0 &&
         <div>
         <h3>Welcome VISITOR</h3>
-        <BrowserRouter>
-          <div>
-          <Header 
-            style={{
-            transform: `translate(0, ${this.state.slide})`,
-            transition: 'transform 90ms linear',
-          }}/>
           <CustomerRoutes />
-          </div>
-        </BrowserRouter>
         </div>
       }
       {sessionStorage.role === "admin" &&
@@ -129,6 +120,14 @@ export default connect(mapStateToProps, { getFarmGoods, getUser })(App); //
 
 
 /*
+
+<Header 
+            style={{
+            transform: `translate(0, ${this.state.slide})`,
+            transition: 'transform 90ms linear',
+          }}/>
+
+/////////////////////
 
 <BrowserRouter >
         <div className="background-here">
