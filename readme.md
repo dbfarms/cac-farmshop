@@ -1,7 +1,7 @@
 
 TO DO LIST:
 Bugs
- -does logging out actuall work re: 'role'?
+ -redirects.... 
 
 1- customer perspective
  -adding to carts
