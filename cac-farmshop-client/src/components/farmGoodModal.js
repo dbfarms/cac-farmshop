@@ -17,9 +17,11 @@ class FarmGoodModal extends React.Component {
         return a.id - b.id;
       });
 
-      return daysArray.map(day=> {
+      return daysArray.map((day, index)=> {
         return (
-          <li>{day.name}</li>
+          <div key={index}>
+            <li>{day.name}</li>
+          </div>
         )
       })
     }

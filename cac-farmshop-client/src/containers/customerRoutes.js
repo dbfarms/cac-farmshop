@@ -17,9 +17,8 @@ import Header from '../components/common/Header';
 //<IndexRoute component={HomePage} /> /// NEED TO ADD 
 export default function FarmerRoutes() {
     return (  
-      <BrowserRouter >
+      //<BrowserRouter >
         <div className="background-here">
-            <Header />
           <Route path="/login" component={LogInPage} />
           <Route path="/signup" component={SignUpPage} />
           
@@ -29,7 +28,7 @@ export default function FarmerRoutes() {
           <Route exact path ="/farm-goods/:id" component={FarmGoodCard} />
           <Route path="*" render={() => <div></div>} />
         </div>
-      </BrowserRouter >
+     // </BrowserRouter >
   );
 }
 

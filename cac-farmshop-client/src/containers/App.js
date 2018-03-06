@@ -23,13 +23,15 @@ import CustomerRoutes from './customerRoutes';
 
 
 class App extends Component {
+  state = { hidden: false };
+
   constructor() {
     super()
 
     this.state = {
       currentUser: null
-      
     }
+    this.handleScroll = this.handleScroll.bind(this);
     //this.updateCurrentUser = this.updateCurrentUser.bind(this);
   }
   
@@ -40,7 +42,26 @@ class App extends Component {
 
   componentWillMount(){
     this.props.getFarmGoods()
-    //WHEN I PUT ANOTHER GET REQUEST HERE IT BREAKS THE PROGRAM. BUT WHY?
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    // If this component is unmounted, stop listening
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll(e) {
+    let lastScrollTop = 0;
+    const currentScrollTop = Header.scrollTop;
+
+    // Set the state of hidden depending on scroll position
+    // We only change the state if it needs to be changed
+    if (!this.state.hidden && currentScrollTop > lastScrollTop) {
+      this.setState({ hidden: true });
+    } else if(this.state.hidden) {
+      this.setState({ hidden: false });
+    }
+    lastScrollTop = currentScrollTop;
   }
 
   componentWillReceiveProps(nextProps){
@@ -64,7 +85,12 @@ class App extends Component {
       {sessionStorage.length === 0 &&
         <div>
         <h3>Welcome VISITOR</h3>
-        <CustomerRoutes />
+        <BrowserRouter>
+          <div>
+          <Header hidden={this.state.hidden} />
+          <CustomerRoutes />
+          </div>
+        </BrowserRouter>
         </div>
       }
       {sessionStorage.role === "admin" &&
