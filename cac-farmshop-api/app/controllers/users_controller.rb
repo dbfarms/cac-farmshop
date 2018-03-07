@@ -8,9 +8,10 @@ class UsersController < ApplicationController
     end
 
     def authorized 
-      byebug 
+      user = Auth.decode(params["_json"])
+      render json: user 
+      #byebug 
     end 
-  
   
     def show
       render json: User.find(params[:id])
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
     def create
       #byebug
       user = User.new(user_params)
-      byebug
+      #byebug
       if user.save
         render json: {}, status: 200
       else

@@ -52,9 +52,20 @@ let header = new Headers({
   'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
 });
 
+
+//LEFT OFF: 'CAN'T ADD NEW KEY INTO HAS DURING ITERATION' IN APPLICATION CONTROLLER 24
 export const getUser = () => {
   return dispatch => {
-    return fetch('http://localhost:3000/users/current-user', header)
+    //debugger 
+    return fetch('http://localhost:3000/session', { // current-user
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json',
+        'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
+      },
+      //method: "POST",
+      //body: JSON.stringify(sessionStorage.jwt)
+    })
     .then(response=> {
       debugger 
       response.json()})

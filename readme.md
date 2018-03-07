@@ -9,6 +9,7 @@ Bugs
  -
 
 2- farmers 
+ -profile page
  -make it so farmers can only edit their own farmgoods etc
  -list of open orders / accepting orders / rejecting orders
  -email list to farmer 
@@ -20,7 +21,6 @@ Bugs
  -stays along top w/ scroll down
 
 4-admin
- -ability to add farmers
  -view orders of all farmers, edit all farmers 
 
 5-design
@@ -28,6 +28,7 @@ Bugs
 
 6-misc 
  -get input from farmers 
+ -validations for forms
 
 7-outreach 
 

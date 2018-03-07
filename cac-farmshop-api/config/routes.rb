@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
   get '/users/current-user', to: "current_user#show"
+  #post '/users/current-user-id', to: "current_user#id"
   resources :users
   post '/login', to: "sessions#create"
+  get '/session', to: "sessions#user_current"
   #resources :sessions, only: [:show]
-  get '/users/authorized' 
+  post '/users/authorized' 
   
   namespace :api do
     resources :carts

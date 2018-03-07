@@ -15,7 +15,9 @@ class AdminSignUpPage extends React.Component {
             email: '', 
             password: '', 
             password_confirmation: '',
-            authorization: 'change role'
+            authorization: 'change role',
+            first_name: '',
+            last_name: '',
         },
         dropdownOpen: false,
     }
@@ -41,16 +43,17 @@ class AdminSignUpPage extends React.Component {
 
   onSignUp(event) {
       event.preventDefault();
+      //debugger 
       this.props.actions.signUpUser(this.state.credentials, this.props.history);
   }
 
   onRoleChange(role){
-      this.setState({
-          credentials: {
-              authorization: role
-          }
-      })
-      console.log(role)
+      //debugger 
+      const field = "authorization" 
+      const credentials = this.state.credentials;
+      credentials[field] = role 
+      return this.setState({credentials: credentials})
+      
   }
 
   render() {
@@ -66,6 +69,18 @@ class AdminSignUpPage extends React.Component {
             onChange={this.onChange}/>
 
           < TextInput
+            name="first_name"
+            label="first name"
+            value={this.state.credentials.first_name}
+            onChange={this.onChange}/>
+
+          < TextInput
+            name="last_name"
+            label="last name"
+            value={this.state.credentials.last_name}
+            onChange={this.onChange}/>
+
+          < TextInput
             name="password"
             label="password"
             type="password"
@@ -74,7 +89,7 @@ class AdminSignUpPage extends React.Component {
 
              < TextInput
             name="password_confirmation"
-            label="password_confirmation"
+            label="password confirmation"
             type="password"
             value={this.state.credentials.password_confirmation}
             onChange={this.onChange}/>

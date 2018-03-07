@@ -28,6 +28,19 @@ class SessionsController < ApplicationController
     end
   end
 
+  def user_current
+    #byebug
+    user_id = request.env["HTTP_AUTHORIZATION"].scan(/Bearer (.*)$/).flatten.last
+    user = Auth.decode(user_id)
+    #byebug
+    userToJson = User.find(user["user"])
+    #byebug
+    render json: userToJson
+    #return userToJson
+    #return user 
+    #byebug 
+  end 
+
 
   private
     def auth_params

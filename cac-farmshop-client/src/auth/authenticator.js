@@ -8,6 +8,7 @@ class Auth {
       sessionStorage.removeItem('jwt');
       sessionStorage.removeItem('role');
     }
+
   }
   
   export default Auth;

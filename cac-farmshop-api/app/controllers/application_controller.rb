@@ -43,7 +43,7 @@ class ApplicationController < ActionController::API
 
  
   def authorized_role
-    
+    #byebug
   end 
 
 
