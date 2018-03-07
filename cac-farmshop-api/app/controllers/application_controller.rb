@@ -30,7 +30,9 @@ class ApplicationController < ActionController::API
     if auth_present?
       #byebug
       user = User.find(auth["user"])
+      #byebug
       if user
+        #byebug 
         @current_user ||= user
       end
     end

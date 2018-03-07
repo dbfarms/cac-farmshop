@@ -66,16 +66,14 @@ export const getUser = () => {
       //method: "POST",
       //body: JSON.stringify(sessionStorage.jwt)
     })
-    .then(response=> {
-      debugger 
-      response.json()})
+    .then(response=> response.json())
     .then(userAuth => dispatch(setUser(userAuth)))
     .catch(error => console.log(error))
   }
 }
 
 const setUser = user => {
-  debugger 
+  //debugger 
   return {
     type: 'USER_SUCCESS',
     user

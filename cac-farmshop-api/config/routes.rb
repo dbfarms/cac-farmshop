@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users
   post '/login', to: "sessions#create"
   get '/session', to: "sessions#user_current"
+  get '/currentuser', to: "application#current_user"
   #resources :sessions, only: [:show]
   post '/users/authorized' 
   
