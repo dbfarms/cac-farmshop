@@ -47,14 +47,16 @@ class FarmerFarmGoods extends Component {
   }
 
   componentWillMount(){
+    //debugger
     this.props.getUser()
-
+    /*
     if (this.props.farmgood === undefined ){
       this.props.getFarmGoods()
     }
     if (this.state.farmGoods_array === undefined){
       this.props.getFarmGoods()
     }
+    */
   }
 
   componentWillReceiveProps(nextProps){
