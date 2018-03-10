@@ -18,6 +18,13 @@ Bugs
  -wholesale options?
  -delivery options?
 
+ class ChangeColumnName < ActiveRecord::Migration[5.1]
+  def change
+    rename_column :farmers, :farmer_id, :user_id
+  end
+end
+
+
 3-navbar
  -stays along top w/ scroll down
 

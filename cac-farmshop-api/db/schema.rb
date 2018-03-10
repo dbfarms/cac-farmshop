@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180227144130) do
+ActiveRecord::Schema.define(version: 20180310202544) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "user_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20180227144130) do
     t.string "kind_of"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "farmgood_categories", force: :cascade do |t|
@@ -78,6 +79,14 @@ ActiveRecord::Schema.define(version: 20180227144130) do
     t.integer "total"
   end
 
+  create_table "user_roles", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "farmer_id"
+    t.integer "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -86,6 +95,7 @@ ActiveRecord::Schema.define(version: 20180227144130) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "authorization"
+    t.integer "farmer_id"
   end
 
 end

@@ -4,8 +4,6 @@ class User < ApplicationRecord
   validates :password, presence: true  #, confirmation: true 
   #validates :password_confirmation, presence: true
 
-  def say_this
-    print "just a test"
-  end 
+  belongs_to :farmer 
 
 end
