@@ -16,6 +16,7 @@ export function logInUser(credentials, history) {
     return sessionApi.login(credentials).then(response => {
       sessionStorage.setItem('jwt', response.jwt);
       sessionStorage.setItem('role', response.role);
+      sessionStorage.setItem('id', response.id);
       dispatch(loginSuccess());
       history.push('/farm-goods')
     }).catch(error => {
@@ -66,7 +67,7 @@ export const getUser = () => {
       //method: "POST",
       //body: JSON.stringify(sessionStorage.jwt)
     })
-    .then(response=> response.json())
+    .then(response => response.json())
     .then(userAuth => dispatch(setUser(userAuth)))
     .catch(error => console.log(error))
   }

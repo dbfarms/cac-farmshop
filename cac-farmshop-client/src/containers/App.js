@@ -79,11 +79,25 @@ class App extends Component {
     }
   }
 
+  determineUser() {
+    //debugger 
+    //makes sure the jwt value is undefined if logging out via logout page 
+    if (sessionStorage.length <= 1) {
+      sessionStorage.jwt = "undefined" 
+    }
+  }
 
   render() {
+    this.determineUser()
     return (
       <div>
-      {sessionStorage.length === 0 &&
+      {sessionStorage.jwt === "undefined" &&
+        <div>
+        <h3>Welcome VISITOR</h3>
+          <CustomerRoutes />
+        </div>
+      }
+      {sessionStorage.jwt === "customer" &&
         <div>
         <h3>Welcome VISITOR</h3>
           <CustomerRoutes />

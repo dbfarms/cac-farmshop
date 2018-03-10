@@ -5,6 +5,7 @@ import FarmerFarmGoods from './FarmerFarmGoods';
 import FarmersPage from './FarmersPage';
 import FarmerShow from './FarmerShow';
 import LogInPage from '../components/LogInPage';
+import Logout from '../components/LogoutPage';
 //import FarmGoodCard from '../components/farmGoodCard'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -38,6 +39,7 @@ export default class FarmerRoutes extends Component {
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmerFarmGoods} />
           <Route path="*" render={() => <div></div>} />
+          <Route path="/logout" component={Logout}/> 
         </div>
       </BrowserRouter >
     );
