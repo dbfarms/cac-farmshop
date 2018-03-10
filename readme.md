@@ -10,6 +10,7 @@ Bugs
 
 2- farmers 
 -made up farmers don't correspond to users... how to reconcile? farmer < user or whatever 
+-need to be add farmgood to farmer's farmgoods in backend whenever something new is created, only going one direction it seems
  -profile page -- NEEDS TO BE EDITABLE
  -make it so farmers can only edit their own farmgoods etc
  -list of open orders / accepting orders / rejecting orders

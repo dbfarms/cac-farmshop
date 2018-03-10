@@ -7,3 +7,13 @@ class User < ApplicationRecord
   belongs_to :farmer 
 
 end
+
+=begin
+Farmgood.all.each do |fg|
+  Farmer.all.each do |f|
+    if fg.farmer.name == f.name
+      f.farmgoods << fg if !farmgoods.include?(fg)
+    end
+  end 
+end  
+=end 
