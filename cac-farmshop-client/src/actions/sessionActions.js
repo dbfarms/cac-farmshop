@@ -12,11 +12,12 @@ const loginSuccess = () => {
 
 
 export function logInUser(credentials, history) {  
+  //debugger
   return function(dispatch) {
     return sessionApi.login(credentials).then(response => {
       sessionStorage.setItem('jwt', response.jwt);
       sessionStorage.setItem('role', response.role);
-      sessionStorage.setItem('id', response.id);
+      sessionStorage.setItem('id', response.farmer_id);
       dispatch(loginSuccess());
       history.push('/farm-goods')
     }).catch(error => {
@@ -55,6 +56,7 @@ let header = new Headers({
 
 
 //LEFT OFF: 'CAN'T ADD NEW KEY INTO HAS DURING ITERATION' IN APPLICATION CONTROLLER 24
+/*
 export const getUser = () => {
   return dispatch => {
     //debugger
@@ -72,6 +74,7 @@ export const getUser = () => {
     .catch(error => console.log(error))
   }
 }
+*/
 
 const setUser = user => {
   //debugger 

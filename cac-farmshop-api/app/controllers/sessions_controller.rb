@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       #byebug
       jwt = Auth.issue({user: user.id})
       role = user.authorization
-      id = user.id 
+       
       request['Authorization'] = jwt
       request.headers['Authorization'] = jwt
       request.env['Authorization'] = jwt 
@@ -20,8 +20,7 @@ class SessionsController < ApplicationController
       session[:Role] = role
       #byebug
       if role == 'farmer' 
-        #byebug
-        render json: {jwt: jwt, role: role, farmer_id: farmer_id } #, id: id} ##DOES ROLE NEED BE ENCRYPTED?
+        render json: {jwt: jwt, role: role, farmer_id: user.id } #, id: id} ##DOES ROLE NEED BE ENCRYPTED?
       elsif role == "admin"
         render json: {jwt: jwt, role: role } ##DOES ROLE NEED BE ENCRYPTED?
       elsif role == "customer"

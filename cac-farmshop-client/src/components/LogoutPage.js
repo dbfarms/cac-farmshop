@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';  
 import * as sessionActions from '../actions/sessionActions';
 
+//NO MAPSTATETOPROPS HERE SO DISPATCH DOESN'T WORK AND SO LOGOUT DOESN'T WORK PROBABLY WILL DELETE THIS...
+
 class Logout extends Component {
     constructor(props) {
       super(props);
@@ -13,7 +15,7 @@ class Logout extends Component {
 
 logOut(event) {
     event.preventDefault();
-    debugger
+    //debugger
     alert('you are logged out')
     //one day i'd like the redirect to work?
     this.props.actions.logOutUser();

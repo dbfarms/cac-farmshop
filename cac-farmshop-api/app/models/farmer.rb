@@ -1,4 +1,4 @@
-class Farmer < ApplicationRecord
+class Farmer < User 
     validates :name, presence: true 
     validates :name, uniqueness: true 
     

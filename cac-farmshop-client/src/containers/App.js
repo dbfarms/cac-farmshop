@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import Authorization from './authorization';
 import Home from './Home';
 import Header from '../components/common/Header';
-import { getUser } from '../actions/sessionActions';
+//import { getUser } from '../actions/sessionActions';
 import FarmerRoutes from './farmerRoutes';
 import AdminRoutes from './adminRoutes';
 import CustomerRoutes from './customerRoutes';
@@ -126,11 +126,11 @@ const mapStateToProps = (state, ownProps) => {
   return ({
       farmGoods: state.farmGoods,
       logged_in: state.session,
-      users: state.users // i suspect i no longer need this line... >
+      //users: state.users // i suspect i no longer need this line... >
   })
 }
 
-export default connect(mapStateToProps, { getFarmGoods, getUser })(App); // 
+export default connect(mapStateToProps, { getFarmGoods /*, getUser */ })(App); // 
 
 
 /*

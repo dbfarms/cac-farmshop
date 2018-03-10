@@ -12,7 +12,7 @@ import FarmgoodNav from '../components/farmgoodNav'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import './FarmGoods.css';
-import { getUser } from '../actions/sessionActions'
+//import { getUser } from '../actions/sessionActions'
 
 class FarmerFarmGoods extends Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class FarmerFarmGoods extends Component {
 
   componentWillMount(){
     //debugger
-    this.props.getUser()
+    //this.props.getUser()
     /*
     if (this.props.farmgood === undefined ){
       this.props.getFarmGoods()
@@ -60,6 +60,14 @@ class FarmerFarmGoods extends Component {
   }
 
   componentWillReceiveProps(nextProps){
+    
+    const farmersFarmGoods = nextProps.farmGoods.data.filter(fg => {
+      debugger 
+      fg.relationships.farmer.data.id === sessionStorage.id
+    })
+
+    debugger 
+
     this.setState({
       farmGoods_array: nextProps.farmGoods.data
     })
@@ -99,8 +107,10 @@ class FarmerFarmGoods extends Component {
 
   render() {
     //debugger
+    //const farmerId = this.farmerIdFilter();
     var objectToArrayDays = []
     var thisFilter = []
+
     return (
       <div className="page-tree">
       <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
@@ -155,11 +165,11 @@ const mapStateToProps = (state) => {
   return ({
       farmGoods: state.farmGoods,
       days: state.days,
-      user: state.user
+      //user: state.user
   })
 }
 
-export default connect(mapStateToProps, { getFarmGoods, deleteFarmGoods, getUser })(FarmerFarmGoods); // 
+export default connect(mapStateToProps, { getFarmGoods, deleteFarmGoods, /*getUser*/ })(FarmerFarmGoods); // 
 
 /*
 

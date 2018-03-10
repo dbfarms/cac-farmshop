@@ -9,7 +9,8 @@ Bugs
  -
 
 2- farmers 
- -profile page
+-made up farmers don't correspond to users... how to reconcile? farmer < user or whatever 
+ -profile page -- NEEDS TO BE EDITABLE
  -make it so farmers can only edit their own farmgoods etc
  -list of open orders / accepting orders / rejecting orders
  -email list to farmer 
