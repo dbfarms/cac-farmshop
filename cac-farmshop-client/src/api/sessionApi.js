@@ -36,6 +36,7 @@ class SessionApi {
     } 
 
     static usersGet(){
+      debugger
       const request = new Request('http://localhost:3000/users', {
         method: 'GET',
         headers: new Headers({
