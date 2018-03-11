@@ -37,16 +37,16 @@ class SessionApi {
 
     static usersGet(){
       debugger
-      const request = new Request('http://localhost:3000/users', {
+      const requestUsers = new Request('http://localhost:3000/api/users', {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin':'',
           'Content-Type': 'application/json',
           'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
         }), 
       });
   
-      return fetch(request).then(response => {
+      return fetch(requestUsers).then(response => {
         return response.json();
       }).catch(error => {
         return error;
