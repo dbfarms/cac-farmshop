@@ -42,6 +42,20 @@ export function signUpUser(credentials, history) {
   };
 }
 
+export function adminSignUpUser(credentials, history) {
+  return function(dispatch) {
+    return sessionApi.signup(credentials).then(response => {
+      sessionStorage.setItem('jwt', response.jwt);
+      dispatch(signUpSuccess());
+      history.push('/farm-goods')
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+
+
 
 export function logOutUser() {  
     auth.logOut();

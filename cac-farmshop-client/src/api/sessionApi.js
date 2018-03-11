@@ -19,21 +19,47 @@ class SessionApi {
     } 
 
     static signup(credentials) {
-        //debugger 
-        const request = new Request('http://localhost:3000/users', {
-          method: 'POST',
-          headers: new Headers({
-            'Content-Type': 'application/json'
-          }), 
-          body: JSON.stringify({user: credentials})
-        });
-    
-        return fetch(request).then(response => {
-          return response.json();
-        }).catch(error => {
-          return error;
-        });
-      } 
+      //debugger 
+      const request = new Request('http://localhost:3000/users', {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }), 
+        body: JSON.stringify({user: credentials})
+      });
+  
+      return fetch(request).then(response => {
+        return response.json();
+      }).catch(error => {
+        return error;
+      });
+    } 
+
+    static adminSignup(credentials) {  //might need to include type one day
+      debugger 
+      const request = new Request('http://localhost:3000/users', {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }), 
+        body: JSON.stringify({user: credentials})
+      });
+      /*
+      const request2 = new Request(`http://localhost:3000/${type}`, {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }), 
+        body: JSON.stringify({user: credentials})
+      });
+      */
+  
+      return fetch(request).then(response => {
+        return response.json();
+      }).catch(error => {
+        return error;
+      });
+    }
 
 }
   

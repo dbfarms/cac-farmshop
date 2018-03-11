@@ -46,19 +46,10 @@ class SignUpPage extends React.Component {
 
              < TextInput
             name="password_confirmation"
-            label="password_confirmation"
+            label="password confirmation"
             type="password"
             value={this.state.credentials.password_confirmation}
             onChange={this.onChange}/>
-
-            < TextInput
-            name="authorization"
-            label="authorization"
-            type=""
-            value={this.state.credentials.authorization}
-            onChange={this.onChange}/>
-
-            
 
           < input
             type="submit"

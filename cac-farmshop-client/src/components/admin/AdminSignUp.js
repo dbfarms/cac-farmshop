@@ -44,7 +44,7 @@ class AdminSignUpPage extends React.Component {
   onSignUp(event) {
       event.preventDefault();
       //debugger 
-      this.props.actions.signUpUser(this.state.credentials, this.props.history);
+      this.props.actions.adminSignUpUser(this.state.credentials, this.props.history, this.state.type); //need type!
   }
 
   onRoleChange(role){
@@ -87,12 +87,12 @@ class AdminSignUpPage extends React.Component {
             value={this.state.credentials.password}
             onChange={this.onChange}/>
 
-             < TextInput
-            name="password_confirmation"
-            label="password confirmation"
-            type="password"
-            value={this.state.credentials.password_confirmation}
-            onChange={this.onChange}/>
+          < TextInput
+          name="password_confirmation"
+          label="password confirmation"
+          type="password"
+          value={this.state.credentials.password_confirmation}
+          onChange={this.onChange}/>
 
             <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
@@ -111,6 +111,55 @@ class AdminSignUpPage extends React.Component {
                     }}>Admin</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
+            {this.state.credentials.authorization === '' &&
+              <div>
+              </div>
+            }
+            {this.state.credentials.authorization === 'farmer' &&
+              <div>
+              < TextInput
+                name="name"
+                label="name"
+                value={this.state.credentials.name}
+                onChange={this.onChange}/>
+
+                < TextInput
+                name="address"
+                label="address"
+                value={this.state.credentials.address}
+                onChange={this.onChange}/>
+              </div>
+            }
+            {this.state.credentials.authorization === 'customer' && //enter customer stuff below
+              <div>
+                < TextInput
+                name="name"
+                label="name"
+                value={this.state.credentials.name}
+                onChange={this.onChange}/>
+
+                < TextInput
+                name="address"
+                label="address"
+                value={this.state.credentials.address}
+                onChange={this.onChange}/>
+              </div>
+            }
+            {this.state.credentials.authorization === 'admin' && //enter admin below
+              <div>
+                < TextInput
+                name="name"
+                label="name"
+                value={this.state.credentials.name}
+                onChange={this.onChange}/>
+
+                < TextInput
+                name="address"
+                label="address"
+                value={this.state.credentials.address}
+                onChange={this.onChange}/>
+              </div>
+            }
 
           < input
             type="submit"
@@ -132,7 +181,7 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(null, mapDispatchToProps)(AdminSignUpPage);
 
-
+ 
 /*
 
 
