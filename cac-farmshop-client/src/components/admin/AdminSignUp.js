@@ -18,10 +18,16 @@ class AdminSignUpPage extends React.Component {
             authorization: 'change role',
             first_name: '',
             last_name: '',
+            typeOfUser: {
+              authorization: '',
+              name: '',
+              address: '',
+            },
         },
         dropdownOpen: false,
     }
 
+    this.onTypeChange = this.onTypeChange.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSignUp = this.onSignUp.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -39,6 +45,13 @@ class AdminSignUpPage extends React.Component {
     const credentials = this.state.credentials;
     credentials[field] = event.target.value;
     return this.setState({credentials: credentials});
+  }
+
+  onTypeChange(event) {
+    const field = event.target.name;
+    const typeOfUser = this.state.credentials.typeOfUser;
+    typeOfUser[field] = event.target.value;
+    return this.setState({typeOfUser: typeOfUser});
   }
 
   onSignUp(event) {
@@ -120,44 +133,44 @@ class AdminSignUpPage extends React.Component {
               < TextInput
                 name="name"
                 label="name"
-                value={this.state.credentials.name}
-                onChange={this.onChange}/>
+                value={this.state.typeOfUser.name}
+                onChange={this.onTypeChange}/>
 
                 < TextInput
                 name="address"
                 label="address"
-                value={this.state.credentials.address}
-                onChange={this.onChange}/>
+                value={this.state.typeOfUser.address}
+                onChange={this.onTypeChange}/>
               </div>
             }
             {this.state.credentials.authorization === 'customer' && //enter customer stuff below
               <div>
-                < TextInput
+                 < TextInput
                 name="name"
                 label="name"
-                value={this.state.credentials.name}
-                onChange={this.onChange}/>
+                value={this.state.typeOfUser.name}
+                onChange={this.onTypeChange}/>
 
                 < TextInput
                 name="address"
                 label="address"
-                value={this.state.credentials.address}
-                onChange={this.onChange}/>
+                value={this.state.typeOfUser.address}
+                onChange={this.onTypeChange}/>
               </div>
             }
             {this.state.credentials.authorization === 'admin' && //enter admin below
               <div>
-                < TextInput
+                 < TextInput
                 name="name"
                 label="name"
-                value={this.state.credentials.name}
-                onChange={this.onChange}/>
+                value={this.state.typeOfUser.name}
+                onChange={this.onTypeChange}/>
 
                 < TextInput
                 name="address"
                 label="address"
-                value={this.state.credentials.address}
-                onChange={this.onChange}/>
+                value={this.state.typeOfUser.address}
+                onChange={this.onTypeChange}/>
               </div>
             }
 

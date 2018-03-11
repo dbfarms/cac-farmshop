@@ -18,17 +18,14 @@ Bugs
  -wholesale options?
  -delivery options?
 
- class ChangeColumnName < ActiveRecord::Migration[5.1]
-  def change
-    rename_column :farmers, :farmer_id, :user_id
-  end
-end
-
 
 3-navbar
  -stays along top w/ scroll down
 
 4-admin
+  -sessionStorage id is undefined ... always? sometimes?
+  -users_controller needs to authorization in addition authentication
+  -two headers when new user created as an admin cuase of the dtermining factor for which routes should show up so just fix that
  -view orders of all farmers, edit all farmers 
 
 5-design

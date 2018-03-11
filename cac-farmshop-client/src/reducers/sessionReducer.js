@@ -8,6 +8,8 @@ export default function sessionReducer(state = initialState.session, action) {
     case types.SIGN_UP_SUCCESS:
       //browserHistory.push('/')
       return !!sessionStorage.jwt 
+    case types.NEW_USER_SUCCESS:
+      return //
     case types.LOG_IN_SUCCESS:
       //browserHistory.push('/farm-goods')
       //debugger

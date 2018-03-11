@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
     include ErrorSerializer
+    #before_action :authenticate, only: [:index] PROBABLY NEED TO MAKE USERS INFORMATION SECRET...
     #skip_before_action :authenticate #, only: [:create]
     #LIB/AUTH.RB NEEDS TO BE REPAIRED NEXT TIME GIT GETS FUCKED UP
   
     def index
+      #byebug
+      #CHECK AUTHORIZATION HERE NOT JUST JUST AUTHENTICATION
       render json: User.all
     end
 

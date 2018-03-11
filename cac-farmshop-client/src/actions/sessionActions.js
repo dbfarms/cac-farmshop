@@ -42,20 +42,21 @@ export function signUpUser(credentials, history) {
   };
 }
 
+export function newUserSuccess() {
+  return {type: types.NEW_USER_SUCCESS}
+}
+
 export function adminSignUpUser(credentials, history) {
   return function(dispatch) {
     return sessionApi.signup(credentials).then(response => {
       sessionStorage.setItem('jwt', response.jwt);
-      dispatch(signUpSuccess());
-      history.push('/farm-goods')
+      dispatch(newUserSuccess());
+      history.push('/users')
     }).catch(error => {
       throw(error);
     });
   };
 }
-
-
-
 
 export function logOutUser() {  
     auth.logOut();
@@ -67,6 +68,31 @@ let header = new Headers({
   'Content-Type': 'multipart/form-data',
   'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
 });
+
+const setUsers = users => {
+  return {
+    type: 'GET_USERS_SUCCESS',
+    users
+  }
+}
+
+export const getUsers = () => {
+  return dispatch => {
+    //debugger
+    return fetch('http://localhost:3000/users', { // current-user
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json',
+        'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
+      },
+      //method: "POST",
+      //body: JSON.stringify(sessionStorage.jwt)
+    })
+    .then(response => response.json())
+    .then(userAuth => dispatch(setUser(userAuth)))
+    .catch(error => console.log(error))
+  }
+}
 
 
 //LEFT OFF: 'CAN'T ADD NEW KEY INTO HAS DURING ITERATION' IN APPLICATION CONTROLLER 24

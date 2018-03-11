@@ -13,6 +13,7 @@ import Authorization from './authorization';
 import Home from './Home';
 import { getUser } from '../actions/sessionActions';
 import Header from '../components/common/Header';
+import Users from './Users';
 
 //<IndexRoute component={HomePage} /> /// NEED TO ADD 
 export default class AdminRoutes extends Component {
@@ -24,7 +25,8 @@ export default class AdminRoutes extends Component {
         'create new user': 'signup',
         farmers: 'farmers',
         home: 'home',
-        farmgoods: 'farm-goods'
+        farmgoods: 'farm-goods',
+        users: 'users',
       }
     }
 
@@ -39,6 +41,7 @@ export default class AdminRoutes extends Component {
           <Route exact path="/home" />
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmGoods} />
+          <Route exact path="/users" component={Users} />
           <Route path="*" render={() => <div></div>} />
         </div>
       </BrowserRouter >
