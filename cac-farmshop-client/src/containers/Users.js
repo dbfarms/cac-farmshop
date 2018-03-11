@@ -8,7 +8,7 @@ class User extends Component {
         super(props)
 
         this.state = {
-            
+            users: []
         }
     }
 
@@ -17,10 +17,10 @@ class User extends Component {
     }
 
     render() {
-        debugger 
+        //debugger 
         return(
             <div>
-
+                {this.props.users}
             </div>
         )
     }

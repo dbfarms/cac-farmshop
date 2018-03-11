@@ -35,6 +35,23 @@ class SessionApi {
       });
     } 
 
+    static usersGet(){
+      const request = new Request('http://localhost:3000/users', {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
+          'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
+        }), 
+      });
+  
+      return fetch(request).then(response => {
+        return response.json();
+      }).catch(error => {
+        return error;
+      });
+    }
+
     static adminSignup(credentials) {  //might need to include type one day
       debugger 
       const request = new Request('http://localhost:3000/users', {

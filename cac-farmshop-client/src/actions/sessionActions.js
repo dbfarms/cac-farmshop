@@ -76,6 +76,19 @@ const setUsers = users => {
   }
 }
 
+export function getUsers() {
+  return function(dispatch) {
+    return sessionApi.usersGet().then(response => {
+      dispatch(setUsers());
+      //history.push('/users')
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+
+/*
 export const getUsers = () => {
   return dispatch => {
     //debugger
@@ -85,8 +98,6 @@ export const getUsers = () => {
         'Content-Type': 'application/json',
         'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
       },
-      //method: "POST",
-      //body: JSON.stringify(sessionStorage.jwt)
     })
     .then(response => response.json())
     .then(userAuth => dispatch(setUser(userAuth)))
