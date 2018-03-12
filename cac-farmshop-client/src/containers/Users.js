@@ -26,7 +26,7 @@ class User extends Component {
     render() {
         //const usersList = this.displayUsers(this.props.users)
         return(
-            <div>
+            <div className="userIndex">
                 <ViewUsers usersList={this.state.usersArray} />
             </div>
         )

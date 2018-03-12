@@ -2,10 +2,13 @@ to fix git corrupt file issue:
 find .git/objects/ -type f -empty | xargs rm
 git fetch -p
 git fsck --full
+////////////////////////////////////////////////////////////
+
 
 TO DO LIST:
 Bugs
  -redirects.... 
+ -state farmgood and farmgoods might be the same array in some point, so try to get rid of one 
 
 1- customer perspective
  -adding to carts
@@ -27,6 +30,7 @@ Bugs
  -stays along top w/ scroll down
 
 4-admin
+  -users list page, should have their information (i.e. farmer, customer) with links to orders (for or from)
   -sessionStorage id is undefined ... always? sometimes?
   -users_controller needs to authorization in addition authentication
   -two headers when new user created as an admin cuase of the dtermining factor for which routes should show up so just fix that
@@ -38,6 +42,7 @@ Bugs
 6-misc 
  -get input from farmers 
  -validations for forms
+ -review security issues
 
 7-outreach 
 

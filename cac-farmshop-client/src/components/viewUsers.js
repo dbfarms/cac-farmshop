@@ -3,13 +3,24 @@ import React from 'react';
 const ViewUsers = ({ usersList }) => {
   return usersList.map(user => {
       //debugger 
-        return Object.entries(user.attributes).map(function(keyName, keyIndex) {
-            //debugger
+    return Object.entries(user.attributes).map(function(keyName, keyIndex) {
+        //debugger
+        if (keyName[0] === 'farmer') {
+            return (
+            <div>
+            <label>Farm Name: {keyName[1].name}</label>
+            <label>Address: {keyName[1].address}</label>
+            </div>
+            )
+        } else if (keyName[0] === 'customer') {
+            debugger 
+        } else {
             return (<div class={keyIndex}>
                 <label>{keyName[0]}: {keyName[1]}</label>
             </div>)
-        })
-    }
+        }
+    })
+  }
 )}
 
 export default ViewUsers
