@@ -7,7 +7,7 @@ const ViewUsers = ({ usersList }) => {
         //debugger
         if (keyName[0] === 'farmer') {
             return (
-            <div>
+            <div className="keyName"> 
             <label>Farm Name: {keyName[1].name}</label>
             <label>Address: {keyName[1].address}</label>
             </div>
@@ -15,7 +15,7 @@ const ViewUsers = ({ usersList }) => {
         } else if (keyName[0] === 'customer') {
             debugger 
         } else {
-            return (<div class={keyIndex}>
+            return (<div className="keyName">
                 <label>{keyName[0]}: {keyName[1]}</label>
             </div>)
         }

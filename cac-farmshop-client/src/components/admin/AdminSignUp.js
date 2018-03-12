@@ -133,13 +133,13 @@ class AdminSignUpPage extends React.Component {
               < TextInput
                 name="name"
                 label="name"
-                value={this.state.typeOfUser.name}
+                value={this.state.credentials.typeOfUser.name}
                 onChange={this.onTypeChange}/>
 
                 < TextInput
                 name="address"
                 label="address"
-                value={this.state.typeOfUser.address}
+                value={this.state.credentials.typeOfUser.address}
                 onChange={this.onTypeChange}/>
               </div>
             }
@@ -148,13 +148,13 @@ class AdminSignUpPage extends React.Component {
                  < TextInput
                 name="name"
                 label="name"
-                value={this.state.typeOfUser.name}
+                value={this.state.credentials.typeOfUser.name}
                 onChange={this.onTypeChange}/>
 
                 < TextInput
                 name="address"
                 label="address"
-                value={this.state.typeOfUser.address}
+                value={this.state.credentials.typeOfUser.address}
                 onChange={this.onTypeChange}/>
               </div>
             }
@@ -163,13 +163,13 @@ class AdminSignUpPage extends React.Component {
                  < TextInput
                 name="name"
                 label="name"
-                value={this.state.typeOfUser.name}
+                value={this.state.credentials.typeOfUser.name}
                 onChange={this.onTypeChange}/>
 
                 < TextInput
                 name="address"
                 label="address"
-                value={this.state.typeOfUser.address}
+                value={this.state.credentials.typeOfUser.address}
                 onChange={this.onTypeChange}/>
               </div>
             }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ViewUsers from '../components/viewUsers'
 import { getUsers } from '../actions/sessionActions';
 import { connect } from 'react-redux';
+import './components.css';
 
 class User extends Component {
     constructor(props){
@@ -22,9 +23,15 @@ class User extends Component {
           usersArray: nextProps.users
         })
       }
+
+    /*
+    displayUsers(usersList){
+        debugger
+    }
+    */
     
     render() {
-        //const usersList = this.displayUsers(this.props.users)
+        //const usersToList = this.displayUsers(this.state.usersArray)
         return(
             <div className="userIndex">
                 <ViewUsers usersList={this.state.usersArray} />

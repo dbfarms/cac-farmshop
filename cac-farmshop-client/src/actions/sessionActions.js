@@ -48,8 +48,7 @@ export function newUserSuccess() {
 
 export function adminSignUpUser(credentials, history) {
   return function(dispatch) {
-    return sessionApi.signup(credentials).then(response => {
-      sessionStorage.setItem('jwt', response.jwt);
+    return sessionApi.adminSignup(credentials).then(response => {
       dispatch(newUserSuccess());
       history.push('/users')
     }).catch(error => {

@@ -20,7 +20,7 @@ class SessionApi {
 
     static signup(credentials) {
       //debugger 
-      const request = new Request('http://localhost:3000/users', {
+      const request = new Request('http://localhost:3000/api/users', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json'
@@ -53,8 +53,8 @@ class SessionApi {
     }
 
     static adminSignup(credentials) {  //might need to include type one day
-      debugger 
-      const request = new Request('http://localhost:3000/users', {
+      //debugger 
+      const request = new Request('http://localhost:3000/api/users', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json'
