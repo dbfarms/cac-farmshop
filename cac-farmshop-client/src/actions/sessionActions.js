@@ -79,7 +79,7 @@ const setUsers = users => {
 export function getUsers() {
   return function(dispatch) {
     return sessionApi.usersGet().then(response => {
-      dispatch(setUsers());
+      dispatch(setUsers(response));
       //history.push('/users')
     }).catch(error => {
       throw(error);

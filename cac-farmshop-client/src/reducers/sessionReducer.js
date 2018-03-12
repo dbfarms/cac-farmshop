@@ -22,6 +22,9 @@ export default function sessionReducer(state = initialState.session, action) {
       )
     case types.USER_SUCCESS:
       return sessionStorage 
+    case types.GET_USERS_SUCCESS:
+      //debugger 
+      return action.users.data
     default: 
       return state;
   }

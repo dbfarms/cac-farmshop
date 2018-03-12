@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ViewUsers from '../components/viewUsers'
 import { getUsers } from '../actions/sessionActions';
 import { connect } from 'react-redux';
 
@@ -8,7 +8,7 @@ class User extends Component {
         super(props)
 
         this.state = {
-            users: []
+            usersArray: []
         }
     }
 
@@ -16,11 +16,18 @@ class User extends Component {
         this.props.getUsers();
     }
 
-    render() {
+    componentWillReceiveProps(nextProps){
         //debugger 
+        this.setState({
+          usersArray: nextProps.users
+        })
+      }
+    
+    render() {
+        //const usersList = this.displayUsers(this.props.users)
         return(
             <div>
-                {this.props.users}
+                <ViewUsers usersList={this.state.usersArray} />
             </div>
         )
     }
@@ -35,4 +42,30 @@ const mapStateToProps = (state, ownProps) => {
   
   export default connect(mapStateToProps, { getUsers })(User); // 
   
-  
+/*
+
+displayUsers(usersList){
+        //debugger
+        return usersList.forEach(user => (
+           Object.entries(usersList).map(function(keyName, keyIndex) {
+               <div>
+                   <label>{keyName}</label>
+               </div>
+            })
+        )
+    )}
+
+/////
+
+{usersList === 'true' &&
+                <div>
+
+                </div>
+            }
+            {usersList !== 'true' &&
+                <div>
+                </div>
+            }
+
+
+*/

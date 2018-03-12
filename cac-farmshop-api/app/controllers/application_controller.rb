@@ -21,7 +21,7 @@ class ApplicationController < ActionController::API
     request.headers.each do |header|
       if header[0].scan(/AUTH/) != []
         #byebug
-        session[:Authorization] = header 
+        #session[:Authorization] = header 
         testArray << header
       end 
     end 
@@ -52,7 +52,7 @@ class ApplicationController < ActionController::API
   private
 
     def token
-      request.env["HTTP_AUTHORIZATION"] #.scan(/Bearer (.*)$/).flatten.last
+      request.env["HTTP_AUTHORIZATION"].scan(/Bearer (.*)$/).flatten.last
     end
 
     def auth

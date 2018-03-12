@@ -1,3 +1,7 @@
+to fix git corrupt file issue:
+find .git/objects/ -type f -empty | xargs rm
+git fetch -p
+git fsck --full
 
 TO DO LIST:
 Bugs
