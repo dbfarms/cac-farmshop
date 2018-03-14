@@ -55,18 +55,21 @@ class AdminSignUpPage extends React.Component {
   }
 
   onSignUp(event) {
-      event.preventDefault();
-      //debugger 
-      this.props.actions.adminSignUpUser(this.state.credentials, this.props.history, this.state.type); //need type!
+    event.preventDefault();
+    //debugger 
+    if (this.props.authorization === 'customer') {
+      this.props.actions.adminCustomerSignUpUser(this.state.credentials, this.props.history, this.state.type);
+    } else if (this.props.authorization === 'farmer')  {
+    this.props.actions.adminSignUpUser(this.state.credentials, this.props.history, this.state.type); //need type!
+    }
   }
 
   onRoleChange(role){
-      //debugger 
-      const field = "authorization" 
-      const credentials = this.state.credentials;
-      credentials[field] = role 
-      return this.setState({credentials: credentials})
-      
+    //debugger 
+    const field = "authorization" 
+    const credentials = this.state.credentials;
+    credentials[field] = role 
+    return this.setState({credentials: credentials})
   }
 
   render() {
@@ -145,17 +148,7 @@ class AdminSignUpPage extends React.Component {
             }
             {this.state.credentials.authorization === 'customer' && //enter customer stuff below
               <div>
-                 < TextInput
-                name="name"
-                label="name"
-                value={this.state.credentials.typeOfUser.name}
-                onChange={this.onTypeChange}/>
-
-                < TextInput
-                name="address"
-                label="address"
-                value={this.state.credentials.typeOfUser.address}
-                onChange={this.onTypeChange}/>
+               
               </div>
             }
             {this.state.credentials.authorization === 'admin' && //enter admin below

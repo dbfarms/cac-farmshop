@@ -87,6 +87,7 @@ const setUsers = users => {
 }
 
 export function getUsers() {
+  //debugger
   return function(dispatch) {
     return sessionApi.usersGet().then(response => {
       dispatch(setUsers(response));

@@ -7,7 +7,8 @@ class Api::UsersController < ApplicationController
     def index
       #byebug
       #CHECK AUTHORIZATION HERE NOT JUST JUST AUTHENTICATION
-      render json: User.all
+      
+      render json: User.all #{users: User.all, customers: Customer_User.all}
     end
 
     def authorized 
