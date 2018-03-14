@@ -3,7 +3,7 @@ class Api::FarmersController < ApplicationController
     before_action :set_farmer, only: [:show, :edit, :destroy]
 
     def index
-        render json: Farmer.all
+        render json: {farmers: Farmer.all, customers: CustomerUser.all}
     end
 
     def create

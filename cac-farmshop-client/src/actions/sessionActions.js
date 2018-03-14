@@ -98,6 +98,56 @@ export function getUsers() {
   };
 }
 
+const setCustomerUsers = customers => {
+  //debugger
+  return {
+    type: 'GET_CUSTOMERS_SUCCESS',
+    customers
+  }
+}
+
+export function getCustomerUsers() {
+  //debugger
+  return function(dispatch) {
+    return sessionApi.usersCustomersGet().then(response => {
+      dispatch(setCustomerUsers(response));
+      //history.push('/users')
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+////
+
+
+
+const setCombinedUsers = users => {
+  debugger
+  return {
+    type: 'GET_CUSTOMERS_SUCCESS',
+    users
+  }
+}
+
+export function getCombinedUsers() {
+  //debugger
+  return function(dispatch) {
+    return sessionApi.farmersGet().then(response => {
+      dispatch(setUsers(response));
+      //history.push('/users')
+    }), 
+    
+    sessionApi.usersCustomersGet().then(response => {
+      dispatch(setCustomerUsers(response));
+    }).catch(error => {
+      throw(error);
+    })
+  };
+}
+
+
+
 
 /*
 export const getUsers = () => {

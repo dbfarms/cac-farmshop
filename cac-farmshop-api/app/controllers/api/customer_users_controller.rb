@@ -7,7 +7,7 @@ class Api::CustomerUsersController < ApplicationController
     def index
       #byebug
       #CHECK AUTHORIZATION HERE NOT JUST JUST AUTHENTICATION
-      render json: Customer_User.all
+      render json: CustomerUser.all
     end
 
     def authorized 
@@ -17,14 +17,14 @@ class Api::CustomerUsersController < ApplicationController
     end 
   
     def show
-      render json: Customer_User.find(params[:id])
+      render json: CustomerUser.find(params[:id])
     end
   
     def create
-      byebug
+      #byebug
       new_customer_user = CustomerUser.new(user_params)
 
-      byebug
+      #byebug
 
       if new_customer_user.save
         render json: {}, status: 200

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import ViewUsers from '../components/viewUsers'
+import ViewCustomerUsers from '../components/viewCustomerUsers'
 import { getUsers } from '../actions/sessionActions';
+import { getCustomerUsers } from '../actions/sessionActions';
+import { getCombinedUsers } from '../actions/sessionActions';
+//import * as getAllUsers from '../actions/sessionActions';
 import { connect } from 'react-redux';
 import './components.css';
 
@@ -9,45 +13,73 @@ class User extends Component {
         super(props)
 
         this.state = {
-            usersArray: []
+            usersArray: [],
+            customersArray: undefined,
+            users: undefined 
         }
     }
 
     componentWillMount(){
-        this.props.getUsers();
+        this.props.getCombinedUsers();
+        //this.props.getUsers();
+        //this.props.getCustomerUsers();
     }
 
     componentWillReceiveProps(nextProps){
         //debugger 
-        this.setState({
-          usersArray: nextProps.users
-        })
-      }
+        if (nextProps.users.farmers !== undefined)  {
+            this.setState({
+            usersArray: nextProps.users.farmers,
+            })
+        }
 
-    /*
-    displayUsers(usersList){
-        debugger
+        if (nextProps.users.customers !== undefined)  {
+            this.setState({
+                customersArray: nextProps.users.customers 
+            })
+        }
     }
-    */
+   
     
     render() {
-        //const usersToList = this.displayUsers(this.state.usersArray)
+        //debugger 
         return(
             <div className="userIndex">
-                <ViewUsers usersList={this.state.usersArray} />
+            {this.state.usersArray !== undefined &&
+                <div>
+                    <label> Farmers </label>
+                    <ViewUsers usersList={this.state.usersArray} />
+                    <br />
+                </div>
+            }
+            {this.state.customersArray !== undefined &&
+                <div>
+                    <label> Customers </label>
+                    <ViewCustomerUsers customersList={this.state.customersArray} />
+                    <br />
+                </div>
+
+            }
+                
             </div>
         )
     }
 }
 
+//<label> Farmers </label>
+//<label> Customers </label>
+//<ViewCustomerUsers customersList={this.state.customersArray}/>
+
 const mapStateToProps = (state, ownProps) => {
     //debugger 
     return ({
         users: state.users,
+        //customers: state.customers
     })
   }
   
-  export default connect(mapStateToProps, { getUsers })(User); // 
+  //export default connect(mapStateToProps, { getUsers, getCustomerUsers })(User); 
+  export default connect(mapStateToProps, { getCombinedUsers })(User);  
   
 /*
 
