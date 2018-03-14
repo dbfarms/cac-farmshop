@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ViewCustomerUsers = ({ customersList }) => {
-    debugger 
+    //debugger 
     return customersList.map(customer => {
         return (
             <div className="keyName"> 

@@ -73,7 +73,7 @@ class SessionApi {
 
     static farmersGet(){
       //debugger 
-      const requestUsers = new Request('http://localhost:3000/api/farmers', {
+      const requestUsers = new Request('http://localhost:3000/api/users', {
         method: 'GET',
         headers: new Headers({
           'Access-Control-Allow-Origin':'',
