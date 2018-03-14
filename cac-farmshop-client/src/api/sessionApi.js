@@ -53,6 +53,24 @@ class SessionApi {
       });
     }
 
+    static usersCustomersGet(){
+      //debugger 
+      const requestUsers = new Request('http://localhost:3000/api/customer_users', {
+        method: 'GET',
+        headers: new Headers({
+          'Access-Control-Allow-Origin':'',
+          'Content-Type': 'application/json',
+          'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
+        }), 
+      });
+  
+      return fetch(requestUsers).then(response => {
+        return response.json();
+      }).catch(error => {
+        return error;
+      });
+    }
+
     static adminSignup(credentials) {  //might need to include type one day
       //debugger 
       const request = new Request('http://localhost:3000/api/users', {

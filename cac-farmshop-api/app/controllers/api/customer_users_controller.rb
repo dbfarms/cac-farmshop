@@ -21,8 +21,8 @@ class Api::CustomerUsersController < ApplicationController
     end
   
     def create
-      #byebug
-      new_customer_user = Customer_User.new(customer_user_params)
+      byebug
+      new_customer_user = CustomerUser.new(user_params)
 
       byebug
 
@@ -35,8 +35,8 @@ class Api::CustomerUsersController < ApplicationController
 
     private
   
-      def customer_user_params
-        params.require(:customer_user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :authorization)
+      def user_params
+        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :authorization)
       end
 
   end

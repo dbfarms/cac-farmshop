@@ -57,9 +57,9 @@ class AdminSignUpPage extends React.Component {
   onSignUp(event) {
     event.preventDefault();
     //debugger 
-    if (this.props.authorization === 'customer') {
+    if (this.state.credentials.authorization === 'customer') {
       this.props.actions.adminCustomerSignUpUser(this.state.credentials, this.props.history, this.state.type);
-    } else if (this.props.authorization === 'farmer')  {
+    } else if (this.state.credentials.authorization === 'farmer')  {
     this.props.actions.adminSignUpUser(this.state.credentials, this.props.history, this.state.type); //need type!
     }
   }

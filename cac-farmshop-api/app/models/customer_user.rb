@@ -1,7 +1,7 @@
-class Customer_User < ApplicationRecord
-    validates :name, presence: true 
-    validates :name, uniqueness: true 
-    
-    #belongs_to :user 
+class CustomerUser < ApplicationRecord
+    has_secure_password
+    validates :email, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
+    validates :password, presence: true  #, confirmation: true 
+    #validates :password_confirmation, presence: true
     
 end
