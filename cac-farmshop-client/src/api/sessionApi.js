@@ -78,6 +78,23 @@ class SessionApi {
       });
     }
 
+    static adminCustomerSignup(credentials) {  //might need to include type one day
+      //debugger 
+      const request = new Request('http://localhost:3000/api/customer_users', {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }), 
+        body: JSON.stringify({user: credentials})
+      });
+  
+      return fetch(request).then(response => {
+        return response.json();
+      }).catch(error => {
+        return error;
+      });
+    }
+
 }
   
-  export default SessionApi;
+export default SessionApi;

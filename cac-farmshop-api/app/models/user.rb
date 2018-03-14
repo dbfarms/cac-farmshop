@@ -5,7 +5,7 @@ class User < ApplicationRecord
   #validates :password_confirmation, presence: true
 
   belongs_to :farmer 
-  belongs_to :customer
+  #belongs_to :customer
 
 end
 

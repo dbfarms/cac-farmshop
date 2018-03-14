@@ -57,6 +57,17 @@ export function adminSignUpUser(credentials, history) {
   };
 }
 
+export function adminCustomerSignUpUser(credentials, history) {
+  return function(dispatch) {
+    return sessionApi.adminCustomerSignup(credentials).then(response => {
+      dispatch(newUserSuccess());
+      history.push('/users')
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 export function logOutUser() {  
     auth.logOut();
     return {type: types.LOG_OUT}

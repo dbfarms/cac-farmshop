@@ -94,7 +94,7 @@ class App extends Component {
       {sessionStorage.jwt === "undefined" &&
         <div>
         <h3>Welcome VISITOR</h3>
-          <CustomerRoutes />
+          <CustomerRoutes /> //eventually this will be different because customers will have access to order history etc 
         </div>
       }
       {sessionStorage.jwt === "customer" &&
@@ -125,7 +125,7 @@ const mapStateToProps = (state, ownProps) => {
   //debugger 
   return ({
       farmGoods: state.farmGoods,
-      logged_in: state.session,
+      logged_in: state.session, //changing this to check in header.js for sessionStorage that isn't undefined
       //users: state.users // i suspect i no longer need this line... >
   })
 }

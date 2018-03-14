@@ -52,7 +52,14 @@ class ApplicationController < ActionController::API
   private
 
     def token
-      request.env["HTTP_AUTHORIZATION"].scan(/Bearer (.*)$/).flatten.last
+      #byebug
+      if request.env["HTTP_AUTHORIZATION"].scan(/Bearer /) != [] 
+        #byebug
+        request.env["HTTP_AUTHORIZATION"].scan(/Bearer (.*)$/).flatten.last
+      else 
+        #byebug
+        request.env["HTTP_AUTHORIZATION"]
+      end 
     end
 
     def auth

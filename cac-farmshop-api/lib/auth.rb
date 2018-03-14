@@ -12,6 +12,7 @@ class Auth
   end
 
   def self.decode(token)
+    #byebug
     JWT.decode(token, 
       auth_secret, 
       true, 

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :farmgoods
     resources :days
     resources :users
+    resources :customer_users 
  end
 
 end

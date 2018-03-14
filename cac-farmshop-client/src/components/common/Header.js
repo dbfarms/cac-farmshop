@@ -54,7 +54,7 @@ class Header extends React.Component {
   render() {
     const routes = this.makeRoutes() 
     //debugger 
-    if (this.props.logged_in) {
+    if (sessionStorage.jwt !== "undefined") { //also this isn't actually working so
       //debugger 
       return (
         <nav className="background">

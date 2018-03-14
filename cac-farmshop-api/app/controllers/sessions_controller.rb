@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
       user_id = request.env["HTTP_AUTHORIZATION"].scan(/Bearer (.*)$/).flatten.last
       user = Auth.decode(user_id)
       userToJson = User.find(user["user"])
-      farmer_id = user["user"]
+      farmer_id = user["user"] #this looks like it's probably wrong... ?
       #byebug
       #head farmer_id
       render json: {userToJson: userToJson}
