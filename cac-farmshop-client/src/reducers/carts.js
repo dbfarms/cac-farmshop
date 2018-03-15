@@ -1,7 +1,9 @@
 export default (state = [], action) => {
   switch(action.type) {
-    case 'GET_CART_SUCCESS':
+    case 'GET_CARTS_SUCCESS':
       return action.carts
+    case 'GET_CART_SUCCESS':
+      return action.cart
     case 'CREATE_CART_SUCCESS':
       return state.concat(action.cart);
     default:

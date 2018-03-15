@@ -41,6 +41,7 @@ export default class FarmerRoutes extends Component {
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmerFarmGoods} />
           <Route exact path="/new-farm-good" component={NewFarmgoodForm} />
+          <Route path ="/farm-goods/:id/edit" component={EditFarmgoodForm} />
           <Route path="*" render={() => <div></div>} />
           <Route path="/logout" component={Logout}/> 
         </div>

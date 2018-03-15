@@ -36,6 +36,7 @@ class FarmGoodModal extends React.Component {
         <button className="FarmGoodsCard" onClick={() => this.simpleDialog.show()}>
           <p>{farmGood.farmGood.attributes.name}</p>
           <p>image of farmgood here</p>
+          <p>Available: {farmGood.farmGood.attributes.inventory}</p>
         </button>
         <SkyLight hideOnOverlayClicked ref={ref => this.simpleDialog = ref} title={this.props.farmGood.attributes.name}>
           <img className="farmGoodImage" src={farmGood.img_url} alt={farmGood.user_id} />

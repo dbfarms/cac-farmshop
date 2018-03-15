@@ -16,7 +16,7 @@ let sentData={
 // ** action creators **
 const setCarts = carts => {
   return {
-    type: 'GET_CART_SUCCESS',
+    type: 'GET_CARTS_SUCCESS',
     carts
   }
 }
@@ -35,6 +35,25 @@ export const getCarts = () => {
       //fetch(`${API_URL}/carts`)
       .then(response => response.json())
       .then(carts => dispatch(setCarts(carts)))
+      .catch(error => console.log(error));
+  }
+}
+
+const setCart = (carts, user_id) => {
+  //debugger
+  const cart = carts.map(cart => cart.customer_user_id === Number(user_id))
+  return {
+    type: 'GET_CART_SUCCESS',
+    cart
+  }
+}
+
+export const getCart = (user_id) => {
+  return dispatch => {
+    return fetch('http://localhost:3000/api/carts', header)
+      //fetch(`${API_URL}/carts`)
+      .then(response => response.json())
+      .then(carts => dispatch(setCart(carts, user_id)))
       .catch(error => console.log(error));
   }
 }

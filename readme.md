@@ -17,7 +17,9 @@ Bugs
  -
 
 2- farmers 
--need to work out authentication/authorization for creating goods cause right now it's off... 
+-orders page of all orders and who they are going to and when they're needed and it should be emailed to user too
+-editfarmgoods needs to authenticate farmer and crashes if not visited through the farmerfarmgood page
+-need to work out authentication/authorization in farmgoods_controller when creating goods cause right now it's off... 
 -upload photo of farmgood or should that only be admin resp? 
 -need to be add farmgood to farmer's farmgoods in backend whenever something new is created, only going one direction it seems
  -profile page -- NEEDS TO BE EDITABLE

@@ -60,11 +60,7 @@ class FarmerFarmGoods extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    
     const farmersFarmGoods = nextProps.farmGoods.data.filter(fg => fg.attributes.farmer.id === Number(sessionStorage.id))
-    console.log(farmersFarmGoods)
-    //debugger 
-
     this.setState({
       farmGoods_array: farmersFarmGoods
     })
@@ -81,14 +77,6 @@ class FarmerFarmGoods extends Component {
     })
   }
   
-  /*
-  this.setState(
-    {
-      farmgood: farmGood,
-      isEditing: true,
-    })
-  */
-
   handleDelete(farmGood){
     this.props.deleteFarmGoods(farmGood);
     alert('deleting')

@@ -2,33 +2,47 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import CartCard from '../components/CartCard';
 import CartForm from './CartForm';
-import { getCarts } from '../actions/carts'
+import { getCart } from '../actions/carts'
 import './Carts.css';
 
-class Carts extends Component {
+class Cart extends Component {
+  constructor(props){
+    super(props)
+    //debugger 
+
+    this.state = {
+      user_id: sessionStorage.id, 
+      user_name: sessionStorage.name,
+      cart: ''
+    }
+  }
 
   componentDidMount(){
-    this.props.getCarts()
+    this.props.getCart(this.state.user_id)
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.state.cart = nextProps.cart 
   }
 
   render() {
     return (
       <div>
       <div className="CartsContainer">
-        <h1>Carts </h1>
-        {this.props.carts.map(cart => <CartCard  key={cart.id} cart={cart} />)}
-        <CartForm />
+        <h1>Cart </h1>
+        <CartCard  key={this.state.cart.id} cart={this.state.cart} />
       </div>
       </div>
    )
   }
 }
-//
+//<CartCard  key={this.state.cart.id} cart={this.state.cart} />
+//<CartForm />
 
 const mapStateToProps = (state) => {
   return ({
-      carts: state.carts
+      cart: state.cart
   })
 }
 
-export default connect(mapStateToProps, { getCarts })(Carts);
+export default connect(mapStateToProps, { getCart })(Cart);
