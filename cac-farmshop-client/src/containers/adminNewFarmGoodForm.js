@@ -35,7 +35,6 @@ class NewFarmgoodForm extends Component {
       value: "Category",
       days_array: [],
       days:"daysAvailable", //THIS IS FOR RAILS PARAMS
-      farmer_id: sessionStorage.id 
     }
   }
 
@@ -130,12 +129,13 @@ class NewFarmgoodForm extends Component {
             />
           </div>
           <br />
-          <label htmlFor="farmgood_id" />
-            <input type="hidden" 
-                    name={this.state.farmer_id}
-                    value={this.state.farmer_id}
-                    ref={(input) => { this.actionInput = input }} 
-            />
+          <label htmlFor="farmgood_quantity">Farmer ID now (but eventually this won't exist)":</label>
+          <input
+            type="number"
+            onChange={this.handleOnChange}
+            name="farmer"
+            value={farmer}
+          />
           <br />
           <label htmlFor="farmgood_inventory">Quantity available:</label>
           <input

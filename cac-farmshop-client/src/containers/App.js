@@ -88,7 +88,7 @@ class App extends Component {
   }
 
   render() {
-    this.determineUser()
+    this.determineUser(); //this just catches a bug that would occur when creating new users but may not be needed anymore who knows?
     return (
       <div>
       {sessionStorage.jwt === "undefined" &&

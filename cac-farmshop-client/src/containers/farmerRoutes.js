@@ -13,6 +13,8 @@ import { connect } from 'react-redux';
 import Home from './Home';
 import { getUser } from '../actions/sessionActions';
 import Header from '../components/common/Header';
+import NewFarmgoodForm from './NewFarmgoodForm';
+import EditFarmgoodForm from './EditFarmgoodForm';
 
 //<IndexRoute component={HomePage} /> /// NEED TO ADD 
 export default class FarmerRoutes extends Component {
@@ -38,6 +40,7 @@ export default class FarmerRoutes extends Component {
           <Route exact path="/home" />
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmerFarmGoods} />
+          <Route exact path="/new-farm-good" component={NewFarmgoodForm} />
           <Route path="*" render={() => <div></div>} />
           <Route path="/logout" component={Logout}/> 
         </div>

@@ -7,6 +7,7 @@ git fsck --full
 
 TO DO LIST:
 Bugs
+ -session controller needs to be able to discern between farmer and customer when creating session
  -redirects.... 
  -state farmgood and farmgoods might be the same array in some point, so try to get rid of one 
 
@@ -16,6 +17,7 @@ Bugs
  -
 
 2- farmers 
+-upload photo of farmgood or should that only be admin resp? 
 -need to be add farmgood to farmer's farmgoods in backend whenever something new is created, only going one direction it seems
  -profile page -- NEEDS TO BE EDITABLE
  -make it so farmers can only edit their own farmgoods etc
