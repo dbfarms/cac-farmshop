@@ -61,15 +61,12 @@ class FarmerFarmGoods extends Component {
 
   componentWillReceiveProps(nextProps){
     
-    const farmersFarmGoods = nextProps.farmGoods.data.filter(fg => {
-      //debugger 
-      fg.attributes.farmer.id === sessionStorage.id
-    })
-
-    debugger 
+    const farmersFarmGoods = nextProps.farmGoods.data.filter(fg => fg.attributes.farmer.id === Number(sessionStorage.id))
+    console.log(farmersFarmGoods)
+    //debugger 
 
     this.setState({
-      farmGoods_array: nextProps.farmGoods.data
+      farmGoods_array: farmersFarmGoods
     })
   }
 
