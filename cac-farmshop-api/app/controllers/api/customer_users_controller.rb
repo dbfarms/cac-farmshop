@@ -23,10 +23,13 @@ class Api::CustomerUsersController < ApplicationController
     def create
       #byebug
       new_customer_user = CustomerUser.new(user_params)
-
+      cart = Cart.new 
+      new_customer_user.cart = cart 
+      cart.customer_user = new_customer_user
       #byebug
 
       if new_customer_user.save
+        
         render json: {}, status: 200
       else
         render json: ErrorSerializer.serialize(user.errors), status: 422

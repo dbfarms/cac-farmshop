@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314190132) do
+ActiveRecord::Schema.define(version: 20180315180414) do
 
   create_table "carts", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "customer_user_id"
     t.string "status", default: "not submited"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20180314190132) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
-    t.integer "customer_user_id"
+    t.integer "cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "authorization"
