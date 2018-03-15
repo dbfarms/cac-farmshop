@@ -20,7 +20,7 @@ class SessionApi {
 
     static signup(credentials) {
       //debugger 
-      const request = new Request('http://localhost:3000/api/users', {
+      const request = new Request('http://localhost:3000/api/customer_users', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json'
