@@ -71,8 +71,6 @@ class EditFarmgoodForm extends Component {
       days_array: days_array 
      })
      this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
-
-
   }
 
   changeCategory = event => {

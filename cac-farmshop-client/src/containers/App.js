@@ -97,9 +97,9 @@ class App extends Component {
           <CustomerRoutes /> //eventually this will be different because customers will have access to order history etc 
         </div>
       }
-      {sessionStorage.jwt === "customer" &&
+      {sessionStorage.role === "customer" &&
         <div>
-        <h3>Welcome VISITOR</h3>
+        <h3>Welcome CUSTOMERNAMEHERE</h3>
           <CustomerRoutes />
         </div>
       }
@@ -111,7 +111,7 @@ class App extends Component {
       }
       {sessionStorage.role === "farmer" &&
         <div>
-        <h3>auth level is {sessionStorage.role}</h3>
+        <h3>Welcome {sessionStorage.name} / auth level is {sessionStorage.role}</h3>
         <FarmerRoutes />
         </div>
       }

@@ -1,5 +1,5 @@
 class Api::FarmgoodsController < ApplicationController
-    before_action :authenticate_user!, only: [:create, :update, :destroy]
+    #before_action :authenticate, only: [:create, :update, :destroy]
     before_action :set_farmgood, only: [:edit, :destroy]
 
     def index
@@ -20,7 +20,7 @@ class Api::FarmgoodsController < ApplicationController
         
         farmgood.category = Category.find_by(title: category_name)
         farmgood.farmer = Farmer.find(farmerID)
-        byebug 
+        #byebug 
         if farmgood.save
             render json: farmgood
         else

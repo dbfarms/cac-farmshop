@@ -3,11 +3,8 @@ class SessionsController < ApplicationController
   
   def create
     #byebug
-    
     #########
     #conditional determing if farer or customer probably needs to be done differently
-
-    #byebug 
     if (!!User.find_by(email: auth_params[:email]))
       #byebug 
       user = User.find_by(email: auth_params[:email])
@@ -30,19 +27,42 @@ class SessionsController < ApplicationController
         request.env['Name'] = name
         session[:Name] = name
 
-        render json: {jwt: jwt, role: role, farmer_id: user.id } #, id: id} ##DOES ROLE NEED BE ENCRYPTED?
+        render json: {jwt: jwt, role: role, user_id: user.farmer.id, name: name } #, id: id} ##DOES ROLE NEED BE ENCRYPTED?
       else 
         render json: {:errors=>
         [{:detail=>"incorrect email or password", 
           :source=>{:pointer=>"user/err_type"}}
         ]}, status: 404
       end 
-
     elsif (CustomerUser.find_by(email: auth_params[:email]))
+      #byebug 
+      user = CustomerUser.find_by(email: auth_params[:email])
+      #byebug
+      if user && user.authenticate(auth_params[:password])
+        #byebug
+        jwt = Auth.issue({user: user.id})
+        role = user.authorization
+        email = user.email 
+        
+        request['Authorization'] = jwt
+        request.headers['Authorization'] = jwt
+        request.env['Authorization'] = jwt 
+        session[:Authorization] = jwt 
+        request['Role'] = role
+        request.headers['Role'] = role
+        request.env['Role'] = role
+        session[:Role] = role
+        request.headers['Email'] = email
+        request.env['Email'] = email
+        session[:Eame] = email
 
-      byebug 
-
-      render json: {jwt: jwt, role: role }  ##DOES ROLE NEED BE ENCRYPTED?
+        render json: {jwt: jwt, role: role, user_id: user.id, email: email } #, id: id} ##DOES ROLE NEED BE ENCRYPTED?
+      else 
+        render json: {:errors=>
+        [{:detail=>"incorrect email or password", 
+          :source=>{:pointer=>"user/err_type"}}
+        ]}, status: 404
+      end 
     ## right now admin doesn't need a separate conditional but it might so don't sleep on it
     else
       #byebug

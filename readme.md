@@ -17,6 +17,7 @@ Bugs
  -
 
 2- farmers 
+-need to work out authentication/authorization for creating goods cause right now it's off... 
 -upload photo of farmgood or should that only be admin resp? 
 -need to be add farmgood to farmer's farmgoods in backend whenever something new is created, only going one direction it seems
  -profile page -- NEEDS TO BE EDITABLE

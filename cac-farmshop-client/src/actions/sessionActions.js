@@ -14,10 +14,12 @@ const loginSuccess = () => {
 export function logInUser(credentials, history) {  
   //debugger
   return function(dispatch) {
+    //debugger
     return sessionApi.login(credentials).then(response => {
       sessionStorage.setItem('jwt', response.jwt);
       sessionStorage.setItem('role', response.role);
-      sessionStorage.setItem('id', response.farmer_id);
+      sessionStorage.setItem('id', response.user_id);
+      sessionStorage.setItem('name', response.name);
       dispatch(loginSuccess());
       history.push('/farm-goods')
     }).catch(error => {

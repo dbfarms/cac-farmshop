@@ -88,7 +88,8 @@ class NewFarmgoodForm extends Component {
   handleOnChange = event => {
     const { name, value } = event.target;
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-      [name]: value
+      [name]: value,
+      farmer: this.state.farmer_id 
     })
     this.props.updateFarmgoodFormData(currentFarmgoodFormData)
   } 
@@ -96,7 +97,7 @@ class NewFarmgoodForm extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     this.props.createFarmgood(this.props.FarmgoodFormData, this.props.history);
-    this.props.changeShow('show all')
+    //this.props.changeShow('show all')
   }
 
   changeCategory = event => {
@@ -130,7 +131,7 @@ class NewFarmgoodForm extends Component {
             />
           </div>
           <br />
-          <label htmlFor="farmgood_id" />
+          <label htmlFor="farmer_id" />
             <input type="hidden" 
                     name={this.state.farmer_id}
                     value={this.state.farmer_id}

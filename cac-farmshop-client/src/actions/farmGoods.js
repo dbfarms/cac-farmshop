@@ -40,9 +40,8 @@ const setFarmGood = farmGood => {
   }
 }
 
-
-
 const addFarmGoods = farmGood => {
+  //debugger 
   return {
     type: 'CREATE_FARMGOOD_SUCCESS',
     farmGood
