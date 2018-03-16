@@ -85,6 +85,40 @@ export const getFarmGoods = () => {
   }
 }
 
+//
+export const getCustomerFarmGoods = () => {
+  return dispatch => {
+    return fetch('http://localhost:3000/api/farmgoods', header)
+      .then(response => response.json())
+      .then(farmGoods => dispatch(setFarmGoods(farmGoods)))
+      //.then(dispatch(getCart(sessionStorage.id)))
+      .catch(error => console.log(error));
+  }
+}
+
+export const getCart = (user_id) => {
+  debugger
+  return dispatch => {
+    return fetch('http://localhost:3000/api/carts', header)
+      //fetch(`${API_URL}/carts`)
+      .then(response => response.json())
+      .then(carts => dispatch(setCart(carts, user_id)))
+      .catch(error => console.log(error));
+  }
+}
+
+const setCart = (carts, user_id) => {
+  //debugger
+  const cart = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
+  //debugger 
+  return {
+    type: 'GET_CART_SUCCESS',
+    cart
+  }
+}
+
+//
+
 export const createFarmgood = (farmGood, history) => {
   return dispatch => {
     return fetch('http://localhost:3000/api/farmgoods', {

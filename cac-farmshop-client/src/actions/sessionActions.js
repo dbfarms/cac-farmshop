@@ -10,6 +10,27 @@ const loginSuccess = () => {
   }
 }
 
+const setCart = (carts, user_id) => {
+  //debugger
+  const cart = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
+  //debugger 
+  return {
+    type: 'GET_CART_SUCCESS',
+    cart
+  }
+}
+
+export const getCart = (user_id) => {
+  //debugger
+  return dispatch => {
+    return fetch('http://localhost:3000/api/carts', header)
+      //fetch(`${API_URL}/carts`)
+      .then(response => response.json())
+      .then(carts => dispatch(setCart(carts, user_id)))
+      .catch(error => console.log(error));
+  }
+}
+
 
 export function logInUser(credentials, history) {  
   //debugger
@@ -21,6 +42,10 @@ export function logInUser(credentials, history) {
       sessionStorage.setItem('id', response.user_id);
       sessionStorage.setItem('name', response.name);
       dispatch(loginSuccess());
+      //debugger 
+      if (sessionStorage.role === 'customer') {
+        dispatch(getCart(sessionStorage.id))
+      }
       history.push('/farm-goods')
     }).catch(error => {
       throw(error);
@@ -125,7 +150,7 @@ export function getCustomerUsers() {
 
 
 const setCombinedUsers = users => {
-  debugger
+  //debugger
   return {
     type: 'GET_CUSTOMERS_SUCCESS',
     users

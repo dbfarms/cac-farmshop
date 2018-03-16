@@ -31,8 +31,10 @@ class CustomerFarmGoodModal extends React.Component {
 
   addToCart(event){
     event.preventDefault();
-    debugger
-    this.props.addFarmgoodToCart()
+    //debugger
+    const cart_id = Number(this.props.cart[0].id)
+    const farmGood_id = Number(this.props.farmGood.id)
+    this.props.addFarmgoodToCart(farmGood_id, cart_id)
   }
 
   render() {
@@ -57,7 +59,7 @@ class CustomerFarmGoodModal extends React.Component {
             <p>No longer available. Check back soon</p>
           }
           {displayDays}
-          <button onClick={this.addToCart}> Add To Cart </button>
+          <button onClick={this.addToCart.bind(this)}> Add To Cart </button>
         </SkyLight>
       </div>
     )

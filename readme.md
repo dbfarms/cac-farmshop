@@ -4,15 +4,25 @@ git fetch -p
 git fsck --full
 ////////////////////////////////////////////////////////////
 
+where i left off:
+1) adding to cart breaks 
+  a) internal server error
+  b) reducer hasn't been written all the way through
+  c) the modal should close?
+  d) quantity
+  e) if line item already exists, conditional to put instead of post
 
 TO DO LIST:
 Bugs
+ -load page for all pages
  -session controller needs to be able to discern between farmer and customer when creating session
  -redirects.... 
  -state farmgood and farmgoods might be the same array in some point, so try to get rid of one 
 
 1- customer perspective
- -adding to carts
+
+ -cart component that exists on sidebar or something and slides down as you pick shit?
+ -adding to lineitem taht already exists... needs a conditional to know whether to post or put
  -decreasing quantity available (line_items)
  -get rid of home and signup in header 
 
