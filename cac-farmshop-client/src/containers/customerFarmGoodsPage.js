@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import FarmGoodModal from '../components/farmGoodModal';
+import CustomerFarmGoodModal from '../components/customerFarmgoodModal';
 import FarmGoodsCard from '../components/FarmGoodsCard';
 import FarmGoodCard from '../components/farmGoodCard';
 import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoods from server
@@ -11,9 +11,10 @@ import EditFarmgoodForm from './EditFarmgoodForm';
 import FarmgoodNav from '../components/farmgoodNav'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
+import { getCart } from '../actions/carts'
 import './FarmGoods.css';
 
-class FarmGoods extends Component {
+class CustomerFarmGoods extends Component {
   constructor(props) {
     super(props);
     
@@ -52,6 +53,7 @@ class FarmGoods extends Component {
     if (this.state.farmGoods_array === undefined){
       this.props.getFarmGoods()
     }
+    this.props.getCart(this.state.user_id)
   }
 
   componentWillReceiveProps(nextProps){
@@ -71,14 +73,6 @@ class FarmGoods extends Component {
     })
   }
   
-  /*
-  this.setState(
-    {
-      farmgood: farmGood,
-      isEditing: true,
-    })
-  */
-
   handleDelete(farmGood){
     this.props.deleteFarmGoods(farmGood);
     alert('deleting')
@@ -103,7 +97,7 @@ class FarmGoods extends Component {
         <div>
            <div className="Farm-Goods-Container">
             <h1>For sale (click on farmgood to edit): </h1>
-            {this.state.farmGoods_array.map(farmGood => <FarmGoodModal  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+            {this.state.farmGoods_array.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
         </div>
       }
@@ -120,7 +114,7 @@ class FarmGoods extends Component {
               }
             })
             }
-             {thisFilter.map(farmGood => <FarmGoodModal  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing} />)}
+             {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing} />)}
           </div>
       }
       {this.state.showKey === "category"  &&
@@ -133,7 +127,7 @@ class FarmGoods extends Component {
                 }
             })
             }
-             {thisFilter.map(farmGood => <FarmGoodModal  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+             {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
           </div>
       }
       
@@ -153,10 +147,8 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getFarmGoods, deleteFarmGoods })(FarmGoods); // 
+export default connect(mapStateToProps, { getFarmGoods, deleteFarmGoods, getCart })(CustomerFarmGoods); // 
 
 /*
-
-
 
 */

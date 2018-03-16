@@ -23,6 +23,8 @@ class LogInPage extends React.Component {
   onSave(event) {
     event.preventDefault();
     this.props.actions.logInUser(this.state.credentials, this.props.history);
+    //debugger 
+    //this.props.history.push('/home')
   }
 
   render() {

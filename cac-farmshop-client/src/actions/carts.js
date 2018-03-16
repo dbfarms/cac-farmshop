@@ -40,8 +40,8 @@ export const getCarts = () => {
 }
 
 const setCart = (carts, user_id) => {
-  //debugger
-  const cart = carts.map(cart => cart.customer_user_id === Number(user_id))
+  const cart = carts.filter(cart => cart.customer_user_id === Number(user_id))
+  //debugger 
   return {
     type: 'GET_CART_SUCCESS',
     cart
@@ -71,6 +71,35 @@ export const createCart = cart => {
     .then(response => response.json())
     .then(cart => {
       dispatch(addCart(cart))
+      dispatch(resetCartForm())
+    })
+    .catch(error => console.log(error))
+  }
+}
+
+
+const addToCart = (cart_id) => {
+  debugger 
+  return {
+    type: 'ADD_CART_SUCCESS',
+    cart_id
+  }
+}
+
+export const addFarmgoodToCart = (farmgood_id, cart_id) => {
+  return dispatch => {
+    //return fetch(`http://localhost:3000/api/carts/${cart_id}`, {
+      return fetch('http://localhost:3000/api/line_items', {
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ cart_id: cart_id, farmgood_id: farmgood_id })
+    })
+    .then(response => response.json())
+    .then(cart => {
+      dispatch(addToCart(cart_id))
       dispatch(resetCartForm())
     })
     .catch(error => console.log(error))

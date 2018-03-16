@@ -9,4 +9,5 @@ class Farmgood < ApplicationRecord
     belongs_to :farmer #s, through: :farmerfarmgoods
     has_many :days_available
     has_many :days, through: :days_available
+    has_many :line_items
 end

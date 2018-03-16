@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :days
     resources :users
     resources :customer_users 
+    resources :line_items
  end
 
 end

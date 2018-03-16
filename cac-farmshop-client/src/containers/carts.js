@@ -22,10 +22,15 @@ class Cart extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    this.state.cart = nextProps.cart 
+    //debugger
+    this.setState({
+      cart: nextProps.cart[0] 
+    })
+    
   }
 
   render() {
+    //debugger 
     return (
       <div>
       <div className="CartsContainer">
@@ -40,6 +45,7 @@ class Cart extends Component {
 //<CartForm />
 
 const mapStateToProps = (state) => {
+  //debugger 
   return ({
       cart: state.cart
   })

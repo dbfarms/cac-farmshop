@@ -21,6 +21,7 @@ class Api::CartsController < ApplicationController
     end
 
     def update
+        byebug 
         if @cart.update(cart_params)
             render json: @cart
         else

@@ -14,7 +14,7 @@ Bugs
 1- customer perspective
  -adding to carts
  -decreasing quantity available (line_items)
- -
+ -get rid of home and signup in header 
 
 2- farmers 
 -orders page of all orders and who they are going to and when they're needed and it should be emailed to user too

@@ -9,6 +9,7 @@ import farmGood from './reducers/farmGoodsReducer'
 import farmGoods from './reducers/farmGoodsReducer'
 import farmers from './reducers/farmersReducer'
 import carts from './reducers/carts';
+import cart from './reducers/carts';
 import cartFormData from './reducers/cartFormData';
 import FarmgoodFormData from './reducers/farmGoodFormData';
 import EditedFarmgoodFormData from './reducers/farmGoodFormData';
@@ -19,6 +20,7 @@ import customers from './reducers/sessionReducer';
 
 const reducers = combineReducers({
   carts,
+  cart,
   cartFormData,
   farmers,
   farmGoods,
