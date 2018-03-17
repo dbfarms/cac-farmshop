@@ -33,9 +33,10 @@ class CustomerFarmGoodModal extends React.Component {
   addToCart(event){
     event.preventDefault();
     //debugger
-    const cart_id = Number(this.props.cart.id)
+    const cart = this.props.cart 
+    //const cart_id = Number(this.props.cart.id)
     const farmGood_id = Number(this.props.farmGood.id)
-    this.props.addFarmgoodToCart(farmGood_id, cart_id)
+    this.props.addFarmgoodToCart(farmGood_id, cart)
   }
 
   render() {

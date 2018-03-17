@@ -4,13 +4,13 @@ git fetch -p
 git fsck --full
 ////////////////////////////////////////////////////////////
 
+***************
 where i left off:
-1) adding to cart breaks 
-  a) internal server error
-  b) reducer hasn't been written all the way through
-  c) the modal should close?
-  d) quantity
-  e) if line item already exists, conditional to put instead of post
+-lineitems fetch request needs to be implemented, possibly INSTEAD of getting the cart 
+-this way we have quantity
+-still need to add to previously existing lineitem if item is in cart
+-needs to deduct from available quantity of farmgoods unless taht shouldn't happen until checkout... which means we'd need a second check
+***************
 
 TO DO LIST:
 Bugs

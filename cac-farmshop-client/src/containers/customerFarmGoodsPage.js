@@ -78,7 +78,7 @@ class CustomerFarmGoods extends Component {
   handleCategory = showCategory => this.setState({ showCategory: showCategory })
 
   render() {
-    //debugger
+    debugger
     //console.log(this.state.cart)
     var objectToArrayDays = []
     var thisFilter = []
