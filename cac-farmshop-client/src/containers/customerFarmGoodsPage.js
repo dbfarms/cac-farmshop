@@ -13,6 +13,7 @@ import FarmgoodNav from '../components/farmgoodNav'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { getCart } from '../actions/carts'
+import CartCard from '../components/CartCard';
 import './FarmGoods.css';
 
 class CustomerFarmGoods extends Component {
@@ -78,13 +79,17 @@ class CustomerFarmGoods extends Component {
 
   render() {
     //debugger
-    console.log(this.state.cart)
+    //console.log(this.state.cart)
     var objectToArrayDays = []
     var thisFilter = []
+    
     //
     return (
       <div className="page-tree">
       <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
+      {this.state.card !== '' && 
+        <CartCard cart={this.state.cart}/>
+      }
       {this.state.farmGoods_array === undefined &&
         <p>loading loading</p>
       }

@@ -4,7 +4,7 @@ export default (state = [], action) => {
       return action.carts
     case 'GET_CART_SUCCESS':
     //debugger
-      return action.cart
+      return action.cart[0]
     case 'CREATE_CART_SUCCESS':
       return state.concat(action.cart);
     default:

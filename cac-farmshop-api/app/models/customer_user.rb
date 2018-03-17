@@ -5,5 +5,6 @@ class CustomerUser < ApplicationRecord
     #validates :password_confirmation, presence: true
     
     belongs_to :cart 
+    has_many :line_items, through: :cart 
 
 end

@@ -2,7 +2,8 @@ import React from 'react';
 import SkyLight from 'react-skylight';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addFarmgoodToCart } from '../actions/carts';
+//import { addFarmgoodToCart } from '../actions/carts';
+import { addFarmgoodToCart } from '../actions/lineitems';
 
 class CustomerFarmGoodModal extends React.Component {
   constructor(props){
@@ -32,7 +33,7 @@ class CustomerFarmGoodModal extends React.Component {
   addToCart(event){
     event.preventDefault();
     //debugger
-    const cart_id = Number(this.props.cart[0].id)
+    const cart_id = Number(this.props.cart.id)
     const farmGood_id = Number(this.props.farmGood.id)
     this.props.addFarmgoodToCart(farmGood_id, cart_id)
   }

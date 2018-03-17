@@ -7,8 +7,7 @@ class Api::LineItemsController < ApplicationController
     end
 
     def create
-      byebug 
-
+      #byebug 
         line_item = LineItem.new(line_item_params)
         if line_item.save
             render json: line_item

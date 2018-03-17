@@ -10,6 +10,7 @@ import farmGoods from './reducers/farmGoodsReducer'
 import farmers from './reducers/farmersReducer'
 import carts from './reducers/carts';
 import cart from './reducers/carts';
+import lineitems from './reducers/lineitemsReducer';
 import cartFormData from './reducers/cartFormData';
 import FarmgoodFormData from './reducers/farmGoodFormData';
 import EditedFarmgoodFormData from './reducers/farmGoodFormData';
@@ -30,7 +31,8 @@ const reducers = combineReducers({
   days,
   session,
   users,
-  customers
+  customers,
+  lineitems
 });
 
 const middleware = [thunk]; //for async actions
