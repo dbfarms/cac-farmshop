@@ -6,10 +6,11 @@ git fsck --full
 
 ***************
 where i left off:
--lineitems fetch request needs to be implemented, possibly INSTEAD of getting the cart 
--this way we have quantity
+-when does quantity decrease... when added to cart or when checkout? maybe it happens one way when it's more than 5 but another way when it's less... but that is probably dumb
 -still need to add to previously existing lineitem if item is in cart
 -needs to deduct from available quantity of farmgoods unless taht shouldn't happen until checkout... which means we'd need a second check
+-you can still add things that no longer exist... perhaps you should be able to do that but then it'll say you can't actually checkout until it's available agian... or... until a certain day you can't order
+-what's the turnaround on an order?
 ***************
 
 TO DO LIST:

@@ -79,7 +79,7 @@ export const createCart = cart => {
   }
 }
 
-
+/*
 const addToCart = (cart_id, farmgood_id) => {
   debugger 
   return {
@@ -109,3 +109,5 @@ export const addFarmgoodToCart = (farmgood_id, cart_id) => {
     .catch(error => console.log(error))
   }
 }
+
+*/

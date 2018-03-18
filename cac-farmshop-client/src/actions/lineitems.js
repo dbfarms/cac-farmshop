@@ -1,6 +1,8 @@
-export const addFarmgoodToCart = (farmgood_id, cart) => {
+export const addFarmgoodToCart = (farmgood_id, cart, user_id) => {
     //debugger 
-    const cart_id = Number(cart.id) 
+    const cart_id = Number(cart.id) //CART DOESN'T ACTUALLY EXIST HERE
+    //debugger 
+    
     return dispatch => {
       //return fetch(`http://localhost:3000/api/carts/${cart_id}`, {
         return fetch('http://localhost:3000/api/line_items', {
@@ -9,7 +11,7 @@ export const addFarmgoodToCart = (farmgood_id, cart) => {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        body: JSON.stringify({ cart_id: cart.id, farmgood_id: farmgood_id })
+        body: JSON.stringify({ farmgood_id: farmgood_id, user_id: user_id })
       })
       .then(response => response.json())
       .then(lineitem => {

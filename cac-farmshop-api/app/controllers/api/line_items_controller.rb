@@ -8,6 +8,11 @@ class Api::LineItemsController < ApplicationController
 
     def create
       #byebug 
+        ##### this is where i left off, finding a cart in order to see if a lineitem already exists for this particular item 
+        if Cart.find_by(customer_user_id: params["user_id"])
+            byebug 
+        end 
+
         line_item = LineItem.new(line_item_params)
         if line_item.save
             render json: line_item

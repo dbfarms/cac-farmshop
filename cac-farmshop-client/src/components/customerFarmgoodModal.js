@@ -36,7 +36,8 @@ class CustomerFarmGoodModal extends React.Component {
     const cart = this.props.cart 
     //const cart_id = Number(this.props.cart.id)
     const farmGood_id = Number(this.props.farmGood.id)
-    this.props.addFarmgoodToCart(farmGood_id, cart)
+    const user_id = Number(sessionStorage.id) 
+    this.props.addFarmgoodToCart(farmGood_id, cart, user_id)
   }
 
   render() {

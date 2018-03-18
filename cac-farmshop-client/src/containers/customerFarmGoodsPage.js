@@ -85,7 +85,7 @@ class CustomerFarmGoods extends Component {
     //console.log(this.state.cart)
     var objectToArrayDays = []
     var thisFilter = []
-    console.log(this.state.lineitems)
+    //console.log(this.state.lineitems)
     //
     return (
       <div className="page-tree">
