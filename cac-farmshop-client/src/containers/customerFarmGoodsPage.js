@@ -12,7 +12,8 @@ import EditFarmgoodForm from './EditFarmgoodForm';
 import FarmgoodNav from '../components/farmgoodNav'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { getCart } from '../actions/carts'
+//import { getCart } from '../actions/carts'
+import { getLineItems } from '../actions/lineitems'
 import CartCard from '../components/CartCard';
 import './FarmGoods.css';
 
@@ -28,6 +29,7 @@ class CustomerFarmGoods extends Component {
       showCategory: '',
       days: [],
       cart: '',
+      lineitems: '',
       farmgood: {
         name: '',
         farmer: '', //EVENTUALLY THIS WILL DEFAULT TO THE LOGGED IN FARMER BUT FOR NOW YOU CAN CHOOSE
@@ -62,14 +64,15 @@ class CustomerFarmGoods extends Component {
   }
 
   componentDidMount(){
-    this.props.getCart(sessionStorage.id)
+    //this.props.getCart(sessionStorage.id)
+    this.props.getLineItems(sessionStorage.id)
   }
 
   componentWillReceiveProps(nextProps){
     //debugger
     this.setState({
       farmGoods_array: nextProps.farmGoods.data,
-      cart: nextProps.cart
+      lineitems: nextProps.lineitems
     })
   }
 
@@ -78,17 +81,17 @@ class CustomerFarmGoods extends Component {
   handleCategory = showCategory => this.setState({ showCategory: showCategory })
 
   render() {
-    debugger
+    //debugger
     //console.log(this.state.cart)
     var objectToArrayDays = []
     var thisFilter = []
-    
+    console.log(this.state.lineitems)
     //
     return (
       <div className="page-tree">
       <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
       {this.state.card !== '' && 
-        <CartCard cart={this.state.cart}/>
+        <CartCard cart={this.state.lineitems}/>
       }
       {this.state.farmGoods_array === undefined &&
         <p>loading loading</p>
@@ -142,12 +145,13 @@ const mapStateToProps = (state) => {
   return ({
       farmGoods: state.farmGoods,
       days: state.days, 
-      cart: state.cart
+      //cart: state.cart
+      lineitems: state.lineitems 
   })
 }
 
-export default connect(mapStateToProps, { getCustomerFarmGoods, getCart })(CustomerFarmGoods); // 
+export default connect(mapStateToProps, { getCustomerFarmGoods, getLineItems })(CustomerFarmGoods); // 
 
 /*
-
+getCart
 */

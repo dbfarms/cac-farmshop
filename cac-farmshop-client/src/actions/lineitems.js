@@ -31,10 +31,15 @@ export const addFarmgoodToCart = (farmgood_id, cart) => {
 
   //
 
-  const showLineItems = (lineitems) => {
+  const showLineItems = (lineitems, user_id) => {
+    //debugger 
+    lineitems = lineitems.data.filter(li =>
+      //debugger 
+      li.attributes["customer-users"].id === Number(user_id)
+    )
     return {
       type: 'GET_LINEITEM_SUCCESS',
-      lineitems
+      lineitems 
     }
   }
 
@@ -53,7 +58,7 @@ export const addFarmgoodToCart = (farmgood_id, cart) => {
       })
       .then(response => response.json())
       .then(lineitems => {
-        dispatch(showLineItems(lineitems))
+        dispatch(showLineItems(lineitems, user_id))
       })
       .catch(error => console.log(error))
     }

@@ -5,6 +5,7 @@ export default (state = [], action) => {
         //const newCart = []
         return action.lineitem.data
       case 'GET_LINEITEM_SUCCESS':
+        //debugger 
         return action.lineitems
       default:
         return state
