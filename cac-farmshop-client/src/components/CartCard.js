@@ -1,14 +1,19 @@
 import React from 'react';
 
 const CartCard = ( lineitems ) => {
-    debugger
+    //debugger
+    var total = 0;
     return (
     <div className="CartsCard">
     <h3>{sessionStorage.name}</h3>
     <img className="CartImage"  />
     {lineitems.cart !== "" &&
-        (lineitems.cart.map(li => <p>{li.attributes.farmgood.name} - {li.attributes.quantity} at </p>))
-    }
+        (lineitems.cart.map(li => <p>{li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}</p>)
+    )}
+    {lineitems.cart !== "" &&
+        (lineitems.cart.forEach(li => total += li.attributes.farmgood.price)
+    )}
+    <label>Total: {total}</label>
     </div>
     
 )}
