@@ -8,12 +8,36 @@ class Api::LineItemsController < ApplicationController
 
     def create
         ##### this is where i left off, finding a cart in order to see if a lineitem already exists for this particular item 
-        newLine = false 
-        #byebug
-        #if Cart.find_by(customer_user_id: params["user_id"])
+        newLine = true 
         cart = Cart.find_by(customer_user_id: params["user_id"])
+        #byebug 
 
-        if cart 
+        cart.line_items.each do |li| 
+            if li.farmgood_id === params["farmgood_id"]
+                #byebug 
+                li.quantity += 1 
+                li.save 
+                newLine = false 
+                render json: li
+            end 
+        end 
+
+        if newLine == true 
+            line_item = LineItem.new(line_item_params)
+            line_item.cart = cart 
+            cart.line_items << line_item 
+            #byebug
+            if line_item.save
+                #byebug
+                render json: line_item
+            else
+                render json: { message: line_item.errors}, status: 400
+            end
+        end 
+
+=begin 
+        if cart.line_items != []
+            #byebug 
             cart.line_items.each do |li| 
                 if li.farmgood_id === params["farmgood_id"]
                     #byebug 
@@ -25,12 +49,17 @@ class Api::LineItemsController < ApplicationController
             end 
         else 
             line_item = LineItem.new(line_item_params)
+            line_item.cart = cart 
+            cart.line_items << line_item 
+            #byebug
             if line_item.save
                 render json: line_item
             else
                 render json: { message: line_item.errors}, status: 400
             end
         end 
+=end 
+
     end
 
     def show

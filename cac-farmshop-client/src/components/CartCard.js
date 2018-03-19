@@ -15,14 +15,21 @@ class CartCard extends Component {
 
     componentWillMount(){
         if (this.state.lineitems === undefined ) {
-            debugger 
+            //debugger 
             this.props.getLineItems();
         }
     }
 
-    deleteItem = () => {
+    componentWillReceiveProps(nextProps){
         //debugger 
-        const lineItemId = Number(this.id)
+        this.setState({
+            lineitems: nextProps.lineitems
+        })
+    }
+
+    deleteItem = (li) => {
+        //debugger 
+        var lineItemId = Number(li.id)
         //debugger
         this.props.removeLineItem(lineItemId)
     }
@@ -39,7 +46,7 @@ class CartCard extends Component {
     {lineitems !== "" &&
         (lineitems.map(li => <p>
             {li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}
-            <button onClick={this.deleteItem.bind(li)}>X</button>
+            <button onClick={() => this.deleteItem(li)}>X</button>
         </p>)
     )}
     {lineitems !== "" &&

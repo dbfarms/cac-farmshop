@@ -8,14 +8,16 @@ export default (state = [], action) => {
         //debugger 
         return action.lineitems
       case 'DELETE_LINEITEM_SUCCESS':
-        debugger 
+        //debugger 
         const newState = Object.assign([], state);
-        const indexOfLineItemToDelete = state.data.findIndex(li => {
-          return li.id === action.lineItemId
+        const indexOfLineItemToDelete = state.findIndex(li => {
+          //debugger 
+          return Number(li.id) === action.lineItemId
         })
         if (indexOfLineItemToDelete > -1 ) {
-          newState.data.splice(indexOfLineItemToDelete, 1)
+          newState.splice(indexOfLineItemToDelete, 1)
         }
+        //debugger 
         return (
           newState
         );

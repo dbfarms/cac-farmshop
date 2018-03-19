@@ -67,7 +67,7 @@ export const getLineItems = (user_id) => {
 }
 
 const deleteLineItem = (lineItemId) =>{
-  debugger 
+  //debugger 
   return {
     type: 'DELETE_LINEITEM_SUCCESS',
     lineItemId 
@@ -75,7 +75,7 @@ const deleteLineItem = (lineItemId) =>{
 }
 
 export const removeLineItem = (lineItemId) => {
-  debugger
+  //debugger
   return dispatch => {
     return fetch(`http://localhost:3000/api/line_items/${lineItemId}`, {
       headers: {
