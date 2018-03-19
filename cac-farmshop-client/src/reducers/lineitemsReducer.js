@@ -3,7 +3,11 @@ export default (state = [], action) => {
       case 'ADD_TO_CART_SUCCESS':
         //debugger 
         //const newCart = []
-        return action.lineitem.data
+        const addedItem = Object.assign([], state)
+        //debugger
+        return (
+          addedItem.concat(action.lineitem.data)
+        )
       case 'GET_LINEITEM_SUCCESS':
         //debugger 
         return action.lineitems

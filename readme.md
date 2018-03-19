@@ -6,6 +6,8 @@ git fsck --full
 
 ***************
 where i left off:
+3/19 - adding quantity doesn't update cart right 
+-need to pass customer id (or cart id but that may )
 -when does quantity decrease... when added to cart or when checkout? maybe it happens one way when it's more than 5 but another way when it's less... but that is probably dumb
 -still need to add to previously existing lineitem if item is in cart
 -needs to deduct from available quantity of farmgoods unless taht shouldn't happen until checkout... which means we'd need a second check
@@ -21,7 +23,7 @@ Bugs
  -state farmgood and farmgoods might be the same array in some point, so try to get rid of one 
 
 1- customer perspective
-
+ -removing things from cart
  -cart component that exists on sidebar or something and slides down as you pick shit?
  -adding to lineitem taht already exists... needs a conditional to know whether to post or put
  -decreasing quantity available (line_items)

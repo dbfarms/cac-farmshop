@@ -7,7 +7,6 @@ class Api::LineItemsController < ApplicationController
     end
 
     def create
-        ##### this is where i left off, finding a cart in order to see if a lineitem already exists for this particular item 
         newLine = true 
         cart = Cart.find_by(customer_user_id: params["user_id"])
         #byebug 

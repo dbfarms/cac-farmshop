@@ -37,13 +37,14 @@ class CartCard extends Component {
     render(){
     //debugger 
     const lineitems = this.state.lineitems
+    //debugger
     var total = 0;
     return (
     <div className="CartsCard">
     <h3>{sessionStorage.name}</h3>
     <img className="CartImage"  />
     
-    {lineitems !== "" &&
+    {lineitems !== "" && //THIS IS WHERE I LEFT OFF, FOR SOME REASON LINEITEMS IS MESSED UP AFTER ADDING
         (lineitems.map(li => <p>
             {li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}
             <button onClick={() => this.deleteItem(li)}>X</button>
