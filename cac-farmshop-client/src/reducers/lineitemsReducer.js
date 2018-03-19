@@ -7,9 +7,35 @@ export default (state = [], action) => {
       case 'GET_LINEITEM_SUCCESS':
         //debugger 
         return action.lineitems
+      case 'DELETE_LINEITEM_SUCCESS':
+        debugger 
+        const newState = Object.assign([], state);
+        const indexOfLineItemToDelete = state.data.findIndex(li => {
+          return li.id === action.lineItemId
+        })
+        if (indexOfLineItemToDelete > -1 ) {
+          newState.data.splice(indexOfLineItemToDelete, 1)
+        }
+        return (
+          newState
+        );
       default:
         return state
     }
   }
 
- 
+ /*
+case 'DELETE_FARMGOOD_SUCCESS':
+        const newState = Object.assign([], state);
+        const indexOfFarmgoodToDelete = state.data.findIndex(farmGood => {
+        return farmGood.id == action.farmGood.id
+        })
+        if (indexOfFarmgoodToDelete > -1) {
+        newState.data.splice(indexOfFarmgoodToDelete, 1)
+        }
+        //debugger 
+        return (
+          newState
+        );
+
+ */

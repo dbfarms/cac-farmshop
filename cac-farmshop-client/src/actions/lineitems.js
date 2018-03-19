@@ -45,7 +45,7 @@ export const addFarmgoodToCart = (farmgood_id, cart, user_id) => {
     }
   }
 
-  export const getLineItems = (user_id) => {
+export const getLineItems = (user_id) => {
     //debugger 
     //const cart_id = Number(cart.id) 
     return dispatch => {
@@ -64,4 +64,28 @@ export const addFarmgoodToCart = (farmgood_id, cart, user_id) => {
       })
       .catch(error => console.log(error))
     }
+}
+
+const deleteLineItem = (lineItemId) =>{
+  debugger 
+  return {
+    type: 'DELETE_LINEITEM_SUCCESS',
+    lineItemId 
+  }
+}
+
+export const removeLineItem = (lineItemId) => {
+  debugger
+  return dispatch => {
+    return fetch(`http://localhost:3000/api/line_items/${lineItemId}`, {
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json'
+      },
+      method: 'DELETE'
+    })
+    .then(() => {
+      dispatch(deleteLineItem(lineItemId))
+    })
+  }
 }

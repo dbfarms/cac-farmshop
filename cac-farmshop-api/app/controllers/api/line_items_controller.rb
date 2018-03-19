@@ -19,7 +19,7 @@ class Api::LineItemsController < ApplicationController
                     #byebug 
                     li.quantity += 1 
                     li.save 
-                    
+
                     render json: li
                 end 
             end 
@@ -47,11 +47,20 @@ class Api::LineItemsController < ApplicationController
     end
 
     def destroy
-        if @line_item.destroy
-            render json: { message: "successfully destroyed" }, status: 204
-        else
+
+        if @line_item.quantity == 1 
+            if @line_item.destroy
+                render json: { message: "successfully destroyed" }, status: 204
+            else
+                render json: { message: "unable to remove this line_item" }, status: 400
+            end
+        elsif @line_item.quantity > 1 
+            @line_item.quantity -= 1 
+            @line_item.save 
+            render json: { message: "deleted one of this item" }, status: 204
+        else 
             render json: { message: "unable to remove this line_item" }, status: 400
-        end
+        end 
     end
 
     private
