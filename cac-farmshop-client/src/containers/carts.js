@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import CartCard from '../components/CartCard';
-import CartForm from './CartForm';
 import { getLineItems } from '../actions/lineitems'
 import './Carts.css';
 
@@ -26,7 +25,6 @@ class Cart extends Component {
     this.setState({
       lineitems: nextProps.lineitems //[0] 
     })
-    
   }
 
   render() {
@@ -48,8 +46,6 @@ class Cart extends Component {
    )
   }
 }
-//<CartCard  key={this.state.cart.id} cart={this.state.cart} />
-//<CartForm />
 
 const mapStateToProps = (state) => {
   //debugger 

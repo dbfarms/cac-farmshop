@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { getLineItems } from '../actions/lineitems'
-import { removeLineItem } from '../actions/lineitems'
+import { connect } from 'react-redux';
+import { getLineItems } from '../actions/lineitems';
+import { removeLineItem } from '../actions/lineitems';
+import { Link } from 'react-router-dom';
+//import Button from 'material-ui/Button';
 
 class CartCard extends Component {
     constructor(props) {
     super(props)
-
-    this.state = {
-        lineitems: this.props.lineitems
-    }
-    
+        this.state = {
+            lineitems: this.props.lineitems
+        }
     }
 
     componentWillMount(){
@@ -40,18 +40,8 @@ class CartCard extends Component {
         })
     }
 
-    checkout(){
-        debugger 
-    }
-
     render(){
-    //debugger 
-    //if (this.state.lineitems !== ''){
-        //const lineitems = this.sortLineItems(this.state.lineitems)
-    //} else {
-       const lineitems = this.state.lineitems
-    //}
-    //debugger
+    const lineitems = this.state.lineitems
     var total = 0;
     return (
     <div className="CartsCard">
@@ -69,7 +59,9 @@ class CartCard extends Component {
     )}
 
     <label>Total: {total}</label>
-    <button onClick={() => this.checkout()}>Checkout</button>
+    <Link to="/checkout">
+        <button>Checkout</button>
+    </Link>
     </div>
     
     )}

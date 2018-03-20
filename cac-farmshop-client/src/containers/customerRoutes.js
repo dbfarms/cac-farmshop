@@ -13,7 +13,8 @@ import Authorization from './authorization';
 import Home from './Home';
 import { getUser } from '../actions/sessionActions';
 import Header from '../components/common/Header';
-import Cart from './carts'
+import Cart from './carts';
+import Checkout from './Checkout';
 
 //<IndexRoute component={HomePage} /> /// NEED TO ADD 
 export default class CustomerRoutes extends Component {
@@ -22,7 +23,6 @@ export default class CustomerRoutes extends Component {
 
     this.state = {
       routes: {
-        'Sign Up': 'signup',
         farmers: 'farmers',
         home: 'home',
         farmgoods: 'farm-goods',
@@ -41,6 +41,7 @@ export default class CustomerRoutes extends Component {
           <Route exact path="/farm-goods" component={CustomerFarmGoods} />
           <Route path="*" render={() => <div></div>} />
           <Route exact path='/cart' component={Cart}/>
+          <Route exact path='/checkout' component={Checkout}/>
         </div>
       </BrowserRouter >
     );

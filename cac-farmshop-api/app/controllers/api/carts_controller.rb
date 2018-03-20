@@ -30,6 +30,9 @@ class Api::CartsController < ApplicationController
     end
 
     def destroy
+
+        byebug 
+        
         if @cart.destroy
             render json: { message: "successfully destroyed" }, status: 204
         else

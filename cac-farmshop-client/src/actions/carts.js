@@ -79,6 +79,33 @@ export const createCart = cart => {
   }
 }
 
+//
+
+const checkedOut = (lineitems) =>{
+  //debugger 
+  return {
+    type: 'CHECKOUT_SUCCESS',
+    lineitems
+  }
+}
+
+export const checkingOutNow = (lineitems, cartID) => {
+  //debugger
+  return dispatch => {
+    return fetch(`http://localhost:3000/api/carts/${cartID}`, {
+        headers: {
+          'Access-Control-Allow-Origin':'',
+          'Content-Type': 'application/json'
+        },
+        method: 'DELETE'
+    })
+    .then(() => {
+      dispatch(checkedOut(lineitems))
+    })
+  }
+}
+
+
 /*
 const addToCart = (cart_id, farmgood_id) => {
   debugger 
