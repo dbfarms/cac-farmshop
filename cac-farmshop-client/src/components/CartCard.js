@@ -34,9 +34,19 @@ class CartCard extends Component {
         this.props.removeLineItem(lineItemId)
     }
 
+    sortLineItems(lineitems){
+        var sortedLI = lineitems.sort(function(a, b) {
+            return a.id = b.id;
+        })
+    }
+
     render(){
     //debugger 
-    const lineitems = this.state.lineitems
+    //if (this.state.lineitems !== ''){
+        //const lineitems = this.sortLineItems(this.state.lineitems)
+    //} else {
+       const lineitems = this.state.lineitems
+    //}
     //debugger
     var total = 0;
     return (
@@ -44,7 +54,7 @@ class CartCard extends Component {
     <h3>{sessionStorage.name}</h3>
     <img className="CartImage"  />
     
-    {lineitems !== "" && //THIS IS WHERE I LEFT OFF, FOR SOME REASON LINEITEMS IS MESSED UP AFTER ADDING
+    {lineitems !== "" && 
         (lineitems.map(li => <p>
             {li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}
             <button onClick={() => this.deleteItem(li)}>X</button>

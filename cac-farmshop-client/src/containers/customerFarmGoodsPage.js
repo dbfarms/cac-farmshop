@@ -70,6 +70,7 @@ class CustomerFarmGoods extends Component {
 
   componentWillReceiveProps(nextProps){
     //debugger
+    
     this.setState({
       farmGoods_array: nextProps.farmGoods.data,
       lineitems: nextProps.lineitems

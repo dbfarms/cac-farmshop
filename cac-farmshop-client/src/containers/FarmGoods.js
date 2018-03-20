@@ -71,14 +71,6 @@ class FarmGoods extends Component {
     })
   }
   
-  /*
-  this.setState(
-    {
-      farmgood: farmGood,
-      isEditing: true,
-    })
-  */
-
   handleDelete(farmGood){
     this.props.deleteFarmGoods(farmGood);
     alert('deleting')

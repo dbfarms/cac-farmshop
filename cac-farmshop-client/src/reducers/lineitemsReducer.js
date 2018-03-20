@@ -11,23 +11,29 @@ export default (state = [], action) => {
       case 'ADD_QUANTITY_CART_SUCCESS':
         //debugger 
         const editedLineItem = Object.assign({}, action.lineitem.data)
-        const editState = [...state.filter(li => li.id !== action.lineitem.data.id)]
-        editState.push(editedLineItem)
+        const editState = [...state.map(li => {
+          if (li.id === action.lineitem.data.id) {
+            return action.lineitem.data 
+          } else {
+            return li 
+          }
+        })]
         return (editState)
       case 'GET_LINEITEM_SUCCESS':
-        //debugger 
         return action.lineitems
       case 'DELETE_LINEITEM_SUCCESS':
-        //debugger 
-        const newState = Object.assign([], state);
+        var newState = Object.assign([], state);
         const indexOfLineItemToDelete = state.findIndex(li => {
-          //debugger 
           return Number(li.id) === action.lineItemId
         })
-        if (indexOfLineItemToDelete > -1 ) {
-          newState.splice(indexOfLineItemToDelete, 1)
+        const lineItem = state[indexOfLineItemToDelete]
+        if (lineItem.attributes.quantity > 1 ) {
+          newState[indexOfLineItemToDelete].attributes.quantity -= 1 
+        } else {
+          if (indexOfLineItemToDelete > -1 ) {
+            newState.splice(indexOfLineItemToDelete, 1)
+          }
         }
-        //debugger 
         return (
           newState
         );
