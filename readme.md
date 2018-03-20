@@ -6,10 +6,8 @@ git fsck --full
 
 ***************
 where i left off:
-3/19 - adding quantity doesn't update cart right 
--need to pass customer id (or cart id but that may )
+3/19 - 
 -when does quantity decrease... when added to cart or when checkout? maybe it happens one way when it's more than 5 but another way when it's less... but that is probably dumb
--still need to add to previously existing lineitem if item is in cart
 -needs to deduct from available quantity of farmgoods unless taht shouldn't happen until checkout... which means we'd need a second check
 -you can still add things that no longer exist... perhaps you should be able to do that but then it'll say you can't actually checkout until it's available agian... or... until a certain day you can't order
 -what's the turnaround on an order?
@@ -23,10 +21,9 @@ Bugs
  -state farmgood and farmgoods might be the same array in some point, so try to get rid of one 
 
 1- customer perspective
- -removing things from cart
- -cart component that exists on sidebar or something and slides down as you pick shit?
- -adding to lineitem taht already exists... needs a conditional to know whether to post or put
- -decreasing quantity available (line_items)
+ -checkout ... need to incorporate stripe and deduct from farmer goods i think... 
+ -cart component slides down as you pick shit?
+ -decreasing quantity available (after checkout)
  -get rid of home and signup in header 
 
 2- farmers 
@@ -36,7 +33,6 @@ Bugs
 -upload photo of farmgood or should that only be admin resp? 
 -need to be add farmgood to farmer's farmgoods in backend whenever something new is created, only going one direction it seems
  -profile page -- NEEDS TO BE EDITABLE
- -make it so farmers can only edit their own farmgoods etc
  -list of open orders / accepting orders / rejecting orders
  -email list to farmer 
  -client accounts 

@@ -40,6 +40,10 @@ class CartCard extends Component {
         })
     }
 
+    checkout(){
+        debugger 
+    }
+
     render(){
     //debugger 
     //if (this.state.lineitems !== ''){
@@ -65,6 +69,7 @@ class CartCard extends Component {
     )}
 
     <label>Total: {total}</label>
+    <button onClick={() => this.checkout()}>Checkout</button>
     </div>
     
     )}

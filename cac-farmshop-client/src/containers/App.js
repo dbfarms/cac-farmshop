@@ -20,6 +20,7 @@ import Header from '../components/common/Header';
 import FarmerRoutes from './farmerRoutes';
 import AdminRoutes from './adminRoutes';
 import CustomerRoutes from './customerRoutes';
+import DefaultRoutes from './defaultRoutes';
 
 
 class App extends Component {
@@ -94,7 +95,7 @@ class App extends Component {
       {sessionStorage.jwt === "undefined" &&
         <div>
         <h3>Welcome VISITOR</h3>
-          <CustomerRoutes /> //eventually this will be different because customers will have access to order history etc 
+          <DefaultRoutes /> 
         </div>
       }
       {sessionStorage.role === "customer" &&

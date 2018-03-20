@@ -15,8 +15,7 @@ import { getUser } from '../actions/sessionActions';
 import Header from '../components/common/Header';
 import Cart from './carts'
 
-//<IndexRoute component={HomePage} /> /// NEED TO ADD 
-export default class CustomerRoutes extends Component {
+export default class DefaultRoutes extends Component {
   constructor(){
     super()
 
@@ -25,8 +24,7 @@ export default class CustomerRoutes extends Component {
         'Sign Up': 'signup',
         farmers: 'farmers',
         home: 'home',
-        farmgoods: 'farm-goods',
-        cart: 'cart'
+        farmgoods: 'farm-goods'
       }
     }
   }
@@ -36,6 +34,8 @@ export default class CustomerRoutes extends Component {
       <BrowserRouter >
         <div className="background-here">
           <Header roleRoutes={this.state.routes}/>
+          <Route path="/login" component={LogInPage} />
+          <Route path="/signup" component={SignUpPage} />
           <Route exact path="/home" />
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={CustomerFarmGoods} />

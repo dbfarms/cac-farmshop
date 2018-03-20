@@ -64,15 +64,16 @@ class CustomerFarmGoodModal extends React.Component {
         <SkyLight hideOnOverlayClicked ref={ref => this.simpleDialog = ref} title={this.props.farmGood.attributes.name}>
           <img className="farmGoodImage" src={farmGood.img_url} alt={farmGood.user_id} />
           {farmGood.farmGood.attributes.inventory > 0 && //
-          <div>
-          <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>
-          </div>
+            <div>
+              <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>
+              <button onClick={this.addToCart.bind(this)}> Add To Cart </button>
+            </div>
           }
           {farmGood.farmGood.attributes.inventory <= 0 &&
             <p>No longer available. Check back soon</p>
           }
           {displayDays}
-          <button onClick={this.addToCart.bind(this)}> Add To Cart </button>
+          
         </SkyLight>
       </div>
     )
