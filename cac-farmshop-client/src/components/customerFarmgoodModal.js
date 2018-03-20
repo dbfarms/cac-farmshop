@@ -2,8 +2,8 @@ import React from 'react';
 import SkyLight from 'react-skylight';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-//import { addFarmgoodToCart } from '../actions/carts';
 import { addFarmgoodToCart } from '../actions/lineitems';
+import { addAnotherToCart } from '../actions/lineitems';
 
 class CustomerFarmGoodModal extends React.Component {
   constructor(props){
@@ -36,8 +36,18 @@ class CustomerFarmGoodModal extends React.Component {
     const cart = this.props.cart 
     //const cart_id = Number(this.props.cart.id)
     const farmGood_id = Number(this.props.farmGood.id)
-    const user_id = Number(sessionStorage.id) 
-    this.props.addFarmgoodToCart(farmGood_id, cart, user_id)
+    const user_id = Number(sessionStorage.id)
+    //debugger 
+    var newItem = true 
+    this.props.lineitems.map(li => {
+      if (li.attributes.farmgood.id === farmGood_id) {
+        newItem = false 
+        this.props.addAnotherToCart(farmGood_id, user_id)
+      }
+    })
+    if (newItem === true ) {
+      this.props.addFarmgoodToCart(farmGood_id, user_id)
+    }
   }
 
   render() {
@@ -78,7 +88,7 @@ const mapStateToProps = state => {
 }
   
   
-export default connect(mapStateToProps, { addFarmgoodToCart })(CustomerFarmGoodModal);
+export default connect(mapStateToProps, { addFarmgoodToCart, addAnotherToCart })(CustomerFarmGoodModal);
 
 
 /*

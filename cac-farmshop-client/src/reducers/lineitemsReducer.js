@@ -8,6 +8,12 @@ export default (state = [], action) => {
         return (
           addedItem.concat(action.lineitem.data)
         )
+      case 'ADD_QUANTITY_CART_SUCCESS':
+        //debugger 
+        const editedLineItem = Object.assign({}, action.lineitem.data)
+        const editState = [...state.filter(li => li.id !== action.lineitem.data.id)]
+        editState.push(editedLineItem)
+        return (editState)
       case 'GET_LINEITEM_SUCCESS':
         //debugger 
         return action.lineitems

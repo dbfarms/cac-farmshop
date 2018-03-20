@@ -102,7 +102,7 @@ class CustomerFarmGoods extends Component {
           <div>
             <div className="Farm-Goods-Container">
               <h1>For sale (click on farmgood to edit): </h1>
-              {this.state.farmGoods_array.map(farmGood => <CustomerFarmGoodModal key={farmGood.id} farmGood={farmGood} cart={this.state.cart}/>)}
+              {this.state.farmGoods_array.map(farmGood => <CustomerFarmGoodModal key={farmGood.id} farmGood={farmGood} lineitems={this.state.lineitems}/>)}
             </div>
           </div>
         }
