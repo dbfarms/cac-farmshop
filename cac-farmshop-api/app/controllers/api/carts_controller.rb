@@ -36,16 +36,14 @@ class Api::CartsController < ApplicationController
         total = 0
         #byebug
         @cart.line_items.each do |li| 
-            #byebug 
             fg = Farmgood.find(li.farmgood_id)
             #byebug 
             if fg.inventory == nil 
                 fg.inventory = 0
                 fg.save 
-                #byebug
             end 
 
-            if fg.inventory - li.quantity >= 0
+            if (fg.inventory - li.quantity >= 0)
                 fg.inventory -= li.quantity 
                 total = total + (li.quantity * fg.price)
                 fg.save 
@@ -64,15 +62,19 @@ class Api::CartsController < ApplicationController
         end 
         
         @cart.line_items.each {|li| li.delete }
-        user = User.find(@cart.customer_user_id)
+        user = CustomerUser.find(@cart.customer_user_id)
         new_cart = Cart.new 
-        new_cart.user = user 
+        #byebug 
+        new_cart.customer_user = user 
         user.cart = new_cart 
-
+        user.save 
+        new_cart.save 
+        
         total_refund = 0
         refund.each {|r| total_refund += r[1]}
         total -= total_refund
-        byebug
+
+        #byebug
 
         if @cart.destroy
             render json: { message: "successfully destroyed", errors: out_of_stock, refund: refund, total: total}, status: 204

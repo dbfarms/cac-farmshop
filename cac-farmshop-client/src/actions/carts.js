@@ -82,7 +82,8 @@ export const createCart = cart => {
 //
 
 const checkedOut = (lineitems) =>{
-  //debugger 
+  //debugger
+  //lineitems = [] 
   return {
     type: 'CHECKOUT_SUCCESS',
     lineitems
@@ -99,7 +100,8 @@ export const checkingOutNow = (lineitems, cartID) => {
         },
         method: 'DELETE'
     })
-    .then(() => {
+    .then(response => {
+      debugger 
       dispatch(checkedOut(lineitems))
     })
   }

@@ -41,6 +41,7 @@ class CartCard extends Component {
     }
 
     render(){
+        //debugger 
     const lineitems = this.state.lineitems
     var total = 0;
     return (

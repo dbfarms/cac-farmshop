@@ -8,6 +8,7 @@ import { addAnotherToCart } from '../actions/lineitems';
 class CustomerFarmGoodModal extends React.Component {
   constructor(props){
     super(props);
+    
   }
 
   daysAvailable = () => {
@@ -39,15 +40,21 @@ class CustomerFarmGoodModal extends React.Component {
     const user_id = Number(sessionStorage.id)
     //debugger 
     var newItem = true 
-    this.props.lineitems.map(li => {
-      if (li.attributes.farmgood.id === farmGood_id) {
-        newItem = false 
-        this.props.addAnotherToCart(farmGood_id, user_id)
+
+      this.props.lineitems.map(li => {
+        if (li.attributes.farmgood.id === farmGood_id) {
+          newItem = false 
+          if (this.props.farmGood.attributes.inventory === li.attributes.quantity) {
+            alert('you are trying to buy more than is available!')
+          } else {
+            this.props.addAnotherToCart(farmGood_id, user_id)
+          }
+        }
+      })
+      if (newItem === true ) {
+        //debugger
+        this.props.addFarmgoodToCart(farmGood_id, user_id)
       }
-    })
-    if (newItem === true ) {
-      this.props.addFarmgoodToCart(farmGood_id, user_id)
-    }
   }
 
   render() {
