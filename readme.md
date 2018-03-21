@@ -6,13 +6,10 @@ git fsck --full
 
 ***************
 where i left off:
-3/20 
--not sure if checkout button works
--when it did it got to cart/delete byebug where i should also delete lineitems and decrease quantity of farmgoods
+3/21 
+-change a column in cart to total and set that during delete and then get the total... but what about things that are no longer available? hmm OR there can be a fetch request for each of the farmgoods to see if they're stlil available but that seems like too many fetch requests unless it's just one fetch request that gets all of the statuses for the selected farmgoods ... that might work
 
 -when does quantity decrease... when added to cart or when checkout? maybe it happens one way when it's more than 5 but another way when it's less... but that is probably dumb
--needs to deduct from available quantity of farmgoods unless taht shouldn't happen until checkout... which means we'd need a second check
--you can still add things that no longer exist... perhaps you should be able to do that but then it'll say you can't actually checkout until it's available agian... or... until a certain day you can't order
 -what's the turnaround on an order?
 ***************
 

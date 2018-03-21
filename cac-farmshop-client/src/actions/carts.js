@@ -100,6 +100,16 @@ export const checkingOutNow = (lineitems, cartID) => {
         },
         method: 'DELETE'
     })
+    /*.then(() => {
+      return fetch (`http://localhost:3000/api/carts/`, {
+        headers: {
+          'Access-Control-Allow-Origin':'',
+          'Content-Type': 'application/json'
+        }
+      })*/
+    .then(response => {
+      debugger 
+      response.json()})
     .then(response => {
       debugger 
       dispatch(checkedOut(lineitems))
@@ -107,8 +117,10 @@ export const checkingOutNow = (lineitems, cartID) => {
   }
 }
 
-
 /*
+.then(response => response.json())
+.then(carts => dispatch(setCart(carts, user_id)))
+
 const addToCart = (cart_id, farmgood_id) => {
   debugger 
   return {

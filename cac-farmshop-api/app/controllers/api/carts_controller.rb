@@ -69,7 +69,7 @@ class Api::CartsController < ApplicationController
         user.cart = new_cart 
         user.save 
         new_cart.save 
-        
+
         total_refund = 0
         refund.each {|r| total_refund += r[1]}
         total -= total_refund
@@ -77,7 +77,8 @@ class Api::CartsController < ApplicationController
         #byebug
 
         if @cart.destroy
-            render json: { message: "successfully destroyed", errors: out_of_stock, refund: refund, total: total}, status: 204
+            #byebug 
+            render json: { message: "successfully destroyed", errors: out_of_stock, refund: refund, total: total} #, status: 204
         else
             render json: { message: "unable to remove this cart" }, status: 400
         end
