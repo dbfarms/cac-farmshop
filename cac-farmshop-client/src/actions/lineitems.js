@@ -71,13 +71,14 @@ export const getLineItems = (user_id) => {
         return fetch('http://localhost:3000/api/line_items', {
         headers: {
           'Access-Control-Allow-Origin':'',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        //method: "GET",
-        //body: JSON.stringify({ cart_id: cart.id, farmgood_id: farmgood_id })
+        //method: 'GET',
+        //body: JSON.stringify({  user_id: user_id })
       })
       .then(response => response.json())
       .then(lineitems => {
+        debugger 
         dispatch(showLineItems(lineitems, user_id))
       })
       .catch(error => console.log(error))
