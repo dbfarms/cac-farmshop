@@ -34,7 +34,10 @@ class Checkout extends Component {
       alert('add items to cart!')
     } else {
       const cartID = lineitems[0].attributes["cart-id"]
-      this.props.checkingOutNow(lineitems, cartID)
+      //debugger 
+      const customerUserID = lineitems[0].attributes.cart.customer_user_id
+      //debugger 
+      this.props.checkingOutNow(customerUserID, cartID)
     }
   }
 

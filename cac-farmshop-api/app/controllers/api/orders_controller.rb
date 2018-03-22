@@ -9,11 +9,12 @@ class Api::OrdersController < ApplicationController
     def create
       #byebug 
         new_order = Order.new(order_params)
-
+        byebug 
+        new_order.customer_user = CustomerUser.find(params["customer_user_id"])
+        #byebug 
         out_of_stock = []
         refund = []
         total = 0
-        #byebug
         @cart = Cart.find(params["cart_id"])
         @cart.line_items.each do |li| 
             fg = Farmgood.find(li.farmgood_id)
@@ -54,10 +55,14 @@ class Api::OrdersController < ApplicationController
         total_refund = 0
         refund.each {|r| total_refund += r[1]}
         total -= total_refund
+        new_order.total = total 
 
+        #byebug
         #new_order = Order.new(order_params)
         if new_order.save
-            render json: {new_order: new_order, errors: out_of_stock, refund: refund, total: total}
+            new_order.status = "complete"
+            new_order.save 
+            render json: {new_order: new_order, errors: out_of_stock, refund: refund }
         else
             render json: { message: new_order.errors}, status: 400
         end
@@ -93,7 +98,7 @@ class Api::OrdersController < ApplicationController
     end
 
     def order_params
-        params.require(:cart).permit(:customer_user_id, :cart_id, :status, :total)
+        params.require(:order).permit(:customer_user_id, :cart_id, :total)
     end
 
 end

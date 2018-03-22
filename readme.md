@@ -15,6 +15,8 @@ where i left off:
 
 TO DO LIST:
 Bugs
+ -need to test what happens if item is sold out before soeone checks out... 
+ 
  -load page for all pages
  -session controller needs to be able to discern between farmer and customer when creating session
  -redirects.... 

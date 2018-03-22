@@ -7,7 +7,7 @@ const checkedOut = (order) =>{
     }
   }
   
-  export const checkingOutNow = (lineitems, cartID) => {
+  export const checkingOutNow = (customer_user_id, cart_id) => {
     //debugger
     return dispatch => {
       return fetch('http://localhost:3000/api/orders', {
@@ -16,7 +16,7 @@ const checkedOut = (order) =>{
             'Content-Type': 'application/json'
           },
           method: 'POST',
-          body: JSON.stringify({ cart_id: cart_id, farmgood_id: farmgood_id })
+          body: JSON.stringify({ customerUserID: customer_user_id, cart_id: cart_id })
       })
       /*.then(() => {
         return fetch (`http://localhost:3000/api/carts/`, {
