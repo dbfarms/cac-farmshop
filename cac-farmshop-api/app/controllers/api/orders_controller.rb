@@ -9,8 +9,8 @@ class Api::OrdersController < ApplicationController
     def create
       #byebug 
         new_order = Order.new(order_params)
-        byebug 
-        new_order.customer_user = CustomerUser.find(params["customer_user_id"])
+        #byebug 
+        new_order.customer_user = CustomerUser.find(params["customerUserID"])
         #byebug 
         out_of_stock = []
         refund = []
@@ -48,6 +48,7 @@ class Api::OrdersController < ApplicationController
         #byebug 
         new_cart.customer_user = user 
         @cart.status = "submitted" 
+        @cart.save 
         user.carts << new_cart 
         user.save 
         new_cart.save 

@@ -21,7 +21,7 @@ class CustomerFarmGoods extends Component {
   constructor(props) {
     super(props);
 
-    //debugger 
+    debugger 
     
     this.state = {
       showKey: 'show all', //show all
@@ -146,7 +146,7 @@ const mapStateToProps = (state) => {
   return ({
       farmGoods: state.farmGoods,
       days: state.days, 
-      //cart: state.cart
+      //cart: state.cart,
       lineitems: state.lineitems 
   })
 }

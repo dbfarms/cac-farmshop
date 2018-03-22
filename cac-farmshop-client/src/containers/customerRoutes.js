@@ -4,8 +4,8 @@ import './App.css';
 import CustomerFarmGoods from './customerFarmGoodsPage';
 import FarmersPage from './FarmersPage';
 import FarmerShow from './FarmerShow';
-import LogInPage from '../components/LogInPage';
-import SignUpPage from '../components/SignUp';
+//import LogInPage from '../components/LogInPage';
+//import SignUpPage from '../components/SignUp';
 import FarmGoodCard from '../components/farmGoodCard'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
