@@ -8,10 +8,13 @@ class Api::OrdersController < ApplicationController
 
     def create
       #byebug 
+        new_order = Order.new(order_params)
+
         out_of_stock = []
         refund = []
         total = 0
         #byebug
+        @cart = Cart.find(params["cart_id"])
         @cart.line_items.each do |li| 
             fg = Farmgood.find(li.farmgood_id)
             #byebug 
@@ -43,6 +46,7 @@ class Api::OrdersController < ApplicationController
         new_cart = Cart.new 
         #byebug 
         new_cart.customer_user = user 
+        @cart.status = "submitted" 
         user.carts << new_cart 
         user.save 
         new_cart.save 
@@ -53,7 +57,7 @@ class Api::OrdersController < ApplicationController
 
         #new_order = Order.new(order_params)
         if new_order.save
-            render json: new_order
+            render json: {new_order: new_order, errors: out_of_stock, refund: refund, total: total}
         else
             render json: { message: new_order.errors}, status: 400
         end
@@ -73,14 +77,10 @@ class Api::OrdersController < ApplicationController
     end
 
     def destroy
-        #byebug 
-        
-
-        #byebug
 
         if @cart.destroy
             #byebug 
-            render json: { message: "successfully destroyed", errors: out_of_stock, refund: refund, total: total} #, status: 204
+            render json: { message: "successfully destroyed"}, status: 204
         else
             render json: { message: "unable to remove this cart" }, status: 400
         end
