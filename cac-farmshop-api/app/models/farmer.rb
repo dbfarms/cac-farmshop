@@ -6,5 +6,7 @@ class Farmer < ApplicationRecord
     has_many :farmgoods, through: :farmerfarmgoods 
 
     belongs_to :user 
+
+    
     
 end

@@ -18,6 +18,8 @@ import days from './reducers/daysReducer';
 import session from './reducers/sessionReducer';
 import users from './reducers/sessionReducer';
 import customers from './reducers/sessionReducer';
+import orders from './reducers/orderReducer';
+import order from './reducers/orderReducer';
 
 const reducers = combineReducers({
   carts,

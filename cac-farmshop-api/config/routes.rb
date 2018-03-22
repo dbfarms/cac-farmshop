@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :users
     resources :customer_users 
     resources :line_items
+    resources :orders 
  end
 
 end

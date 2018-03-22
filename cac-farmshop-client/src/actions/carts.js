@@ -79,7 +79,7 @@ export const createCart = cart => {
   }
 }
 
-//
+/*
 
 const checkedOut = (lineitems) =>{
   //debugger
@@ -106,7 +106,7 @@ export const checkingOutNow = (lineitems, cartID) => {
           'Access-Control-Allow-Origin':'',
           'Content-Type': 'application/json'
         }
-      })*/
+      }) */ /*
     .then(response => {
       debugger 
       response.json()})

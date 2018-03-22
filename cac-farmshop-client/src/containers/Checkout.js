@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CartCard from '../components/CartCard';
 import { getLineItems } from '../actions/lineitems';
-import { checkingOutNow } from '../actions/carts';
+import { checkingOutNow } from '../actions/orders';
 
 class Checkout extends Component {
   constructor(props){

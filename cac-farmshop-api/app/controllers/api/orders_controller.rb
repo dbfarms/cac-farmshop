@@ -1,37 +1,13 @@
-class Api::CartsController < ApplicationController
+class Api::OrdersController < ApplicationController
 
-    before_action :set_cart, only: [:show, :edit, :destroy]
+    before_action :set_order, only: [:show, :edit, :destroy]
 
     def index
-        render json: Cart.all
+        render json: Order.all
     end
 
     def create
       #byebug 
-        cart = Cart.new(cart_params)
-        if cart.save
-            render json: cart
-        else
-            render json: { message: cart.errors}, status: 400
-        end
-    end
-
-    def show
-        render json: @cart
-    end
-
-    def update
-        #byebug 
-        if @cart.update(cart_params)
-            render json: @cart
-        else
-            render json: { message: @cart.errors }, status: 400
-        end
-    end
-
-    def destroy
-        #byebug 
-=begin 
         out_of_stock = []
         refund = []
         total = 0
@@ -62,12 +38,12 @@ class Api::CartsController < ApplicationController
 
         end 
         
-        @cart.line_items.each {|li| li.delete }
+        #@cart.line_items.each {|li| li.delete }
         user = CustomerUser.find(@cart.customer_user_id)
         new_cart = Cart.new 
         #byebug 
         new_cart.customer_user = user 
-        user.cart = new_cart 
+        user.carts << new_cart 
         user.save 
         new_cart.save 
 
@@ -75,8 +51,33 @@ class Api::CartsController < ApplicationController
         refund.each {|r| total_refund += r[1]}
         total -= total_refund
 
+        #new_order = Order.new(order_params)
+        if new_order.save
+            render json: new_order
+        else
+            render json: { message: new_order.errors}, status: 400
+        end
+    end
+
+    def show
+        render json: @order
+    end
+
+    def update
+        #byebug 
+        if @order.update(order_params)
+            render json: @order
+        else
+            render json: { message: @order.errors }, status: 400
+        end
+    end
+
+    def destroy
+        #byebug 
+        
+
         #byebug
-=end 
+
         if @cart.destroy
             #byebug 
             render json: { message: "successfully destroyed", errors: out_of_stock, refund: refund, total: total} #, status: 204
@@ -87,12 +88,12 @@ class Api::CartsController < ApplicationController
 
     private
 
-    def set_cart
-        @cart = Cart.find_by(id: params[:id])
+    def set_order
+        @order = Order.find_by(id: params[:id])
     end
 
-    def cart_params
-        params.require(:cart).permit(:user_id, :status)
+    def order_params
+        params.require(:cart).permit(:customer_user_id, :cart_id, :status, :total)
     end
 
 end
