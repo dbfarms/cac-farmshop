@@ -13,11 +13,12 @@ export default function sessionReducer(state = initialState.session, action) {
       return null//
     case types.LOG_IN_SUCCESS:
       //browserHistory.push('/farm-goods')
-      debugger
-      return !!sessionStorage.jwt
+      //debugger
+      return (!!sessionStorage.jwt,
+              action.current_cart)
     case types.GET_CART_SUCCESS:
       //debugger 
-      return action.cart 
+      return action.current_cart 
     case types.LOG_OUT:
       //browserHistory.push('/')
       return (

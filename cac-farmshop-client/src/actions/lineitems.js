@@ -51,17 +51,49 @@ const addToCart = (lineitem) => {
   }
 }
 
-  const showLineItems = (lineitems, user_id) => {
+const showLineItems = (lineitems, user_id, cart) => {
+  //debugger 
+  lineitems = lineitems.data.filter(li =>
     //debugger 
-    lineitems = lineitems.data.filter(li =>
-      //debugger 
-      li.attributes["customer-users"].id === Number(user_id)
-    )
-    return {
-      type: 'GET_LINEITEM_SUCCESS',
-      lineitems 
-    }
+    li.attributes["cart-id"] === Number(cart.id)
+  )
+  //debugger 
+  return {
+    type: 'GET_LINEITEM_SUCCESS',
+    lineitems 
   }
+}
+
+/////
+
+let header = new Headers({
+  'Access-Control-Allow-Origin':'',
+  'Content-Type': 'multipart/form-data',
+  'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
+});
+
+const setCart = (carts, user_id) => {
+  //debugger
+  const userCarts = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
+  //debugger 
+  const current_cart = userCarts[userCarts.length - 1]
+  return {
+    type: 'GET_CART_SUCCESS',
+    current_cart
+  }
+}
+
+export const getCart = (user_id) => {
+  //debugger
+  return dispatch => {
+    return fetch('http://localhost:3000/api/carts', header)
+      //fetch(`${API_URL}/carts`)
+      .then(response => response.json())
+      .then(carts => dispatch(setCart(carts, user_id)))
+      .catch(error => console.log(error));
+  }
+}
+
 
 export const getLineItems = (user_id) => {
     //debugger 
@@ -78,8 +110,12 @@ export const getLineItems = (user_id) => {
       })
       .then(response => response.json())
       .then(lineitems => {
-        debugger 
-        dispatch(showLineItems(lineitems, user_id))
+        //debugger 
+        dispatch(getCart(sessionStorage.id))
+        .then(response =>  { // {debugger}
+        //debugger 
+        dispatch(showLineItems(lineitems, user_id, response.current_cart))
+        })
       })
       .catch(error => console.log(error))
     }

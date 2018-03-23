@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import './App.css';
-import CustomerFarmGoods from './customerFarmGoodsPage';
+import FarmGoods from './FarmGoods';
 import FarmersPage from './FarmersPage';
 import FarmerShow from './FarmerShow';
 import LogInPage from '../components/LogInPage';
@@ -38,7 +38,7 @@ export default class DefaultRoutes extends Component {
           <Route path="/signup" component={SignUpPage} />
           <Route exact path="/home" />
           <Route exact path='/farmers' component={FarmersPage} />
-          <Route exact path="/farm-goods" component={CustomerFarmGoods} />
+          <Route exact path="/farm-goods" component={FarmGoods} />
           <Route path="*" render={() => <div></div>} />
           <Route exact path='/cart' component={Cart}/>
         </div>

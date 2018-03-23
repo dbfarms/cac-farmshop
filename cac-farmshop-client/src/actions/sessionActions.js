@@ -5,9 +5,10 @@ import auth from '../auth/authenticator';
 
 const loginSuccess = (cart) => {
   //debugger 
+  const current_cart = cart.current_cart
   return {
     type: 'LOG_IN_SUCCESS',
-    cart 
+    current_cart
   }
 }
 
@@ -46,10 +47,14 @@ export function logInUser(credentials, history) {
       //debugger 
       var cart; 
       if (sessionStorage.role === 'customer') {
-         cart = dispatch(getCart(sessionStorage.id))
-        
+         dispatch(getCart(sessionStorage.id))
+         .then(response =>  dispatch(loginSuccess(response))) //response.json()
+         //.then(cart => {debugger})
+         //.then(dispatch(loginSuccess(cart)))
+      } else {
+        dispatch(loginSuccess());
       }
-      dispatch(loginSuccess(cart));
+      
       history.push('/farm-goods')
     }).catch(error => {
       throw(error);
