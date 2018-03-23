@@ -53,14 +53,22 @@ const addToCart = (lineitem) => {
 
 const showLineItems = (lineitems, user_id, cart) => {
   //debugger 
+  /*
+  const userLineItems = lineitems.data.filter(li =>
+    //debugger 
+    li.attributes["cart-id"] !== Number(cart.id)
+  )
+
   lineitems = lineitems.data.filter(li =>
     //debugger 
     li.attributes["cart-id"] === Number(cart.id)
   )
+  */
   //debugger 
   return {
     type: 'GET_LINEITEM_SUCCESS',
-    lineitems 
+    lineitems,
+    //userLineItems
   }
 }
 
@@ -71,6 +79,26 @@ let header = new Headers({
   'Content-Type': 'multipart/form-data',
   'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
 });
+
+export const getAllLineItems = (user_id) => {
+  return dispatch => {
+    return fetch ('http://localhost:3000/api/line_items', header)
+      .then(response => response.json())
+      .then(lineitems => dispatch(setUserLineItems(lineitems, user_id)))
+      .catch(error => console.log(error));
+  }
+}
+
+const setUserLineItems = (lineitems, user_id) => {
+  //debugger 
+  const userLineItems = lineitems.data.filter(li => li.attributes.cart["customer_user_id"] === Number(user_id) )
+  return {
+    type: 'GET_ALL_USER_LINEITEMS',
+    userLineItems
+  }
+}
+
+///
 
 const setCart = (carts, user_id) => {
   //debugger

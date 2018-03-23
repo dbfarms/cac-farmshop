@@ -9,7 +9,10 @@ class CartCard extends Component {
     constructor(props) {
     super(props)
         this.state = {
-            lineitems: this.props.lineitems
+            lineitems: this.props.lineitems,
+            cart: this.props.cart 
+            //currentLineItems: '',
+            //oldLineitems: ''
         }
     }
 
@@ -23,7 +26,9 @@ class CartCard extends Component {
     componentWillReceiveProps(nextProps){
         //debugger 
         this.setState({
-            lineitems: nextProps.lineitems
+            lineitems: nextProps.lineitems,
+            cart: nextProps.cart 
+            //oldLineItems: nextProps.allLineItems 
         })
     }
 
@@ -43,20 +48,35 @@ class CartCard extends Component {
     render(){
         //debugger 
     const lineitems = this.state.lineitems
+    const currentLineItems = []
+    const oldLineItems = [] 
+    //debugger 
+    if (lineitems.data ) {
+        //debugger 
+        lineitems.data.map(li => {
+            //debugger 
+            if (li.attributes["cart-id"] === Number(this.state.cart.id)) {
+                currentLineItems.push(li)
+            } else {
+                oldLineItems.push(li)
+            }
+        })
+    }
+    //debugger 
     var total = 0;
     return (
     <div className="CartsCard">
-    <h3>{sessionStorage.name}</h3>
+    <p>{sessionStorage.name}</p>
     <img className="CartImage"  />
     
-    {lineitems !== "" && 
-        (lineitems.map(li => <p>
+    {currentLineItems !== [] && 
+        (currentLineItems.map(li => <p>
             {li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}
             <button onClick={() => this.deleteItem(li)}>X</button>
         </p>)
     )}
-    {lineitems !== "" &&
-        (lineitems.forEach(li => total += (li.attributes.farmgood.price * li.attributes.quantity))
+    {currentLineItems !== "" &&
+        (currentLineItems.forEach(li => total += (li.attributes.farmgood.price * li.attributes.quantity))
     )}
 
     <label>Total: {total}</label>
@@ -72,8 +92,9 @@ class CartCard extends Component {
 const mapStateToProps = (state) => {
     //debugger 
     return ({
-        //cart: state.cart
+        cart: state.cart,
         lineitems: state.lineitems 
+
     })
   }
   
@@ -81,59 +102,4 @@ const mapStateToProps = (state) => {
 
 /*
 
-    {lineitems.cart !== "" &&
-        (lineitems.cart.map(li => <p>
-            {li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}
-            <button onClick={this.deleteItem}>X</button>
-        </p>)
-    )}
-    {lineitems.cart !== "" &&
-        (lineitems.cart.forEach(li => total += li.attributes.farmgood.price)
-    )}
-
-
-//
-const CartCard = ( lineitems ) => {
-    //debugger
-    var total = 0;
-    return (
-    <div className="CartsCard">
-    <h3>{sessionStorage.name}</h3>
-    <img className="CartImage"  />
-    {lineitems.cart !== "" &&
-        (lineitems.cart.map(li => <p>
-            {li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}
-            <button onClick={this.deleteItem}>X</button>
-        </p>)
-    )}
-    {lineitems.cart !== "" &&
-        (lineitems.cart.forEach(li => total += li.attributes.farmgood.price)
-    )}
-    <label>Total: {total}</label>
-    </div>
-    
-)}
-
-
-
-export default CartCard
-
-
-/*
-
-<div className="CartsCard">
-    <h3>{sessionStorage.name}</h3>
-    <img className="CartImage"  />
-    {lineitems !== [] &&
-        (lineitems.map(li => <p>{li.attributes.farmgood.name} - {li.attributes.quantity} at </p>))
-    }
-    
-</div>
-
-src={lineitems.img_url} alt={cart.user_id}
-
-
-const listLineItems = ({lineitems}) => {
-    return (lineitems.map(li => <p>{li.attributes.farmgood.name} - {li.attributes.quantity} at </p>))
-}
 */

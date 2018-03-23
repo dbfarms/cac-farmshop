@@ -3,15 +3,16 @@ import sessionApi from '../api/sessionApi';
 import auth from '../auth/authenticator';
 
 
-const loginSuccess = (cart) => {
+const loginSuccess = () => { //cart
   //debugger 
-  const current_cart = cart.current_cart
+  //const current_cart = cart.current_cart
   return {
     type: 'LOG_IN_SUCCESS',
-    current_cart
+    //current_cart
   }
 }
 
+/*
 const setCart = (carts, user_id) => {
   //debugger
   const userCarts = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
@@ -33,18 +34,26 @@ export const getCart = (user_id) => {
       .catch(error => console.log(error));
   }
 }
-
+*/
 
 export function logInUser(credentials, history) {  
   //debugger
   return function(dispatch) {
     //debugger
     return sessionApi.login(credentials).then(response => {
+      //debugger 
+      if (response.role === "customer") {
+        sessionStorage.setItem('jwt', response.jwt);
+      sessionStorage.setItem('role', response.role);
+      sessionStorage.setItem('id', response.user_id);
+      sessionStorage.setItem('name', response.email);
+      } else {
       sessionStorage.setItem('jwt', response.jwt);
       sessionStorage.setItem('role', response.role);
       sessionStorage.setItem('id', response.user_id);
       sessionStorage.setItem('name', response.name);
-      //debugger 
+      }
+      /*
       var cart; 
       if (sessionStorage.role === 'customer') {
          dispatch(getCart(sessionStorage.id))
@@ -54,7 +63,8 @@ export function logInUser(credentials, history) {
       } else {
         dispatch(loginSuccess());
       }
-      
+      */
+      dispatch(loginSuccess());
       history.push('/farm-goods')
     }).catch(error => {
       throw(error);

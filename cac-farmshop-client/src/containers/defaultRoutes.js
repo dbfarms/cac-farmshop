@@ -13,7 +13,6 @@ import Authorization from './authorization';
 import Home from './Home';
 import { getUser } from '../actions/sessionActions';
 import Header from '../components/common/Header';
-import Cart from './carts'
 
 export default class DefaultRoutes extends Component {
   constructor(){
@@ -40,7 +39,6 @@ export default class DefaultRoutes extends Component {
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmGoods} />
           <Route path="*" render={() => <div></div>} />
-          <Route exact path='/cart' component={Cart}/>
         </div>
       </BrowserRouter >
     );

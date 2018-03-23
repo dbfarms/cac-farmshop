@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import CartCard from '../components/CartCard';
-import { getLineItems } from '../actions/lineitems'
+import { getLineItems } from '../actions/lineitems';
+
 import './Carts.css';
 
 class Cart extends Component {
@@ -12,7 +13,10 @@ class Cart extends Component {
     this.state = {
       user_id: sessionStorage.id, 
       user_name: sessionStorage.name,
-      lineitems: undefined 
+      //lineitems: undefined 
+      lineitems: this.props.lineitems,
+      cart: this.props.cart 
+
     }
   }
 
@@ -23,12 +27,28 @@ class Cart extends Component {
   componentWillReceiveProps(nextProps){
     //debugger
     this.setState({
-      lineitems: nextProps.lineitems //[0] 
+      lineitems: nextProps.lineitems,
+      cart: nextProps.cart 
     })
   }
 
   render() {
     //debugger 
+    const lineitems = this.state.lineitems
+    const currentLineItems = []
+    const oldLineItems = [] 
+    //debugger 
+    if (lineitems.data ) {
+        //debugger 
+        lineitems.data.map(li => {
+            //debugger 
+            if (li.attributes["cart-id"] === Number(this.state.cart.id)) {
+                currentLineItems.push(li)
+            } else {
+                oldLineItems.push(li)
+            }
+        })
+    }
     return (
       <div>
       {this.state.lineitems === undefined &&
@@ -38,8 +58,13 @@ class Cart extends Component {
       }
       {this.state.lineitems != undefined &&
       <div className="CartsContainer">
-        <h1>Cart </h1>
-        <CartCard  cart={this.state.lineitems} />
+        <div align="left">
+          <h1>Cart </h1>
+          <CartCard  cart={this.state.lineitems} />
+        </div>
+        <div align="right">
+          <h3>old orders / what you ate in the past</h3>
+        </div>
       </div>
       }
       </div>
