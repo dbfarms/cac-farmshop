@@ -53,7 +53,7 @@ const addToCart = (lineitem) => {
 
 const showLineItems = (lineitems, user_id, cart) => {
   //debugger 
-  /*
+  
   const userLineItems = lineitems.data.filter(li =>
     //debugger 
     li.attributes["cart-id"] !== Number(cart.id)
@@ -63,12 +63,12 @@ const showLineItems = (lineitems, user_id, cart) => {
     //debugger 
     li.attributes["cart-id"] === Number(cart.id)
   )
-  */
+  
   //debugger 
   return {
     type: 'GET_LINEITEM_SUCCESS',
     lineitems,
-    //userLineItems
+    userLineItems
   }
 }
 

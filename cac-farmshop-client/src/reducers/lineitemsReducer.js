@@ -21,9 +21,11 @@ export default (state = [], action) => {
         return (editState)
       case 'GET_LINEITEM_SUCCESS':
       //debugger 
-        return (action.lineitems//, 
-                //action.userLineItems
-              )
+      const lineItemState = [...state, action.lineitems, action.userLineItems]
+      //const lineitems = action.lineitems
+      //const userLineItems = action.userLineItems
+      //debugger 
+        return (lineItemState)
       case 'DELETE_LINEITEM_SUCCESS':
         var newState = Object.assign([], state);
         const indexOfLineItemToDelete = state.findIndex(li => {

@@ -8,12 +8,10 @@ import { addAnotherToCart } from '../actions/lineitems';
 class CustomerFarmGoodModal extends React.Component {
   constructor(props){
     super(props);
-    
+    //debugger 
   }
 
   daysAvailable = () => {
-    
-    //debugger
     if (this.props.farmGood.relationships !== undefined ){
       var days = this.props.farmGood.relationships.days.data //this.props.farmGood.data.relationships.days.data 
 
@@ -34,14 +32,14 @@ class CustomerFarmGoodModal extends React.Component {
   addToCart(event){
     event.preventDefault();
     //debugger
-    const cart = this.props.cart 
+    //const cart = this.props.cart 
     //const cart_id = Number(this.props.cart.id)
     const farmGood_id = Number(this.props.farmGood.id)
     const user_id = Number(sessionStorage.id)
     //debugger 
     var newItem = true 
-
-      this.props.lineitems.map(li => {
+      this.props.lineitems.data.map(li => {
+        debugger 
         if (li.attributes.farmgood.id === farmGood_id) {
           newItem = false 
           if (this.props.farmGood.attributes.inventory === li.attributes.quantity) {
@@ -52,7 +50,7 @@ class CustomerFarmGoodModal extends React.Component {
         }
       })
       if (newItem === true ) {
-        //debugger
+        debugger 
         this.props.addFarmgoodToCart(farmGood_id, user_id)
       }
   }
