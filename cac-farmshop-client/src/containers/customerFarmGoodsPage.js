@@ -123,7 +123,7 @@ class CustomerFarmGoods extends Component {
                 }
               })
               }
-              {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood}  />)}
+              {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} lineitems={this.state.lineitems} />)}
             </div>
         }
         {this.state.showKey === "category"  &&
@@ -135,7 +135,7 @@ class CustomerFarmGoods extends Component {
                   }
               })
               }
-              {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood}  />)}
+              {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} lineitems={this.state.lineitems} />)}
             </div>
         }
         </div>
