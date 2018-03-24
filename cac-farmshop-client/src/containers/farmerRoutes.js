@@ -15,6 +15,7 @@ import { getUser } from '../actions/sessionActions';
 import Header from '../components/common/Header';
 import NewFarmgoodForm from './NewFarmgoodForm';
 import EditFarmgoodForm from './EditFarmgoodForm';
+import OrdersList from './Orders';
 
 //<IndexRoute component={HomePage} /> /// NEED TO ADD 
 export default class FarmerRoutes extends Component {
@@ -26,6 +27,7 @@ export default class FarmerRoutes extends Component {
         profile: 'profile',
         farmers: 'farmers',
         home: 'home',
+        orders: 'orders',
         'my farmgoods': 'farm-goods'
       }
     }
@@ -42,6 +44,7 @@ export default class FarmerRoutes extends Component {
           <Route exact path="/farm-goods" component={FarmerFarmGoods} />
           <Route exact path="/new-farm-good" component={NewFarmgoodForm} />
           <Route path ="/farm-goods/:id/edit" component={EditFarmgoodForm} />
+          <Route path="/orders" component={OrdersList} />
           <Route path="*" render={() => <div></div>} />
           <Route path="/logout" component={Logout}/> 
         </div>

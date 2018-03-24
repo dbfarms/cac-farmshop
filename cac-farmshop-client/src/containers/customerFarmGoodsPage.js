@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import CustomerFarmGoodModal from '../components/customerFarmgoodModal';
 //import CustomerFarmGoodModals from '../components/customerFarmgoodModals';
 import FarmGoodsCard from '../components/FarmGoodsCard';

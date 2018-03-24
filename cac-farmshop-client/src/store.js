@@ -36,7 +36,9 @@ const reducers = combineReducers({
   users,
   customers,
   lineitems,
-  userLineItems
+  userLineItems,
+  orders,
+  order  
 });
 
 const middleware = [thunk]; //for async actions

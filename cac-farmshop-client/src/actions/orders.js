@@ -1,6 +1,33 @@
+const orders = "http://localhost:3000/api/orders"
+
+export const getFarmerOrders = (farmer_id) => {
+  return dispatch => {
+    return fetch(`${orders}`, {
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(orders => dispatch(setOrders(orders, farmer_id)))
+    .catch(error => console.log(error));
+  }
+}
+
+const setOrders = (orders, farmer_id) => {
+  const openFarmerOrders = orders.data.map(order => {
+    return order.attributes.farmgoods.filter(fg => (fg.farmer_id === Number(farmer_id)))
+  })
+  //const test = "test"
+  //debugger 
+  return {
+    type: 'GET_FARMERORDERS_SUCCESS',
+    openFarmerOrders
+    //test
+  }
+}
+
 const checkedOut = (order) =>{
-    //debugger
-    //lineitems = [] 
     return {
       type: 'CHECKOUT_SUCCESS',
       order
@@ -18,16 +45,9 @@ const checkedOut = (order) =>{
           method: 'POST',
           body: JSON.stringify({ customerUserID: customer_user_id, cart_id: cart_id })
       })
-      /*.then(() => {
-        return fetch (`http://localhost:3000/api/carts/`, {
-          headers: {
-            'Access-Control-Allow-Origin':'',
-            'Content-Type': 'application/json'
-          }
-        })*/
       .then(response => response.json())
       .then(order => {
-        debugger 
+        //debugger 
         dispatch(checkedOut())
       })
     }
