@@ -27,7 +27,7 @@ class Header extends React.Component {
     //debugger 
     Object.entries(this.props.roleRoutes).map(function(keyName, keyIndex) {
       //debugger 
-      routesLinks.push(keyName[0])
+      routesLinks.push(keyName)
     })
     //debugger 
     return routesLinks.map((route, keyIndex) => {
@@ -37,7 +37,7 @@ class Header extends React.Component {
         {keyIndex === routesLength &&
           <span>
           <NavLink to={`/${route[1]}`} 
-          className="navLink"> {route} </NavLink>
+          className="navLink"> {route[0]} </NavLink>
           {" | "}
           <a href="/" onClick={this.logOut}>log out</a>
           </span>
@@ -45,7 +45,7 @@ class Header extends React.Component {
         {keyIndex !== (routesLinks.length-1) &&
         <span>
         <NavLink to={`/${route[1]}`}
-        className="navLink"> {route} </NavLink>
+        className="navLink"> {route[0]} </NavLink>
          {" | "}
         </span>
         }
