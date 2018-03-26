@@ -1,20 +1,22 @@
-class Api::OrdersController < ApplicationController
+### see orders_controller for more 
+
+class Api::FarmerOrdersController < ApplicationController
 
     before_action :set_order, only: [:show, :edit, :destroy]
 
     def index
-        render json: Order.all
+        render json: FarmerOrder.all
     end
 
     def create
       #byebug 
-        new_order = Order.new(order_params)
-        farmer_order = FarmerOrder.new(farmer_order_params) 
-        #byebug 
-        new_order.customer_user = CustomerUser.find(params["customerUserID"])
+=begin 
+        new_farmer_order = FarmerOrder.new(order_params)
+        byebug 
+        new_farmer_order.customer_user = CustomerUser.find(params["customerUserID"])
         #byebug 
         out_of_stock = []
-        refund = []
+        #refund = []
         total = 0
         @cart = Cart.find(params["cart_id"])
         @cart.line_items.each do |li| 
@@ -25,15 +27,11 @@ class Api::OrdersController < ApplicationController
                 fg.save 
             end 
 
-            if (fg.inventory - li.quantity >= 0)
-                fg.inventory -= li.quantity 
-                total = total + (li.quantity * fg.price)
-                fg.save 
-                if fg.inventory === 0 
-
-                end 
-            elsif fg.inventory == 0
-                out_of_stock.push(`#{fg.name} is out of stock`)
+            if (fg.inventory === 0)
+                #fg.inventory -= li.quantity 
+                #total = total + (li.quantity * fg.price)
+                #fg.save
+                out_of_stock << fg 
             else 
                 over_order = fg.inventory - li.quantity
                 amount_available = li.quantity + over_order
@@ -42,10 +40,6 @@ class Api::OrdersController < ApplicationController
                 fg.save 
 
                 refund << [fg.name, fg.price]
-            end 
-
-            @cart.line_items.each do |li|
-                byebug 
             end 
 
         end 
@@ -75,43 +69,40 @@ class Api::OrdersController < ApplicationController
         else
             render json: { message: new_order.errors}, status: 400
         end
+=end 
     end
 
     def show
-        render json: @order
+        render json: @farmer_order
     end
 
     def update
         #byebug 
-        if @order.update(order_params)
-            render json: @order
+        if @farmer_order.update(order_params)
+            render json: @farmer_order
         else
-            render json: { message: @order.errors }, status: 400
+            render json: { message: @farmer_order.errors }, status: 400
         end
     end
 
     def destroy
 
-        if @order.destroy
+        if @farmer_order.destroy
             #byebug 
             render json: { message: "successfully destroyed"}, status: 204
         else
-            render json: { message: "unable to remove this cart" }, status: 400
+            render json: { message: "unable to remove this farmer's order" }, status: 400
         end
     end
 
     private
 
     def set_order
-        @order = Order.find_by(id: params[:id])
-    end
-
-    def order_params
-        params.require(:order).permit(:customer_user_id, :cart_id, :total)
+        @farmer_order = FarmerOrder.find_by(id: params[:id])
     end
 
     def farmer_order_params
-        params.require(:order).permit(:customer_user_id, :cart_id)
+        params.require(:order).permit(:customer_user_id, :cart_id, :total)
     end
 
 end

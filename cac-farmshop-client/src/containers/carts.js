@@ -44,6 +44,7 @@ class Cart extends Component {
   }
 
   renderOldLineItems = (oldlineitems) => {
+    //debugger 
     return <div align="center" className="CartsContaine">
       {oldlineitems.map(li => {
       //debugger

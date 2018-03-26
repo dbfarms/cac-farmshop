@@ -9,8 +9,9 @@ class CartCard extends Component {
     constructor(props) {
     super(props)
         this.state = {
-            lineitems: this.props.lineitems,
-            cart: this.props.cart 
+            openLineitems: [],
+            closedLineitems: [],
+            cart: this.props.cart, 
             //currentLineItems: '',
             //oldLineitems: ''
         }
@@ -45,23 +46,30 @@ class CartCard extends Component {
         })
     }
 
-    render(){
-        //debugger 
-    const lineitems = this.state.lineitems
-    const currentLineItems = []
-    const oldLineItems = [] 
-    //debugger 
-    if (lineitems.data ) {
-        //debugger 
-        lineitems.data.map(li => {
-            //debugger 
-            if (li.attributes["cart-id"] === Number(this.state.cart.id)) {
-                currentLineItems.push(li)
-            } else {
-                oldLineItems.push(li)
-            }
-        })
+    /*
+    setLineItems(lineitems){
+        debugger 
+        if (lineitems.length > 0 ) {
+            this.setState({
+                currentLineItems: lineitems[0],
+                oldLineItems: lineitems[1]
+            })
+            /*
+            debugger 
+            lineitems[0].map(li => {
+                debugger 
+                if (li.attributes["cart-id"] === Number(this.state.cart.id)) {
+                    currentLineItems.push(li)
+                } else {
+                    oldLineItems.push(li)
+                }
+            })
+        }
     }
+    */
+
+    render(){
+    
     //debugger 
     var total = 0;
     return (
@@ -69,14 +77,14 @@ class CartCard extends Component {
     <p>{sessionStorage.name}</p>
     <img className="CartImage"  />
     
-    {currentLineItems !== [] && 
-        (currentLineItems.map(li => <p>
+    {this.state.openLineitems.length > 0 && 
+        (this.state.openLineitems.map(li => <span>
             {li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}
             <button onClick={() => this.deleteItem(li)}>X</button>
-        </p>)
+        </span>)
     )}
-    {currentLineItems !== "" &&
-        (currentLineItems.forEach(li => total += (li.attributes.farmgood.price * li.attributes.quantity))
+    {this.state.openLineitems.length > 0 &&
+        (this.state.openLineitems.forEach(li => total += (li.attributes.farmgood.price * li.attributes.quantity))
     )}
 
     <label>Total: {total}</label>
@@ -93,7 +101,7 @@ const mapStateToProps = (state) => {
     //debugger 
     return ({
         cart: state.cart,
-        lineitems: state.lineitems 
+        openLineitems: state.openLineitems 
 
     })
   }

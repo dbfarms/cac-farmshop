@@ -1,5 +1,6 @@
 const orders = "http://localhost:3000/api/orders"
 
+/*
 export const getFarmerOrders = (farmer_id) => {
   return dispatch => {
     return fetch(`${orders}`, {
@@ -16,16 +17,19 @@ export const getFarmerOrders = (farmer_id) => {
 
 const setOrders = (orders, farmer_id) => {
   const openFarmerOrders = orders.data.map(order => {
-    return order.attributes.farmgoods.filter(fg => (fg.farmer_id === Number(farmer_id)))
+    debugger 
+    farmersGoods = order.attributes.farmgoods.filter(fg => (fg.farmer_id === Number(farmer_id)))
+
+    //return order.attributes["line-items"].filter(fg => (fg.))
   })
-  //const test = "test"
-  //debugger 
+
   return {
     type: 'GET_FARMERORDERS_SUCCESS',
     openFarmerOrders
     //test
   }
 }
+*/
 
 const checkedOut = (order) =>{
     return {

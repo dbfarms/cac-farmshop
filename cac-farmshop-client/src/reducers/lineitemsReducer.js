@@ -21,17 +21,20 @@ export default (state = [], action) => {
         return (editState)
       case 'GET_LINEITEM_SUCCESS':
       //debugger 
-      const lineItemState = [...state, action.lineitems, action.userLineItems]
+      //const lineItemState = [...state, action.lineitems, action.userLineItems]
       //const lineitems = action.lineitems
       //const userLineItems = action.userLineItems
+        return (action.openLineitems)
+      case 'GET_ALL_LINEITEMS_SUCCESS':
       //debugger 
-        return (lineItemState)
+        return (action.closedLineItems)  
       case 'DELETE_LINEITEM_SUCCESS':
         var newState = Object.assign([], state);
-        const indexOfLineItemToDelete = state.findIndex(li => {
+        const indexOfLineItemToDelete = state[0].findIndex(li => {
           return Number(li.id) === action.lineItemId
         })
-        const lineItem = state[indexOfLineItemToDelete]
+        const lineItem = state[0][indexOfLineItemToDelete]
+        //debugger
         if (lineItem.attributes.quantity > 1 ) {
           newState[indexOfLineItemToDelete].attributes.quantity -= 1 
         } else {
@@ -39,6 +42,7 @@ export default (state = [], action) => {
             newState.splice(indexOfLineItemToDelete, 1)
           }
         }
+        debugger
         return (
           newState
         );

@@ -1,3 +1,42 @@
+const line_items = "http://localhost:3000/api/line_items"
+
+export const getFarmerOrders = (farmer_id) => {
+  return dispatch => {
+    return fetch(`${line_items}`, {
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(line_items => dispatch(setOrders(line_items, farmer_id)))
+    .catch(error => console.log(error));
+  }
+}
+
+const setOrders = (line_items, farmer_id) => {
+  //debugger 
+  const closedFarmerOrders = []
+  const openFarmerOrders = []
+  line_items.data.map(li => {
+    //debugger 
+    if (li.attributes.farmer.id === Number(farmer_id)) {
+      if (li.attributes.cart.status === "submitted") {
+        closedFarmerOrders
+      } else if (li.attributes.cart.status === "not submitted") {
+        debugger 
+      }
+    }
+
+  })
+
+  return {
+    type: 'GET_FARMERORDERS_SUCCESS',
+    openFarmerOrders
+    //test
+  }
+}
+
 export const addAnotherToCart = (farmgood_id, user_id) => {
   
   return dispatch => {
@@ -54,12 +93,14 @@ const addToCart = (lineitem) => {
 const showLineItems = (lineitems, user_id, cart) => {
   //debugger 
   
+  /*
   const userLineItems = lineitems.data.filter(li =>
     //debugger 
     li.attributes["cart-id"] !== Number(cart.id)
   )
+  */
 
-  lineitems = lineitems.data.filter(li =>
+  const openLineitems = lineitems.data.filter(li =>
     //debugger 
     li.attributes["cart-id"] === Number(cart.id)
   )
@@ -67,11 +108,24 @@ const showLineItems = (lineitems, user_id, cart) => {
   //debugger 
   return {
     type: 'GET_LINEITEM_SUCCESS',
-    lineitems,
-    userLineItems
+    openLineitems,
+    //userLineItems
   }
 }
 
+const showClosedLineItems = (lineitems, user_id, cart) => {
+  //debugger 
+  
+  const closedLineItems = lineitems.data.filter(li =>
+    //debugger 
+    li.attributes["cart-id"] !== Number(cart.id)
+  )
+
+  return {
+    type: 'GET_ALL_LINEITEMS_SUCCESS',
+    closedLineItems
+  }
+}
 /////
 
 let header = new Headers({
@@ -85,6 +139,7 @@ export const getAllLineItems = (user_id) => {
     return fetch ('http://localhost:3000/api/line_items', header)
       .then(response => response.json())
       .then(lineitems => dispatch(setUserLineItems(lineitems, user_id)))
+      .then(lineitems => dispatch(setAllUserLineItems(lineitems, user_id)))
       .catch(error => console.log(error));
   }
 }
@@ -92,6 +147,17 @@ export const getAllLineItems = (user_id) => {
 const setUserLineItems = (lineitems, user_id) => {
   //debugger 
   const userLineItems = lineitems.data.filter(li => li.attributes.cart["customer_user_id"] === Number(user_id) )
+  debugger 
+  return {
+    type: 'GET_ALL_USER_LINEITEMS',
+    userLineItems
+  }
+}
+
+const setAllUserLineItems = (lineitems, user_id) => {
+  //debugger 
+  const userLineItems = lineitems.data.filter(li => li.attributes.cart["customer_user_id"] === Number(user_id) )
+  debugger 
   return {
     type: 'GET_ALL_USER_LINEITEMS',
     userLineItems
@@ -133,8 +199,6 @@ export const getLineItems = (user_id) => {
           'Access-Control-Allow-Origin':'',
           'Content-Type': 'application/json',
         },
-        //method: 'GET',
-        //body: JSON.stringify({  user_id: user_id })
       })
       .then(response => response.json())
       .then(lineitems => {
@@ -143,7 +207,9 @@ export const getLineItems = (user_id) => {
         .then(response =>  { // {debugger}
         //debugger 
         dispatch(showLineItems(lineitems, user_id, response.current_cart))
+        dispatch(showClosedLineItems(lineitems, user_id, response.current_cart))
         })
+        //.then()
       })
       .catch(error => console.log(error))
     }

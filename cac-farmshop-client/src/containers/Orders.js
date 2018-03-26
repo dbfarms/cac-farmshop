@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getFarmerOrders } from '../actions/orders';
+import { getFarmerOrders } from '../actions/lineitems';
+import { Link } from 'react-router-dom'
 
 class OrdersList extends Component {
     constructor(props) {
@@ -26,15 +27,20 @@ class OrdersList extends Component {
     displayOpenOrders(orders){
         //debugger 
         if (typeof orders === 'object') {
-        return orders.map(order => {
-            return <p>name: {order[0].name}</p>
+        return orders.map((order, keyIndex) => {
+            return (
+                <div key={keyIndex}>
+                <Link to > </Link>
+                <label>name: {order[0].name}</label>
+                </div>
+            )
             
         })
         }
     }
 
     render(){
-        //debugger 
+        debugger 
         return (
             <div>
                 {

@@ -6,10 +6,11 @@ git fsck --full
 
 ***************
 where i left off:
-3/21 
--change a column in cart to total and set that during delete and then get the total... but what about things that are no longer available? hmm OR there can be a fetch request for each of the farmgoods to see if they're stlil available but that seems like too many fetch requests unless it's just one fetch request that gets all of the statuses for the selected farmgoods ... that might work
+3/26
+-make line_items two separate dispatches that happen in the same call
 
--when does quantity decrease... when added to cart or when checkout? maybe it happens one way when it's more than 5 but another way when it's less... but that is probably dumb
+-farmer_orders need to be created off of each farmer and farmgood listed in line item per cart 
+
 -what's the turnaround on an order?
 ***************
 

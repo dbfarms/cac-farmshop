@@ -3,5 +3,6 @@ class LineItem < ActiveRecord::Base
     belongs_to :cart
     #belongs_to :customer_user 
     has_one :customer_users, through: :cart 
+    has_one :farmer, through: :farmgood
   end
   

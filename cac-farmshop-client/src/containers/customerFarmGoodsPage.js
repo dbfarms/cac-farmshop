@@ -29,7 +29,7 @@ class CustomerFarmGoods extends Component {
       showCategory: '',
       days: [],
       cart: '',
-      lineitems: '',
+      openLineitems: '',
       farmgood: {
         name: '',
         farmer: '', //EVENTUALLY THIS WILL DEFAULT TO THE LOGGED IN FARMER BUT FOR NOW YOU CAN CHOOSE
@@ -73,7 +73,7 @@ class CustomerFarmGoods extends Component {
     
     this.setState({
       farmGoods_array: nextProps.farmGoods.data,
-      lineitems: nextProps.lineitems
+      openLineitems: nextProps.openLineitems
     })
   }
 
@@ -84,14 +84,14 @@ class CustomerFarmGoods extends Component {
   render() {
     
    // if (this.props.lineitems.data) {
-   //   debugger
+   //  debugger
    // }
     
     //console.log(this.state.cart)
     var objectToArrayDays = []
     var thisFilter = []
     //console.log(this.state.lineitems)
-    //
+    //debugger 
     return (
       <div className="page-tree">
       <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
@@ -147,11 +147,12 @@ class CustomerFarmGoods extends Component {
 
 const mapStateToProps = (state) => {
   //debugger 
+  
   return ({
       farmGoods: state.farmGoods,
       days: state.days, 
       //cart: state.cart,
-      lineitems: state.lineitems 
+      openLineitems: state.openLineitems 
   })
 }
 

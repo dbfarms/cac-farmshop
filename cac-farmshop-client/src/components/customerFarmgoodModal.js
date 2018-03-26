@@ -9,6 +9,10 @@ class CustomerFarmGoodModal extends React.Component {
   constructor(props){
     super(props);
     //debugger 
+
+    this.state = {
+      currentLineItems: this.props.lineitems
+    }
   }
 
   daysAvailable = () => {
@@ -38,8 +42,9 @@ class CustomerFarmGoodModal extends React.Component {
     const user_id = Number(sessionStorage.id)
     //debugger 
     var newItem = true 
-      this.props.lineitems.data.map(li => {
-        debugger 
+      //debugger 
+      this.props.lineitems[0].map(li => {
+        //debugger 
         if (li.attributes.farmgood.id === farmGood_id) {
           newItem = false 
           if (this.props.farmGood.attributes.inventory === li.attributes.quantity) {
@@ -58,6 +63,7 @@ class CustomerFarmGoodModal extends React.Component {
   render() {
     const displayDays = this.daysAvailable();
     const farmGood = this.props
+
     //debugger 
     return (
       <div>
@@ -89,7 +95,8 @@ CustomerFarmGoodModal.displayName = 'CustomerFarmGoodmodal';
 
 const mapStateToProps = state => {
     return {
-      farmgood: state.farmgood
+      farmgood: state.farmgood,
+      lineitems: state.lineitems
     }
 }
   
