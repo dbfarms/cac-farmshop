@@ -7,7 +7,7 @@ git fsck --full
 ***************
 where i left off:
 3/26
--make line_items two separate dispatches that happen in the same call
+-open and closedLineitems returning same stuff
 
 -farmer_orders need to be created off of each farmer and farmgood listed in line item per cart 
 

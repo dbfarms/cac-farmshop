@@ -14,7 +14,8 @@ class Cart extends Component {
       user_id: sessionStorage.id, 
       user_name: sessionStorage.name,
       //lineitems: undefined 
-      lineitems: this.props.lineitems,
+      openLineitems: this.props.openLineitems,
+      closedLineitems: this.props.closedLineitems,
       cart: this.props.cart 
 
     }
@@ -25,19 +26,19 @@ class Cart extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    //debugger
-    if (nextProps.lineitems != undefined ) {
+    debugger
+    if (nextProps.openLineitems != undefined ) {
       //debugger 
       this.setState({
-        lineitems: nextProps.lineitems,
-        userlineitems: nextProps.userlineitems,
+        openLineitems: nextProps.openLineitems,
+        closedLineitems: nextProps.closedLineitems,
         cart: nextProps.cart 
       })
     } else {
       //debugger 
       this.setState({
-        lineitems: nextProps.lineitems,
-        userlineitems: nextProps.lineitems,
+        openLineitems: nextProps.openLineitems,
+        closedLineitems: nextProps.closedLineitems,
         cart: nextProps.cart 
       })
     }
@@ -56,8 +57,8 @@ class Cart extends Component {
 
   render() {
     //debugger 
-    const oldlineitems = this.state.userlineitems
-    const currentLineItems = this.state.lineitems
+    const oldlineitems = this.state.closedLineitems
+    const currentLineItems = this.state.openLineitems
     //const oldLineItems = [] 
     //debugger 
     
@@ -88,8 +89,8 @@ class Cart extends Component {
 const mapStateToProps = (state) => {
   //debugger 
   return ({
-      lineitems: state.lineitems[0],
-      userlineitems: state.lineitems[1]
+      openLineitems: state.openLineitems,
+      closedLineitems: state.closedLineitems
   })
 }
 

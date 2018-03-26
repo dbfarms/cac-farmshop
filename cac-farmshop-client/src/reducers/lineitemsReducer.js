@@ -27,7 +27,7 @@ export default (state = [], action) => {
         return (action.openLineitems)
       case 'GET_ALL_LINEITEMS_SUCCESS':
       //debugger 
-        return (action.closedLineItems)  
+        return (action.closedLineitems)  
       case 'DELETE_LINEITEM_SUCCESS':
         var newState = Object.assign([], state);
         const indexOfLineItemToDelete = state[0].findIndex(li => {

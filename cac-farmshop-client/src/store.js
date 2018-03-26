@@ -11,7 +11,7 @@ import farmers from './reducers/farmersReducer'
 import carts from './reducers/carts';
 import cart from './reducers/carts';
 import openLineitems from './reducers/lineitemsReducer';
-import closedLineItems from './reducers/lineitemsReducer';
+import closedLineitems from './reducers/lineitemsReducer';
 import cartFormData from './reducers/cartFormData';
 import FarmgoodFormData from './reducers/farmGoodFormData';
 import EditedFarmgoodFormData from './reducers/farmGoodFormData';
@@ -36,7 +36,7 @@ const reducers = combineReducers({
   users,
   customers,
   openLineitems,
-  closedLineItems,
+  closedLineitems,
   orders,
   order  
 });

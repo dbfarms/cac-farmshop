@@ -115,15 +115,13 @@ const showLineItems = (lineitems, user_id, cart) => {
 
 const showClosedLineItems = (lineitems, user_id, cart) => {
   //debugger 
-  
-  const closedLineItems = lineitems.data.filter(li =>
-    //debugger 
+  const closedLineitems = lineitems.data.filter(li =>
     li.attributes["cart-id"] !== Number(cart.id)
   )
-
+  //debugger 
   return {
     type: 'GET_ALL_LINEITEMS_SUCCESS',
-    closedLineItems
+    closedLineitems
   }
 }
 /////
@@ -206,10 +204,9 @@ export const getLineItems = (user_id) => {
         dispatch(getCart(sessionStorage.id))
         .then(response =>  { // {debugger}
         //debugger 
-        dispatch(showLineItems(lineitems, user_id, response.current_cart))
+        dispatch(showLineItems(lineitems, user_id, response.current_cart)),
         dispatch(showClosedLineItems(lineitems, user_id, response.current_cart))
         })
-        //.then()
       })
       .catch(error => console.log(error))
     }

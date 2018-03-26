@@ -18,16 +18,16 @@ class CartCard extends Component {
     }
 
     componentWillMount(){
-        if (this.state.lineitems === undefined ) {
+        //if (this.state.lineitems === undefined ) {
             //debugger 
             this.props.getLineItems();
-        }
+        //}
     }
 
     componentWillReceiveProps(nextProps){
         //debugger 
         this.setState({
-            lineitems: nextProps.lineitems,
+            openLineitems: nextProps.openLineitems,
             cart: nextProps.cart 
             //oldLineItems: nextProps.allLineItems 
         })
@@ -78,7 +78,7 @@ class CartCard extends Component {
     <img className="CartImage"  />
     
     {this.state.openLineitems.length > 0 && 
-        (this.state.openLineitems.map(li => <span>
+        (this.state.openLineitems.map((li, keyIndex) => <span key={keyIndex}>
             {li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}
             <button onClick={() => this.deleteItem(li)}>X</button>
         </span>)
