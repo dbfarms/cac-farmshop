@@ -24,9 +24,12 @@ class Header extends React.Component {
     //debugger
     const routesLinks = [] 
     const routesLength = (Object.keys(this.props.roleRoutes).length - 1)
+    //debugger 
     Object.entries(this.props.roleRoutes).map(function(keyName, keyIndex) {
-      routesLinks.push(keyName, keyIndex)
+      //debugger 
+      routesLinks.push(keyName[0])
     })
+    //debugger 
     return routesLinks.map((route, keyIndex) => {
       //debugger 
       return (
@@ -34,7 +37,7 @@ class Header extends React.Component {
         {keyIndex === routesLength &&
           <span>
           <NavLink to={`/${route[1]}`} 
-          className="navLink"> {route[0]} </NavLink>
+          className="navLink"> {route} </NavLink>
           {" | "}
           <a href="/" onClick={this.logOut}>log out</a>
           </span>
@@ -42,7 +45,7 @@ class Header extends React.Component {
         {keyIndex !== (routesLinks.length-1) &&
         <span>
         <NavLink to={`/${route[1]}`}
-        className="navLink"> {route[0]} </NavLink>
+        className="navLink"> {route} </NavLink>
          {" | "}
         </span>
         }
@@ -52,6 +55,7 @@ class Header extends React.Component {
   }
 
   render() {
+    //debugger 
     const routes = this.makeRoutes() 
     //debugger 
     if (sessionStorage.jwt !== "undefined") { //also this isn't actually working so
