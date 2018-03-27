@@ -13,7 +13,7 @@ import FarmgoodNav from '../components/farmgoodNav'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 //import { getCart } from '../actions/carts'
-import { getLineItems } from '../actions/lineitems'
+import { getOpenLineItems } from '../actions/lineitems'
 import CartCard from '../components/CartCard';
 import './FarmGoods.css';
 
@@ -65,7 +65,7 @@ class CustomerFarmGoods extends Component {
 
   componentDidMount(){
     //this.props.getCart(sessionStorage.id)
-    this.props.getLineItems(sessionStorage.id)
+    this.props.getOpenLineItems(sessionStorage.id)
   }
 
   componentWillReceiveProps(nextProps){
@@ -96,7 +96,7 @@ class CustomerFarmGoods extends Component {
       <div className="page-tree">
       <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
       {this.state.card !== '' && 
-        <CartCard cart={this.state.lineitems}/>
+        <CartCard cart={this.state.openLineitems}/>
       }
       {this.state.farmGoods_array === undefined &&
         <p>loading loading</p>
@@ -107,7 +107,7 @@ class CustomerFarmGoods extends Component {
           <div>
             <div className="Farm-Goods-Container">
               <h1>For sale (click on farmgood to edit): </h1>
-              {this.state.farmGoods_array.map(farmGood => <CustomerFarmGoodModal key={farmGood.id} farmGood={farmGood} lineitems={this.state.lineitems}/>)}
+              {this.state.farmGoods_array.map(farmGood => <CustomerFarmGoodModal key={farmGood.id} farmGood={farmGood} lineitems={this.state.openLineitems}/>)}
             </div>
           </div>
         }
@@ -123,7 +123,7 @@ class CustomerFarmGoods extends Component {
                 }
               })
               }
-              {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} lineitems={this.state.lineitems} />)}
+              {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} lineitems={this.state.openLineitems} />)}
             </div>
         }
         {this.state.showKey === "category"  &&
@@ -135,7 +135,7 @@ class CustomerFarmGoods extends Component {
                   }
               })
               }
-              {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} lineitems={this.state.lineitems} />)}
+              {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} lineitems={this.state.openLineitems} />)}
             </div>
         }
         </div>
@@ -156,7 +156,7 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getCustomerFarmGoods, getLineItems })(CustomerFarmGoods); // 
+export default connect(mapStateToProps, { getCustomerFarmGoods, getOpenLineItems })(CustomerFarmGoods); // getLineItems 
 
 /*
 getCart

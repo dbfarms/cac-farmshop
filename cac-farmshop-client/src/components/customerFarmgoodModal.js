@@ -11,7 +11,7 @@ class CustomerFarmGoodModal extends React.Component {
     //debugger 
 
     this.state = {
-      currentLineItems: this.props.lineitems
+      openLineItems: this.props.openLineitems
     }
   }
 
@@ -43,7 +43,7 @@ class CustomerFarmGoodModal extends React.Component {
     //debugger 
     var newItem = true 
       //debugger 
-      this.props.lineitems[0].map(li => {
+      this.props.lineitems.map(li => {
         //debugger 
         if (li.attributes.farmgood.id === farmGood_id) {
           newItem = false 
@@ -55,7 +55,7 @@ class CustomerFarmGoodModal extends React.Component {
         }
       })
       if (newItem === true ) {
-        debugger 
+        //debugger 
         this.props.addFarmgoodToCart(farmGood_id, user_id)
       }
   }
@@ -96,7 +96,7 @@ CustomerFarmGoodModal.displayName = 'CustomerFarmGoodmodal';
 const mapStateToProps = state => {
     return {
       farmgood: state.farmgood,
-      lineitems: state.lineitems
+      openLineitems: state.openLineitems
     }
 }
   

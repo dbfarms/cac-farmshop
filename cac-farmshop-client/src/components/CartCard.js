@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getLineItems } from '../actions/lineitems';
+import { getOpenLineItems } from '../actions/lineitems';
 import { removeLineItem } from '../actions/lineitems';
 import { Link } from 'react-router-dom';
 //import Button from 'material-ui/Button';
@@ -10,7 +10,7 @@ class CartCard extends Component {
     super(props)
         this.state = {
             openLineitems: [],
-            closedLineitems: [],
+            //closedLineitems: [],
             cart: this.props.cart, 
             //currentLineItems: '',
             //oldLineitems: ''
@@ -20,7 +20,7 @@ class CartCard extends Component {
     componentWillMount(){
         //if (this.state.lineitems === undefined ) {
             //debugger 
-            this.props.getLineItems();
+            this.props.getOpenLineItems();
         //}
     }
 
@@ -106,7 +106,7 @@ const mapStateToProps = (state) => {
     })
   }
   
-  export default connect(mapStateToProps, { getLineItems, removeLineItem })(CartCard); // 
+  export default connect(mapStateToProps, { getOpenLineItems, removeLineItem })(CartCard); // 
 
 /*
 

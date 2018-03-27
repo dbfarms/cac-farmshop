@@ -1,5 +1,14 @@
 const line_items = "http://localhost:3000/api/line_items"
 
+
+let header = new Headers({
+  'Access-Control-Allow-Origin':'',
+  'Content-Type': 'multipart/form-data',
+  'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
+});
+
+
+
 export const getFarmerOrders = (farmer_id) => {
   return dispatch => {
     return fetch(`${line_items}`, {
@@ -90,18 +99,11 @@ const addToCart = (lineitem) => {
   }
 }
 
-const showLineItems = (lineitems, user_id, cart) => {
-  //debugger 
-  
-  /*
-  const userLineItems = lineitems.data.filter(li =>
-    //debugger 
-    li.attributes["cart-id"] !== Number(cart.id)
-  )
-  */
+/////////////////////////////////////////////////////////////
+
+const showOpenLineItems = (lineitems, user_id, cart) => {
 
   const openLineitems = lineitems.data.filter(li =>
-    //debugger 
     li.attributes["cart-id"] === Number(cart.id)
   )
   
@@ -124,13 +126,54 @@ const showClosedLineItems = (lineitems, user_id, cart) => {
     closedLineitems
   }
 }
-/////
 
-let header = new Headers({
-  'Access-Control-Allow-Origin':'',
-  'Content-Type': 'multipart/form-data',
-  'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
-});
+export const getLineItems = (user_id) => {
+  //debugger 
+  return dispatch => {
+      return fetch('http://localhost:3000/api/line_items', {
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => response.json())
+    .then(lineitems => {
+      //debugger 
+      dispatch(getCart(sessionStorage.id))
+      .then(response =>  { // {debugger}
+      //debugger 
+      dispatch(showOpenLineItems(lineitems, user_id, response.current_cart)),
+      dispatch(showClosedLineItems(lineitems, user_id, response.current_cart))
+      })
+    })
+    .catch(error => console.log(error))
+  }
+}
+
+export const getOpenLineItems = (user_id) => {
+  //debugger 
+  return dispatch => {
+      return fetch('http://localhost:3000/api/line_items', {
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => response.json())
+    .then(lineitems => {
+      //debugger 
+      dispatch(getCart(sessionStorage.id))
+      .then(response =>  { // {debugger}
+      //debugger 
+      dispatch(showOpenLineItems(lineitems, user_id, response.current_cart))//,
+      //dispatch(showClosedLineItems(lineitems, user_id, response.current_cart))
+      })
+    })
+    .catch(error => console.log(error))
+  }
+}
+
+/////////////////////////////////////////////////////////////
 
 export const getAllLineItems = (user_id) => {
   return dispatch => {
@@ -162,7 +205,7 @@ const setAllUserLineItems = (lineitems, user_id) => {
   }
 }
 
-///
+/////////////////////////////////////////////////////////////
 
 const setCart = (carts, user_id) => {
   //debugger
@@ -186,31 +229,6 @@ export const getCart = (user_id) => {
   }
 }
 
-
-export const getLineItems = (user_id) => {
-    //debugger 
-    //const cart_id = Number(cart.id) 
-    return dispatch => {
-      //return fetch(`http://localhost:3000/api/carts/${cart_id}`, {
-        return fetch('http://localhost:3000/api/line_items', {
-        headers: {
-          'Access-Control-Allow-Origin':'',
-          'Content-Type': 'application/json',
-        },
-      })
-      .then(response => response.json())
-      .then(lineitems => {
-        //debugger 
-        dispatch(getCart(sessionStorage.id))
-        .then(response =>  { // {debugger}
-        //debugger 
-        dispatch(showLineItems(lineitems, user_id, response.current_cart)),
-        dispatch(showClosedLineItems(lineitems, user_id, response.current_cart))
-        })
-      })
-      .catch(error => console.log(error))
-    }
-}
 
 const deleteLineItem = (lineItemId) =>{
   //debugger 
