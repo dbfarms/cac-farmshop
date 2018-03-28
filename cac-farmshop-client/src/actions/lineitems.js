@@ -229,16 +229,18 @@ export const getCart = (user_id) => {
   }
 }
 
+///////////////////////////////
 
-const deleteLineItem = (lineItemId) =>{
+const deleteLineItem = (lineItemId, initialQuantity) =>{
   //debugger 
   return {
     type: 'DELETE_LINEITEM_SUCCESS',
-    lineItemId 
+    lineItemId,
+    initialQuantity
   }
 }
 
-export const removeLineItem = (lineItemId) => {
+export const removeLineItem = (lineItemId, initialQuantity) => {
   //debugger
   return dispatch => {
     return fetch(`http://localhost:3000/api/line_items/${lineItemId}`, {
@@ -249,7 +251,7 @@ export const removeLineItem = (lineItemId) => {
       method: 'DELETE'
     })
     .then(() => {
-      dispatch(deleteLineItem(lineItemId))
+      dispatch(deleteLineItem(lineItemId, initialQuantity))
     })
   }
 }

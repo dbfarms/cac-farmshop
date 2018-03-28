@@ -35,18 +35,22 @@ export default (state = [], action) => {
       case 'DELETE_LINEITEM_SUCCESS':
         //debugger 
         var newState = Object.assign([], state);
-        const indexOfLineItemToDelete = state.findIndex(li => {
-          return Number(li.id) === action.lineItemId
-        })
-        const lineItem = state[indexOfLineItemToDelete]
-        debugger
-        if (lineItem.attributes.quantity > 1 ) {
-          newState[indexOfLineItemToDelete].attributes.quantity -= 1 
-        } else {
-          if (indexOfLineItemToDelete > -1 ) {
-            newState.splice(indexOfLineItemToDelete, 1)
+        if (action.initialQuantity === state[0].attributes.quantity )
+        {
+          const indexOfLineItemToDelete = state.findIndex(li => {
+            return Number(li.id) === action.lineItemId
+          })
+          const lineItem = state[indexOfLineItemToDelete]
+          //debugger
+          if (lineItem.attributes.quantity > 1 ) {
+            newState[indexOfLineItemToDelete].attributes.quantity -= 1 
+          } else {
+            if (indexOfLineItemToDelete > -1 ) {
+              newState.splice(indexOfLineItemToDelete, 1)
+            }
           }
         }
+        
         //debugger
         return (
           newState

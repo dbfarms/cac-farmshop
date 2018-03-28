@@ -35,9 +35,10 @@ class CartCard extends Component {
 
     deleteItem = (li) => {
         //debugger 
-        var lineItemId = Number(li.id)
+        const lineItemId = Number(li.id)
+        const initialQuantity = li.attributes.quantity
         //debugger
-        this.props.removeLineItem(lineItemId)
+        this.props.removeLineItem(lineItemId, initialQuantity)
     }
 
     sortLineItems(lineitems){
