@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import CartCardModal from '../components/CartCardModal';
-import { getLineItems } from '../actions/lineitems';
+//import { connect } from 'react-redux';
+import CartCard from '../components/CartCard';
+//import CartCardModal from '../components/CartCardModal';
+//import { getLineItems } from '../actions/lineitems';
+import HistoryOrders from '../components/HistoryOrders';
 
 import './Carts.css';
 
@@ -14,19 +16,21 @@ class Cart extends Component {
       user_id: sessionStorage.id, 
       user_name: sessionStorage.name,
       //lineitems: undefined 
+      /*
       openLineitems: this.props.openLineitems,
       closedLineitems: this.props.closedLineitems,
       cart: this.props.cart 
-
+      */
     }
   }
 
   componentDidMount(){
-    this.props.getLineItems(sessionStorage.id)
+    //this.props.getLineItems(sessionStorage.id)
   }
 
   componentWillReceiveProps(nextProps){
-    debugger
+    //debugger
+    /*
     if (nextProps.openLineitems != undefined ) {
       //debugger 
       this.setState({
@@ -42,8 +46,10 @@ class Cart extends Component {
         cart: nextProps.cart 
       })
     }
+    */
   }
 
+  /*
   renderOldLineItems = (oldlineitems) => {
     //debugger 
     return <div align="center" className="CartsContaine">
@@ -53,39 +59,37 @@ class Cart extends Component {
     })}
     </div>
   }
+  */
 
 
   render() {
     //debugger 
-    const oldlineitems = this.state.closedLineitems
-    const currentLineItems = this.state.openLineitems
+    //const oldlineitems = this.state.closedLineitems
+    //const currentLineItems = this.state.openLineitems
     //const oldLineItems = [] 
     //debugger 
     
     return (
       <div>
-      {this.state.lineitems === undefined &&
-        <div>
-          <p>loading</p>
-        </div>
-      }
-      {this.state.lineitems != undefined &&
+      
       <div className="CartsContainer">
         <div align="left">
           <h1>Cart </h1>
-          <CartCardModal cart={currentLineItems} total={0}  />
+          <CartCard />
         </div>
         <div align="right">
           <h3>old orders / what you ate in the past</h3>
-          {this.renderOldLineItems(oldlineitems)}
+          <HistoryOrders />
+          
         </div>
       </div>
-      }
       </div>
    )
   }
 }
 
+//{this.renderOldLineItems(oldlineitems)}
+/*
 const mapStateToProps = (state) => {
   //debugger 
   return ({
@@ -93,11 +97,18 @@ const mapStateToProps = (state) => {
       closedLineitems: state.closedLineitems
   })
 }
+*/
 
-export default connect(mapStateToProps, { getLineItems })(Cart);
+export default Cart //connect(mapStateToProps, { getLineItems })(Cart);
 
 
 /*
+
+{this.state.lineitems === undefined &&
+        <div>
+          <p>loading</p>
+        </div>
+      }
 
 if (lineitems != undefined ) {
         //debugger 

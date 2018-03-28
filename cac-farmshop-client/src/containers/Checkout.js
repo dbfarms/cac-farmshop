@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CartCard from '../components/CartCard';
-import { getLineItems } from '../actions/lineitems';
+import { getOpenLineItems } from '../actions/lineitems';
 import { checkingOutNow } from '../actions/orders';
 
 class Checkout extends Component {
@@ -17,7 +17,7 @@ class Checkout extends Component {
   }
 
   componentDidMount(){
-    this.props.getLineItems(sessionStorage.id)
+    this.props.getOpenLineItems(sessionStorage.id)
   }
 
   componentWillReceiveProps(nextProps){
@@ -62,4 +62,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getLineItems, checkingOutNow })(Checkout);
+export default connect(mapStateToProps, { getOpenLineItems, checkingOutNow })(Checkout);

@@ -29,8 +29,7 @@ export default (state = [], action) => {
         return (action.openLineitems)//)
       case 'GET_ALL_LINEITEMS_SUCCESS':
         //debugger 
-          const closedState = Object.assign({}, ...action.closedLineitems)
-          debugger 
+        //debugger 
         return (action.closedLineitems)  
       case 'DELETE_LINEITEM_SUCCESS':
         //debugger 

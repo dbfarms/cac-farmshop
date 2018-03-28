@@ -106,18 +106,16 @@ const showOpenLineItems = (lineitems, user_id, cart) => {
   const openLineitems = lineitems.data.filter(li =>
     li.attributes["cart-id"] === Number(cart.id)
   )
-  
   //debugger 
   return {
     type: 'GET_LINEITEM_SUCCESS',
-    openLineitems,
-    //userLineItems
+    openLineitems
   }
 }
 
-const showClosedLineItems = (lineitems, user_id, cart) => {
+const showClosedLineItems = (gotLineitems, cart) => {
   //debugger 
-  const closedLineitems = lineitems.data.filter(li =>
+  const closedLineitems = gotLineitems.data.filter(li =>
     li.attributes["cart-id"] !== Number(cart.id)
   )
   //debugger 
@@ -127,7 +125,7 @@ const showClosedLineItems = (lineitems, user_id, cart) => {
   }
 }
 
-export const getLineItems = (user_id) => {
+export const getClosedLineItems = (user_id) => {
   //debugger 
   return dispatch => {
       return fetch('http://localhost:3000/api/line_items', {
@@ -137,13 +135,11 @@ export const getLineItems = (user_id) => {
       },
     })
     .then(response => response.json())
-    .then(lineitems => {
+    .then(gotLineitems => {
       //debugger 
       dispatch(getCart(sessionStorage.id))
       .then(response =>  { // {debugger}
-      //debugger 
-      dispatch(showOpenLineItems(lineitems, user_id, response.current_cart)),
-      dispatch(showClosedLineItems(lineitems, user_id, response.current_cart))
+      dispatch(showClosedLineItems(gotLineitems, response.current_cart))
       })
     })
     .catch(error => console.log(error))
