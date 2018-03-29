@@ -17,8 +17,8 @@ class Cart extends Component {
       user_name: sessionStorage.name,
       //lineitems: undefined 
       
-      openLineitems: this.props.openLineitems,
-      closedLineitems: this.props.closedLineitems,
+      openLineitems: [],//this.props.openLineitems,
+      closedLineitems: [], //this.props.closedLineitems,
       cart: this.props.cart 
       
     }
@@ -30,58 +30,32 @@ class Cart extends Component {
 
   componentWillReceiveProps(nextProps){
     //debugger
-    /*
-    if (nextProps.openLineitems != undefined ) {
-      //debugger 
+    if (nextProps.openLineitems.length > 0 ) {
       this.setState({
-        openLineitems: nextProps.openLineitems,
-        closedLineitems: nextProps.closedLineitems,
-        cart: nextProps.cart 
+        openLineitems: nextProps.openLineitems[0],
+        closedLineitems: nextProps.closedLineitems[1] 
       })
-    } else {
-      //debugger 
-      this.setState({
-        openLineitems: nextProps.openLineitems,
-        closedLineitems: nextProps.closedLineitems,
-        cart: nextProps.cart 
-      })
-    }
-    */
+    } 
   }
-
-  /*
-  renderOldLineItems = (oldlineitems) => {
-    //debugger 
-    return <div align="center" className="CartsContaine">
-      {oldlineitems.map(li => {
-      //debugger
-      return <p>link to: {li.attributes.farmgood.name}</p>
-    })}
-    </div>
-  }
-  */
-
 
   render() {
+    //const closedLineitems = this.state.closedLineitems
+    //const openLineItems = this.state.openLineitems
     //debugger 
-    //const oldlineitems = this.state.closedLineitems
-    //const currentLineItems = this.state.openLineitems
-    //const oldLineItems = [] 
-    debugger 
     
     return (
       <div>
-      {this.state.openLineitems === [] &&
+      {JSON.stringify(this.state.openLineitems) === "[]" &&
         <div>
           <p>loading</p>
         </div> 
       }
-      {this.state.openLineitems !== [] &&
+      {JSON.stringify(this.state.openLineitems) !== "[]" &&
         <div className="CartsContainer">
-        <div align="left">
-          <h1>Cart </h1>
-          <CartCardModal openLineitems={this.state.openLineitems}/>
-        </div>
+          <div align="left">
+            <h1>Cart </h1>
+            <CartCardModal openLineitems={this.state.openLineitems}/>
+          </div>
         </div>
       }
       {this.state.closedLineitems === [] &&

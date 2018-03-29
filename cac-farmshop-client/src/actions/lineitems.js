@@ -220,7 +220,6 @@ const setAllUserLineItems = (lineitems, cart) => {
   allLineItems.push(closedLineitems)
   //allLineItems[0] = lineitems.data.filter(li => li.attributes.cart["customer_user_id"] === Number(cart.id) )
   //allLineItems[1] = 
-  debugger 
   return {
     type: 'GET_ALL_USER_LINEITEMS',
     allLineItems

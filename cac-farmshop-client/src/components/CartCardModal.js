@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 
 
 const totalCost = (currentLineItems) =>{
-debugger 
+//debugger 
     var total = 0
 
-    if (currentLineItems !== undefined ){
-        currentLineItems.openLineitems.forEach(li => total += (li.attributes.farmgood.price * li.attributes.quantity))
-         //debugger 
+    if (currentLineItems !== undefined || currentLineItems.openLineitems !== [] ){
+        currentLineItems.openLineitems.forEach(li => {
+            total += (li.attributes.farmgood.price * li.attributes.quantity)
+        })
     }
     return total
-
 }
 
 const CartCardModal = (currentLineItems, total=0) => 
@@ -31,7 +31,6 @@ const CartCardModal = (currentLineItems, total=0) =>
             <p>Total: {totalCost(currentLineItems)}</p>
         }
 
-        <label>Total: {totalCost()}</label>
         <Link to="/checkout">
             <button>Checkout</button>
         </Link>
@@ -41,6 +40,12 @@ const CartCardModal = (currentLineItems, total=0) =>
 export default CartCardModal
 
 /*
+<label>Total: {totalCost()}</label>
+
+
+{debugger} ) /*
+            --
+
 
 <div className="CartsCard">
         <p>{sessionStorage.name}</p>

@@ -54,9 +54,9 @@ export default (state = [], action) => {
         return (
           newState
         );
-      //case 'GET_ALL_USER_LINEITEMS':
+      case 'GET_ALL_USER_LINEITEMS':
         //debugger 
-        //return action.userLineItems 
+        return action.allLineItems 
       default:
         return state
     }
