@@ -40,13 +40,13 @@ class OrdersList extends Component {
     }
 
     render(){
-        debugger 
+        //debugger 
         return (
             <div>
                 {
                     <p>orders: {this.displayOpenOrders(this.state.orders)}</p>
                 }
-                {this.state.orders === '' ? <p>loading</p> : <p>loaded</p> }
+                {this.state.orders === '' ? <p>loading</p> : <p>loaded {console.log(this.state.orders)} </p> }
             </div>
 
         )

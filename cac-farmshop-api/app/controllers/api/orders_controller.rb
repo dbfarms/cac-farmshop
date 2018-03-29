@@ -30,7 +30,7 @@ class Api::OrdersController < ApplicationController
                 total = total + (li.quantity * fg.price)
                 fg.save 
                 if fg.inventory === 0 
-
+                    ## this will alert the farmer that a stock is out
                 end 
             elsif fg.inventory == 0
                 out_of_stock.push(`#{fg.name} is out of stock`)
