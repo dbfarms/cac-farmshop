@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 //import CartCard from '../components/CartCard';
 import CartCardModal from '../components/CartCardModal';
-import { getAllLineItems } from '../actions/lineitems';
+//import { getAllLineItems } from '../actions/lineitems';
+import { getClosedLineItems } from '../actions/lineitems';
 import HistoryOrders from '../components/HistoryOrders';
 
 import './Carts.css';
@@ -25,7 +26,8 @@ class Cart extends Component {
   }
 
   componentDidMount(){
-    this.props.getAllLineItems(sessionStorage.id)
+    //this.props.getAllLineItems(sessionStorage.id)
+    this.props.getClosedLineItems(sessionStorage.id)
   }
 
   componentWillReceiveProps(nextProps){
@@ -33,7 +35,7 @@ class Cart extends Component {
     if (nextProps.openLineitems.length > 0 ) {
       this.setState({
         openLineitems: nextProps.openLineitems[0],
-        closedLineitems: nextProps.closedLineitems[1] 
+        closedLineitems: nextProps.closedLineitems//[1] 
       })
     } 
   }
@@ -46,17 +48,23 @@ class Cart extends Component {
     return (
       <div>
       {JSON.stringify(this.state.openLineitems) === "[]" &&
-        <div>
-          <p>loading</p>
+        <div align="left">
+          <p>put something in yr cart</p>
         </div> 
       }
+      
       {JSON.stringify(this.state.openLineitems) !== "[]" &&
+      /*
+        FOR NOW THIS DOESN'T EXIST HERE CAUSE A) IT'S BROKEN AND ANYWAY B) IT'S REDUNDANT 
         <div className="CartsContainer">
           <div align="left">
             <h1>Cart </h1>
             <CartCardModal openLineitems={this.state.openLineitems}/>
           </div>
         </div>
+        */
+       <div>
+         </div>
       }
       {this.state.closedLineitems === [] &&
         <div>
@@ -86,7 +94,7 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { getAllLineItems })(Cart);
+export default connect(mapStateToProps, { getClosedLineItems })(Cart);
 
 
 /*
