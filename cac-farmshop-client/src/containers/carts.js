@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-//import { connect } from 'react-redux';
-import CartCard from '../components/CartCard';
-//import CartCardModal from '../components/CartCardModal';
-//import { getLineItems } from '../actions/lineitems';
+import { connect } from 'react-redux';
+//import CartCard from '../components/CartCard';
+import CartCardModal from '../components/CartCardModal';
+import { getAllLineItems } from '../actions/lineitems';
 import HistoryOrders from '../components/HistoryOrders';
 
 import './Carts.css';
@@ -16,16 +16,16 @@ class Cart extends Component {
       user_id: sessionStorage.id, 
       user_name: sessionStorage.name,
       //lineitems: undefined 
-      /*
+      
       openLineitems: this.props.openLineitems,
       closedLineitems: this.props.closedLineitems,
       cart: this.props.cart 
-      */
+      
     }
   }
 
   componentDidMount(){
-    //this.props.getLineItems(sessionStorage.id)
+    this.props.getAllLineItems(sessionStorage.id)
   }
 
   componentWillReceiveProps(nextProps){
@@ -67,29 +67,42 @@ class Cart extends Component {
     //const oldlineitems = this.state.closedLineitems
     //const currentLineItems = this.state.openLineitems
     //const oldLineItems = [] 
-    //debugger 
+    debugger 
     
     return (
       <div>
-      
-      <div className="CartsContainer">
+      {this.state.openLineitems === [] &&
+        <div>
+          <p>loading</p>
+        </div> 
+      }
+      {this.state.openLineitems !== [] &&
+        <div className="CartsContainer">
         <div align="left">
           <h1>Cart </h1>
-          <CartCard />
+          <CartCardModal openLineitems={this.state.openLineitems}/>
         </div>
+        </div>
+      }
+      {this.state.closedLineitems === [] &&
+        <div>
+          <p>loading</p>
+        </div> 
+      }
+      {this.state.closedLineitems !== [] &&
         <div align="right">
           <h3>old orders / what you ate in the past</h3>
-          <HistoryOrders />
+          <HistoryOrders closedLineitems={this.state.closedLineitems}/>
           
         </div>
-      </div>
+      }
       </div>
    )
   }
 }
 
 //{this.renderOldLineItems(oldlineitems)}
-/*
+
 const mapStateToProps = (state) => {
   //debugger 
   return ({
@@ -97,9 +110,9 @@ const mapStateToProps = (state) => {
       closedLineitems: state.closedLineitems
   })
 }
-*/
 
-export default Cart //connect(mapStateToProps, { getLineItems })(Cart);
+
+export default connect(mapStateToProps, { getAllLineItems })(Cart);
 
 
 /*

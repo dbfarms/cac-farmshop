@@ -9,12 +9,13 @@ class HistoryOrder extends Component{
 
         this.state = {
             //openLineitems: this.props.openLineitems,
-            closedLineitems: ''
+            closedLineitems: this.props.closedLineitems
         }
     }
 
+    /*
     componentWillMount(){
-        this.props.getClosedLineItems(sessionStorage.id)
+        //this.props.getClosedLineItems(sessionStorage.id)
     }
 
     componentWillReceiveProps(nextProps){
@@ -23,6 +24,7 @@ class HistoryOrder extends Component{
             closedLineitems: nextProps.closedLineitems
         })
     }
+    */
 
     renderOldLineItems = (oldlineitems) => {
         //debugger 
@@ -45,8 +47,8 @@ class HistoryOrder extends Component{
     }
 }
 
-
-const mapStateToProps = (state) => {
+/*
+const mapStateToProps = (state, ownProps) => {
     //debugger 
     return ({
         //cart: state.cart,
@@ -54,5 +56,6 @@ const mapStateToProps = (state) => {
 
     })
   }
+*/
   
-export default connect(mapStateToProps, { getClosedLineItems})(HistoryOrder); // 
+export default HistoryOrder//connect(mapStateToProps, { getClosedLineItems})(HistoryOrder); // 

@@ -175,14 +175,22 @@ export const getAllLineItems = (user_id) => {
   return dispatch => {
     return fetch ('http://localhost:3000/api/line_items', header)
       .then(response => response.json())
-      .then(lineitems => dispatch(setUserLineItems(lineitems, user_id)))
-      .then(lineitems => dispatch(setAllUserLineItems(lineitems, user_id)))
+      .then(lineitems => { 
+        dispatch(getCart(sessionStorage.id))
+        .then(response => {
+          dispatch(setAllUserLineItems(lineitems, response.current_cart))
+        })
+      })
+      //.then(lineitems => dispatch(setAllUserLineItems(lineitems, user_id)))
       .catch(error => console.log(error));
   }
 }
 
+
+
+/*
 const setUserLineItems = (lineitems, user_id) => {
-  //debugger 
+  debugger 
   const userLineItems = lineitems.data.filter(li => li.attributes.cart["customer_user_id"] === Number(user_id) )
   debugger 
   return {
@@ -190,14 +198,32 @@ const setUserLineItems = (lineitems, user_id) => {
     userLineItems
   }
 }
+*/
 
-const setAllUserLineItems = (lineitems, user_id) => {
+const setAllUserLineItems = (lineitems, cart) => {
   //debugger 
-  const userLineItems = lineitems.data.filter(li => li.attributes.cart["customer_user_id"] === Number(user_id) )
+  const user_id = Number(sessionStorage.id)
+  var allUserLineItems = lineitems.data.filter(li => li.attributes["customer-users"].id === user_id)
+  var allLineItems = []
+  var openLineitems = []
+  var closedLineitems = []
+  //debugger 
+  allUserLineItems.map(li => {
+    //debugger 
+    if (li.attributes.cart.id === Number(cart.id)) {
+      openLineitems.push(li)
+    } else {
+      closedLineitems.push(li)
+    }
+  })
+  allLineItems.push(openLineitems)
+  allLineItems.push(closedLineitems)
+  //allLineItems[0] = lineitems.data.filter(li => li.attributes.cart["customer_user_id"] === Number(cart.id) )
+  //allLineItems[1] = 
   debugger 
   return {
     type: 'GET_ALL_USER_LINEITEMS',
-    userLineItems
+    allLineItems
   }
 }
 

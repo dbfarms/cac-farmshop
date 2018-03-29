@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   #get '/api/users', to: "users"
   #resources :sessions, only: [:show]
   post '/users/authorized' 
+
+  #get 'customer/:id', to: "api/line_items#customer_line_items"
   
   namespace :api do
     resources :carts

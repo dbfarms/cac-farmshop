@@ -35,7 +35,7 @@ class Api::CustomerUsersController < ApplicationController
         render json: ErrorSerializer.serialize(user.errors), status: 422
       end
     end
-
+    
     private
   
       def user_params

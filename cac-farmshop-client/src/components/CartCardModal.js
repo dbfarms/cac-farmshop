@@ -3,21 +3,26 @@ import { Link } from 'react-router-dom';
 
 
 const totalCost = (currentLineItems) =>{
-//debugger 
+debugger 
+    var total = 0
+
     if (currentLineItems !== undefined ){
-        var total = 0 
-        currentLineItems.cart.forEach(li => total += (li.attributes.farmgood.price * li.attributes.quantity))
-        return total //debugger 
+        currentLineItems.openLineitems.forEach(li => total += (li.attributes.farmgood.price * li.attributes.quantity))
+         //debugger 
     }
+    return total
+
 }
 
 const CartCardModal = (currentLineItems, total=0) => 
+    //debugger
     <div className="CartsCard">
         <p>{sessionStorage.name}</p>
         <img className="CartImage"  />
-
-        {currentLineItems !== [] && 
-            (currentLineItems.cart.map(li => <p>
+        <p>{console.log(currentLineItems)}</p>
+        {currentLineItems.openLineitems !== [] && 
+            
+            (currentLineItems.openLineitems.map(li => <p>
                 {li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}
                 <button onClick={() => this.deleteItem(li)}>X</button>
             </p>)
@@ -31,6 +36,7 @@ const CartCardModal = (currentLineItems, total=0) =>
             <button>Checkout</button>
         </Link>
     </div>
+    
 
 export default CartCardModal
 
