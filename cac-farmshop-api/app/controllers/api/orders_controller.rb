@@ -7,16 +7,21 @@ class Api::OrdersController < ApplicationController
     end
 
     def create
-      #byebug 
+
         new_order = Order.new(order_params)
+        @cart = Cart.find(params["cart_id"])
+
+      byebug ##what does farmer_order_params have? how can i get farmer from @cart?
         farmer_order = FarmerOrder.new(farmer_order_params) 
+        farmer_order.customer_user = CustomerUser.find(params["customerUserID"])
+
         #byebug 
         new_order.customer_user = CustomerUser.find(params["customerUserID"])
         #byebug 
         out_of_stock = []
         refund = []
         total = 0
-        @cart = Cart.find(params["cart_id"])
+       
         @cart.line_items.each do |li| 
             fg = Farmgood.find(li.farmgood_id)
             #byebug 
@@ -45,8 +50,12 @@ class Api::OrdersController < ApplicationController
             end 
 
             @cart.line_items.each do |li|
-                byebug 
+                byebug ### for each line_item check to see if it belongs to farmer and if so add to 
             end 
+
+            ##calculate total here from the line_items added to farmer_orders.farmgoods
+
+            ##status here (open until date?)
 
         end 
         

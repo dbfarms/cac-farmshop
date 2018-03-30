@@ -10,4 +10,5 @@ class Farmgood < ApplicationRecord
     has_many :days_available
     has_many :days, through: :days_available
     has_many :line_items
+    has_many :farmer_orders
 end
