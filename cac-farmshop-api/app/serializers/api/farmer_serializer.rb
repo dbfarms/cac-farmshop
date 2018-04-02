@@ -1,14 +1,14 @@
-class Farmer < ApplicationRecord
-    validates :name, presence: true 
-    validates :name, uniqueness: true 
-    
+class Api::FarmerSerializer < ActiveModel::Serializer
+    attributes :id, :name, :line_items
+  
     has_many :farmerfarmgoods
     has_many :farmgoods, through: :farmerfarmgoods 
     has_many :line_items, through: :farmgoods
     #has_many :farmer_orders
-    #has_many :orders, through: :line_items
     belongs_to :user 
-
+  
     
-    
-end
+  
+  end
+  
+  
