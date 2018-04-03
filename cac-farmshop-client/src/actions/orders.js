@@ -15,6 +15,7 @@ export const getOpenFarmerOrders = (farmer_id) => {
 }
 
 const setOrders = (orders, farmer_id) => {
+  const farmersGoods = []
   const openFarmerOrders = orders.data.map(order => {
     debugger 
     const farmersGoods = order.attributes.farmgoods.filter(fg => (fg.farmer_id === Number(farmer_id)))

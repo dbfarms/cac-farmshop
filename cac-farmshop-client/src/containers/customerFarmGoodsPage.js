@@ -32,7 +32,7 @@ class CustomerFarmGoods extends Component {
       openLineitems: '',
       farmgood: {
         name: '',
-        farmer: '', //EVENTUALLY THIS WILL DEFAULT TO THE LOGGED IN FARMER BUT FOR NOW YOU CAN CHOOSE
+        farmer: '', 
         days_available_ids: [],
         theWeek: [ 
           ["Monday", false],

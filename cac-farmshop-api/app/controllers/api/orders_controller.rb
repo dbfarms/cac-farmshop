@@ -37,7 +37,7 @@ class Api::OrdersController < ApplicationController
                     fli.farmgood = li.farmgood 
                     fli.quantity = li.quantity 
 
-                    order.farmer_orders.each do |fo|
+                    new_order.farmer_orders.each do |fo|
                         if fo.farmer != nil 
                             new_farmer_order = false 
                             fli.farmer_order = fo 
@@ -78,6 +78,7 @@ class Api::OrdersController < ApplicationController
                             new_farmer_order = false 
                             fli.farmer_order = fo 
                             fo.farmer_line_items << fli 
+                            new_order.farmer_orders << new_fo
                         end 
                     end 
 
@@ -86,6 +87,7 @@ class Api::OrdersController < ApplicationController
                         new_fo.order = new_order 
                         new_fo.customer_user = new_order.customer_user
                         new_fo.farmer = fli.farmer 
+                        new_order.farmer_orders << new_fo
                         new_fo.save 
                     end 
                     
@@ -112,7 +114,7 @@ class Api::OrdersController < ApplicationController
         total -= total_refund
         new_order.total = total 
 
-        #byebug
+        byebug
         #new_order = Order.new(order_params)
 
             ##calculate total here from the line_items added to farmer_orders.farmgoods

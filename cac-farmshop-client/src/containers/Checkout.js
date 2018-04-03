@@ -16,19 +16,21 @@ class Checkout extends Component {
     }
   }
 
-  componentDidMount(){
-    this.props.getOpenLineItems(sessionStorage.id)
+  componentWillMount(){
+    this.props.getOpenLineItems()
   }
 
   componentWillReceiveProps(nextProps){
     //debugger
     this.setState({
-      lineitems: nextProps.lineitems //[0] 
+      openLineitems: nextProps.openLineitems,
+      cart: nextProps.cart 
+      //oldLineItems: nextProps.allLineItems 
     })
   }
 
   checkingOut(){
-    const lineitems = this.props.lineitems
+    const lineitems = this.props.openLineitems
     //debugger 
     if (lineitems.length === 0) {
       alert('add items to cart!')
@@ -56,9 +58,10 @@ class Checkout extends Component {
 }
 
 const mapStateToProps = (state) => {
-  //debugger 
   return ({
-      lineitems: state.lineitems
+    cart: state.cart,
+    openLineitems: state.openLineitems 
+
   })
 }
 
