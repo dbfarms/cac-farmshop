@@ -7,9 +7,8 @@ git fsck --full
 ***************
 where i left off:
 3/26
--open and closedLineitems returning same stuff
-
--farmer_orders need to be created off of each farmer and farmgood listed in line item per cart 
+-an order is only complete when all farmer_orders are complete 
+-orders page shows open orders with button to 'close' an order once it's harvested, maybe some dropdown menu to see closed orders
 
 -what's the turnaround on an order?
 ***************
@@ -31,6 +30,11 @@ Bugs
 
 2- farmers 
 -orders page of all orders and who they are going to and when they're needed and it should be emailed to user too
+ (
+-farmer_order doesn't make sense yet... do i need farmer line_items or does it take that place? can't add farmgoods to farmer_order which makes it more like a farmer line_item so maybe that is the direction to go
+
+-farmer_orders need to be created off of each farmer and farmgood listed in line item per cart 
+)
 -editfarmgoods needs to authenticate farmer and crashes if not visited through the farmerfarmgood page
 -need to work out authentication/authorization in farmgoods_controller when creating goods cause right now it's off... 
 -upload photo of farmgood or should that only be admin resp? 

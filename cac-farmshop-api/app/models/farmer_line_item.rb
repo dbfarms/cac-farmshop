@@ -1,7 +1,7 @@
 class FarmerLineItem < ActiveRecord::Base
     belongs_to :farmgood
-    belongs_to :order
-    #belongs_to :farmer_order 
+    #belongs_to :order
+    belongs_to :farmer_order 
     #belongs_to :customer_user 
     
     has_one :customer_user, through: :order

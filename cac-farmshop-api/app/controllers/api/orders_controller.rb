@@ -7,14 +7,10 @@ class Api::OrdersController < ApplicationController
     end
 
     def create
-        byebug
         new_order = Order.new(order_params)
-        farmer_order = FarmerOrder.new(farmer_order_params)
+        
         @cart = Cart.find(params["cart_id"])
 
-        farmer_order.customer_user = CustomerUser.find(params["customerUserID"])
-
-        #byebug 
         new_order.customer_user = CustomerUser.find(params["customerUserID"])
         #byebug 
         out_of_stock = []
@@ -32,14 +28,33 @@ class Api::OrdersController < ApplicationController
             if (fg.inventory - li.quantity >= 0)
                 fg.inventory -= li.quantity 
                 total = total + (li.quantity * fg.price)
-                fli = FarmerLineItem.new 
-                fli.order = new_order 
-                fli.farmgood = li.farmgood 
-                fli.quantity = li.quantity 
-                farmer_order.farmer_line_items << fli 
-                fli.save
-                new_order.save 
+                
                 fg.save 
+
+                if fg.save 
+                    new_farmer_order = true
+                    fli = FarmerLineItem.new 
+                    fli.farmgood = li.farmgood 
+                    fli.quantity = li.quantity 
+
+                    order.farmer_orders.each do |fo|
+                        if fo.farmer != nil 
+                            new_farmer_order = false 
+                            fli.farmer_order = fo 
+                            fo.farmer_line_items << fli 
+                        end 
+                    end 
+
+                    if new_farmer_order == true 
+                        new_fo = FarmerOrder.new 
+                        new_fo.order = new_order 
+                        new_fo.customer_user = new_order.customer_user
+                        new_fo.farmer = fli.farmer 
+                        new_fo.save 
+                    end 
+
+                end 
+
                 if fg.inventory === 0 
                     ## this will alert the farmer that a stock is out
                 end 
@@ -52,20 +67,36 @@ class Api::OrdersController < ApplicationController
                 total = total + (amount_available * fg.price)
                 fg.save 
 
+                if fg.save 
+                    new_farmer_order = true
+                    fli = FarmerLineItem.new 
+                    fli.farmgood = li.farmgood 
+                    fli.quantity = li.quantity 
+
+                    order.farmer_orders.each do |fo|
+                        if fo.farmer != nil 
+                            new_farmer_order = false 
+                            fli.farmer_order = fo 
+                            fo.farmer_line_items << fli 
+                        end 
+                    end 
+
+                    if new_farmer_order == true 
+                        new_fo = FarmerOrder.new 
+                        new_fo.order = new_order 
+                        new_fo.customer_user = new_order.customer_user
+                        new_fo.farmer = fli.farmer 
+                        new_fo.save 
+                    end 
+                    
+                end 
+                
+
                 refund << [fg.name, fg.price]
             end 
 
-           # @cart.line_items.each do |li|
-            #    byebug ### for each line_item check to see if it belongs to farmer and if so add to 
-            #end 
-
-            ##calculate total here from the line_items added to farmer_orders.farmgoods
-
-            ##status here (open until date?)
-
         end 
         
-        #@cart.line_items.each {|li| li.delete }
         user = CustomerUser.find(@cart.customer_user_id)
         new_cart = Cart.new 
         #byebug 
@@ -83,6 +114,12 @@ class Api::OrdersController < ApplicationController
 
         #byebug
         #new_order = Order.new(order_params)
+
+            ##calculate total here from the line_items added to farmer_orders.farmgoods
+
+            ##status here (open until date?)
+
+
         if new_order.save
             new_order.status = "complete"
             new_order.save 
@@ -126,7 +163,7 @@ class Api::OrdersController < ApplicationController
     end
 
     def farmer_order_params
-        params.require(:order).permit(:customer_user_id, :cart_id)
+        params.require(:order).permit(:customer_user_id)
     end
 
 end

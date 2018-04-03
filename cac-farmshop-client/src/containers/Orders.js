@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getFarmerOrders } from '../actions/lineitems';
+import { getOpenFarmerOrders } from '../actions/orders';
 import { Link } from 'react-router-dom'
 
 class OrdersList extends Component {
@@ -14,7 +14,7 @@ class OrdersList extends Component {
     }
 
     componentWillMount(){
-        this.props.getFarmerOrders(sessionStorage.id)
+        this.props.getOpenFarmerOrders(sessionStorage.id)
     }
 
     componentWillReceiveProps(nextProps){
@@ -61,6 +61,6 @@ const mapStateToProps = (state) => {
     })
 }
 
-export default connect(mapStateToProps, { getFarmerOrders })(OrdersList);
+export default connect(mapStateToProps, { getOpenFarmerOrders })(OrdersList);
 
   

@@ -1,9 +1,8 @@
 const orders = "http://localhost:3000/api/orders"
 
-/*
-export const getFarmerOrders = (farmer_id) => {
+export const getOpenFarmerOrders = (farmer_id) => {
   return dispatch => {
-    return fetch(`${orders}`, {
+    return fetch(`${orders}`, { //////////////////////////////
       headers: {
         'Access-Control-Allow-Origin':'',
         'Content-Type': 'application/json'
@@ -18,7 +17,7 @@ export const getFarmerOrders = (farmer_id) => {
 const setOrders = (orders, farmer_id) => {
   const openFarmerOrders = orders.data.map(order => {
     debugger 
-    farmersGoods = order.attributes.farmgoods.filter(fg => (fg.farmer_id === Number(farmer_id)))
+    const farmersGoods = order.attributes.farmgoods.filter(fg => (fg.farmer_id === Number(farmer_id)))
 
     //return order.attributes["line-items"].filter(fg => (fg.))
   })
@@ -29,7 +28,6 @@ const setOrders = (orders, farmer_id) => {
     //test
   }
 }
-*/
 
 const checkedOut = (order) =>{
     return {
