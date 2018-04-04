@@ -10,6 +10,8 @@ where i left off:
 -an order is only complete when all farmer_orders are complete 
 -orders page shows open orders with button to 'close' an order once it's harvested, maybe some dropdown menu to see closed orders
 
+-test refunds / out-of-stock/ etc when ordering
+
 -what's the turnaround on an order?
 ***************
 
