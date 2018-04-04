@@ -38,19 +38,28 @@ class Api::OrdersController < ApplicationController
                     fli.quantity = li.quantity 
 
                     new_order.farmer_orders.each do |fo|
-                        if fo.farmer != nil 
+                        #byebug 
+                        if fo.farmer && fo.farmer == li.farmer 
+                            #byebug 
                             new_farmer_order = false 
                             fli.farmer_order = fo 
+                            fli.save 
                             fo.farmer_line_items << fli 
+                            fo.save 
                         end 
                     end 
 
                     if new_farmer_order == true 
+                        #byebug 
                         new_fo = FarmerOrder.new 
                         new_fo.order = new_order 
                         new_fo.customer_user = new_order.customer_user
                         new_fo.farmer = fli.farmer 
                         new_fo.save 
+                        fli.save 
+                        new_fo.farmer_line_items << fli 
+                        new_order.farmer_orders << new_fo 
+                        new_order.save 
                     end 
 
                 end 
@@ -74,11 +83,13 @@ class Api::OrdersController < ApplicationController
                     fli.quantity = li.quantity 
 
                     order.farmer_orders.each do |fo|
-                        if fo.farmer != nil 
+                        if fo.farmer && fo.farmer == li.farmer 
+                            #byebug 
                             new_farmer_order = false 
                             fli.farmer_order = fo 
+                            fli.save 
                             fo.farmer_line_items << fli 
-                            new_order.farmer_orders << new_fo
+                            fo.save 
                         end 
                     end 
 
@@ -89,6 +100,9 @@ class Api::OrdersController < ApplicationController
                         new_fo.farmer = fli.farmer 
                         new_order.farmer_orders << new_fo
                         new_fo.save 
+                        fli.save 
+                        new_fo.farmer_line_items << fli 
+                        new_order.save
                     end 
                     
                 end 
