@@ -1,5 +1,5 @@
 const line_items = "http://localhost:3000/api/line_items"
-
+const farmer_line_items = "http://localhost:3000/api/farmer_line_items"
 
 let header = new Headers({
   'Access-Control-Allow-Origin':'',
@@ -7,8 +7,55 @@ let header = new Headers({
   'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
 });
 
+export const getFarmerLineItems = (farmer_id) => {
+  return dispatch => {
+    return fetch(`${farmer_line_items}`, {
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(farmer_line_items => dispatch(setFarmerLineItems(farmer_line_items, farmer_id)))
+    .catch(error => console.log(error));
+  }
+}
+
+const setFarmerLineItems = (farmer_line_items, farmer_id) => {
+  //debugger 
+  const farmerLineItems = []
+  const openFarmerLineItems = []
+  const closedFarmerLineItems = []
+
+  farmer_line_items.data.map(li => {
+    //debugger 
+    if (li.attributes.farmer.id === Number(farmer_id)) {
+      //debugger 
+      if (li.attributes["farmer-order"].status === "closed") {
+        //closedFarmerOrders
+          closedFarmerLineItems.push(li)
+      } else {
+          openFarmerLineItems.push(li)
+      }
+    }
+
+  })
+
+  farmerLineItems.push(openFarmerLineItems)
+  farmerLineItems.push(closedFarmerLineItems)
+
+  //debugger 
+
+  return {
+    type: 'GET_FARMERLINEITEMS_SUCCESS',
+    farmerLineItems
+    //test
+  }
+}
 
 
+
+// not sure if i'm using this or if i'm using the one in orders actions
 export const getFarmerOrders = (farmer_id) => {
   return dispatch => {
     return fetch(`${line_items}`, {

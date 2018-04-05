@@ -18,9 +18,9 @@ export const getOpenFarmerOrders = (farmer_id) => {
 const setOpenFarmerOrders = (farmerOrders, farmer_id) => {
   const openFarmerOrders = []
     //debugger 
-    farmerOrders.map(order => {
+    farmerOrders.data.map(order => {
     //debugger 
-      if (order.farmer_id === Number(farmer_id)) {
+      if (order.relationships.farmer.data.id === farmer_id) {
         openFarmerOrders.push(order) 
       }
     })

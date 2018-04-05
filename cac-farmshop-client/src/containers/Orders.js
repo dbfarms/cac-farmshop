@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getOpenFarmerOrders } from '../actions/orders';
+//import { getOpenFarmerOrders } from '../actions/orders';
+import { getFarmerLineItems } from '../actions/lineitems';
 import { Link } from 'react-router-dom'
 
 class OrdersList extends Component {
@@ -14,7 +15,7 @@ class OrdersList extends Component {
     }
 
     componentWillMount(){
-        this.props.getOpenFarmerOrders(sessionStorage.id)
+        this.props.getFarmerLineItems(sessionStorage.id)
     }
 
     componentWillReceiveProps(nextProps){
@@ -26,16 +27,16 @@ class OrdersList extends Component {
 
     //<Link to > </Link>
     displayOpenOrders(orders){
-        debugger 
+        //debugger 
         if (typeof orders === 'object') {
         return orders.map((order, keyIndex) => {
-            return (
-                <div key={keyIndex}>
+            debugger 
+            return order.attributes.farmgoods.map((fg, keyIndex) => {
+               return ( <div key={keyIndex}>
                 
-                <label>name: {order.name}</label>
-                </div>
-            )
-            
+                <label>Item: {fg.name} - quantity </label>
+                </div>)
+            })
         })
         }
     }
@@ -45,7 +46,7 @@ class OrdersList extends Component {
         return (
             <div>
                 {
-                    <p>orders: {this.displayOpenOrders(this.state.orders)}</p>
+                    <h2>orders: {this.displayOpenOrders(this.state.orders)}</h2>
                 }
                 {this.state.orders === '' ? <p>loading</p> : <p>loaded {console.log(this.state.orders)} </p> }
             </div>
@@ -62,6 +63,6 @@ const mapStateToProps = (state) => {
     })
 }
 
-export default connect(mapStateToProps, { getOpenFarmerOrders })(OrdersList);
+export default connect(mapStateToProps, { getFarmerLineItems })(OrdersList);
 
   

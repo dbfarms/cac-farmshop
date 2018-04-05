@@ -137,9 +137,6 @@ class Api::OrdersController < ApplicationController
         new_order.total = total 
 
         byebug
-        #new_order = Order.new(order_params)
-
-            ##calculate total here from the line_items added to farmer_orders.farmgoods
 
             ##status here (open until date?)
 

@@ -50,13 +50,15 @@ export default (state = [], action) => {
           }
         }
         
-        //debugger
         return (
           newState
         );
       case 'GET_ALL_USER_LINEITEMS':
         //debugger 
         return action.allLineItems 
+      case 'GET_FARMERLINEITEMS_SUCCESS':
+        //debugger 
+        return action.farmerLineItems
       default:
         return state
     }

@@ -1,13 +1,13 @@
 class Api::FarmerOrderSerializer < ActiveModel::Serializer
-    attributes :id, :customer_user_id, :status,  :line_items, :farmer_line_items, :farmgoods
+    attributes :id, :customer_user_id, :status, :farmer_line_items, :farmgoods
 
     belongs_to :order
     belongs_to :customer_user 
     #belongs_to :cart 
     belongs_to :farmer 
 
-    has_many :farmgoods, through: :farmer 
-    has_many :line_items, through: :farmgoods 
+    #has_many :farmgoods, through: :farmer 
+    #has_many :line_items, through: :farmgoods 
 
 
     has_many :farmer_line_items #, through: :order #, :source => :farmer 

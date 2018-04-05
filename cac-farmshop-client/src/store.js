@@ -21,6 +21,7 @@ import users from './reducers/sessionReducer';
 import customers from './reducers/sessionReducer';
 import orders from './reducers/orderReducer';
 import order from './reducers/orderReducer';
+import farmerLineItems from './reducers/lineitemsReducer';
 
 const reducers = combineReducers({
   carts,
@@ -38,7 +39,8 @@ const reducers = combineReducers({
   openLineitems,
   closedLineitems,
   orders,
-  order  
+  order,
+  farmerLineItems  
 });
 
 const middleware = [thunk]; //for async actions
