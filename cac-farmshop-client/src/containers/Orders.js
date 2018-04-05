@@ -24,14 +24,15 @@ class OrdersList extends Component {
         })
     }
 
+    //<Link to > </Link>
     displayOpenOrders(orders){
-        //debugger 
+        debugger 
         if (typeof orders === 'object') {
         return orders.map((order, keyIndex) => {
             return (
                 <div key={keyIndex}>
-                <Link to > </Link>
-                <label>name: {order[0].name}</label>
+                
+                <label>name: {order.name}</label>
                 </div>
             )
             

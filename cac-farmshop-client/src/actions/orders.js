@@ -1,28 +1,31 @@
 const orders = "http://localhost:3000/api/orders"
+const farmer_orders = "http://localhost:3000/api/farmer_orders"
 
 export const getOpenFarmerOrders = (farmer_id) => {
   return dispatch => {
-    return fetch(`${orders}`, { //////////////////////////////
+    return fetch(`${farmer_orders}`, { //////////////////////////////
       headers: {
         'Access-Control-Allow-Origin':'',
         'Content-Type': 'application/json'
       }
     })
     .then(response => response.json())
-    .then(orders => dispatch(setOrders(orders, farmer_id)))
+    .then(farmerOrders => dispatch(setOpenFarmerOrders(farmerOrders, farmer_id)))
     .catch(error => console.log(error));
   }
 }
 
-const setOrders = (orders, farmer_id) => {
-  const farmersGoods = []
-  const openFarmerOrders = orders.data.map(order => {
-    debugger 
-    const farmersGoods = order.attributes.farmgoods.filter(fg => (fg.farmer_id === Number(farmer_id)))
+const setOpenFarmerOrders = (farmerOrders, farmer_id) => {
+  const openFarmerOrders = []
+    //debugger 
+    farmerOrders.map(order => {
+    //debugger 
+      if (order.farmer_id === Number(farmer_id)) {
+        openFarmerOrders.push(order) 
+      }
+    })
 
-    //return order.attributes["line-items"].filter(fg => (fg.))
-  })
-
+  //debugger 
   return {
     type: 'GET_FARMERORDERS_SUCCESS',
     openFarmerOrders

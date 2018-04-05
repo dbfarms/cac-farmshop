@@ -2,6 +2,7 @@ to fix git corrupt file issue:
 find .git/objects/ -type f -empty | xargs rm
 git fetch -p
 git fsck --full
+
 ////////////////////////////////////////////////////////////
 
 ***************
@@ -9,6 +10,9 @@ where i left off:
 3/26
 -an order is only complete when all farmer_orders are complete 
 -orders page shows open orders with button to 'close' an order once it's harvested, maybe some dropdown menu to see closed orders
+-orders automatically close after due date... 
+-how to set due date?
+
 
 -test refunds / out-of-stock/ etc when ordering
 
