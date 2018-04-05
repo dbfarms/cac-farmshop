@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     resources :customer_users 
     resources :line_items
     resources :orders 
+    resources :farmer_orders 
+    resources :farmer_line_items
  end
 
 end
