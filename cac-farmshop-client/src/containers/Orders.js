@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { getOpenFarmerOrders } from '../actions/orders';
 //import { getFarmerLineItems } from '../actions/lineitems';
 import { Link } from 'react-router-dom'
+import { OrderCard } from '../components/orderCard';
 
 class OrdersList extends Component {
     constructor(props) {
@@ -33,12 +34,11 @@ class OrdersList extends Component {
             return orders.map((order, keyIndex) => {
                 //debugger 
                 //const farmgoods = []
-                return order.attributes["farmer-line-items"].map((fli, keyIndex) => {
-                return ( <div key={keyIndex}>
-                    
-                    <label>Item: {fli.farmgood.name} - quantity: {fli.quantity}</label>
-                    </div>)
-                })
+                return (
+                <div key={keyIndex}>
+                 <OrderCard order={order} />
+                </div>
+                )
             })
         }
     }
