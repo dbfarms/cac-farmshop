@@ -5,7 +5,9 @@ class Api::FarmerOrdersController < ApplicationController
     before_action :set_order, only: [:show, :edit, :destroy]
 
     def index
-        render json: FarmerOrder.all
+        render json: FarmerOrder.all#, include: 'farmer_line_items', fields: { farmgood: [:name] }
+        # 'posts.category, posts.author.address', fields: { posts: { category: [:name], author: [:id, :name] } }
+
     end
 
     def create
