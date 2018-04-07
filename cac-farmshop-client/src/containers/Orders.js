@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { getOpenFarmerOrders } from '../actions/orders';
 //import { getFarmerLineItems } from '../actions/lineitems';
 import { Link } from 'react-router-dom'
-import { OrderCard } from '../components/orderCard';
+import OrderCard from '../components/orderCard';
 
 class OrdersList extends Component {
     constructor(props) {
@@ -31,6 +31,7 @@ class OrdersList extends Component {
     displayOpenOrders(orders){
         //debugger 
         if (typeof orders === 'object') {
+            debugger 
             return orders.map((order, keyIndex) => {
                 //debugger 
                 //const farmgoods = []
@@ -59,7 +60,7 @@ class OrdersList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    //debugger 
+    debugger 
     return ({
         orders: state.order
     })

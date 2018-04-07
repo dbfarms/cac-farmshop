@@ -2,7 +2,7 @@
 
 class Api::FarmerOrdersController < ApplicationController
 
-    before_action :set_order, only: [:show, :edit, :destroy]
+    before_action :set_order, only: [:show, :edit, :update, :destroy]
 
     def index
         render json: FarmerOrder.all#, include: 'farmer_line_items', fields: { farmgood: [:name] }
@@ -80,11 +80,22 @@ class Api::FarmerOrdersController < ApplicationController
 
     def update
         #byebug 
-        if @farmer_order.update(order_params)
-            render json: @farmer_order
-        else
-            render json: { message: @farmer_order.errors }, status: 400
-        end
+        if params["status"] == "change"
+            #byebug 
+            if @farmer_order.status == "open"
+                @farmer_order.status = "closed"
+                render json: @farmer_order
+            else 
+                @farmer_order.status = "open"
+                render json: @farmer_order
+            end 
+        else 
+            if @farmer_order.update(params)
+                render json: @farmer_order
+            else
+                render json: { message: @farmer_order.errors }, status: 400
+            end
+        end 
     end
 
     def destroy
@@ -100,7 +111,7 @@ class Api::FarmerOrdersController < ApplicationController
     private
 
     def set_order
-        @farmer_order = FarmerOrder.find_by(id: params[:id])
+        @farmer_order = FarmerOrder.find(params["id"])
     end
 
     def farmer_order_params

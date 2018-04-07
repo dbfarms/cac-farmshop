@@ -9,7 +9,7 @@ export const closeFarmerOrder = (order_id) => {
         'Content-Type': 'application/json'
       },
       method: 'PATCH',
-      body: JSON.stringify()
+      body: JSON.stringify({status: "change"})
     })
     .then(response => response.json())
     .then(farmerOrder => dispatch(setFarmerOrderClosedOrOpen(farmerOrder)))
@@ -18,7 +18,8 @@ export const closeFarmerOrder = (order_id) => {
 }
 
 const setFarmerOrderClosedOrOpen = (farmerOrder) => {
-  debugger 
+  //debugger 
+  farmerOrder = farmerOrder.data
   return {
     type: 'CHANGE_ORDER_STATUS_SUCCESS',
     farmerOrder

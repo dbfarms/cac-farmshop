@@ -13,9 +13,16 @@ class OrderCard extends Component {
         }
     }
 
+    markClosed(order_id){
+        //debugger
+        const farmer_order_id = Number(order_id)
+        this.props.closeFarmerOrder(farmer_order_id)
+    }
+
     render(){
+        const order = this.state.order[0]
         return(
-            this.state.order.attributes["farmer-line-items"].map((fli, keyIndex) => {
+            order.attributes["farmer-line-items"].map((fli, keyIndex) => {
                 //debugger 
                 return ( <div key={keyIndex} className="orderCard">
                 
@@ -23,7 +30,8 @@ class OrderCard extends Component {
                 
                 <label>Item: {fli.farmgood.name} - quantity: {fli.quantity}</label>
                 <br />
-                {keyIndex === this.state.order.attributes["farmer-line-items"].length - 1 ? <label>Total: {this.state.order.attributes.total} </label> : <p>-------</p>}
+                {keyIndex === order.attributes["farmer-line-items"].length - 1 ? <label>Total: {order.attributes.total} </label> : <p>-------</p>}
+                {<button className="farmerOrderStatus" onClick={() => this.markClosed(order.id)}>{order.attributes.status === "open" ? "Close Order" : "Reopen Order"}</button>}
                 </div>)
             })
         )
