@@ -40,6 +40,7 @@ Bugs
 2- farmers 
 -orders page of all orders and who they are going to and when they're needed and it should be emailed to user too
  (
+   -over ordering catch.. does that work?
 -farmer_order doesn't make sense yet... do i need farmer line_items or does it take that place? can't add farmgoods to farmer_order which makes it more like a farmer line_item so maybe that is the direction to go
 
 -farmer_orders need to be created off of each farmer and farmgood listed in line item per cart 

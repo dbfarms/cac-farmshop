@@ -22,7 +22,7 @@ class Api::FarmgoodsController < ApplicationController
         farmgood.farmer = Farmer.find(farmerID)
         #byebug 
         farmer = Farmer.find(farmerID)
-        farmer.farmgoods << fg 
+        farmer.farmgoods << farmgood 
 
         if farmgood.save
             render json: farmgood

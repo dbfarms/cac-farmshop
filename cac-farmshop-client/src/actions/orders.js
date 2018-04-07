@@ -1,6 +1,33 @@
 const orders = "http://localhost:3000/api/orders"
 const farmer_orders = "http://localhost:3000/api/farmer_orders"
 
+export const closeFarmerOrder = (order_id) => {
+  return dispatch => {
+    return fetch(`${farmer_orders}/${order_id}`, { 
+      headers: {
+        'Access-Control-Allow-Origin':'',
+        'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify()
+    })
+    .then(response => response.json())
+    .then(farmerOrder => dispatch(setFarmerOrderClosedOrOpen(farmerOrder)))
+    .catch(error => console.log(error));
+  }
+}
+
+const setFarmerOrderClosedOrOpen = (farmerOrder) => {
+  debugger 
+  return {
+    type: 'CHANGE_ORDER_STATUS_SUCCESS',
+    farmerOrder
+  }
+}
+
+
+//
+
 export const getOpenFarmerOrders = (farmer_id) => {
   return dispatch => {
     return fetch(`${farmer_orders}`, { //////////////////////////////

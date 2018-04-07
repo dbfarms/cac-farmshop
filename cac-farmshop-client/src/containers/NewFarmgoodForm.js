@@ -73,9 +73,10 @@ class NewFarmgoodForm extends Component {
   }
   
   makeCheckBoxes() {
-    return this.state.theWeek.map(keyName => { 
+    return this.state.theWeek.map((keyName, keyIndex) => { 
       return (
           <CheckBox 
+            key={keyIndex}
             item={keyName} 
             handleChange={this.toggleCheckbox.bind(this)} 
             value={keyName} 
