@@ -12,12 +12,14 @@ export default (state = [], action) => {
         //debugger 
         return action.openFarmerOrders
       case 'CHANGE_ORDER_STATUS_SUCCESS':
+        const newState = Object.assign([], state);
+        const indexOfFarmerOrder = state.findIndex(fo => {
+          return fo.id == action.farmerOrder.id
+        })
+        newState.splice(indexOfFarmerOrder, 1, action.farmerOrder)
         //debugger 
-        const editedFarmerOrder = Object.assign({}, action.farmOrder)
-        const editState = [...state.filter(fo => fo.id !== action.farmerOrder.id)]
-        editState.push(editedFarmerOrder)
-        const orders = editState
-        debugger 
+        const orders = newState
+        //debugger 
         return (
           orders 
         );

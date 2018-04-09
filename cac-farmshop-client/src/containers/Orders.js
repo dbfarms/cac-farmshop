@@ -28,28 +28,37 @@ class OrdersList extends Component {
     }
 
     //<Link to > </Link>
-    displayOpenOrders(orders){
+    displayOpenOrders(){
         //debugger 
-        if (typeof orders === 'object') {
-            debugger 
-            return orders.map((order, keyIndex) => {
+        if (typeof this.state.orders === 'object') {
+            //debugger 
+            return this.state.orders.map((order, keyIndex) => {
                 //debugger 
                 //const farmgoods = []
                 return (
-                <div key={keyIndex}>
-                 <OrderCard order={order} />
-                </div>
+                    <OrderCard 
+                        order={order} 
+                        key={keyIndex}
+                    />
                 )
             })
+            
         }
     }
 
+
     render(){
         //debugger 
+        //const openOrders = this.displayOpenOrders(this.state.orders)
+        //{this.displayOpenOrders()}
         return (
             <div>
                 {
-                    <h2>orders: {this.displayOpenOrders(this.state.orders)}</h2>
+                    <div>
+                    <h2>orders:</h2> 
+                    
+                    {this.state.orders === '' ? <p>loading</p> : <OrderCard orders={this.state.orders} />}
+                    </div>
                 }
                 {this.state.orders === '' ? <p>loading</p> : <p>loaded {console.log(this.state.orders)} </p> }
             </div>
@@ -60,7 +69,7 @@ class OrdersList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    debugger 
+    //debugger 
     return ({
         orders: state.order
     })
