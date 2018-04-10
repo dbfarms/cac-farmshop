@@ -107,18 +107,19 @@ class Api::OrdersController < ApplicationController
                     
                 end 
 
-                #sets total
-                new_order.farmer_orders.each do |fo|
-                    fo.farmer_line_items.each do |fli|
-                        fo.total += (fli.quantity * fli.farmgood.price) 
-                        fo.save 
-                    end 
-                end 
-                
-
                 refund << [fg.name, fg.price]
             end 
 
+        end 
+
+        #byebug 
+        new_order.farmer_orders.each do |fo|
+            #byebug 
+            fo.farmer_line_items.each do |fli|
+                #byebug
+                fo.total += (fli.quantity * fli.farmgood.price) 
+                fo.save 
+            end 
         end 
         
         user = CustomerUser.find(@cart.customer_user_id)
