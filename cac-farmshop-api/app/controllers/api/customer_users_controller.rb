@@ -24,7 +24,7 @@ class Api::CustomerUsersController < ApplicationController
       #byebug
       new_customer_user = CustomerUser.new(user_params)
       cart = Cart.new 
-      new_customer_user.cart = cart 
+      new_customer_user.carts << cart 
       cart.customer_user = new_customer_user
       #byebug
 

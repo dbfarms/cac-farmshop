@@ -29,7 +29,24 @@ class ApplicationController < ActionController::API
     #byebug 
     if auth_present?
       #byebug
-      user = User.find(auth["user"])
+      case session[:Role]
+      when "customer"
+        puts "i am a customer"
+        user = CustomerUser.find(auth["user"])
+        #byebug 
+      when "admin"
+        puts "i am an admin"
+        user = User.find(auth["user"])
+        #byebug 
+      when "farmer"
+        puts "i am a farmer"
+        user = User.find(auth["user"])
+        #byebug 
+      else 
+        puts "error"
+      end 
+
+      
       #byebug
       if user
         #byebug 
