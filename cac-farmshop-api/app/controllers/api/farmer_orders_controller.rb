@@ -85,6 +85,9 @@ class Api::FarmerOrdersController < ApplicationController
             if @farmer_order.status == "open"
                 @farmer_order.status = "closed"
                 @farmer_order.save
+
+                byebug 
+
                 render json: @farmer_order
             else 
                 @farmer_order.status = "open"

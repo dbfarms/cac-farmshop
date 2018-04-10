@@ -136,14 +136,17 @@ class Api::OrdersController < ApplicationController
         refund.each {|r| total_refund += r[1]}
         total -= total_refund
         new_order.total = total 
+        new_order.due_date = new_order.created_at + 2.day 
+        new_order.save 
 
-        byebug
+        #byebug #test save
 
             ##status here (open until date?)
 
 
         if new_order.save
             new_order.status = "complete"
+            new_order
             new_order.save 
             render json: {new_order: new_order, errors: out_of_stock, refund: refund }
         else
