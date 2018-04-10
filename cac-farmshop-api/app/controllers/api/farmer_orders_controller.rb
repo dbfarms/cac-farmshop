@@ -86,7 +86,19 @@ class Api::FarmerOrdersController < ApplicationController
                 @farmer_order.status = "closed"
                 @farmer_order.save
 
-                byebug 
+                order_complete = true
+                @farmer_order.order.farmer_orders.each do |fo|
+                    if fo.status === "open"
+                        order_complete = false 
+                    end 
+                end 
+
+                if order_complete === true 
+                    @farmer_order.order.status = "complete"
+                    @farmer_order.order.save 
+                end 
+
+               # byebug 
 
                 render json: @farmer_order
             else 

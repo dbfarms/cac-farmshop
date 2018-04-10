@@ -118,7 +118,7 @@ class Api::OrdersController < ApplicationController
             fo.farmer_line_items.each do |fli|
                 #byebug
                 fo.total += (fli.quantity * fli.farmgood.price) 
-                fo.due_date = fo.created_at + 2.day 
+                fo.due_date = fo.created_at + 2.days
                 fo.save 
             end 
         end 
