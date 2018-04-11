@@ -12,7 +12,8 @@ class OrdersList extends Component {
         super(props)
 
         this.state = {
-            orders: ''
+            openOrders: '',
+            closedOrders: ''
         }
     }
 
@@ -23,16 +24,17 @@ class OrdersList extends Component {
     componentWillReceiveProps(nextProps){
         //debugger 
         this.setState({
-            orders: nextProps.orders 
+            openOrders: nextProps.openOrders,
+            closedOrders: nextProps.closedOrders 
         })
     }
 
     //<Link to > </Link>
-    displayOpenOrders(){
+    displayOpenOrders(orders){
         //debugger 
-        if (typeof this.state.orders === 'object') {
+        if (typeof orders === 'object') {
             //debugger 
-            return this.state.orders.map((order, keyIndex) => {
+            return orders.map((order, keyIndex) => {
                 //debugger 
                 //const farmgoods = []
                 return (
@@ -49,7 +51,8 @@ class OrdersList extends Component {
 
     render(){
         //debugger 
-        //const openOrders = this.displayOpenOrders(this.state.orders)
+        const openOrders = this.displayOpenOrders(this.state.openOrders)
+        const closedOrders = this.displayOpenOrders(this.state.closedOrders)
         //{this.displayOpenOrders()}
         return (
             <div>
@@ -57,22 +60,35 @@ class OrdersList extends Component {
                     <div>
                     <h2>orders:</h2> 
                     
-                    {this.state.orders === '' ? <p>loading</p> : <OrderCard orders={this.state.orders} />}
+                    {this.state.orders === '' ? <p>loading</p> : <p>loaded</p> }
                     </div>
                 }
-                {this.state.orders === '' ? <p>loading</p> : <p>loaded {console.log(this.state.orders)} </p> }
-            </div>
+                <h1>Open Orders</h1>
+                {this.state.orders === '' ? <p>loading</p> : <div>loaded {openOrders} </div> }
 
+                <br />
+                <h1>Closed Orders</h1>
+                {this.state.orders === '' ? <p>loading</p> : <div>{closedOrders} </div> }
+            </div>
         )
     }
-
 }
+
+//<OrderCard orders={this.state.orders}/>
 
 const mapStateToProps = (state) => {
     //debugger 
-    return ({
-        orders: state.order
-    })
+    if ( state.order.length === 0 ) {
+        return ({
+            openOrders: state.order,
+            closedOrders: state.order
+        })
+    } else {
+        return ({
+            openOrders: state.order[0],
+            closedOrders: state.order[1]
+        })
+    }
 }
 
 export default connect(mapStateToProps, { getOpenFarmerOrders })(OrdersList);

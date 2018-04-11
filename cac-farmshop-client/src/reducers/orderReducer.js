@@ -10,7 +10,7 @@ export default (state = [], action) => {
         return state.concat(action.order);
       case 'GET_FARMERORDERS_SUCCESS':
         //debugger 
-        return action.openFarmerOrders
+        return action.allFarmerOrders
       case 'CHANGE_ORDER_STATUS_SUCCESS':
         const newState = Object.assign([], state);
         const indexOfFarmerOrder = state.findIndex(fo => {

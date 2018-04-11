@@ -31,7 +31,7 @@ const setFarmerOrderClosedOrOpen = (farmerOrder) => {
 
 export const getOpenFarmerOrders = (farmer_id) => {
   return dispatch => {
-    return fetch(`${farmer_orders}`, { //////////////////////////////
+    return fetch(`${farmer_orders}`, { 
       headers: {
         'Access-Control-Allow-Origin':'',
         'Content-Type': 'application/json'
@@ -44,19 +44,28 @@ export const getOpenFarmerOrders = (farmer_id) => {
 }
 
 const setOpenFarmerOrders = (farmerOrders, farmer_id) => {
+  const allFarmerOrders = []
+  const closedFarmerOrders = []
   const openFarmerOrders = []
     //debugger 
     farmerOrders.data.map(order => {
     //debugger 
       if (order.relationships.farmer.data.id === farmer_id) {
-        openFarmerOrders.push(order) 
+        if (order.attributes.status === "open"){
+          openFarmerOrders.push(order) 
+        } else if (order.attributes.status === "closed") {
+          closedFarmerOrders.push(order)
+        }
       }
     })
+
+    allFarmerOrders.push(openFarmerOrders)
+    allFarmerOrders.push(closedFarmerOrders)
 
   //debugger 
   return {
     type: 'GET_FARMERORDERS_SUCCESS',
-    openFarmerOrders
+    allFarmerOrders
     //test
   }
 }
