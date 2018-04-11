@@ -12,6 +12,7 @@ let sentData={
 // ** action creators **
 const setFarmers = farmers => {
   //debugger 
+  farmers = farmers.data 
   return {
     type: 'GET_FARMER_SUCCESS',
     farmers

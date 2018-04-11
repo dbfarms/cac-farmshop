@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
 import FarmerShow from '../containers/FarmerShow';
+import FarmerCard from '../components/farmerCard'
 
 var farmerId = undefined 
 
@@ -8,12 +9,15 @@ var farmerId = undefined
 
 const FarmersList = ({ farmers }) => {
   //debugger
-  const renderFarmers = farmers.map((farmer, index) =>
+  const renderFarmers = farmers.map((farmer, index) =>{
+    //debugger
     //<button key={index} className="farm-button" onClick={() => changeFarmer(farmer.id)}>{farmer.name}</button>
     //<Link style={{ marginRight: '12px'}} key={farmer.id} to={`/farmers/${farmer.id}`}>{farmer.name}</Link>
-    <FarmerShow key={index} farmer={farmer} />
+    return <FarmerCard key={index} farmer={farmer} />
+  }
   );
 
+  //does this do anything? doesn't look like it it does anymore...
   const changeFarmer = (farmerId) => {
     //console.log(farmerId);
     farmerId = farmerId
@@ -32,38 +36,9 @@ const FarmersList = ({ farmers }) => {
 
 export default FarmersList;
 
-//  <Route path="/:farmerId" component={FarmerShow}/>
+
 
 /*
 
-export default (  
-  <Route path="/" component={App}>
-    <IndexRoute component={HomePage} />
-    <Route path="/cats" component={CatsPage} >
-      <Route path="/cats/:id" component={CatPage} />
-    </Route>
-  </Route>
-);
-
-<div>
-              <Navbar changeForecast={this.handleForecastChange} />
-              {forecastKey === 'currently' &&
-                <div> 
-                <h2>Current Forecast</h2>
-                <CurrentForecast forecast={forecast} />
-                </div>
-              }
-              {forecastKey === 'minutely' && <MinutelyForecast forecastData={forecast.data} />}
-              {forecastKey === 'hourly' && 
-                <div>
-                <h2>Hourly Forecast</h2>
-                {forecast.data.map((forecast, index) => <CurrentForecast key={index} forecast={forecast} />)}
-                </div>
-              }
-              {forecastKey === 'daily' && <DailyForecast forecastData={forecast.data} />}
-            </div>
-          }
-
-
-
+//  <Route path="/:farmerId" component={FarmerShow}/>
 */

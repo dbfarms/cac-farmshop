@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import FarmGoods from './FarmGoods';
 import FarmersPage from './FarmersPage';
-import FarmerShow from './FarmerShow';
+//import FarmerShow from './FarmerShow';
 import LogInPage from '../components/LogInPage';
 import SignUpPage from '../components/SignUp';
 import FarmGoodCard from '../components/farmGoodCard'
