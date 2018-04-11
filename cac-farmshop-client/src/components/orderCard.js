@@ -10,13 +10,15 @@ class OrderCard extends Component {
         //debugger 
         
         this.state = {
-            openOrders: this.props.orders,
-            closedOrders: this.props.orders //[1]
+            openOrders: this.props.openOrders,
+            closedOrders: this.props.closedOrders, //[1]
         }
     }
 
+    
+
     componentWillReceiveProps(nextProps){
-        debugger 
+        //debugger 
         this.setState({
             openOrders: nextProps.openOrders,
             closedOrders: nextProps.closedOrders 
@@ -29,15 +31,17 @@ class OrderCard extends Component {
         this.props.closeFarmerOrder(farmer_order_id)
     }
 
-    displayOpenFarmerOrder(){
+    displayOpenFarmerOrder(openOrders){
         
-        debugger
-        const openOrders = this.state.openOrders
+       // debugger
+        //const openOrders = this.state.openOrders
         
         //debugger 
         if (typeof openOrders === "object" ) {
+            //debugger
+
             return openOrders.map((order, keyIndex) => { 
-                debugger 
+                console.log("i ma here")
                 return order.attributes["farmer-line-items"].map((fli, keyIndex) => {
                     //debugger 
                     return ( 
@@ -55,15 +59,16 @@ class OrderCard extends Component {
     }
 
 
-    displayClosedFarmerOrder(){
+    displayClosedFarmerOrder(closedOrders){
         
         //debugger
-        const closedOrders = this.state.closedOrders
+        //const closedOrders = this.state.closedOrders
         
         //debugger 
         if (typeof closedOrders === "object" ) {
             return closedOrders.map((order, keyIndex) => { 
                 //debugger 
+               
                 return order.attributes["farmer-line-items"].map((fli, keyIndex) => {
                     //debugger 
                     return ( 
@@ -84,10 +89,13 @@ class OrderCard extends Component {
         //debugger
         //const orders = this.state.order
         //debugger 
+        const orderList = this.displayOpenFarmerOrder(this.state.openOrders)
+        //const closedOrderList = this.displayClosedFarmerOrder(this.state.closedOrders)
+        //{closedOrderList}
         return(
             <div>
-                {this.displayOpenFarmerOrder()}
-                {this.displayClosedFarmerOrder()}
+                {orderList}
+                
             </div>
         )
     }
@@ -102,6 +110,7 @@ class OrderCard extends Component {
 const mapStateToProps = (state) => {
     //debugger 
     if ( state.order.length === 0 ) {
+        //debugger
         return ({
             openOrders: state.order,
             closedOrders: state.order

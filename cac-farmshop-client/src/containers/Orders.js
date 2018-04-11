@@ -34,16 +34,16 @@ class OrdersList extends Component {
         //debugger 
         if (typeof orders === 'object') {
             //debugger 
-            return orders.map((order, keyIndex) => {
+            //return orders.map((order, keyIndex) => {
                 //debugger 
                 //const farmgoods = []
                 return (
                     <OrderCard 
-                        order={order} 
-                        key={keyIndex}
+                        order={orders} 
+                        //key={keyIndex}
                     />
                 )
-            })
+            //})
             
         }
     }
@@ -53,6 +53,7 @@ class OrdersList extends Component {
         //debugger 
         const openOrders = this.displayOpenOrders(this.state.openOrders)
         const closedOrders = this.displayOpenOrders(this.state.closedOrders)
+        //debugger 
         //{this.displayOpenOrders()}
         return (
             <div>
