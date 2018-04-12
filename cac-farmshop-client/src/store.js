@@ -20,9 +20,9 @@ import session from './reducers/sessionReducer';
 import users from './reducers/sessionReducer';
 import customers from './reducers/sessionReducer';
 import orders from './reducers/orderReducer';
-import order from './reducers/orderReducer';
+//import order from './reducers/orderReducer';
 import farmerLineItems from './reducers/lineitemsReducer';
-import farmerOrder from './reducers/orderReducer';
+//import farmerOrder from './reducers/orderReducer';
 
 const reducers = combineReducers({
   carts,
@@ -40,9 +40,9 @@ const reducers = combineReducers({
   openLineitems,
   closedLineitems,
   orders,
-  order,
+  //order,
   farmerLineItems,
-  farmerOrder
+  //farmerOrder,
 });
 
 const middleware = [thunk]; //for async actions

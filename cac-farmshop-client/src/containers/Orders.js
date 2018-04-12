@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -6,6 +5,7 @@ import { getOpenFarmerOrders } from '../actions/orders';
 //import { getFarmerLineItems } from '../actions/lineitems';
 import { Link } from 'react-router-dom'
 import {OrderCard} from '../components/orderCard';
+import { closeFarmerOrder } from '../actions/orders';
 
 class OrdersList extends Component {
     constructor(props) {
@@ -34,13 +34,16 @@ class OrdersList extends Component {
         //debugger 
         if (typeof orders === 'object') {
             //debugger 
+
+            const test = orders.sort((a,b) => {
+                return a.id - b.id
+            })
+            //debugger 
+
             return orders.map((order, keyIndex) => {
                 //debugger 
-                //const farmgoods = []
-                
                 return (
-
-                    <div>
+                    <div key={keyIndex}>
                     <OrderCard 
                         order={order} 
                         key={keyIndex}
@@ -49,7 +52,6 @@ class OrdersList extends Component {
                     </div>
                 )
             })
-            
         }
     }
 
@@ -65,7 +67,6 @@ class OrdersList extends Component {
         const openOrders = this.displayOpenOrders(this.state.openOrders)
         const closedOrders = this.displayOpenOrders(this.state.closedOrders)
         //debugger 
-        //{this.displayOpenOrders()}
         return (
             <div>
                 {
@@ -90,20 +91,20 @@ class OrdersList extends Component {
 
 const mapStateToProps = (state) => {
     //debugger 
-    if ( state.order.length === 0 ) {
+    if ( state.orders.length === 0 ) {
         return ({
-            openOrders: state.order,
-            closedOrders: state.order
+            openOrders: state.orders,
+            closedOrders: state.orders
         })
     } else {
         return ({
-            openOrders: state.order[0],
-            closedOrders: state.order[1]
+            openOrders: state.orders[0],
+            closedOrders: state.orders[1]
         })
     }
 }
 
-export default connect(mapStateToProps, { getOpenFarmerOrders })(OrdersList);
+export default connect(mapStateToProps, { getOpenFarmerOrders, closeFarmerOrder })(OrdersList);
 
   
 /*
