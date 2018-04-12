@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 //import { bindActionCreators } from 'redux';
 import { closeFarmerOrder } from '../actions/orders';
+import './Order.css'
 
 
 class OrderCard extends Component {
@@ -46,11 +47,19 @@ class OrderCard extends Component {
                     //debugger 
                     return ( 
                         <div key={keyIndex} className="orderCard">
-                        {keyIndex === 0 ? <label>Customer: {fli["customer-user"].email} </label> : <p></p>}
+                        {keyIndex === 0 && 
+                            <br /> }
+                        {keyIndex === 0 &&
+                            <label>FarmerOrderID: {order.id} - Customer: {fli["customer-user"].email} </label>
+                        }
                         <label>Item: {fli.farmgood.name} - quantity: {fli.quantity}</label>
-                        <br />
-                        {keyIndex === order.attributes["farmer-line-items"].length - 1 ? <label>Total: {order.attributes.total} </label> : <p></p>}
-                        {keyIndex === order.attributes["farmer-line-items"].length - 1 ? <button className="farmerOrderStatus" onClick={() => this.markClosed(order.id)}>{order.attributes.status === "open" ? "Close Order" : "Reopen Order"}</button> : <p/>}
+                        {keyIndex === order.attributes["farmer-line-items"].length - 1 && 
+                            <label>Total: {order.attributes.total} </label> 
+                        }
+                        {keyIndex === order.attributes["farmer-line-items"].length - 1 && 
+                            <button className="farmerOrderStatus" onClick={() => this.markClosed(order.id)}>{order.attributes.status === "open" ? "Close Order" : "Reopen Order"}</button> 
+                        }
+                        
                         </div>
                     )
                 })
@@ -68,14 +77,14 @@ class OrderCard extends Component {
         if (typeof closedOrders === "object" ) {
             return closedOrders.map((order, keyIndex) => { 
                 //debugger 
-               
+                
                 return order.attributes["farmer-line-items"].map((fli, keyIndex) => {
                     //debugger 
                     return ( 
-                        <div key={keyIndex} className="orderCard">
-                        {keyIndex === 0 ? <label>Customer: {fli["customer-user"].email} </label> : <p></p>}
+                        <div key={keyIndex} className="orderLine">
+                        {keyIndex === 0 ? <label>FarmerOrderID: {order.id} - Customer: {fli["customer-user"].email} </label> : <p></p>}
                         <label>Item: {fli.farmgood.name} - quantity: {fli.quantity}</label>
-                        <br />
+                        
                         {keyIndex === order.attributes["farmer-line-items"].length - 1 ? <label>Total: {order.attributes.total} </label> : <p></p>}
                         {keyIndex === order.attributes["farmer-line-items"].length - 1 ? <button className="farmerOrderStatus" onClick={() => this.markClosed(order.id)}>{order.attributes.status === "open" ? "Close Order" : "Reopen Order"}</button> : <p/>}
                         </div>
@@ -93,7 +102,7 @@ class OrderCard extends Component {
         //const closedOrderList = this.displayClosedFarmerOrder(this.state.closedOrders)
         //{closedOrderList}
         return(
-            <div>
+            <div className="orderCard">
                 {orderList}
                 
             </div>
