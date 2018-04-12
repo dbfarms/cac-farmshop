@@ -5,15 +5,15 @@ import { bindActionCreators } from 'redux';
 import { getOpenFarmerOrders } from '../actions/orders';
 //import { getFarmerLineItems } from '../actions/lineitems';
 import { Link } from 'react-router-dom'
-import OrderCard from '../components/orderCard';
+import {OrderCard} from '../components/orderCard';
 
 class OrdersList extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            openOrders: '',
-            closedOrders: ''
+            openOrders: [],
+            closedOrders: []
         }
     }
 
@@ -34,18 +34,29 @@ class OrdersList extends Component {
         //debugger 
         if (typeof orders === 'object') {
             //debugger 
-            //return orders.map((order, keyIndex) => {
+            return orders.map((order, keyIndex) => {
                 //debugger 
                 //const farmgoods = []
+                
                 return (
+
+                    <div>
                     <OrderCard 
-                        order={orders} 
-                        //key={keyIndex}
+                        order={order} 
+                        key={keyIndex}
                     />
+                    <button className="farmerOrderStatus" onClick={() => this.markClosed(order.id)}>{order.attributes.status === "open" ? "Close Order" : "Reopen Order"}</button> 
+                    </div>
                 )
-            //})
+            })
             
         }
+    }
+
+    markClosed(order_id){
+        //debugger
+        const farmer_order_id = Number(order_id)
+        this.props.closeFarmerOrder(farmer_order_id)
     }
 
 
@@ -61,15 +72,15 @@ class OrdersList extends Component {
                     <div>
                     <h2>orders:</h2> 
                     
-                    {this.state.orders === '' ? <p>loading</p> : <p>loaded</p> }
+                    {this.state.orders === [] ? <p>loading</p> : <p>loaded</p> }
                     </div>
                 }
                 <h1>Open Orders</h1>
-                {this.state.orders === '' ? <p>loading</p> : <div>loaded {openOrders} </div> }
+                {this.state.orders === [] ? <p>loading</p> : <div>loaded {openOrders} </div> }
 
                 <br />
                 <h1>Closed Orders</h1>
-                {this.state.orders === '' ? <p>loading</p> : <div>{closedOrders} </div> }
+                {this.state.orders === [] ? <p>loading</p> : <div>{closedOrders} </div> }
             </div>
         )
     }
