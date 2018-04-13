@@ -34,7 +34,7 @@ class OrdersList extends Component {
         //debugger 
         if (typeof orders === 'object') {
             //debugger 
-
+            const todayDate = new Date().toISOString().slice(0,10);
             const test = orders.sort((a,b) => {
                 return a.id - b.id
             })
@@ -48,7 +48,15 @@ class OrdersList extends Component {
                         order={order} 
                         key={keyIndex}
                     />
-                    <button className="farmerOrderStatus" onClick={() => this.markClosed(order.id)}>{order.attributes.status === "open" ? "Close Order" : "Reopen Order"}</button> 
+                    {order.attributes["due-date"] >= todayDate && 
+                        <div>
+                        <p>{console.log(todayDate)}</p>
+                        <p>{console.log(order.attributes["due-date"])}</p>
+                        <button className="farmerOrderStatus" 
+                                onClick={() => this.markClosed(order.id)}>
+                                {order.attributes.status === "open" ? "Close Order" : "Reopen Order"}</button> 
+                        </div>
+                    }
                     </div>
                 )
             })
@@ -59,6 +67,7 @@ class OrdersList extends Component {
         //debugger
         const farmer_order_id = Number(order_id)
         this.props.closeFarmerOrder(farmer_order_id)
+        
     }
 
 

@@ -14,7 +14,11 @@ export const OrderCard = (order) => {
                     {keyIndex === 0 && 
                         <br /> }
                     {keyIndex === 0 &&
-                        <label>FarmerOrderID: {order.id} - Customer: {fli["customer-user"].email} </label>
+                        <div>
+                            <label>Order due: {order.order.attributes["due-date"]}</label>
+                            <br />
+                            <label>FarmerOrderID: {order.id} - Customer: {fli["customer-user"].email} </label>
+                        </div>
                     }
                     <label>Item: {fli.farmgood.name} - quantity: {fli.quantity}</label>
                     {keyIndex === order.order.attributes["farmer-line-items"].length - 1 && 

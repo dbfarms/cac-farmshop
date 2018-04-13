@@ -13,36 +13,7 @@ export default (state = [], action) => {
         return action.allFarmerOrders
       case 'CHANGE_ORDER_STATUS_SUCCESS':
         const newState = Object.assign([], state);
-        //debugger 
-        /*
-        const indexOfFarmerOrder = state.findIndex(fo => {
-          return fo.id == action.farmerOrder.id
-        })
-
-        //////////////////////
         
-        const indexOfFarmerOrder = state.forEach(fos => {
-          return fos.findIndex(fo => {
-            return fo.id == action.farmerOrder.id
-          })
-        })
-
-        ////////////////
-
-        newState.forEach(fos => {
-          if (indexOfFarmerOrder > -1 ) {
-            debugger 
-            fos.splice(indexOfFarmerOrder, 1)
-          } else { 
-            fos.forEach((fo, index ) => {
-              if (fo.id == action.farmerOrder.id) {
-                indexOfFarmerOrder = index 
-                //fos.splice(indexOfFarmerOrder, 1)
-              }
-            })
-          }
-        })
-        */
         var openFos = state[0]
         var closedFos = state[1]
 

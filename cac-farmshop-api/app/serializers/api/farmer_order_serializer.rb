@@ -1,5 +1,5 @@
 class Api::FarmerOrderSerializer < ActiveModel::Serializer
-    attributes :id, :customer_user_id, :status, :farmer_line_items, :farmgoods, :total
+    attributes :id, :customer_user_id, :status, :farmer_line_items, :farmgoods, :total, :due_date
 
     belongs_to :order
     belongs_to :customer_user 
