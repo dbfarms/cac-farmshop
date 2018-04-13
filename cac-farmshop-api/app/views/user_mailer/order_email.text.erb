@@ -1,0 +1,7 @@
+<%= @user.farmer.name %>, you've received an order from... (add customer name?)
+    Your order is due <%= @order.due_date %> 
+    Please have the following ready and boxed in the pickup area by then: 
+    <% @order.farmer_line_items.each do |fli| %>
+      name: <%= fli.farmgood.name %> - quantity: <%= fli.quantity %>
+    <% end %>
+Your order total is $<%= @order.total %>

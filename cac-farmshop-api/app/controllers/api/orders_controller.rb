@@ -147,8 +147,12 @@ class Api::OrdersController < ApplicationController
 
         if new_order.save
             new_order.status = "complete"
-            new_order
+            #new_order
             new_order.save 
+            new_order.farmer_orders.each do |fo|
+                UserMailer.order_email(fo.farmer.user, fo).deliver_now 
+            end 
+
             render json: {new_order: new_order, errors: out_of_stock, refund: refund }
         else
             render json: { message: new_order.errors}, status: 400
