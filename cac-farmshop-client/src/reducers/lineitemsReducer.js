@@ -32,7 +32,7 @@ export default (state = [], action) => {
         //debugger 
         return (action.closedLineitems)  
       case 'DELETE_LINEITEM_SUCCESS':
-        debugger 
+        //debugger 
         var newState = Object.assign([], state);
         if (action.initialQuantity === state[0].attributes.quantity )
         {

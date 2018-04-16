@@ -71,6 +71,7 @@ const setOpenFarmerOrders = (farmerOrders, farmer_id) => {
 }
 
 const checkedOut = (order) =>{
+  //debugger 
     return {
       type: 'CHECKOUT_SUCCESS',
       order
@@ -91,7 +92,7 @@ const checkedOut = (order) =>{
       .then(response => response.json())
       .then(order => {
         //debugger 
-        dispatch(checkedOut())
+        dispatch(checkedOut(order))
       })
     }
   }

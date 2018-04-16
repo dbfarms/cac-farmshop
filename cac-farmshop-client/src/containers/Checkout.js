@@ -12,7 +12,8 @@ class Checkout extends Component {
     this.state = {
       user_id: sessionStorage.id, 
       user_name: sessionStorage.name,
-      lineitems: ''
+      lineitems: '',
+      alerts: '',
     }
   }
 
@@ -22,9 +23,11 @@ class Checkout extends Component {
 
   componentWillReceiveProps(nextProps){
     //debugger
+    
     this.setState({
       openLineitems: nextProps.openLineitems,
-      cart: nextProps.cart 
+      cart: nextProps.cart,
+      //alerts: nextProps.order
       //oldLineItems: nextProps.allLineItems 
     })
   }
@@ -58,9 +61,11 @@ class Checkout extends Component {
 }
 
 const mapStateToProps = (state) => {
+  //debugger 
   return ({
     cart: state.cart,
-    openLineitems: state.openLineitems 
+    openLineitems: state.openLineitems,
+    order: state.order 
 
   })
 }

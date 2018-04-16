@@ -50,7 +50,9 @@ export default (state = [], action) => {
         return (
           orders 
         );
-
+      case 'CHECKOUT_SUCCESS':
+        //debugger 
+        return action.order 
       default:
         return state
     }

@@ -61,14 +61,14 @@ class Api::OrdersController < ApplicationController
                         new_order.farmer_orders << new_fo 
                         new_order.save 
                     end 
-
                 end 
 
                 if fg.inventory === 0 
-                    ## this will alert the farmer that a stock is out
+## add line to email farmer that certain product is out of stock (at what level? 0? 2? etc)
                 end 
             elsif fg.inventory == 0
-                out_of_stock.push(`#{fg.name} is out of stock`)
+                #byebug 
+                out_of_stock.push([fg.name, 0])
             else 
                 over_order = fg.inventory - li.quantity
                 amount_available = li.quantity + over_order
@@ -81,8 +81,9 @@ class Api::OrdersController < ApplicationController
                     fli = FarmerLineItem.new 
                     fli.farmgood = li.farmgood 
                     fli.quantity = li.quantity 
+                    out_of_stock.push([fg.name, amount_available])
 
-                    order.farmer_orders.each do |fo|
+                    new_order.farmer_orders.each do |fo|
                         if fo.farmer && fo.farmer == li.farmer 
                             #byebug 
                             new_farmer_order = false 
@@ -107,7 +108,9 @@ class Api::OrdersController < ApplicationController
                     
                 end 
 
-                refund << [fg.name, fg.price]
+                refund << [fg.name, fg.price] 
+                ## this needs to trigger in between actual charge to customer and clicking of submit order button
+                #
             end 
 
         end 
@@ -123,22 +126,7 @@ class Api::OrdersController < ApplicationController
             end 
         end 
         
-        user = CustomerUser.find(@cart.customer_user_id)
-        new_cart = Cart.new 
-        #byebug 
-        new_cart.customer_user = user 
-        @cart.status = "submitted" 
-        @cart.save 
-        user.carts << new_cart 
-        user.save 
-        new_cart.save 
-
-        total_refund = 0
-        refund.each {|r| total_refund += r[1]}
-        total -= total_refund
-        new_order.total = total 
-        new_order.due_date = new_order.created_at + 2.day 
-        new_order.save 
+        
 
         #byebug #test save
 
@@ -146,6 +134,25 @@ class Api::OrdersController < ApplicationController
 
 
         if new_order.save
+            ###
+            user = CustomerUser.find(@cart.customer_user_id)
+            new_cart = Cart.new 
+            #byebug 
+            new_cart.customer_user = user 
+            @cart.status = "submitted" 
+            @cart.save 
+            user.carts << new_cart 
+            user.save 
+            new_cart.save 
+
+            total_refund = 0
+            refund.each {|r| total_refund += r[1]}
+            total -= total_refund
+            new_order.total = total 
+            new_order.due_date = new_order.created_at + 2.day 
+            new_order.save 
+            ###
+
             new_order.status = "complete"
             #new_order
             new_order.save 
@@ -153,7 +160,7 @@ class Api::OrdersController < ApplicationController
                 UserMailer.order_email(fo.farmer.user, fo).deliver_now 
             end 
 
-            render json: {new_order: new_order, errors: out_of_stock, refund: refund }
+            render json: {new_order: new_order, out_of_stock: out_of_stock, refund: refund }
         else
             render json: { message: new_order.errors}, status: 400
         end
