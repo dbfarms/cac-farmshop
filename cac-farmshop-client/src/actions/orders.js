@@ -72,9 +72,29 @@ const setOpenFarmerOrders = (farmerOrders, farmer_id) => {
 
 const checkedOut = (order) =>{
   //debugger 
+
+    if (order.out_of_stock.length > 0) {
+      const outOfStock = []
+      
+      order.out_of_stock.map(fg => {
+        //debugger 
+        if (fg[1] > 0 ) {
+          var line = `${fg[0]} is out of stock. You were able to order ${fg[1]}`
+          outOfStock.push(line)
+        } else {
+          var line = `${fg[0]} is out of stock.`
+          outOfStock.push(line)
+        }
+        
+      })
+      //debugger 
+      //alert(outOfStock)
+      outOfStock.forEach(out => { alert(out)})
+    }
+
     return {
       type: 'CHECKOUT_SUCCESS',
-      order
+      order 
     }
   }
   
