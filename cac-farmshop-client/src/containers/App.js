@@ -21,7 +21,7 @@ import FarmerRoutes from './farmerRoutes';
 import AdminRoutes from './adminRoutes';
 import CustomerRoutes from './customerRoutes';
 import DefaultRoutes from './defaultRoutes';
-
+import '../index.css'
 
 class App extends Component {
   constructor() {
@@ -44,7 +44,6 @@ class App extends Component {
   componentWillMount(){
     this.props.getFarmGoods();
     window.addEventListener('scroll', this.handleScroll);
-    //WHEN I PUT ANOTHER GET REQUEST HERE IT BREAKS THE PROGRAM. BUT WHY?
   }
 
   componentWillUnmount() {
@@ -91,32 +90,44 @@ class App extends Component {
   render() {
     this.determineUser(); //this just catches a bug that would occur when creating new users but may not be needed anymore who knows?
     return (
-      <div>
-      {sessionStorage.jwt === "undefined" &&
-        <div>
-        <h3>Welcome VISITOR</h3>
-          <DefaultRoutes /> 
+      <div className="masthead classic-header justify logo-center widgets dividers surround line-decoration dt-parent-menu-clickable show-device-logo show-mobile-logo masthead-mobile" role="banner">
+
+      <div className="top-bar full-width-line">
+        <div className="left-widgets mini-widgets"></div>					
+      </div>
+
+
+
+        <div className="top-bar full-width-line">
+        <div className="cac-logo-here">
+          <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/54612904e4b08f1a465c54ca/5ad77dea8a922deac7191197/1524071917324/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" align="middle"/></a>
+      </div>
+          {sessionStorage.jwt === "undefined" &&
+            <div>
+            <h3>Welcome VISITOR</h3>
+              <DefaultRoutes /> 
+            </div>
+          }
+          {sessionStorage.role === "customer" &&
+            <div>
+                
+                <h3>Welcome {sessionStorage.name}</h3>
+                <CustomerRoutes />
+            </div>
+          }
+          {sessionStorage.role === "admin" &&
+            <div>
+            <h3>auth level is {sessionStorage.role}</h3>
+            <AdminRoutes />
+            </div>
+          }
+          {sessionStorage.role === "farmer" &&
+            <div>
+            <h3>Welcome {sessionStorage.name} / auth level is {sessionStorage.role}</h3>
+            <FarmerRoutes />
+            </div>
+          }
         </div>
-      }
-      {sessionStorage.role === "customer" &&
-        <div>
-        <h3>Welcome CUSTOMERNAMEHERE</h3>
-          <CustomerRoutes />
-        </div>
-      }
-      {sessionStorage.role === "admin" &&
-        <div>
-        <h3>auth level is {sessionStorage.role}</h3>
-        <AdminRoutes />
-        </div>
-      }
-      {sessionStorage.role === "farmer" &&
-        <div>
-        <h3>Welcome {sessionStorage.name} / auth level is {sessionStorage.role}</h3>
-        <FarmerRoutes />
-        </div>
-      }
-      
       </div>
     );
   }

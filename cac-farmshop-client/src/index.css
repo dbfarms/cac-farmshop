@@ -1,4 +1,17 @@
 @charset "utf-8";
+
+.cac-logo-here {
+  padding-top: 10px;
+  align-content: "middle";
+  
+  /*
+  background-image: url("https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/54612904e4b08f1a465c54ca/5ad77dea8a922deac7191197/1524071917324/Chester-Agricultural-Center-220.jpg?format=750w");
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-top:168px;
+  */
+}
+
 .transparent-border-mixin {
   border-color: rgba(43,155,58,0.2);
 }
