@@ -4,14 +4,53 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';  
 import * as sessionActions from '../../actions/sessionActions';
 import '../../index.css';
+import MediaQuery from 'react-responsive';
+//import Submenu from '../../components/common/Submenu'
+import CSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
+
+class Submenu extends React.Component {
+
+  render() {
+    //debugger 
+    console.log("test")
+    return (
+      <ul className="nav__submenu">
+        <li className="nav__submenu-item ">
+          <a>Our Company</a>
+        </li>
+        <li className="nav__submenu-item ">
+          <a>Our Team</a>
+        </li>
+        <li className="nav__submenu-item ">
+          <a>Our Portfolio</a>
+        </li>
+      </ul>
+    )
+  }
+}
 
 class Header extends React.Component {  
   constructor(props) {
     super();
+
+
+    this.state = {
+      showAboutMenu: false
+    };
+
     this.logOut = this.logOut.bind(this);
     
     //debugger 
   }
+
+  handleHover = (event) => {
+    this.setState({ showAboutMenu: true });
+  };
+  
+  handleLeave = (event) => {
+    this.setState({ showAboutMenu: false });
+  };
+
 
   logOut(event) {
     event.preventDefault();
@@ -40,6 +79,19 @@ class Header extends React.Component {
           className="navLink"> {route[0]} </NavLink>
           {" | "}
           <a href="/" onClick={this.logOut}>log out</a>
+          <div className="submenu-container">
+              <CSSTransitionGroup
+                transitionName="slide"
+                transitionEnterTimeout={300}
+                transitionLeaveTimeout={300}
+              >
+                { this.state.showAboutMenu && 
+                  <div>
+                  <Submenu /> 
+                  </div>
+                }
+              </CSSTransitionGroup>
+            </div>
           </span>
         }
         {keyIndex !== (routesLinks.length-1) &&
@@ -68,12 +120,18 @@ class Header extends React.Component {
     //debugger 
     return (
       <header className="header-bar">
+        <div className="masthead classic-header justify logo-center widgets dividers surround line-decoration dt-parent-menu-clickable show-device-logo show-mobile-logo masthead-mobile" role="banner">
 
+        <div className="top-bar full-width-line">
+          <div className="left-widgets mini-widgets"></div>					
+        </div>
+
+        <div className="cac-logo-here" align="middle">
+            <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/54612904e4b08f1a465c54ca/5ad77dea8a922deac7191197/1524071917324/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="220" height="204" align="middle"/></a>
+        </div>
           <div className="branding">
-            <div id="site-title" className="assistive-text">Chester Agricultural Center</div>
-            <div id="site-description" className="assistive-text">Chester Agricultural Center</div>
-
-            <div className="mini-widgets">
+            <div className="mini-widgets" align="right">
+              <MediaQuery query="(min-width: 1000px)">
               <div className="soc-ico show-on-desktop near-logo-first-switch in-menu-second-switch custom-bg disabled-border border-off hover-accent-bg hover-disabled-border  hover-border-off">
                 <a title="Facebook" href="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/" target="_blank" className="facebook" > 
                   <span className="soc-font-icon"></span>
@@ -92,9 +150,12 @@ class Header extends React.Component {
                   <span className="screen-reader-text">Google+</span>
                 </a>
               </div>
+              </MediaQuery>
             </div>
 
-            <div className="mobile-header-bar">
+            
+            <MediaQuery query="(max-width: 999px)">
+              <div className="mobile-header-bar">
               <div className="mobile-navigation">
                 <a href="#" className="dt-mobile-menu-icon">
                   <span className="lines"></span>
@@ -120,13 +181,15 @@ class Header extends React.Component {
                 </a>
               </div>
             </div>
-          <div className="mobile-branding">
-          <a href="http://www.chesteragcenter.com/">
-          <img className=" preload-me" src="http://www.chesteragcenter.com/wp-content/uploads/2017/05/Chester-Agricultural-Center-220.jpg" srcset="http://www.chesteragcenter.com/wp-content/uploads/2017/05/Chester-Agricultural-Center-220.jpg 220w, http://www.chesteragcenter.com/wp-content/uploads/2017/05/Chester-Agricultural-Center-220.jpg 220w" width="220" height="202" sizes="220px" alt="Chester Agricultural Center" />
-          <img className="mobile-logo preload-me" src="http://www.chesteragcenter.com/wp-content/uploads/2014/03/Chester-Agricultural-Center-140px.jpg" srcset="http://www.chesteragcenter.com/wp-content/uploads/2014/03/Chester-Agricultural-Center-140px.jpg 140w, http://www.chesteragcenter.com/wp-content/uploads/2014/03/Chester-Agricultural-Center-140px.jpg 140w" width="140" height="133" sizes="140px" alt="Chester Agricultural Center"/>
-          </a>
-          </div>
-          </div>
+            <div className="mobile-branding">
+            <a href="http://www.chesteragcenter.com/">
+            <img className=" preload-me" src="http://www.chesteragcenter.com/wp-content/uploads/2017/05/Chester-Agricultural-Center-220.jpg" srcset="http://www.chesteragcenter.com/wp-content/uploads/2017/05/Chester-Agricultural-Center-220.jpg 220w, http://www.chesteragcenter.com/wp-content/uploads/2017/05/Chester-Agricultural-Center-220.jpg 220w" width="220" height="202" sizes="220px" alt="Chester Agricultural Center" />
+            <img className="mobile-logo preload-me" src="http://www.chesteragcenter.com/wp-content/uploads/2014/03/Chester-Agricultural-Center-140px.jpg" srcset="http://www.chesteragcenter.com/wp-content/uploads/2014/03/Chester-Agricultural-Center-140px.jpg 140w, http://www.chesteragcenter.com/wp-content/uploads/2014/03/Chester-Agricultural-Center-140px.jpg 140w" width="140" height="133" sizes="140px" alt="Chester Agricultural Center"/>
+            </a>
+            </div>
+            </div>
+          </MediaQuery>
+          
           </div>
           {sessionStorage.jwt !== "undefined" &&
             <div>
@@ -136,22 +199,41 @@ class Header extends React.Component {
             </div>
           }
           {sessionStorage.jwt === "undefined" && 
-            <nav className="background">
-            <NavLink to="/" 
-              className="active">Home</NavLink>
-            {" | "}
-            <Link to="/farm-goods" className="active">Farmgoods</Link>
-            {" | "}
+            <nav className="menu-item menu-item-type-post_type menu-item-object-post menu-item-has-children menu-item-15136 has-children" align="middle">
+            <span className="left-menu" onMouseLeave={this.handleLeave}>
+              <NavLink to="/" 
+                className="menu-item-text"
+                onMouseEnter={this.handleHover}
+                >Home
+              </NavLink>
+              <span className="submenu-container">
+              <CSSTransitionGroup
+                transitionName="slide"
+                transitionEnterTimeout={300}
+                transitionLeaveTimeout={300}
+              >
+                { this.state.showAboutMenu && 
+                  <div>
+                  <Submenu /> 
+                  </div>
+                }
+              </CSSTransitionGroup>
+            </span>
+            </span>
+            <span>
+            <Link to="/farm-goods" className="menu-item-text">Farmgoods</Link>
+            </span>
             <Link to="/farmers" 
-              className="active">Farmers</Link>
-            {" | "}
-            <Link to="/login" className="active">
-              log in</Link>
-            {" | "}
-            <Link to="/signup" className="active">
-              sign up</Link>
+              className="menu-item-text">Farmers</Link>
+            <Link to="/login" className="menu-item-text">
+              Log In</Link>
+            <Link to="/signup" className="menu-item-text">
+              Sign Up</Link>
           </nav>
           }
+          </div>
+          <br />
+          <div className="top-bar full-width-line"></div>
           </header>
     )
     }

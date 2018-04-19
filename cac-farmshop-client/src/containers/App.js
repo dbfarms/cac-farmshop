@@ -90,21 +90,11 @@ class App extends Component {
   render() {
     this.determineUser(); //this just catches a bug that would occur when creating new users but may not be needed anymore who knows?
     return (
-      <div className="masthead classic-header justify logo-center widgets dividers surround line-decoration dt-parent-menu-clickable show-device-logo show-mobile-logo masthead-mobile" role="banner">
-
-      <div className="top-bar full-width-line">
-        <div className="left-widgets mini-widgets"></div>					
-      </div>
-
-
-
-        <div className="top-bar full-width-line">
-        <div className="cac-logo-here">
-          <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/54612904e4b08f1a465c54ca/5ad77dea8a922deac7191197/1524071917324/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" align="middle"/></a>
-      </div>
+      <div className="post-template-default single single-post postid-15038 single-format-standard no-comments title-off scale-on-hover small-hover-icons click-effect-on-img dt-responsive-on overlay-cursor-on accent-gradient srcset-enabled btn-material custom-btn-color custom-btn-hover-color outline-element-decoration accent-bullets bold-icons phantom-fade phantom-line-decoration phantom-custom-logo-on sticky-mobile-header top-header first-switch-logo-left first-switch-menu-right second-switch-logo-left second-switch-menu-right right-mobile-menu layzr-loading-on popup-message-style wpb-js-composer js-comp-ver-5.1.1 vc_responsive is-webkit no-mobile phantom-off closed-overlay-mobile-header">
+      
           {sessionStorage.jwt === "undefined" &&
             <div>
-            <h3>Welcome VISITOR</h3>
+            <h3>Welcome VISITOR</h3> 
               <DefaultRoutes /> 
             </div>
           }
@@ -127,7 +117,6 @@ class App extends Component {
             <FarmerRoutes />
             </div>
           }
-        </div>
       </div>
     );
   }

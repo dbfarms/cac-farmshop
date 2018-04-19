@@ -1,4 +1,57 @@
+.cac-logo-here {
+  padding-top: 10px;
+  align-content: "middle";
+}
+
+.left-menu {
+  border-left: 1px solid rgba(117,117,117,0.2);
+}
+
+.menu-item-text {
+  font:  normal  17px / 21px "Playfair Display";
+  word-spacing: normal;
+  align-content: "middle";
+  color: #424242;
+  border-right: 1px solid rgba(117,117,117,0.2);
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.menu-item-text:after {
+  margin: 30px;
+  border-left: 1px solid rgba(117,117,117,0.2);
+}
+
+a {
+  color: #424242;
+}
+
+.top-bar.full-width-line {
+  border-bottom: 1px solid rgba(117,117,117,0.2);
+}
+
+.masthead .soc-ico a .soc-font-icon,
+.dt-mobile-header .soc-ico a .soc-font-icon {
+  color: #ffffff;
+}
+.masthead .soc-ico a:hover .soc-font-icon,
+.dt-mobile-header .soc-ico a:hover .soc-font-icon {
+  color: #ffffff !important;
+}
+
+.top-header .sub-nav.hover-style-bg li:not(.dt-mega-parent):hover > a,
+.top-header .hover-style-click-bg li:not(.dt-mega-parent):hover > a,
+.top-header .hover-style-click-bg li:not(.dt-mega-parent) > a .rippleAnimate {
+  background-color: rgba(107,160,49,0.07);
+}
+
+/*
 @charset "utf-8";
+
+.text {
+  font: "Playfair Display";
+  color: "red";
+}
 
 .cac-logo-here {
   padding-top: 10px;
@@ -9,7 +62,6 @@
   background-repeat: no-repeat;
   background-position: center;
   padding-top:168px;
-  */
 }
 
 .transparent-border-mixin {
@@ -1410,6 +1462,13 @@ blockquote,
   font:  normal  17px / 21px "Playfair Display", Helvetica, Arial, Verdana, sans-serif;
   text-transform: none;
 }
+
+.menu-text {
+  font:  normal  17px / 21px "Playfair Display", Helvetica, Arial, Verdana, sans-serif;
+  text-transform: none;
+}
+
+
 .main-nav > li:not(.wpml-ls-item) > a .menu-text {
   color: #333333;
 }
@@ -1533,6 +1592,7 @@ blockquote,
   background-color: ;
   height: ;
 }
+
 .from-centre-line > li > a .menu-item-text:before {
   bottom: -2px;
   height: ;
@@ -1564,6 +1624,7 @@ li:not(.dt-mega-menu) .sub-nav {
 .sub-nav {
   background-color: #000000;
 }
+
 .main-nav .sub-nav > li > a .menu-text,
 .mini-nav .sub-nav > li > a .menu-text {
   font:    15px / 19px "Playfair Display", Helvetica, Arial, Verdana, sans-serif;
@@ -6226,3 +6287,4 @@ h3.gform_title,
     background-image: none !important;
   }
 }
+*/
