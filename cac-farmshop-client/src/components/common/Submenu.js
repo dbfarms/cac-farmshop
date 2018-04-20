@@ -1,4 +1,56 @@
 import React from 'react'
+
+export default class Submenu extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      selector: this.props.seletor
+    }
+  }
+
+  render() {
+    //debugger 
+
+    if (this.props.selector === "home") {
+      return (
+        <ul className="nav__submenu">
+          <li className="nav__submenu-item">
+            <a>About</a>
+          </li>
+          <li className="nav__submenu-item">
+            <a>Contact</a>
+          </li>
+          <li className="nav__submenu-item">
+            <a>Something Else</a>
+          </li>
+        </ul>
+      )
+    } else if (this.props.selector === "farmer") {
+      return (
+        <ul className="nav__submenu">
+          <li className="nav__submenu-item">
+            <a>Jim's Eggs</a>
+          </li>
+          <li className="nav__submenu-item">
+            <a>Will's Beef</a>
+          </li>
+          <li className="nav__submenu-item">
+            <a>DBFARMS</a>
+          </li>
+        </ul>
+      )
+    } else {
+      return (
+        <p>where will i be?</p>
+      )
+    }
+    
+  }
+}
+
+/*
+import React from 'react'
 //import CSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
 //let CSSTransitionGroup = React.addons.CSSTransitionGroup;

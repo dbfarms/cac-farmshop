@@ -1,3 +1,127 @@
+
+
+/*
+color-blue: #00aeef;
+color-blue-dark: #0d2035;
+submenu-width: 180px;
+  Slide animation styles
+
+  You may need to add vendor prefixes for transform depending on your desired browser support.
+*/
+
+.slide-enter {
+  transform: translateY(-100%);
+  transition: .3s cubic-bezier(0, 1, 0.5, 1);
+}
+
+.slide-enter-active {
+    transform: translateY(0%);
+}
+
+.slide-leave {
+  transform: translateY(0%);
+  transition: .3s ease-in-out;
+}
+
+.slide-leave-active {
+    transform: translateY(-100%);
+}
+
+.submenu-container {
+  height: 150px; 
+  min-width: 180px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 1;  
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.menu-container {
+  text-align: center;
+}
+
+.nav {
+  align-content: "middle";
+  display: inline-block;
+  margin: 2rem auto 0;
+  background: #fff;
+  color: #0d2035;
+  text-align: middle;
+}
+
+.nav > ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.nav > a {
+  display: block;
+  padding: 0 16px;
+  line-height: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+  
+.nav__menu {
+  line-height: 45px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+  
+.nav__menu-item {
+  display: inline-block;
+  position: relative;
+  color: white;
+} 
+
+/*
+.nav__menu-item:hover {
+  color: #86af2d;
+} */
+
+.nav__menu-item:hover.nav__submenu {
+  display: block;
+}
+    
+.nav__submenu {
+  font:  normal 17px / 17px "Playfair Display";
+  font-weight: 300;
+  text-transform: none;
+  display: block;
+  position: absolute;
+  width: 180px;
+  background-color: black;
+}
+
+.nav__submenu-item {
+  padding: 10px;
+}
+
+.nav__submenu-item:hover {
+  background: rgba(#000, 0.1);
+  color: #86af2d;
+}
+
+
+/*
+*/
+
 .cac-logo-here {
   padding-top: 10px;
   align-content: "middle";
@@ -22,6 +146,11 @@
   border-left: 1px solid rgba(117,117,117,0.2);
 }
 
+.menu-item-text:hover {
+  text-decoration: none;
+  color: #86af2d;
+}
+
 a {
   color: #424242;
 }
@@ -43,6 +172,17 @@ a {
 .top-header .hover-style-click-bg li:not(.dt-mega-parent):hover > a,
 .top-header .hover-style-click-bg li:not(.dt-mega-parent) > a .rippleAnimate {
   background-color: rgba(107,160,49,0.07);
+}
+
+ul { text-align: center; }
+
+.header-nav > li {
+  list-style-type: none;
+  display: inline-block;
+}
+
+li {
+  list-style-type: none;
 }
 
 /*
