@@ -30,13 +30,13 @@ export default class Submenu extends React.Component {
       return (
         <ul className="nav__submenu">
           <li className="nav__submenu-item">
-            <a>Jim's Eggs</a>
+            <a href="">Jim's Eggs</a>
           </li>
           <li className="nav__submenu-item">
             <a>Will's Beef</a>
           </li>
           <li className="nav__submenu-item">
-            <a>DBFARMS</a>
+            <a className="nav__submenu-item"href="http://www.chesteragcenter.com/dirty-boots-farm/">DBFARMS</a>
           </li>
         </ul>
       )

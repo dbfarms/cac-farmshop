@@ -83,15 +83,9 @@ class CustomerFarmGoods extends Component {
 
   render() {
     
-   // if (this.props.lineitems.data) {
-   //  debugger
-   // }
-    
-    //console.log(this.state.cart)
     var objectToArrayDays = []
     var thisFilter = []
-    //console.log(this.state.lineitems)
-    //debugger 
+    
     return (
       <div className="page-tree">
       <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
