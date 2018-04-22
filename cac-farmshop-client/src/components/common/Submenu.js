@@ -26,7 +26,7 @@ export default class Submenu extends React.Component {
           </li>
         </ul>
       )
-    } else if (this.props.selector === "farmer") {
+    } else if (this.props.selector === "farmers") {
       return (
         <ul className="nav__submenu">
           <li className="nav__submenu-item">

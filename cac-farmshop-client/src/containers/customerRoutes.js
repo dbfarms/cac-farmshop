@@ -23,8 +23,8 @@ export default class CustomerRoutes extends Component {
 
     this.state = {
       routes: {
-        farmers: 'farmers',
         home: 'home',
+        farmers: 'farmers',
         farmgoods: 'farm-goods',
         cart: 'cart'
       }

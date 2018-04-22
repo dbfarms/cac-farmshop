@@ -8,14 +8,9 @@ import MediaQuery from 'react-responsive';
 import Submenu from '../../components/common/Submenu'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
-//let CSSTransitionGroup = React.addons.CSSTransitionGroup;
-
-
-
 class Header extends React.Component {  
   constructor(props) {
     super();
-
 
     this.state = {
       showAboutMenu: false,
@@ -23,11 +18,10 @@ class Header extends React.Component {
     };
 
     this.logOut = this.logOut.bind(this);
-    
-    //debugger 
   }
 
   handleHover = (event) => {
+    //debugger 
     this.setState({ showAboutMenu: true });
   };
   
@@ -56,50 +50,99 @@ class Header extends React.Component {
     const routesLength = (Object.keys(this.props.roleRoutes).length - 1)
     //debugger 
     Object.entries(this.props.roleRoutes).map(function(keyName, keyIndex) {
-      //debugger 
       routesLinks.push(keyName)
     })
     //debugger 
-    return routesLinks.map((route, keyIndex) => {
-      //debugger 
-      return (
-        <span key={keyIndex}>
-        {keyIndex === routesLength &&
-          <span>
-          <NavLink to={`/${route[1]}`} 
-          className="navLink"> {route[0]} </NavLink>
-          {" | "}
-          <a href="/" onClick={this.logOut}>log out</a>
-          <div className="submenu-container">
+    return (
+      <nav className="nav">
+        <ul className="nav__menu header-nav">
+          {routesLinks.map((route, keyIndex) => { 
+            //debugger 
+            //onMouseEnter={this.handleHover}
+            //onMouseLeave={this.handleLeave}
+            return (
+                <span key={keyIndex}>
+                  {keyIndex === routesLength &&
+                    <span>
+                      {this.menuSelector(route)}
+                      <a className="menu-item-text" 
+                         href="/" onClick={this.logOut}>log out</a>
+                    </span>
+                  }
+                  {keyIndex !== (routesLinks.length-1) &&
+                  <span>
+                    {this.menuSelector(route)}
+                  </span>
+                  }
+                </span>
+              )
+            })
+          }
+        </ul>
+      </nav>
+    ) 
+  }
+
+  aStyle = {
+    visibility: "visible"
+  };
+
+  menuSelector = (route) => {
+    //debugger 
+    switch(route[1]){
+      case 'home':
+        return (
+          <li className="nav__menu-item left-menu"
+            onMouseLeave={this.handleLeave}>
+            <NavLink to={`/${route[1]}`} 
+              className="menu-item-text"
+              onMouseEnter={this.handleHover}> {route[0]} 
+            </NavLink>
+            <div className="submenu-container">
               <ReactCSSTransitionGroup
                 transitionName="slide"
                 transitionEnterTimeout={300}
                 transitionLeaveTimeout={300}
               >
                 { this.state.showAboutMenu && 
-                  <div>
-                  <Submenu /> 
-                  </div>
+                  <Submenu selector="home"/> 
                 }
               </ReactCSSTransitionGroup>
             </div>
-          </span>
-        }
-        {keyIndex !== (routesLinks.length-1) &&
-        <span>
-        <NavLink to={`/${route[1]}`}
-        className="navLink"> {route[0]} </NavLink>
-         {" | "}
-        </span>
-        }
-        </span>
+            {console.log(route[1])}
+          </li>
         )
-    }) 
+      case 'farmers':
+        return (
+          <li className="nav__menu-item left-menu"
+              onMouseLeave={this.handleFarmersLeave}>
+            <NavLink to={`/${route[1]}`} 
+              className="menu-item-text"
+              onMouseEnter={this.handleFarmersHover}> {route[0]} 
+            </NavLink>
+            <div className="submenu-container">
+              <ReactCSSTransitionGroup
+                transitionName="slide"
+                transitionEnterTimeout={300}
+                transitionLeaveTimeout={300}
+              >
+                {this.state.showFarmerMenu && 
+                  <Submenu selector="farmers"/> 
+                }
+              </ReactCSSTransitionGroup>
+            </div>
+          </li>
+        )
+      default: 
+        return (
+          <li className="nav__menu-item left-menu">
+            <NavLink to={`/${route[1]}`} 
+              className="menu-item-text"> {route[0]} 
+            </NavLink>
+          </li>
+        )
+    }
   }
-
-  aStyle = {
-    visibility: "visible"
-  };
 
   render() {
     //debugger 
@@ -227,7 +270,7 @@ class Header extends React.Component {
                     transitionLeaveTimeout={300}
                   >
                     { this.state.showFarmerMenu && 
-                      <Submenu selector="farmer"/> 
+                      <Submenu selector="farmers"/> 
                     }
                   </ReactCSSTransitionGroup>
                 </div>
