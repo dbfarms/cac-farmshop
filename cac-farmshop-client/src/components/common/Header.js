@@ -18,7 +18,8 @@ class Header extends React.Component {
 
 
     this.state = {
-      showAboutMenu: false
+      showAboutMenu: false,
+      showFarmerMenu: false
     };
 
     this.logOut = this.logOut.bind(this);
@@ -34,6 +35,13 @@ class Header extends React.Component {
     this.setState({ showAboutMenu: false });
   };
 
+  handleFarmersHover = (event) => {
+    this.setState({ showFarmerMenu: true });
+  };
+  
+  handleFarmersLeave = (event) => {
+    this.setState({ showFarmerMenu: false });
+  };
 
   logOut(event) {
     event.preventDefault();
@@ -205,11 +213,11 @@ class Header extends React.Component {
               <Link to="/farm-goods" className="menu-item-text">Farmgoods</Link>
               </li>
               <li className="nav__menu-item left-menu"
-                  onMouseLeave={this.handleLeave}
+                  onMouseLeave={this.handleFarmersLeave}
               >
                 <NavLink to="/farmers" 
                   className="menu-item-text"
-                  onMouseEnter={this.handleHover}
+                  onMouseEnter={this.handleFarmersHover}
                   >Farmers
                 </NavLink>
                 <div className="submenu-container">
@@ -218,7 +226,7 @@ class Header extends React.Component {
                     transitionEnterTimeout={300}
                     transitionLeaveTimeout={300}
                   >
-                    { this.state.showAboutMenu && 
+                    { this.state.showFarmerMenu && 
                       <Submenu selector="farmer"/> 
                     }
                   </ReactCSSTransitionGroup>
