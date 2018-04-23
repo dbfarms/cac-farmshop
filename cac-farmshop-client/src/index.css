@@ -1,14 +1,5 @@
 
 
-/*
-color-blue: #00aeef;
-color-blue-dark: #0d2035;
-submenu-width: 180px;
-  Slide animation styles
-
-  You may need to add vendor prefixes for transform depending on your desired browser support.
-*/
-
 .slide-enter {
   transform: translateY(-100%);
   transition: .3s cubic-bezier(0, 1, 0.5, 1);
@@ -82,6 +73,9 @@ body {
   line-height: 45px;
   font-weight: 700;
   text-transform: uppercase;
+  width: 90%;
+  margin: auto;
+
 }
   
 .nav__menu-item {
@@ -163,9 +157,10 @@ max-width:50%;
 max-height:50%;
 }
 
-
-/*
-*/
+.widget {
+  width: 40px;
+  display: inline-block;
+}
 
 .cac-logo-here {
   padding-top: 10px;
@@ -176,14 +171,17 @@ max-height:50%;
   border-left: 1px solid rgba(117,117,117,0.2);
 }
 
+.right-menu {
+  border-right: 1px solid rgba(117,117,117,0.2);
+}
+
 .menu-item-text {
   font:  normal  17px / 21px "Playfair Display";
   word-spacing: normal;
   align-content: "middle";
   color: #424242;
-  border-right: 1px solid rgba(117,117,117,0.2);
-  padding-right: 30px;
-  padding-left: 30px;
+  padding-right: 50px;
+  padding-left: 50px;
 }
 
 .menu-item-text:after {

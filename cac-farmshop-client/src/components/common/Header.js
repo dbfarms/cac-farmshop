@@ -5,8 +5,9 @@ import {bindActionCreators} from 'redux';
 import * as sessionActions from '../../actions/sessionActions';
 import '../../index.css';
 import MediaQuery from 'react-responsive';
-import Submenu from '../../components/common/Submenu'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
+import Submenu from '../../components/common/Submenu';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
+import ShareButton from 'react-social-share-buttons';
 
 class Header extends React.Component {  
   constructor(props) {
@@ -65,8 +66,10 @@ class Header extends React.Component {
                   {keyIndex === routesLength &&
                     <span>
                       {this.menuSelector(route)}
+                      <span className="nav__menu-item left-menu right-menu">
                       <a className="menu-item-text" 
                          href="/" onClick={this.logOut}>log out</a>
+                      </span>
                     </span>
                   }
                   {keyIndex !== (routesLinks.length-1) &&
@@ -161,30 +164,35 @@ class Header extends React.Component {
         </div>
           <div className="branding">
             <div className="mini-widgets" align="right">
-              <MediaQuery query="(min-width: 1000px)">
+              <MediaQuery query="(min-width: 1065px)">
               <div className="soc-ico show-on-desktop near-logo-first-switch in-menu-second-switch custom-bg disabled-border border-off hover-accent-bg hover-disabled-border  hover-border-off">
-                <a title="Facebook" href="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/" target="_blank" className="facebook" > 
-                  <span className="soc-font-icon"></span>
-                  <span className="screen-reader-text">Facebook</span>
-                </a>
-                <a title="Instagram" href="https://www.instagram.com/chesteragcenter/" target="_blank" className="instagram" style={this.aStyle}>
-                  <span className="soc-font-icon"></span>
-                  <span className="screen-reader-text">Instagram</span>
-                </a>
-                <a title="Twitter" href="https://twitter.com/ChesterAgCenter" target="_blank" className="twitter" style={this.aStyle}>
-                  <span className="soc-font-icon"></span>
-                  <span className="screen-reader-text">Twitter</span>
-                </a>
-                <a title="Google+" href="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en" target="_blank" className="google" style={this.aStyle}>
-                  <span className="soc-font-icon"></span>
-                  <span className="screen-reader-text">Google+</span>
-                </a>
+                <span className="widget">
+                <ShareButton 
+                  compact
+                  socialMedia={'facebook'}
+                  url="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/"
+                />
+                </span>
+                <span className="widget">
+                <ShareButton 
+                  compact
+                  socialMedia={'twitter'}
+                  url="https://twitter.com/ChesterAgCenter"
+                />
+                </span>
+                <span className="widget">
+                <ShareButton 
+                  compact
+                  socialMedia={'google-plus'}
+                  url="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en"
+                />
+                </span>
               </div>
               </MediaQuery>
             </div>
 
             
-            <MediaQuery query="(max-width: 999px)">
+            <MediaQuery query="(max-width: 1064px)">
               <div className="mobile-header-bar">
               <div className="mobile-navigation">
                 <a href="#" className="dt-mobile-menu-icon">
@@ -193,29 +201,31 @@ class Header extends React.Component {
               </div>
               <div className="mobile-mini-widgets">
               <div className="soc-ico show-on-desktop near-logo-first-switch in-menu-second-switch custom-bg disabled-border border-off hover-accent-bg hover-disabled-border  hover-border-off">
-                <a title="Facebook" href="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/" target="_blank" className="facebook" style={this.aStyle}>
-                  <span className="soc-font-icon"></span>
-                  <span className="screen-reader-text">Facebook</span>
-                </a>
-                <a title="Instagram" href="https://www.instagram.com/chesteragcenter/" target="_blank" className="instagram" style={this.aStyle}>
-                  <span className="soc-font-icon"></span>
-                  <span className="screen-reader-text">Instagram</span>
-                </a>
-                <a title="Twitter" href="https://twitter.com/ChesterAgCenter" target="_blank" className="twitter" style={this.aStyle}>
-                  <span className="soc-font-icon"></span>
-                  <span className="screen-reader-text">Twitter</span>
-                </a>
-                <a title="Google+" href="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en" target="_blank" className="google" style={this.aStyle}>
-                  <span className="soc-font-icon"></span>
-                  <span className="screen-reader-text">Google+</span>
-                </a>
+              <span className="widget">
+                <ShareButton 
+                  compact
+                  socialMedia={'facebook'}
+                  url="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/"
+                />
+                </span>
+                <span className="widget">
+                <ShareButton 
+                  compact
+                  socialMedia={'twitter'}
+                  url="https://twitter.com/ChesterAgCenter"
+                />
+                </span>
+                <span className="widget">
+                <ShareButton 
+                  compact
+                  socialMedia={'google-plus'}
+                  url="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en"
+                />
+                </span>
               </div>
             </div>
             <div className="mobile-branding">
-            <a href="http://www.chesteragcenter.com/">
-            <img className=" preload-me" src="http://www.chesteragcenter.com/wp-content/uploads/2017/05/Chester-Agricultural-Center-220.jpg" srcset="http://www.chesteragcenter.com/wp-content/uploads/2017/05/Chester-Agricultural-Center-220.jpg 220w, http://www.chesteragcenter.com/wp-content/uploads/2017/05/Chester-Agricultural-Center-220.jpg 220w" width="220" height="202" sizes="220px" alt="Chester Agricultural Center" />
-            <img className="mobile-logo preload-me" src="http://www.chesteragcenter.com/wp-content/uploads/2014/03/Chester-Agricultural-Center-140px.jpg" srcset="http://www.chesteragcenter.com/wp-content/uploads/2014/03/Chester-Agricultural-Center-140px.jpg 140w, http://www.chesteragcenter.com/wp-content/uploads/2014/03/Chester-Agricultural-Center-140px.jpg 140w" width="140" height="133" sizes="140px" alt="Chester Agricultural Center"/>
-            </a>
+            
             </div>
             </div>
           </MediaQuery>
