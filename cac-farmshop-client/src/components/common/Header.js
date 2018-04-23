@@ -8,6 +8,7 @@ import MediaQuery from 'react-responsive';
 import Submenu from '../../components/common/Submenu';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 import ShareButton from 'react-social-share-buttons';
+import { slide as Menu } from 'react-burger-menu';
 
 class Header extends React.Component {  
   constructor(props) {
@@ -147,12 +148,23 @@ class Header extends React.Component {
     }
   }
 
+  showSettings (event) {
+    event.preventDefault();
+  }
+
   render() {
     //debugger 
     const routes = this.makeRoutes() 
     //debugger 
     return (
       <header className="header-bar">
+      <Menu>
+        <a id="home" className="menu-item" href="/">Home</a>
+        <a id="about" className="menu-item" href="/about">About</a>
+        <a id="contact" className="menu-item" href="/contact">Contact</a>
+        <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
+      </Menu>
+
         <div className="masthead classic-header justify logo-center widgets dividers surround line-decoration dt-parent-menu-clickable show-device-logo show-mobile-logo masthead-mobile" role="banner">
 
         <div className="top-bar full-width-line">
@@ -188,50 +200,7 @@ class Header extends React.Component {
                 />
                 </span>
               </div>
-              </MediaQuery>
-            </div>
-
-            
-            <MediaQuery query="(max-width: 1064px)">
-              <div className="mobile-header-bar">
-              <div className="mobile-navigation">
-                <a href="#" className="dt-mobile-menu-icon">
-                  <span className="lines"></span>
-                </a>
-              </div>
-              <div className="mobile-mini-widgets">
-              <div className="soc-ico show-on-desktop near-logo-first-switch in-menu-second-switch custom-bg disabled-border border-off hover-accent-bg hover-disabled-border  hover-border-off">
-              <span className="widget">
-                <ShareButton 
-                  compact
-                  socialMedia={'facebook'}
-                  url="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/"
-                />
-                </span>
-                <span className="widget">
-                <ShareButton 
-                  compact
-                  socialMedia={'twitter'}
-                  url="https://twitter.com/ChesterAgCenter"
-                />
-                </span>
-                <span className="widget">
-                <ShareButton 
-                  compact
-                  socialMedia={'google-plus'}
-                  url="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en"
-                />
-                </span>
-              </div>
-            </div>
-            <div className="mobile-branding">
-            
-            </div>
-            </div>
-          </MediaQuery>
-          
-          </div>
-          {sessionStorage.jwt !== "undefined" &&
+              {sessionStorage.jwt !== "undefined" &&
             <div>
               <nav className="background">
                 {routes}
@@ -296,6 +265,51 @@ class Header extends React.Component {
             </ul>
           </nav>
           }
+              </MediaQuery>
+            </div>
+
+            
+            <MediaQuery query="(max-width: 1064px)">
+              <div className="mobile-header-bar">
+              <div className="mobile-navigation">
+                <a href="#" className="dt-mobile-menu-icon">
+                  <span className="lines"></span>
+                </a>
+              </div>
+              <div className="mobile-mini-widgets">
+              <div className="soc-ico show-on-desktop near-logo-first-switch in-menu-second-switch custom-bg disabled-border border-off hover-accent-bg hover-disabled-border  hover-border-off">
+              <span className="widget">
+                <ShareButton 
+                  compact
+                  socialMedia={'facebook'}
+                  url="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/"
+                />
+                </span>
+                <span className="widget">
+                <ShareButton 
+                  compact
+                  socialMedia={'twitter'}
+                  url="https://twitter.com/ChesterAgCenter"
+                />
+                </span>
+                <span className="widget">
+                <ShareButton 
+                  compact
+                  socialMedia={'google-plus'}
+                  url="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en"
+                />
+                </span>
+              </div>
+            </div>
+            <div className="mobile-branding">
+            
+            </div>
+            </div>
+          </MediaQuery>
+          
+          </div>
+
+          
           </div>
           <br />
           <div className="top-bar full-width-line"></div>
