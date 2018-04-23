@@ -1,7 +1,31 @@
+.test-container {
+  height: 300px;
+  position: relative;
+}
+
+.test-container-small {
+  height: 200px;
+  position: relative;
+}
+
+@media screen and (max-width: 595px) {
+  .test-container-small {
+    height: 250px;
+    position: relative;
+  }
+}
+
 .mobile-mini-widgets {
-  width: 20%;
+  width: 15%;
+  top: 110px;
   right: 0px;
-  top: 150px;
+  position: absolute;
+}
+
+.mobile-mini-widgets-small-screen {
+  width: 15%;
+  top: 110px;
+  right: 0px;
   position: absolute;
 }
 
@@ -78,7 +102,7 @@ body {
   line-height: 45px;
   font-weight: 700;
   text-transform: uppercase;
-  width: 90%;
+  width: 100%;
   margin: auto;
 
 }

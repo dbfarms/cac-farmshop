@@ -67,10 +67,13 @@ class Header extends React.Component {
                   {keyIndex === routesLength &&
                     <span>
                       {this.menuSelector(route)}
-                      <span className="nav__menu-item left-menu right-menu">
+                      <li className="nav__menu-item left-menu">
                       <a className="menu-item-text" 
                          href="/" onClick={this.logOut}>log out</a>
-                      </span>
+                      </li>
+                      <li className="nav__menu-item">
+                        {this.miniWidgets()}
+                      </li>
                     </span>
                   }
                   {keyIndex !== (routesLinks.length-1) &&
@@ -148,23 +151,9 @@ class Header extends React.Component {
     }
   }
 
-  render() {
-    //debugger 
-    const routes = this.makeRoutes() 
-    //debugger 
+  miniWidgets = () => {
     return (
-      <header className="header-bar">
-
-        <div className="masthead classic-header justify logo-center widgets dividers surround line-decoration dt-parent-menu-clickable show-device-logo show-mobile-logo masthead-mobile" role="banner">
-
-        <div className="top-bar full-width-line"></div>
-          <div className="branding">
-            <div className="mini-widgets" align="right">
-              <MediaQuery query="(min-width: 1065px)">
-              <div className="cac-logo-here" align="middle">
-                  <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/54612904e4b08f1a465c54ca/5ad77dea8a922deac7191197/1524071917324/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="220" height="204" align="middle"/></a>
-              </div>
-                <div className="soc-ico show-on-desktop near-logo-first-switch in-menu-second-switch custom-bg disabled-border border-off hover-accent-bg hover-disabled-border  hover-border-off">
+      <div className="">
                   <span className="widget">
                   <ShareButton 
                     compact
@@ -187,9 +176,26 @@ class Header extends React.Component {
                   />
                   </span>
                 </div>
+    )
+  }
+
+  render() {
+    //debugger 
+    const routes = this.makeRoutes() 
+    //debugger 
+    return (
+      <header>
+        <div className="top-bar full-width-line" role="banner">
+        <div className="top-bar full-width-line"></div>
+          <div className="branding">
+              <MediaQuery query="(min-width: 1065px)" >
+                <div className="test-container">
+                <div className="cac-logo-here" align="middle">
+                    <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/54612904e4b08f1a465c54ca/5ad77dea8a922deac7191197/1524071917324/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="220" height="204" align="middle"/></a>
+                </div>
                 {sessionStorage.jwt !== "undefined" &&
                   <div>
-                    <nav className="background">
+                    <nav className="nav">
                       {routes}
                     </nav>
                   </div>
@@ -198,7 +204,7 @@ class Header extends React.Component {
                 //menu-item menu-item-type-post_type menu-item-object-post menu-item-has-children menu-item-15136 has-children
                 <nav className="nav">
                   <ul className="nav__menu header-nav">
-                    <li className="nav__menu-item left-menu"
+                    <li className="nav__menu-item"
                         onMouseLeave={this.handleLeave}
                     >
                       <NavLink to="/" 
@@ -245,60 +251,56 @@ class Header extends React.Component {
                       <Link to="/login" className="menu-item-text">
                         Log In</Link>
                     </li>
-                    <li className="nav__menu-item left-menu right-menu">
+                    <li className="nav__menu-item left-menu">
                       <Link to="/signup" className="menu-item-text">
                         Sign Up</Link>
+                    </li>
+                    <li className="nav__menu-item">
+                      {this.miniWidgets()}
                     </li>
                   </ul>
                 </nav>
                 }
-                <div className="top-bar full-width-line"></div>
-              </MediaQuery>
-            </div>
-            
-            <MediaQuery query="(max-width: 1064px)">
-              <div className="cac-logo-here top-bar full-width-line" align="middle">
-                  <a href="http://www.chesteragcenter.com" align="left"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/54612904e4b08f1a465c54ca/5ad77dea8a922deac7191197/1524071917324/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="110" height="102" align="left"/></a>
-              </div>
-              <div >
-                <SideMenu routes={this.props.routes}/>
-              </div>
-              <div className="mobile-header-bar">
-                <div className="mobile-navigation">
-                  <a href="#" className="dt-mobile-menu-icon">
-                    <span className="lines"></span>
-                  </a>
                 </div>
-              <div className="mobile-mini-widgets">
-                  <span className="widget">
+              </MediaQuery>
+            
+              <MediaQuery query="(max-width: 1064px)" >
+                <div className="test-container-small">
+                <div className="cac-logo-here" align="middle">
+                    <a href="http://www.chesteragcenter.com" align="left"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/54612904e4b08f1a465c54ca/5ad77dea8a922deac7191197/1524071917324/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="110" height="102" align="left"/></a>
+                </div>
+                <div >
+                  <SideMenu routes={this.props.routes}/>
+                </div>
+                <div className="mobile-mini-widgets-small-screen">
+                    <span className="widget">
+                      <ShareButton 
+                        compact
+                        socialMedia={'facebook'}
+                        url="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/"
+                      />
+                    </span>
+                    <span className="widget">
                     <ShareButton 
                       compact
-                      socialMedia={'facebook'}
-                      url="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/"
+                      socialMedia={'twitter'}
+                      url="https://twitter.com/ChesterAgCenter"
                     />
-                  </span>
-                  <span className="widget">
-                  <ShareButton 
-                    compact
-                    socialMedia={'twitter'}
-                    url="https://twitter.com/ChesterAgCenter"
-                  />
-                  </span>
-                  <span className="widget">
-                  <ShareButton 
-                    compact
-                    socialMedia={'google-plus'}
-                    url="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en"
-                  />
-                  </span>
-              </div>
-            </div>
-          </MediaQuery>
-          
+                    </span>
+                    <span className="widget">
+                    <ShareButton 
+                      compact
+                      socialMedia={'google-plus'}
+                      url="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en"
+                    />
+                    </span>
+                  </div>
+                  </div>
+              </MediaQuery>
+
           </div>
           </div>
           <br />
-          
           </header>
     )
     }
