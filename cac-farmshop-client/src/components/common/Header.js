@@ -231,7 +231,7 @@ class Header extends React.Component {
                   </ReactCSSTransitionGroup>
                 </div>
               </li>
-              <li className="nav__menu-item">
+              <li className="nav__menu-item left-menu">
               <Link to="/farm-goods" className="menu-item-text">Farmgoods</Link>
               </li>
               <li className="nav__menu-item left-menu"
@@ -254,11 +254,11 @@ class Header extends React.Component {
                   </ReactCSSTransitionGroup>
                 </div>
               </li>
-              <li className="nav__menu-item">
+              <li className="nav__menu-item left-menu">
                 <Link to="/login" className="menu-item-text">
                   Log In</Link>
               </li>
-              <li className="nav__menu-item">
+              <li className="nav__menu-item left-menu right-menu">
                 <Link to="/signup" className="menu-item-text">
                   Sign Up</Link>
               </li>
