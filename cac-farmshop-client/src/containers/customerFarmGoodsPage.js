@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 //import { getCart } from '../actions/carts'
 import { getOpenLineItems } from '../actions/lineitems'
 import CartCard from '../components/CartCard';
-import './FarmGoods.css';
+import '../index.css';
 
 class CustomerFarmGoods extends Component {
   constructor(props) {
@@ -100,7 +100,9 @@ class CustomerFarmGoods extends Component {
         {this.state.showKey === "show all" && 
           <div>
             <div className="Farm-Goods-Container">
-              <h1>For sale (click on farmgood to edit): </h1>
+              <div >
+                <span className="header-one">For sale (click on farmgood to edit): </span>
+              </div>
               {this.state.farmGoods_array.map(farmGood => <CustomerFarmGoodModal key={farmGood.id} farmGood={farmGood} lineitems={this.state.openLineitems}/>)}
             </div>
           </div>

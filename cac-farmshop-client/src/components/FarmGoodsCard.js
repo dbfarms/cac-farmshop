@@ -6,12 +6,10 @@ class FarmGoodsCard extends Component {
     super()
 
   }
-
   
   render(){
     const {isEditing, farmGood} = this.props
-    
-    return (<button key={farmGood.id} className="FarmGoodsCard"  onClick={() => isEditing(farmGood) }>
+    return (<button key={farmGood.id} className="FarmGoodsCard" onClick={() => isEditing(farmGood) }>
       <h4>{farmGood.attributes.name}</h4>
       <img className="farmGoodImage" src={farmGood.img_url} alt={farmGood.user_id} />
       {farmGood.attributes.inventory > 0 &&

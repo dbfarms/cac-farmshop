@@ -63,12 +63,14 @@ class CustomerFarmGoodModal extends React.Component {
   render() {
     const displayDays = this.daysAvailable();
     const farmGood = this.props
-
+    
     //debugger 
     return (
       <div>
         <button className="FarmGoodsCard" onClick={() => this.simpleDialog.show()}>
           <p>{farmGood.farmGood.attributes.name}</p>
+          <img src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/>
+          {console.log(farmGood.farmGood["img-url"])}
           <p>image of farmgood here</p>
           <p>Available: {farmGood.farmGood.attributes.inventory}</p>
         </button>
