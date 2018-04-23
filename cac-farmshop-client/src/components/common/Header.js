@@ -6,9 +6,9 @@ import * as sessionActions from '../../actions/sessionActions';
 import '../../index.css';
 import MediaQuery from 'react-responsive';
 import Submenu from '../../components/common/Submenu';
+import SideMenu from '../../components/common/sideMenu';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 import ShareButton from 'react-social-share-buttons';
-import { slide as Menu } from 'react-burger-menu';
 
 class Header extends React.Component {  
   constructor(props) {
@@ -148,22 +148,12 @@ class Header extends React.Component {
     }
   }
 
-  showSettings (event) {
-    event.preventDefault();
-  }
-
   render() {
     //debugger 
     const routes = this.makeRoutes() 
     //debugger 
     return (
       <header className="header-bar">
-      <Menu>
-        <a id="home" className="menu-item" href="/">Home</a>
-        <a id="about" className="menu-item" href="/about">About</a>
-        <a id="contact" className="menu-item" href="/contact">Contact</a>
-        <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
-      </Menu>
 
         <div className="masthead classic-header justify logo-center widgets dividers surround line-decoration dt-parent-menu-clickable show-device-logo show-mobile-logo masthead-mobile" role="banner">
 
@@ -201,75 +191,77 @@ class Header extends React.Component {
                 </span>
               </div>
               {sessionStorage.jwt !== "undefined" &&
-            <div>
-              <nav className="background">
-                {routes}
+                <div>
+                  <nav className="background">
+                    {routes}
+                  </nav>
+                </div>
+              }
+              {sessionStorage.jwt === "undefined" && 
+              //menu-item menu-item-type-post_type menu-item-object-post menu-item-has-children menu-item-15136 has-children
+              <nav className="nav">
+                <ul className="nav__menu header-nav">
+                  <li className="nav__menu-item left-menu"
+                      onMouseLeave={this.handleLeave}
+                  >
+                    <NavLink to="/" 
+                      className="menu-item-text"
+                      onMouseEnter={this.handleHover}
+                      >Home
+                    </NavLink>
+                    <div className="submenu-container">
+                      <ReactCSSTransitionGroup
+                        transitionName="slide"
+                        transitionEnterTimeout={300}
+                        transitionLeaveTimeout={300}
+                      >
+                        { this.state.showAboutMenu && 
+                          <Submenu selector="home"/> 
+                        }
+                      </ReactCSSTransitionGroup>
+                    </div>
+                  </li>
+                  <li className="nav__menu-item left-menu">
+                  <Link to="/farm-goods" className="menu-item-text">Farmgoods</Link>
+                  </li>
+                  <li className="nav__menu-item left-menu"
+                      onMouseLeave={this.handleFarmersLeave}
+                  >
+                    <NavLink to="/farmers" 
+                      className="menu-item-text"
+                      onMouseEnter={this.handleFarmersHover}
+                      >Farmers
+                    </NavLink>
+                    <div className="submenu-container">
+                      <ReactCSSTransitionGroup
+                        transitionName="slide"
+                        transitionEnterTimeout={300}
+                        transitionLeaveTimeout={300}
+                      >
+                        { this.state.showFarmerMenu && 
+                          <Submenu selector="farmers"/> 
+                        }
+                      </ReactCSSTransitionGroup>
+                    </div>
+                  </li>
+                  <li className="nav__menu-item left-menu">
+                    <Link to="/login" className="menu-item-text">
+                      Log In</Link>
+                  </li>
+                  <li className="nav__menu-item left-menu right-menu">
+                    <Link to="/signup" className="menu-item-text">
+                      Sign Up</Link>
+                  </li>
+                </ul>
               </nav>
-            </div>
-          }
-          {sessionStorage.jwt === "undefined" && 
-          //menu-item menu-item-type-post_type menu-item-object-post menu-item-has-children menu-item-15136 has-children
-          <nav className="nav">
-            <ul className="nav__menu header-nav">
-              <li className="nav__menu-item left-menu"
-                  onMouseLeave={this.handleLeave}
-              >
-                <NavLink to="/" 
-                  className="menu-item-text"
-                  onMouseEnter={this.handleHover}
-                  >Home
-                </NavLink>
-                <div className="submenu-container">
-                  <ReactCSSTransitionGroup
-                    transitionName="slide"
-                    transitionEnterTimeout={300}
-                    transitionLeaveTimeout={300}
-                  >
-                    { this.state.showAboutMenu && 
-                      <Submenu selector="home"/> 
-                    }
-                  </ReactCSSTransitionGroup>
-                </div>
-              </li>
-              <li className="nav__menu-item left-menu">
-              <Link to="/farm-goods" className="menu-item-text">Farmgoods</Link>
-              </li>
-              <li className="nav__menu-item left-menu"
-                  onMouseLeave={this.handleFarmersLeave}
-              >
-                <NavLink to="/farmers" 
-                  className="menu-item-text"
-                  onMouseEnter={this.handleFarmersHover}
-                  >Farmers
-                </NavLink>
-                <div className="submenu-container">
-                  <ReactCSSTransitionGroup
-                    transitionName="slide"
-                    transitionEnterTimeout={300}
-                    transitionLeaveTimeout={300}
-                  >
-                    { this.state.showFarmerMenu && 
-                      <Submenu selector="farmers"/> 
-                    }
-                  </ReactCSSTransitionGroup>
-                </div>
-              </li>
-              <li className="nav__menu-item left-menu">
-                <Link to="/login" className="menu-item-text">
-                  Log In</Link>
-              </li>
-              <li className="nav__menu-item left-menu right-menu">
-                <Link to="/signup" className="menu-item-text">
-                  Sign Up</Link>
-              </li>
-            </ul>
-          </nav>
-          }
+              }
               </MediaQuery>
             </div>
-
             
             <MediaQuery query="(max-width: 1064px)">
+              <div className="burger">
+                <SideMenu />
+              </div>
               <div className="mobile-header-bar">
               <div className="mobile-navigation">
                 <a href="#" className="dt-mobile-menu-icon">

@@ -1,4 +1,11 @@
-
+.burger {
+  align-content: "middle";
+  display: inline-block;
+  margin: 2rem auto 0;
+  background: gray;
+  text-align: middle;
+  width: 25%
+}
 
 .slide-enter {
   transform: translateY(-100%);
@@ -15,7 +22,7 @@
 }
 
 .slide-leave-active {
-    transform: translateY(-100%);
+  transform: translateY(-100%);
 }
 
 .submenu-container {
