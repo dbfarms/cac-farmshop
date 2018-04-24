@@ -73,7 +73,8 @@ class CustomerFarmGoodModal extends React.Component {
           <span>{farmGood.farmGood.attributes.name}</span>
           <p>Available: {farmGood.farmGood.attributes.inventory}</p>
           <p>{farmGood.farmGood.attributes.details}</p>
-          <NavLink to={farmGood.farmGood.attributes.farmer.link}>{farmGood.farmGood.attributes.farmer.name}</NavLink>
+          <a href={farmGood.farmGood.attributes.farmer.link}>{farmGood.farmGood.attributes.farmer.name}</a>
+          
         </div>
         
       </div>

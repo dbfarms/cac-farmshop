@@ -191,7 +191,7 @@ class Header extends React.Component {
               <MediaQuery query="(min-width: 1065px)" >
                 <div className="test-container">
                 <div className="cac-logo-here" align="middle">
-                    <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/54612904e4b08f1a465c54ca/5ad77dea8a922deac7191197/1524071917324/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="220" height="204" align="middle"/></a>
+                    <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="220" height="204" align="middle"/></a>
                 </div>
                 {sessionStorage.jwt !== "undefined" &&
                   <div>
@@ -267,7 +267,7 @@ class Header extends React.Component {
               <MediaQuery query="(max-width: 1064px)" >
                 <div className="test-container-small">
                 <div className="cac-logo-here" align="middle">
-                    <a href="http://www.chesteragcenter.com" align="left"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/54612904e4b08f1a465c54ca/5ad77dea8a922deac7191197/1524071917324/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="110" height="102" align="left"/></a>
+                    <a href="http://www.chesteragcenter.com" align="left"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="110" height="102" align="left"/></a>
                 </div>
                 <div >
                   <SideMenu routes={this.props.routes}/>
