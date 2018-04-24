@@ -74,26 +74,25 @@ class CartCard extends Component {
     //debugger 
     var total = 0;
     return (
-    <div className="CartsCard">
-    <p>{sessionStorage.name}</p>
-    <img className="CartImage"  />
-    
-    {this.state.openLineitems.length > 0 && 
-        (this.state.openLineitems.map((li, keyIndex) => <span key={keyIndex}>
-            {li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}
-            <button onClick={() => this.deleteItem(li)}>X</button>
-        </span>)
-    )}
-    {this.state.openLineitems.length > 0 &&
-        (this.state.openLineitems.forEach(li => total += (li.attributes.farmgood.price * li.attributes.quantity))
-    )}
+        <div className="CartsCard">
+            <p>{sessionStorage.name}</p>
+            <img className="CartImage"  />
+            
+            {this.state.openLineitems.length > 0 && 
+                (this.state.openLineitems.map((li, keyIndex) => <span key={keyIndex}>
+                    {li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}
+                    <button onClick={() => this.deleteItem(li)}>X</button>
+                </span>)
+            )}
+            {this.state.openLineitems.length > 0 &&
+                (this.state.openLineitems.forEach(li => total += (li.attributes.farmgood.price * li.attributes.quantity))
+            )}
 
-    <label>Total: {total}</label>
-    <Link to="/checkout">
-        <button>Checkout</button>
-    </Link>
-    </div>
-    
+            <label>Total: {total}</label>
+            <Link to="/checkout">
+                <button>Checkout</button>
+            </Link>
+        </div>
     )}
 }
 

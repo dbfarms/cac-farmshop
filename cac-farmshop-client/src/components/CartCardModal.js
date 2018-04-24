@@ -49,7 +49,7 @@ class CartCardModal extends Component {
             {this.state.currentLineItems !== [] &&
                 <p>Total: {this.totalCost(this.state.currentLineItems)}</p>
             }
-    
+            
             <Link to="/checkout">
                 <button>Checkout</button>
             </Link>
