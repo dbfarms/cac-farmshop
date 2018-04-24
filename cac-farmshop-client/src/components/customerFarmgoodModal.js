@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addFarmgoodToCart } from '../actions/lineitems';
 import { addAnotherToCart } from '../actions/lineitems';
+import { NavLink } from 'react-router-dom';
 
 class CustomerFarmGoodModal extends React.Component {
   constructor(props){
@@ -67,27 +68,14 @@ class CustomerFarmGoodModal extends React.Component {
     //debugger 
     return (
       <div>
-        <button className="FarmGoodsCard" onClick={() => this.simpleDialog.show()}>
-          <p>{farmGood.farmGood.attributes.name}</p>
+        <div className="FarmGoodsCard" onClick={() => this.simpleDialog.show()}>
           <img src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/>
-          {console.log(farmGood.farmGood["img-url"])}
-          <p>image of farmgood here</p>
+          <span>{farmGood.farmGood.attributes.name}</span>
           <p>Available: {farmGood.farmGood.attributes.inventory}</p>
-        </button>
-        <SkyLight hideOnOverlayClicked ref={ref => this.simpleDialog = ref} title={this.props.farmGood.attributes.name}>
-          <img className="farmGoodImage" src={farmGood.img_url} alt={farmGood.user_id} />
-          {farmGood.farmGood.attributes.inventory > 0 && //
-            <div>
-              <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>
-              <button onClick={this.addToCart.bind(this)}> Add To Cart </button>
-            </div>
-          }
-          {farmGood.farmGood.attributes.inventory <= 0 &&
-            <p>No longer available. Check back soon</p>
-          }
-          {displayDays}
-          
-        </SkyLight>
+          <p>{farmGood.farmGood.attributes.details}</p>
+          <NavLink to={farmGood.farmGood.attributes.farmer.link}>{farmGood.farmGood.attributes.farmer.name}</NavLink>
+        </div>
+        
       </div>
     )
   }
@@ -107,6 +95,19 @@ export default connect(mapStateToProps, { addFarmgoodToCart, addAnotherToCart })
 
 
 /*
-
+<SkyLight hideOnOverlayClicked ref={ref => this.simpleDialog = ref} title={this.props.farmGood.attributes.name}>
+          <img className="farmGoodImage" src={farmGood.img_url} alt={farmGood.user_id} />
+          {farmGood.farmGood.attributes.inventory > 0 && //
+            <div>
+              <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>
+              <button onClick={this.addToCart.bind(this)}> Add To Cart </button>
+            </div>
+          }
+          {farmGood.farmGood.attributes.inventory <= 0 &&
+            <p>No longer available. Check back soon</p>
+          }
+          {displayDays}
+          
+        </SkyLight>
 
 */

@@ -1,5 +1,5 @@
 class Api::FarmgoodSerializer < ActiveModel::Serializer
-  attributes :id, :name, :price, :inventory, :category, :farmer, :line_items, :img_url
+  attributes :id, :name, :price, :inventory, :category, :farmer, :line_items, :img_url, :details
 
   has_many :farmerfarmgoods
   belongs_to :farmer #s, through: :farmerfarmgoods
