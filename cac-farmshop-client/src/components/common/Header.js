@@ -185,7 +185,7 @@ class Header extends React.Component {
     //debugger 
     return (
       <header>
-        <div className="top-bar full-width-line" role="banner">
+        <div className="top-bar full-width-line header-bottom" role="banner">
         <div className="top-bar full-width-line"></div>
           <div className="branding">
               <MediaQuery query="(min-width: 1065px)" >
