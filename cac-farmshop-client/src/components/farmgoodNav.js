@@ -33,9 +33,9 @@ export default class FarmgoodNav extends React.Component {
     render(){
         return(
         
-        <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+        <Dropdown className="dropdown-text" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
-            Dropdown
+            Sort Farmgoods
             </DropdownToggle>
             <DropdownMenu >
                 <DropdownItem header>Farm Goods</DropdownItem>

@@ -12,7 +12,8 @@ class CustomerFarmGoodModal extends React.Component {
     //debugger 
 
     this.state = {
-      openLineItems: this.props.openLineitems
+      openLineItems: this.props.openLineitems,
+      showFGMenu: false
     }
   }
 
@@ -61,6 +62,26 @@ class CustomerFarmGoodModal extends React.Component {
       }
   }
 
+  fgMenu = (event) => {
+    this.setState({ showFGMenu: true })
+  }
+
+  fgReg = (event) => {
+    this.setState({ showFGMenu: false });
+  };
+
+  addFG = () => {
+    //debugger
+    return (
+      <div>
+        <button>minus</button>
+
+        <button>plus</button>
+      </div>
+    )
+  }
+
+
   render() {
     const displayDays = this.daysAvailable();
     const farmGood = this.props
@@ -68,15 +89,29 @@ class CustomerFarmGoodModal extends React.Component {
     //debugger 
     return (
       <div>
-        <div className="FarmGoodsCard" onClick={() => this.simpleDialog.show()}>
+      <li onMouseLeave={this.fgReg}>
+        <div className="FarmGoodsCard" onMouseEnter={this.fgMenu}>
           <img src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/>
           <span>{farmGood.farmGood.attributes.name}</span>
           <p>Available: {farmGood.farmGood.attributes.inventory}</p>
           <p>{farmGood.farmGood.attributes.details}</p>
           <a href={farmGood.farmGood.attributes.farmer.link}>{farmGood.farmGood.attributes.farmer.name}</a>
-          
+          {farmGood.farmGood.attributes.inventory > 0 && //
+          <div>
+            <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>
+            {this.state.showFGMenu &&
+              <div>
+                {this.addFG()}
+              </div>
+            }
+          </div>
+          }
+          {farmGood.farmGood.attributes.inventory <= 0 &&
+            <p>No longer available. Check back soon</p>
+          }
         </div>
-        
+      </li>
+      <div className="fg-li"></div>
       </div>
     )
   }

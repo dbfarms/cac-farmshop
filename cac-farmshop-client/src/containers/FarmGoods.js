@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import FarmGoodModal from '../components/farmGoodModal';
+//import FarmGoodModal from '../components/farmGoodModal';
+import CustomerFarmGoodModal from '../components/customerFarmgoodModal';
 import FarmGoodsCard from '../components/FarmGoodsCard';
 import FarmGoodCard from '../components/farmGoodCard';
 import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoods from server
@@ -90,45 +91,59 @@ class FarmGoods extends Component {
     var thisFilter = []
     return (
       <div className="page-tree">
-      <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
-      {this.state.showKey === "show all" && 
-        <div>
-           <div className="Farm-Goods-Container">
-            <h1>For sale (click on farmgood to edit): </h1>
-            {this.state.farmGoods_array.map(farmGood => <FarmGoodModal  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
-          </div>
+        <div className="dropdown">
+          <span></span>
+          <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
         </div>
-      }
-      {this.state.showKey === "day"  &&
-          <div>
-            <h1>{this.state.showDay}</h1>
-            
-            {this.state.farmGoods_array.map(farmGood => {
-              for (let i=0; i<farmGood.relationships.days.data.length; i++) {
-                if (farmGood.relationships.days.data[i].name === this.state.showDay) {
-                  
-                  thisFilter.push(farmGood)
-                }
-              }
-            })
-            }
-             {thisFilter.map(farmGood => <FarmGoodModal  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing} />)}
+        {this.state.card !== '' && 
+          <div className="cartcardhere">
+            <span></span>
           </div>
-      }
-      {this.state.showKey === "category"  &&
-          <div>
-            <h1>{this.state.showCategory}</h1>
-            
-            {this.state.farmGoods_array.map(farmGood => {
-                if (farmGood.attributes.category.title === this.state.showCategory) {
-                  thisFilter.push(farmGood)
+        }
+        {this.state.farmGoods_array === undefined &&
+          <p>loading loading</p>
+        }
+        {this.state.farmGoods_array != undefined &&
+        <div className="Farm-Goods-Container">
+          {this.state.showKey === "show all" && 
+            <div>
+              <div>
+                <div >
+                  <span className="header-one">Currently For Sale: </span>
+                </div>
+                {this.state.farmGoods_array.map(farmGood => <CustomerFarmGoodModal key={farmGood.id} farmGood={farmGood} lineitems={this.state.openLineitems}/>)}
+              </div>
+            </div>
+          }
+          {this.state.showKey === "day"  &&
+              <div>
+                <h1>{this.state.showDay}</h1>
+                
+                {this.state.farmGoods_array.map(farmGood => {
+                  for (let i=0; i<farmGood.relationships.days.data.length; i++) {
+                    if (farmGood.relationships.days.data[i].name === this.state.showDay) {
+                      thisFilter.push(farmGood)
+                    }
+                  }
+                })
                 }
-            })
-            }
-             {thisFilter.map(farmGood => <FarmGoodModal  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
+                {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} lineitems={this.state.openLineitems} />)}
+              </div>
+          }
+          {this.state.showKey === "category"  &&
+              <div>
+                <h1>{this.state.showCategory}</h1>
+                {this.state.farmGoods_array.map(farmGood => {
+                    if (farmGood.attributes.category.title === this.state.showCategory) {
+                      thisFilter.push(farmGood)
+                    }
+                })
+                }
+                {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} lineitems={this.state.openLineitems} />)}
+              </div>
+          }
           </div>
-      }
-      
+          }
       </div>
     )
   }

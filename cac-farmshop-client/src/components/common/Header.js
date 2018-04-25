@@ -60,8 +60,6 @@ class Header extends React.Component {
         <ul className="nav__menu header-nav">
           {routesLinks.map((route, keyIndex) => { 
             //debugger 
-            //onMouseEnter={this.handleHover}
-            //onMouseLeave={this.handleLeave}
             return (
                 <span key={keyIndex}>
                   {keyIndex === routesLength &&
@@ -191,7 +189,7 @@ class Header extends React.Component {
               <MediaQuery query="(min-width: 1065px)" >
                 <div className="test-container">
                 <div className="cac-logo-here" align="middle">
-                    <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="220" height="204" align="middle"/></a>
+                    <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="198" height="181" align="middle"/></a>
                 </div>
                 {sessionStorage.jwt !== "undefined" &&
                   <div>

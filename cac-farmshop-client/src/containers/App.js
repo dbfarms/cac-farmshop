@@ -94,26 +94,26 @@ class App extends Component {
       
           {sessionStorage.jwt === "undefined" &&
             <div>
-            <h3>Welcome VISITOR</h3> 
+            <h3 className="welcome">Welcome VISITOR</h3> 
               <DefaultRoutes /> 
             </div>
           }
           {sessionStorage.role === "customer" &&
             <div>
                 
-                <h3>Welcome {sessionStorage.name}</h3>
+                <h3 className="welcome">Welcome {sessionStorage.name}</h3>
                 <CustomerRoutes />
             </div>
           }
           {sessionStorage.role === "admin" &&
             <div>
-            <h3>auth level is {sessionStorage.role}</h3>
+            <h3 className="welcome">auth level is {sessionStorage.role}</h3>
             <AdminRoutes />
             </div>
           }
           {sessionStorage.role === "farmer" &&
             <div>
-            <h3>Welcome {sessionStorage.name} / auth level is {sessionStorage.role}</h3>
+            <h3 className="welcome">Welcome {sessionStorage.name} / auth level is {sessionStorage.role}</h3>
             <FarmerRoutes />
             </div>
           }
