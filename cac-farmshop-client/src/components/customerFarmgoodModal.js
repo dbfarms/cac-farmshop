@@ -89,7 +89,7 @@ class CustomerFarmGoodModal extends React.Component {
       <div>
         <li onMouseLeave={this.fgReg}>
           <div className="FarmGoodsCard" onMouseEnter={this.fgMenu}>
-            <img src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/>
+            <a href={"farmers/" + farmGood.farmGood.attributes.farmer.id + "/farmgoods/" + farmGood.farmGood.id}><img src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/></a>
             <span>{farmGood.farmGood.attributes.name}</span>
             <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>
             <p>{farmGood.farmGood.attributes.details}</p>
