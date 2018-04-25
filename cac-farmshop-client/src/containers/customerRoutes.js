@@ -13,6 +13,8 @@ import { getUser } from '../actions/sessionActions';
 import Header from '../components/common/Header';
 import Cart from './carts';
 import Checkout from './Checkout';
+import FarmgoodView from '../components/FarmgoodView'
+import FarmerView from '../components/FarmerView'
 
 //<IndexRoute component={HomePage} /> /// NEED TO ADD 
 export default class CustomerRoutes extends Component {
@@ -35,11 +37,12 @@ export default class CustomerRoutes extends Component {
         <div className="background-here">
           <Header roleRoutes={this.state.routes}/>
           <Route exact path="/home" />
-          <Route exact path='/farmers' component={FarmersPage} />
+          <Route path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={CustomerFarmGoods} />
           <Route path="*" render={() => <div></div>} />
           <Route exact path='/cart' component={Cart}/>
           <Route exact path='/checkout' component={Checkout}/>
+
         </div>
       </BrowserRouter >
     );

@@ -8,7 +8,7 @@ var farmerId = undefined
 //debugger
 
 const FarmersList = ({ farmers }) => {
-  //debugger
+  debugger
   const renderFarmers = farmers.map((farmer, index) =>{
     //debugger
     //<button key={index} className="farm-button" onClick={() => changeFarmer(farmer.id)}>{farmer.name}</button>

@@ -20,10 +20,10 @@ class FarmersPage extends Component {
     //debugger
     return (
       <div>
-        <FarmersList farmers={this.props.farmers} />
        
         <Switch>
-          
+        
+        <Route path={`${match.url}`} component={FarmersList(this.props.farmers)} />
         <Route path={`${match.url}/:farmerId`} component={FarmerShow} />
           
         </Switch>
@@ -32,7 +32,7 @@ class FarmersPage extends Component {
     )
   }
 }
-
+//<FarmersList farmers={this.props.farmers} />
 // <Route path="/:name" component={FarmerShow} />
 
 const mapStateToProps = (state) => {

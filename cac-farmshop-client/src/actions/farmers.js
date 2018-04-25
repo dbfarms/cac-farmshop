@@ -42,6 +42,25 @@ export const getFarmers = () => {
   }
 }
 
+export const getFarmer = (farmer_id) => {
+  return dispatch => {
+    return fetch(`http://localhost:3000/api/farmers/${farmer_id}`, header)
+    //fetch(`${API_URL}/carts`)
+    .then(response => response.json())
+    .then(farmer => dispatch(setFarmer(farmer)))
+    .catch(error => console.log(error));
+  }
+}
+
+const setFarmer = farmer => {
+  farmer = farmer.data 
+  return {
+    type: 'GET_A_FARMER_SUCCESS',
+    farmer
+  }
+}
+
+
 /*
 export const createCart = cart => {
   return dispatch => {
