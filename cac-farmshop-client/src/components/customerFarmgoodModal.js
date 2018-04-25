@@ -74,9 +74,7 @@ class CustomerFarmGoodModal extends React.Component {
     //debugger
     return (
       <div>
-        <button>minus</button>
-
-        <button>plus</button>
+        <button onClick={this.addToCart.bind(this)}> Add To Cart </button>
       </div>
     )
   }
