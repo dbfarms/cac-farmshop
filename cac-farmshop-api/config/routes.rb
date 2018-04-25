@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   
   namespace :api do
     resources :carts
-    resources :farmers
+    resources :farmers do
+      resources :farmgoods, only: [:show]
+    end 
+
     resources :farmgoods
     resources :days
     resources :users

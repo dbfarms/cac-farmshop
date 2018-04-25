@@ -1,5 +1,5 @@
 import React from 'react';
-import SkyLight from 'react-skylight';
+//import SkyLight from 'react-skylight';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addFarmgoodToCart } from '../actions/lineitems';
@@ -74,7 +74,7 @@ class CustomerFarmGoodModal extends React.Component {
     //debugger
     return (
       <div>
-        <button onClick={this.addToCart.bind(this)}> Add To Cart </button>
+        <button className="addToCart" onClick={this.addToCart.bind(this)}> Add To Cart </button>
       </div>
     )
   }
@@ -87,29 +87,28 @@ class CustomerFarmGoodModal extends React.Component {
     //debugger 
     return (
       <div>
-      <li onMouseLeave={this.fgReg}>
-        <div className="FarmGoodsCard" onMouseEnter={this.fgMenu}>
-          <img src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/>
-          <span>{farmGood.farmGood.attributes.name}</span>
-          <p>Available: {farmGood.farmGood.attributes.inventory}</p>
-          <p>{farmGood.farmGood.attributes.details}</p>
-          <a href={farmGood.farmGood.attributes.farmer.link}>{farmGood.farmGood.attributes.farmer.name}</a>
-          {farmGood.farmGood.attributes.inventory > 0 && //
-          <div>
+        <li onMouseLeave={this.fgReg}>
+          <div className="FarmGoodsCard" onMouseEnter={this.fgMenu}>
+            <img src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/>
+            <span>{farmGood.farmGood.attributes.name}</span>
             <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>
-            {this.state.showFGMenu &&
+            <p>{farmGood.farmGood.attributes.details}</p>
+            <a href={farmGood.farmGood.attributes.farmer.link}>{farmGood.farmGood.attributes.farmer.name}</a>
+            {farmGood.farmGood.attributes.inventory > 0 && //
               <div>
-                {this.addFG()}
+                {this.state.showFGMenu &&
+                  <div>
+                    {this.addFG()}
+                  </div>
+                }
               </div>
             }
+            {farmGood.farmGood.attributes.inventory <= 0 &&
+              <p>No longer available. Check back soon</p>
+            }
           </div>
-          }
-          {farmGood.farmGood.attributes.inventory <= 0 &&
-            <p>No longer available. Check back soon</p>
-          }
-        </div>
-      </li>
-      <div className="fg-li"></div>
+        </li>
+        <div className="fg-li"></div>
       </div>
     )
   }

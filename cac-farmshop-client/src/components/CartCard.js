@@ -79,13 +79,21 @@ class CartCard extends Component {
             <img className="CartImage"  />
             
             {this.state.openLineitems.length > 0 && 
-                (this.state.openLineitems.map((li, keyIndex) => <span key={keyIndex}>
-                    {li.attributes.farmgood.name} - {li.attributes.quantity} at ${li.attributes.farmgood.price}
-                    <button onClick={() => this.deleteItem(li)}>X</button>
-                </span>)
-            )}
+                <ul>
+                {this.state.openLineitems.map((lineItem, keyIndex) => {
+                    return (
+                        <li className="cartLine">
+                            <span key={keyIndex}>
+                                {lineItem.attributes.farmgood.name} - {lineItem.attributes.quantity} at ${lineItem.attributes.farmgood.price}
+                                <button onClick={() => this.deleteItem(lineItem)}>X</button>
+                            </span> 
+                        </li>
+                    )})
+                }
+                </ul>
+            }
             {this.state.openLineitems.length > 0 &&
-                (this.state.openLineitems.forEach(li => total += (li.attributes.farmgood.price * li.attributes.quantity))
+                (this.state.openLineitems.forEach(lineItem => total += (lineItem.attributes.farmgood.price * lineItem.attributes.quantity))
             )}
 
             <label>Total: {total}</label>
