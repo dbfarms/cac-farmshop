@@ -40,10 +40,18 @@ class Header extends React.Component {
   };
 
   logOut(event) {
-    event.preventDefault();
-    alert('you are logged out')
-    //one day i'd like the redirect to work?
-    this.props.actions.logOutUser();
+    //debugger
+    if (event.preventDefault) {
+      event.preventDefault();
+      alert('you are logged out')
+      //one day i'd like the redirect to work?
+      this.props.actions.logOutUser();
+    } else {
+      alert('you are logged out')
+      //one day i'd like the redirect to work?
+      this.props.actions.logOutUser();
+    }
+    
   }
 
   makeRoutes(routes){
@@ -268,7 +276,7 @@ class Header extends React.Component {
                     <a href="http://www.chesteragcenter.com" align="left"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="110" height="102" align="left"/></a>
                 </div>
                 <div >
-                  <SideMenu routes={this.props.routes}/>
+                  <SideMenu routes={this.props.routes} logout={this.logOut}/>
                 </div>
                 <div className="mobile-mini-widgets-small-screen">
                     <span className="widget">

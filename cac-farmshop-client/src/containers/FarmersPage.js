@@ -23,8 +23,9 @@ class FarmersPage extends Component {
        
         <Switch>
         
-        <Route path={`${match.url}`} component={FarmersList(this.props.farmers)} />
+        
         <Route path={`${match.url}/:farmerId`} component={FarmerShow} />
+        <Route path={`${match.url}`} component={FarmersList(this.props.farmers)} />
           
         </Switch>
         
