@@ -34,7 +34,7 @@ class FarmgoodShow extends Component {
                 <img src={fg.attributes["img-url"]} />
                 <h3>{fg.attributes.name}  </h3> 
                 <p>Price: {fg.attributes.price}</p>
-                <p>Details will go here eventually</p>
+                <p>{fg.attributes.details}</p>
             </div>
         )
     }

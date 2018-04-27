@@ -38,12 +38,14 @@ class CustomerFarmGoodModal extends React.Component {
   addToCart(event){
     event.preventDefault();
     //debugger
-    //const cart = this.props.cart 
-    //const cart_id = Number(this.props.cart.id)
-    const farmGood_id = Number(this.props.farmGood.id)
-    const user_id = Number(sessionStorage.id)
-    //debugger 
-    var newItem = true 
+    debugger 
+    if (sessionStorage.jwt === "undefined") {
+      alert("please log in to add to cart!")
+    } else {
+      const farmGood_id = Number(this.props.farmGood.id)
+      const user_id = Number(sessionStorage.id)
+      //debugger 
+      var newItem = true 
       //debugger 
       this.props.lineitems.map(li => {
         //debugger 
@@ -60,6 +62,7 @@ class CustomerFarmGoodModal extends React.Component {
         //debugger 
         this.props.addFarmgoodToCart(farmGood_id, user_id)
       }
+    }
   }
 
   fgMenu = (event) => {
