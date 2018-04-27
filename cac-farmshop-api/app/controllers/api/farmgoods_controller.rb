@@ -4,7 +4,12 @@ class Api::FarmgoodsController < ApplicationController
 
     def index
         #byebug 
-        render json: Farmgood.all
+        if params["farmer_id"]
+            farmgoods = Farmer.find(params["farmer_id"]).farmgoods
+            render json: farmgoods 
+        else 
+            render json: Farmgood.all
+        end 
     end
 
     def create

@@ -38,7 +38,6 @@ class CustomerFarmGoodModal extends React.Component {
   addToCart(event){
     event.preventDefault();
     //debugger
-    debugger 
     if (sessionStorage.jwt === "undefined") {
       alert("please log in to add to cart!")
     } else {
@@ -95,7 +94,6 @@ class CustomerFarmGoodModal extends React.Component {
             <a href={"farmers/" + farmGood.farmGood.attributes.farmer.id + "/farmgoods/" + farmGood.farmGood.id}><img src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/></a>
             <span>{farmGood.farmGood.attributes.name}</span>
             <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>
-            <p>{farmGood.farmGood.attributes.details}</p>
             <a href={farmGood.farmGood.attributes.farmer.link}>{farmGood.farmGood.attributes.farmer.name}</a>
             {farmGood.farmGood.attributes.inventory > 0 && //
               <div>
