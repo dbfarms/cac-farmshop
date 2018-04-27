@@ -36,7 +36,7 @@ export default class Submenu extends React.Component {
             <a>Will's Beef</a>
           </li>
           <li className="nav__submenu-item">
-            <a className="nav__submenu-item"href="http://www.chesteragcenter.com/dirty-boots-farm/">DBFARMS</a>
+            <a className="nav__submenu-item"href="">DBFARMS</a>
           </li>
         </ul>
       )

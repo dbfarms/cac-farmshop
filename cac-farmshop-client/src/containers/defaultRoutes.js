@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import './App.css';
 import FarmGoods from './FarmGoods';
 import FarmersPage from './FarmersPage';
-//import FarmerShow from './FarmerShow';
+import FarmersList from '../components/FarmersList';
+import FarmerShow from './FarmerShow';
 import LogInPage from '../components/LogInPage';
 import SignUpPage from '../components/SignUp';
 import FarmGoodCard from '../components/farmGoodCard'
@@ -31,15 +32,18 @@ export default class DefaultRoutes extends Component {
   render() {
     return (  
       <BrowserRouter >
+        <Switch>
         <div className="background-here">
           <Header roleRoutes={this.state.routes}/>
-          <Route path="/login" component={LogInPage} />
-          <Route path="/signup" component={SignUpPage} />
+          <Route exact path="/login" component={LogInPage} />
+          <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/home" />
-          <Route exact path='/farmers' component={FarmersPage} />
+          <Route exact path='/farmers' component={FarmersList} />
+          <Route exact path='/farmers/:id' component={FarmerShow} />
           <Route exact path="/farm-goods" component={FarmGoods} />
           <Route path="*" render={() => <div></div>} />
         </div>
+        </Switch>
       </BrowserRouter >
     );
   }

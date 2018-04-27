@@ -1,38 +1,44 @@
+/*
 import React, { Component } from 'react';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { BrowserRouter, Link, Route, Switch } from 'react-router';
+//import { connect } from 'react-redux';
 //import { bindActionCreators}  from 'redux';
-import { getFarmers } from '../actions/farmers'; //
+//import { getFarmers } from '../actions/farmers'; //
 import FarmersList from '../components/FarmersList'; //
 import FarmerShow from './FarmerShow';
+import NoMatch from '../components/NoMatch';
 
-class FarmersPage extends Component {
+export default class FarmersPage extends Component {
 
-  componentDidMount(){
-    this.props.getFarmers();
-  }
 
   render() {
-
 
     //debugger
     const { match } = this.props
     //debugger
     return (
       <div>
-       
-        <Switch>
-        
-        
-        <Route path={`${match.url}/:farmerId`} component={FarmerShow} />
-        <Route path={`${match.url}`} component={FarmersList(this.props.farmers)} />
-          
-        </Switch>
-        
+        <h3>Farmers</h3>
+        <Route path={`${match.url}/:productId`}
+            render={() => {<h3> i'm rendering</h3>}}/>
+        <Route exact path={match.url}
+            render={() => <FarmersList />}
+        />
       </div>
     )
   }
 }
+/*
+        <Switch>
+          <Route path={`${match.path}/:name`} render= {({match}) =>( <div> <h3> {match.params.name} </h3></div>)}/>
+          <Route exact path={`${match.path}/:farmerId`} component={FarmerShow} />
+          <Route 
+            path={match.url} component={FarmersList} />
+          <Route component={NoMatch}/>
+        </Switch>
+        <Route path={`${match.path}/:name`} render= {({match}) =>( <div> <h3> testest </h3></div>)}/>
+
+
 //<FarmersList farmers={this.props.farmers} />
 // <Route path="/:name" component={FarmerShow} />
 
@@ -42,4 +48,5 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, { getFarmers })(FarmersPage);
+//export default connect(mapStateToProps, { getFarmers })(FarmersPage);
+*/

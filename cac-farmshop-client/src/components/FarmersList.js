@@ -1,40 +1,71 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import FarmerShow from '../containers/FarmerShow';
 import FarmerCard from '../components/farmerCard'
+import { getFarmers } from '../actions/farmers';
+import { connect } from 'react-redux';
 
 var farmerId = undefined 
 
 //debugger
 
-const FarmersList = ({ farmers }) => {
-  debugger
-  const renderFarmers = farmers.map((farmer, index) =>{
+class FarmersList extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+      farmers: this.props.farmers
+    }
+  }
+
+  componentWillMount(){
+    //debugger
+    this.props.getFarmers();
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      farmers: nextProps.farmers
+    })
+  }
+
+  
+  renderFarmers = () => { 
+    return this.state.farmers.map((farmer, index) =>{
     //debugger
     //<button key={index} className="farm-button" onClick={() => changeFarmer(farmer.id)}>{farmer.name}</button>
     //<Link style={{ marginRight: '12px'}} key={farmer.id} to={`/farmers/${farmer.id}`}>{farmer.name}</Link>
-    return <FarmerCard key={index} farmer={farmer} />
-  }
-  );
-
-  //does this do anything? doesn't look like it it does anymore...
-  const changeFarmer = (farmerId) => {
-    //console.log(farmerId);
-    farmerId = farmerId
-    console.log(farmerId)
+      return <FarmerCard key={index} farmer={farmer} />
+      }
+    )
   }
 
   //
+  render() {
+    const { match } = this.props
+    const listOfFarmers = this.renderFarmers()
+    return (
+      <div>
+        <h3>Farmers</h3>
+        
+        <Route path={match.url}
+            render={() => listOfFarmers}
+        />
+        
+      </div>
+    )
+  }
 
-  return (
-    <div>
-      {renderFarmers}
-      
-    </div>
-  );
-};
+} 
 
-export default FarmersList;
+
+const mapStateToProps = (state) => {
+  return {
+    farmers: state.farmers
+  };
+}
+
+export default connect(mapStateToProps, { getFarmers })(FarmersList);
 
 
 

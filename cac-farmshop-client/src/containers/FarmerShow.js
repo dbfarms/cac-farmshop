@@ -7,20 +7,29 @@ import './FarmerCard.css';
 class FarmerShow extends Component {
   constructor(props){
     super(props)
-
+    //debugger 
     this.state = {
       farmer: this.props.farmer
     }
   }
 
   componentWillMount(){
+    //debugger
     const routeArray = document.location.href.split('/');
     const farmerID = Number(routeArray[routeArray.length - 1])
     //debugger
     this.props.getFarmer(farmerID)
   }
 
+  componentWillReceiveProps(nextProps) {
+    //debugger
+    this.setState({
+      farmer: nextProps.farmer
+    })
+  }
+
   render(){
+    //debugger 
     const farmer = this.state.farmer
     return (
       <div>
@@ -40,7 +49,7 @@ class FarmerShow extends Component {
 
 const mapStateToProps = state => {
   return {
-    farmer: state.farmer
+    farmer: state.farmers.data
   }
 }
 
