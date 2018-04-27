@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import './App.css';
 import FarmGoods from './FarmGoods';
-import FarmersPage from './FarmersPage';
+//import FarmersPage from './FarmersPage';
 import FarmersList from '../components/FarmersList';
 import FarmerShow from './FarmerShow';
+import FarmgoodShow from './FarmgoodShow';
 import LogInPage from '../components/LogInPage';
 import SignUpPage from '../components/SignUp';
 import FarmGoodCard from '../components/farmGoodCard'
@@ -32,7 +33,6 @@ export default class DefaultRoutes extends Component {
   render() {
     return (  
       <BrowserRouter >
-        <Switch>
         <div className="background-here">
           <Header roleRoutes={this.state.routes}/>
           <Route exact path="/login" component={LogInPage} />
@@ -40,10 +40,10 @@ export default class DefaultRoutes extends Component {
           <Route exact path="/home" />
           <Route exact path='/farmers' component={FarmersList} />
           <Route exact path='/farmers/:id' component={FarmerShow} />
+          <Route exact path='/farmers/:id/farmgoods/:id' component={FarmgoodShow} />
           <Route exact path="/farm-goods" component={FarmGoods} />
           <Route path="*" render={() => <div></div>} />
         </div>
-        </Switch>
       </BrowserRouter >
     );
   }

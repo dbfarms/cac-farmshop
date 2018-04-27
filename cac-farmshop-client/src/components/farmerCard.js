@@ -1,6 +1,6 @@
 import React from 'react';
-import FarmerView from './FarmerView';
-import FarmgoodView from './FarmgoodView';
+//ort FarmerView from './FarmerView';
+//import FarmgoodView from './FarmgoodView';
 import { Route } from 'react-router-dom';
 
 

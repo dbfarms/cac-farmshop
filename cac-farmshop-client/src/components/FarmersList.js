@@ -31,6 +31,7 @@ class FarmersList extends Component {
 
   
   renderFarmers = () => { 
+    //debugger 
     return this.state.farmers.map((farmer, index) =>{
     //debugger
     //<button key={index} className="farm-button" onClick={() => changeFarmer(farmer.id)}>{farmer.name}</button>
@@ -48,15 +49,20 @@ class FarmersList extends Component {
       <div>
         <h3>Farmers</h3>
         
-        <Route path={match.url}
-            render={() => listOfFarmers}
-        />
+        {listOfFarmers}
         
       </div>
     )
   }
-
 } 
+
+/*
+
+<Route path={match.url}
+            render={() => listOfFarmers}
+        />
+
+*/
 
 
 const mapStateToProps = (state) => {

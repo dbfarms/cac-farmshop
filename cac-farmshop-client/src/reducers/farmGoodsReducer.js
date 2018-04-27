@@ -17,6 +17,7 @@ export default (state = [], action) => {
         farmGood
       )
     case 'GET_FARMGOOD_SUCCESS':
+    //debugger 
       return action.farmGoods
     case 'CREATE_FARMGOOD_SUCCESS':
     const newState1 = Object.assign([], state)

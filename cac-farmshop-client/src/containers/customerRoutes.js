@@ -13,8 +13,8 @@ import { getUser } from '../actions/sessionActions';
 import Header from '../components/common/Header';
 import Cart from './carts';
 import Checkout from './Checkout';
-import FarmgoodView from '../components/FarmgoodView'
-import FarmerView from '../components/FarmerView'
+//import FarmgoodView from '../components/FarmgoodView'
+//import FarmerView from '../components/FarmerView'
 
 //<IndexRoute component={HomePage} /> /// NEED TO ADD 
 export default class CustomerRoutes extends Component {

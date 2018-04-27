@@ -1,7 +1,7 @@
 import React, {Component } from 'react';
 //import { Redirect } from 'react-router'
 import EditFarmgoodForm from '../containers/EditFarmgoodForm';
-import { getFarmGood } from '../actions/farmGoods';
+import { getSingleFarmGood } from '../actions/farmGoods';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 
@@ -97,7 +97,7 @@ const mapStateToProps = (state, ownProps) => {
   })
 }
 
-export default connect(mapStateToProps, { getFarmGood })(FarmGoodCard); // 
+export default connect(mapStateToProps, { getSingleFarmGood })(FarmGoodCard); // 
 
 // export default FarmGoodCard
 

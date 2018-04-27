@@ -34,6 +34,7 @@ const setFarmGoods = farmGoods => {
 }
 
 const setFarmGood = farmGood => {
+  //debugger
   return {
     type: 'GET_A_FARMGOOD_SUCCESS',
     farmGood
@@ -65,11 +66,11 @@ const deletingFarmgood = farmGood => {
 
 // ** async actions **
 
-export const getFarmGood = (id) => {
+export const getSingleFarmGood = (farmer_id, farmgood_id) => {
+  //debugger
   return dispatch => {
    // debugger
-    return fetch(`http://localhost:3000/api/farmgoods/${id}`, header)
-   // fetch('http://localhost:3000/api/days', header) ///
+    return fetch(`http://localhost:3000/api/farmers/${farmer_id}/farmgoods/${farmgood_id}`, header)
       .then(response => response.json())
       .then(farmGood => dispatch(setFarmGood(farmGood)))
       .catch(error => console.log(error));
@@ -77,6 +78,7 @@ export const getFarmGood = (id) => {
 }
 
 export const getFarmGoods = () => {
+  //debugger
   return dispatch => {
     return fetch('http://localhost:3000/api/farmgoods', header)
       .then(response => response.json())

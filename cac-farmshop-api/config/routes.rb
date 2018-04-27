@@ -12,13 +12,15 @@ Rails.application.routes.draw do
 
   #get 'customer/:id', to: "api/line_items#customer_line_items"
   
-  resources :farmers do
-    resources :farmgoods, only: [:show]
-  end 
+  #resources :farmers do
+  #  resources :farmgoods, only: [:show]
+  #end 
 
   namespace :api do
     resources :carts
-    resources :farmers 
+    resources :farmers do
+      resources :farmgoods, only: [:show]
+    end 
     resources :farmgoods
     resources :days
     resources :users
