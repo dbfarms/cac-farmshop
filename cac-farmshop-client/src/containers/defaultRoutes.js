@@ -6,6 +6,7 @@ import FarmGoods from './FarmGoods';
 import FarmersList from '../components/FarmersList';
 import FarmerShow from './FarmerShow';
 import FarmgoodShow from './FarmgoodShow';
+import FarmgoodIndex from './FarmgoodIndex';
 import LogInPage from '../components/LogInPage';
 import SignUpPage from '../components/SignUp';
 import FarmGoodCard from '../components/farmGoodCard'
@@ -15,6 +16,7 @@ import Authorization from './authorization';
 import Home from './Home';
 import { getUser } from '../actions/sessionActions';
 import Header from '../components/common/Header';
+
 
 export default class DefaultRoutes extends Component {
   constructor(){
@@ -40,6 +42,7 @@ export default class DefaultRoutes extends Component {
           <Route exact path="/home" />
           <Route exact path='/farmers' component={FarmersList} />
           <Route exact path='/farmers/:id' component={FarmerShow} />
+          <Route exact path='/farmers/:id/farmgoods' component={FarmgoodIndex} />
           <Route exact path='/farmers/:id/farmgoods/:id' component={FarmgoodShow} />
           <Route exact path="/farm-goods" component={FarmGoods} />
           <Route path="*" render={() => <div></div>} />

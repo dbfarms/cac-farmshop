@@ -194,7 +194,22 @@ export const deleteFarmGoods = (farmGood, history) => {
     });
     }
   }
+
+  export const getAllFarmerGoods = (farmer_id) => {
+    return dispatch => {
+      return fetch(`http://localhost:3000/api/farmers/${farmer_id}/farmgoods`, header)
+        .then(response => response.json())
+        .then(farmgoods => dispatch(setAllFarmerGoods(farmgoods)))
+        .catch(error => console.log(error));
+    }
+  }
   
+  const setAllFarmerGoods = (farmgoods) => {
+    return {
+      type: 'GET_ALL_FARMERGOODS_SUCCESS',
+      farmgoods
+    }
+  }
 
 /*
 

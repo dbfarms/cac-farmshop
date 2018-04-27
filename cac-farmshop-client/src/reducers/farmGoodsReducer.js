@@ -36,6 +36,8 @@ export default (state = [], action) => {
         return (
           newState
         );
+    case 'GET_ALL_FARMERGOODS_SUCCESS':
+        return action.farmgoods.data
     default:
       return state
   }
