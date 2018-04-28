@@ -13,7 +13,16 @@ class CustomerFarmGoodModal extends React.Component {
 
     this.state = {
       openLineItems: this.props.openLineitems,
-      showFGMenu: false
+      showFGMenu: false,
+      farmgoodscard: "FarmGoodsCard",
+    }
+  }
+
+  componentWillMount(){
+    if (this.props.farmgoodscard) {
+      this.setState({
+        farmgoodscard: this.props.farmgoodscard
+      })
     }
   }
 
@@ -90,7 +99,7 @@ class CustomerFarmGoodModal extends React.Component {
     return (
       <div>
         <span onMouseLeave={this.fgReg}>
-          <div className="FarmGoodsCard" onMouseEnter={this.fgMenu}>
+          <div className={this.state.farmgoodscard} onMouseEnter={this.fgMenu}>
             <a href={"farmers/" + farmGood.farmGood.attributes.farmer.id + "/farmgoods/" + farmGood.farmGood.id}><img src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/></a>
             <span>{farmGood.farmGood.attributes.name}</span>
             <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>

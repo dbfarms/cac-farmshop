@@ -44,6 +44,7 @@ class FarmgoodIndex extends Component {
                                     <CustomerFarmGoodModal 
                                         key={good.id} 
                                         farmGood={good} 
+                                        farmgoodscard="indexFarmGood"
                                     />
                                 </li>
                             )
