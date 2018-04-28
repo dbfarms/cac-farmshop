@@ -38,10 +38,9 @@ class FarmgoodIndex extends Component {
                     <div>
                         {console.log('step two')}
                         <ul>
-                        {goods.map(good => {
-                            console.log("i ma here")
+                        {goods.map((good, keyIndex) => {
                             return (
-                                <li>
+                                <li key={keyIndex}>
                                     <CustomerFarmGoodModal 
                                         key={good.id} 
                                         farmGood={good} 
@@ -75,6 +74,7 @@ class FarmgoodIndex extends Component {
 }
 
 const mapStateToProps = state => {
+    // for some reason this eventually returns undefined and need to figure out why
     if (state.farmGoods != undefined) {
         return {
             farmgoods: state.farmGoods

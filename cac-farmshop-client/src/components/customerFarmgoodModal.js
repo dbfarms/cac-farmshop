@@ -89,7 +89,7 @@ class CustomerFarmGoodModal extends React.Component {
     //debugger 
     return (
       <div>
-        <li onMouseLeave={this.fgReg}>
+        <span onMouseLeave={this.fgReg}>
           <div className="FarmGoodsCard" onMouseEnter={this.fgMenu}>
             <a href={"farmers/" + farmGood.farmGood.attributes.farmer.id + "/farmgoods/" + farmGood.farmGood.id}><img src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/></a>
             <span>{farmGood.farmGood.attributes.name}</span>
@@ -108,7 +108,7 @@ class CustomerFarmGoodModal extends React.Component {
               <p>No longer available. Check back soon</p>
             }
           </div>
-        </li>
+        </span>
         <div className="fg-li"></div>
       </div>
     )
