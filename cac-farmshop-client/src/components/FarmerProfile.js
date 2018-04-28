@@ -4,12 +4,14 @@ import { Route } from 'react-router-dom';
 
   const FarmerProfile = ({ farmer }) => {
     return (
-      <div className="farmerShow">
+    <div className="container-bg">
+      <div className="farmerShow ">
         <a key={farmer.id} href={"/farmers/" + farmer.id} >
           <h3>{farmer.attributes.name}</h3>
           <p>{farmer.attributes.address}</p>
         
         </a>
+      </div>
       </div>
     )
 }
