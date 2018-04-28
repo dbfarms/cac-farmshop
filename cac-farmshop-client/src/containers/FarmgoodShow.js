@@ -30,11 +30,24 @@ class FarmgoodShow extends Component {
         const fg = this.state.farmgood
         //debugger 
         return (
-            <div className="farmgoodShow">
-                <img src={fg.attributes["img-url"]} />
-                <h3>{fg.attributes.name}  </h3> 
-                <p>Price: {fg.attributes.price}</p>
-                <p>{fg.attributes.details}</p>
+            <div className="defaultText">
+                <a href={"http://localhost:3001/farmers/" + fg.attributes.farmer.id + "/farmgoods/"}>
+                    See All {fg.attributes.farmer.name} Farm Goods
+                </a>
+
+                <div className="farmgoodShow">
+
+                    <img src={fg.attributes["img-url"]} />
+                    <h3>{fg.attributes.name}  </h3> 
+                    <p>Price: {fg.attributes.price}</p>
+                    <p>{fg.attributes.details}</p>
+                    
+                    <div className="farmerdetails">
+                    <img src="" alt="farmer image here"/>
+                    <h3>{fg.attributes.farmer.name}</h3>
+
+                    </div>
+                </div>
             </div>
         )
     }

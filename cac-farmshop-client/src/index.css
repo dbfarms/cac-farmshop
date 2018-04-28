@@ -1,3 +1,15 @@
+.farmerShow {
+  background-image: url("https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5ae49323758d46d77fe2ac05/1524929318135/dbfarms_large.jpg?format=750w");
+  height: 1000px;
+  width: 100%;
+}
+
+.defaultText > a {
+  font:  normal 27px / 29px "Playfair Display";
+  text-decoration: none;
+  color: darkred;
+}
+
 .indexFarmGood {
   width: 240px;
   height: auto;
@@ -10,8 +22,12 @@
   box-sizing: border-box;
 }
 
+.farmerdetails {
+  border-top: 1px solid rgba(117,117,117,0.2);
+}
+
 .farmgoodShow {
-  width: 240px;
+  width: 80%;
   height: auto;
   float: left;
   margin: 6px 6px 6px 6px;

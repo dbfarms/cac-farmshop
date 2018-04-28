@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import FarmerCard from '../components/farmerCard'
-import {getFarmer} from '../actions/farmers'
+import { connect } from 'react-redux';
+import FarmerProfile from '../components/FarmerProfile';
+import {getFarmer} from '../actions/farmers';
 import './FarmerCard.css';
 
 class FarmerShow extends Component {
@@ -36,7 +36,7 @@ class FarmerShow extends Component {
         {farmer != undefined &&
           <div>
             <div>
-              <FarmerCard farmer={farmer} />
+              <FarmerProfile farmer={farmer} />
             </div>
           </div>
 

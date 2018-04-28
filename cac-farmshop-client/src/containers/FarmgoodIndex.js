@@ -30,14 +30,17 @@ class FarmgoodIndex extends Component {
         const goods = this.state.farmgoods 
         //debugger 
         return (
-            <div> 
+            <div className="page-tree">
+                <div>
+                    <h3>some info / filler</h3>
+                </div>
                 {goods != undefined &&
                 <div>
                     {console.log(goods.length)}
                     {goods.length > 0 &&
                     <div>
                         {console.log('step two')}
-                        <ul>
+                        <ul className="fg-grid">
                         {goods.map((good, keyIndex) => {
                             return (
                                 <li key={keyIndex}>
