@@ -17,7 +17,7 @@ export default class SideMenu extends React.Component {
         return (
             <div>
             {sessionStorage.jwt !== "undefined" &&
-                <Menu >
+                <Menu right>
                     <a id="home" className="menu-item" href="/">Home</a>
                     <a id="about" className="menu-item" href="/farmers">Farmers</a>
                     <a id="farmgoods" className="menu-item" href="/farm-goods">Farmgoods</a>
@@ -27,7 +27,7 @@ export default class SideMenu extends React.Component {
                 </Menu>
             }
             {sessionStorage.jwt === "undefined" &&
-                <Menu >
+                <Menu right>
                     <a id="home" className="menu-item" href="/">Home</a>
                     <a id="about" className="menu-item" href="/farmers">Farmers</a>
                     <a id="farmgoods" className="menu-item" href="/farm-goods">Farmgoods</a>
