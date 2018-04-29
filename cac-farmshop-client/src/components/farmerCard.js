@@ -3,18 +3,26 @@ import React from 'react';
 //import FarmgoodView from './FarmgoodView';
 import { Route } from 'react-router-dom';
 
+const FarmerCard = ({ farmer }) => {
+  return (
+    <div style={divStyle} >
+      <img src={farmer.attributes["link"]} />
+      <a key={farmer.id} href={"/farmers/" + farmer.id} >
+        <h3>{farmer.attributes.name}</h3>
+        <p>{farmer.attributes.address}</p>
+      
+      </a>
+    </div>
+  )
 
-  const FarmerCard = ({ farmer }) => {
-    return (
-      <div className="FarmerCard">
-        <a key={farmer.id} href={"/farmers/" + farmer.id} >
-          <h3>{farmer.attributes.name}</h3>
-          <p>{farmer.attributes.address}</p>
-        
-        </a>
-      </div>
-    )
+  const divStyle = {
+    color: 'blue',
+    backgroundImage: 'url(' + farmer.attributes["link"] + ')',
+  };
 }
+//className="FarmerCard" 
+
+
 
 export default FarmerCard
 

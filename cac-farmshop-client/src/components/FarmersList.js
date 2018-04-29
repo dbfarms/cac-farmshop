@@ -32,13 +32,20 @@ class FarmersList extends Component {
   
   renderFarmers = () => { 
     //debugger 
-    return this.state.farmers.map((farmer, index) =>{
+    return (
+      this.state.farmers.map((farmer, index) =>{
     //debugger
     //<button key={index} className="farm-button" onClick={() => changeFarmer(farmer.id)}>{farmer.name}</button>
     //<Link style={{ marginRight: '12px'}} key={farmer.id} to={`/farmers/${farmer.id}`}>{farmer.name}</Link>
-      return <FarmerCard key={index} farmer={farmer} />
+      return (
+        <div>
+          <li>
+            <FarmerCard key={index} farmer={farmer}/>
+          </li>
+        </div>
+      )
       }
-    )
+    ))
   }
 
   //
@@ -46,11 +53,15 @@ class FarmersList extends Component {
     const { match } = this.props
     const listOfFarmers = this.renderFarmers()
     return (
-      <div>
-        <h3>Farmers</h3>
-        
-        {listOfFarmers}
-        
+      <div >
+        <div>
+          <h3>Farmers</h3>
+        </div>
+        <div>
+          <ul className="fg-grid">
+            {listOfFarmers}
+          </ul>
+        </div>
       </div>
     )
   }
