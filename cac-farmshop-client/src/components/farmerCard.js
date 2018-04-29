@@ -3,10 +3,20 @@ import React from 'react';
 //import FarmgoodView from './FarmgoodView';
 import { Route } from 'react-router-dom';
 
+/*
+var bg=require('../../../../images/products/cards/main.jpg')
+return (      
+  <div className="ProductItem">
+
+      <div className='background-image' style ={ { backgroundImage: "url("+bg+")" } }></div>
+*/
+
 const FarmerCard = ({ farmer }) => {
+  const bg = farmer.attributes["link"]
+
   return (
-    <div style={divStyle} >
-      <img src={farmer.attributes["link"]} />
+    <div className="FarmerCard" style ={ { backgroundImage: "url("+bg+")" } } >
+      
       <a key={farmer.id} href={"/farmers/" + farmer.id} >
         <h3>{farmer.attributes.name}</h3>
         <p>{farmer.attributes.address}</p>
