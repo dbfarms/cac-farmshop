@@ -29,8 +29,9 @@ class FarmerShow extends Component {
   }
 
   render(){
-    //debugger 
     const farmer = this.state.farmer
+    //debugger 
+
     return (
       <div>
         {farmer != undefined &&

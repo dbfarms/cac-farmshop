@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllFarmerGoods } from '../actions/farmGoods';
 import CustomerFarmGoodModal from '../components/customerFarmgoodModal';
+import FarmerProfile from '../components/FarmerProfile';
 
 class FarmgoodIndex extends Component {
     constructor(props){
@@ -14,7 +15,8 @@ class FarmgoodIndex extends Component {
 
     componentWillMount() {
         const routeArray = document.location.href.split('/');
-        const farmer_id = Number(routeArray[routeArray.length - 2])
+        const farmer_id = Number(routeArray[routeArray.length - 3])
+        //debugger 
         this.props.getAllFarmerGoods(farmer_id);
     }
 
@@ -26,20 +28,32 @@ class FarmgoodIndex extends Component {
     }
 
     setGoods = () => {
-        //debugger
+        
         const goods = this.state.farmgoods 
+
+        if (goods != undefined) {
+            if (goods.length > 0) {
+                
+            }
+        }
         //debugger 
         return (
-            <div className="page-tree">
+            <div className="page-tree-farmerfarmgoods">
+                {goods != undefined && 
                 <div>
-                    <h3>some info / filler</h3>
-                </div>
-                {goods != undefined &&
-                <div>
-                    {console.log(goods.length)}
                     {goods.length > 0 &&
                     <div>
-                        {console.log('step two')}
+                        {console.log(goods)}
+                        <FarmerProfile farmer={goods[0].attributes.farmer} />
+                    </div>
+                    }
+                </div>
+                }
+                <div></div>
+                {goods != undefined &&
+                <div>
+                    {goods.length > 0 &&
+                    <div>
                         <ul className="fg-grid">
                         {goods.map((good, keyIndex) => {
                             return (

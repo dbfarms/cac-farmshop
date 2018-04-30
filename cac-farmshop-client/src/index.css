@@ -333,6 +333,12 @@ body {
   padding: 10px;
 }
 
+.page-tree-farmerfarmgoods {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
 .fg-grid {
   display: grid;
   grid-template-columns: 300px 300px 300px;
