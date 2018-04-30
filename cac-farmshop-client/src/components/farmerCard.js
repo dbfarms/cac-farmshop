@@ -1,34 +1,47 @@
-import React from 'react';
-//ort FarmerView from './FarmerView';
-//import FarmgoodView from './FarmgoodView';
-import { Route } from 'react-router-dom';
+import React, { Component } from 'react';
+
+class FarmerCard extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+      farmer: this.props.farmer 
+    }
+  }
+
+  render(){
+    const farmer = this.state.farmer 
+    const bg = farmer.attributes["link"]
+
+    return (
+      <li className="FarmerCard" style ={ { backgroundImage: "url(" + bg + ")" } } >
+        <a key={farmer.id} href={"/farmers/" + farmer.id} >
+          <h3>{farmer.attributes.name}</h3>
+          <p>{farmer.attributes.address}</p>
+        
+        </a>
+      </li>
+    )
+  }
+
+}
+  
+export default FarmerCard
 
 /*
-var bg=require('../../../../images/products/cards/main.jpg')
-return (      
-  <div className="ProductItem">
-
-      <div className='background-image' style ={ { backgroundImage: "url("+bg+")" } }></div>
-*/
-
 const FarmerCard = ({ farmer }) => {
   const bg = farmer.attributes["link"]
 
   return (
-    <div className="FarmerCard" style ={ { backgroundImage: "url("+bg+")" } } >
-      
+    <li className="FarmerCard" style ={ { backgroundImage: "url(" + bg + ")" } } >
       <a key={farmer.id} href={"/farmers/" + farmer.id} >
         <h3>{farmer.attributes.name}</h3>
         <p>{farmer.attributes.address}</p>
       
       </a>
-    </div>
+    </li>
   )
 
-  const divStyle = {
-    color: 'blue',
-    backgroundImage: 'url(' + farmer.attributes["link"] + ')',
-  };
 }
 //className="FarmerCard" 
 

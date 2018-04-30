@@ -20,8 +20,6 @@ import '../index.css';
 class CustomerFarmGoods extends Component {
   constructor(props) {
     super(props);
-
-    //debugger 
     
     this.state = {
       showKey: 'show all', //show all

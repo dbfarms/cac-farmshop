@@ -111,7 +111,16 @@ class FarmGoods extends Component {
                 <div >
                   <span className="header-one">Currently For Sale: </span>
                 </div>
-                {this.state.farmGoods_array.map(farmGood => <CustomerFarmGoodModal key={farmGood.id} farmGood={farmGood} lineitems={this.state.openLineitems}/>)}
+                <ul className="fg-grid">
+                  {this.state.farmGoods_array.map(farmGood =>  
+                    <CustomerFarmGoodModal 
+                      key={farmGood.id} 
+                      farmGood={farmGood} 
+                      lineitems={this.state.openLineitems}
+                    />
+                    )
+                  }
+                </ul>
               </div>
             </div>
           }
