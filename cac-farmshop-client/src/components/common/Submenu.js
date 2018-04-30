@@ -27,6 +27,7 @@ export default class Submenu extends React.Component {
         </ul>
       )
     } else if (this.props.selector === "farmers") {
+      //need to make this dynamic, probably add a fetch request to header.js for farmers... 
       return (
         <ul className="nav__submenu">
           <li className="nav__submenu-item">
@@ -36,7 +37,7 @@ export default class Submenu extends React.Component {
             <a>Will's Beef</a>
           </li>
           <li className="nav__submenu-item">
-            <a className="nav__submenu-item"href="">DBFARMS</a>
+            <a className="nav__submenu-item"href="http://localhost:3001/farmers/1/farmgoods/">DBFARMS</a>
           </li>
         </ul>
       )
