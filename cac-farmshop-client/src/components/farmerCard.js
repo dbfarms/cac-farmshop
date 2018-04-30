@@ -14,13 +14,15 @@ class FarmerCard extends Component {
     const bg = farmer.attributes["link"]
 
     return (
-      <li className="FarmerCard" style ={ { backgroundImage: "url(" + bg + ")" } } >
-        <a key={farmer.id} href={"/farmers/" + farmer.id} >
-          <h3>{farmer.attributes.name}</h3>
-          <p>{farmer.attributes.address}</p>
-        
-        </a>
-      </li>
+      <div>
+        <div className="FarmerCard" style ={ { backgroundImage: "url(" + bg + ")" } } >
+          <a href={"/farmers/" + farmer.id} >
+            <span>{farmer.attributes.name}</span>
+            <p>{farmer.attributes.address}</p>
+          
+          </a>
+        </div>
+      </div> 
     )
   }
 

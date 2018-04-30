@@ -48,14 +48,22 @@ class FarmersList extends Component {
   render() {
     const { match } = this.props
     const listOfFarmers = this.renderFarmers()
+    // {listOfFarmers}
     return (
       <div >
         <div>
-          <h3>Farmers</h3>
-        </div>
-        <div>
+          <div>
+            <h3>Farmers</h3>
+          </div>
           <ul className="farmer-grid">
-            {listOfFarmers}
+            {this.state.farmers.map(farmer => 
+              <FarmerCard 
+                key={farmer.id} 
+                farmer={farmer}
+            />
+            )
+
+            }
           </ul>
         </div>
       </div>
