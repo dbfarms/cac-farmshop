@@ -35,6 +35,34 @@
   border-top: 1px solid rgba(117,117,117,0.2);
 }
 
+
+.farmerlink {
+  font-weight: bold;
+  width: 300px;
+  min-height: 40px;
+  padding: 10px 0px 5px 0px;
+  background: rgba(0,0,0,0.5);
+  display: block;
+  top: 80px;
+  position: relative;
+
+}
+
+.farmerlink > a {
+  color: white;
+  font:  bold 15px / 15px "Arial";
+  text-decoration: none;
+}
+
+.farmerlink:hover > a {
+  color: white;
+  text-decoration: none;
+}
+
+.farmerlink:hover {
+  background-color: rgb(44, 44, 44);
+}
+
 .FarmerCard {
   min-width: 300px;
   height: 225px;
@@ -57,9 +85,15 @@
 }
 
 .FarmerCard > a {
+  color: white;
+  font:  bold 15px / 15px "Arial";
   text-decoration: none;
-  color: darkgrey;
 } 
+
+.FarmerCard:hover > a {
+  color: white;
+  text-decoration: none;
+}
 
 .farmgoodShow {
   width: 80%;

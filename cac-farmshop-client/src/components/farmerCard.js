@@ -17,9 +17,9 @@ class FarmerCard extends Component {
       <div>
         <div className="FarmerCard" style ={ { backgroundImage: "url(" + bg + ")" } } >
           <a href={"/farmers/" + farmer.id} >
-            <span>{farmer.attributes.name}</span>
-            <p>{farmer.attributes.address}</p>
-          
+            <span className="farmerlink">
+                {farmer.attributes.name}
+            </span>
           </a>
         </div>
       </div> 
