@@ -1,18 +1,19 @@
+//probably phasing this one out
+
 import React from 'react';
 import { Route } from 'react-router-dom';
 
 
   const FarmerProfile = ({ farmer }) => {
+    const bg = farmer.attributes["link"]
     return (
-    <div className="container-bg">
-      <div className="farmerShow ">
-        <a key={farmer.id} href={"/farmers/" + farmer.id} >
-          <h3>{farmer.attributes.name}</h3>
-          <p>{farmer.attributes.address}</p>
-        
-        </a>
+      <div>
+      <div className="FarmerCard" style ={ { backgroundImage: "url(" + bg + ")" } } >
+          <span className="farmerprofile">
+              {farmer.attributes.name}
+          </span>
       </div>
-      </div>
+    </div> 
     )
 }
 

@@ -5,11 +5,11 @@
 }
 
 .farmerShow {
-  background-image: url("https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5ae49323758d46d77fe2ac05/1524929318135/dbfarms_large.jpg?format=750w");
   height: 1000px;
   width: 750px;
   background-repeat: no-repeat;
   background-size: auto;
+  font:  normal 27px / 29px "Playfair Display";
 }
 
 
@@ -35,6 +35,25 @@
   border-top: 1px solid rgba(117,117,117,0.2);
 }
 
+.farmerprofile {
+  font-weight: bold;
+  width: 300px;
+  min-height: 40px;
+  padding: 10px 0px 5px 0px;
+  background: rgba(0,0,0,0.5);
+  display: block;
+  top: 80px;
+  position: relative;
+  color: white;
+  font:  bold 15px / 15px "Arial";
+  text-decoration: none;
+  text-align: center;
+}
+
+
+.farmerprofile:hover {
+  background-color: rgb(44, 44, 44);
+}
 
 .farmerlink {
   font-weight: bold;
@@ -45,7 +64,6 @@
   display: block;
   top: 80px;
   position: relative;
-
 }
 
 .farmerlink > a {
