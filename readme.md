@@ -7,19 +7,6 @@ git fsck --full
 
 ***************
 where i left off:
-4/10
-
-
--reverted to farmer orders i guess had some idea of setting values at some point and then loading a component to display them once it's all sorted? like a orderCard yeah that makes sense
-^-- do that orderCard thing
-
--an order is only complete when all farmer_orders are complete 
--orders page shows open orders with button to 'close' an order once it's harvested, maybe some dropdown menu to see closed orders
--orders automatically close after due date... 
--how to set due date?
-
-
--test refunds / out-of-stock/ etc when ordering
 
 -what's the turnaround on an order?
 ***************

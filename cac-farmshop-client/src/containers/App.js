@@ -94,7 +94,7 @@ class App extends Component {
       
           {sessionStorage.jwt === "undefined" &&
             <div>
-            <h3 className="welcome">Welcome VISITOR</h3> 
+              <h3 className="welcome">Welcome VISITOR</h3> 
               <DefaultRoutes /> 
             </div>
           }

@@ -35,7 +35,7 @@ export default class DefaultRoutes extends Component {
   render() {
     return (  
       <BrowserRouter >
-        <div className="background-here">
+        <div className="">
           <Header roleRoutes={this.state.routes}/>
           <Route exact path="/login" component={LogInPage} />
           <Route exact path="/signup" component={SignUpPage} />

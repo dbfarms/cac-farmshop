@@ -129,14 +129,23 @@
   padding-bottom: 0px;
 }
 
-.dropdown {
-  margin-top: 24px;
-  top: 21px;
-  width: 100%;
-  position: relative;
-  background: rgb(241, 208, 17);
+@media screen and (min-width: 1594px) {
+  .dropdown {
+    margin-top: 24px;
+    top: 21px;
+    width: 100%;
+    position: relative;
+    background: rgb(241, 208, 17);
+  }
 }
 
+@media screen and (max-width: 1595px) {
+  .dropdown {
+    width: 100%;
+    position: relative;
+    background: rgb(241, 208, 17);
+  }
+}
 
 .farmnav-button {
   font-size: 18px;
@@ -347,14 +356,22 @@ body {
 
 .page-tree {
   display: grid;
-  grid-template-columns: 190px 300px auto;
+  grid-template-columns: 190px auto auto;
   padding: 10px;
 }
 
-.page-tree-farmerfarmgoods {
+.page-tree-small {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 190px  auto;
   padding: 10px;
+}
+
+  @media screen and (max-width: 1423px){
+  .page-tree-farmerfarmgoods {
+    display: grid;
+    grid-template-columns: 0px auto auto;
+    padding: 10px;
+  }
 }
 
 @media screen and (max-width: 708px) {
@@ -368,8 +385,24 @@ body {
 
 .fg-grid {
   display: grid;
-  grid-template-columns: 300px 300px 300px;
-  grid-row-gap: 30px ;
+  grid-template-columns: auto auto auto;
+  grid-row-gap: 20px ;
+}
+
+@media screen and (max-width: 1120px) {
+  .fg-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row-gap: 30px ;
+  }
+}
+
+@media screen and (max-width: 838px) {
+  .fg-grid {
+    display: grid;
+    grid-template-columns: auto;
+    grid-row-gap: 30px ;
+  }
 }
 
 .fg-grid-small {
@@ -511,12 +544,12 @@ max-height:50%;
 
 .menu-item {
   color: white;
-  font:  normal  17px / 21px "Playfair Display";
+  font:  normal  15px / 19px "Playfair Display";
   padding: 5px;
 }
 
 .menu-item-text {
-  font:  normal  17px / 21px "Playfair Display";
+  font:  normal  15px / 19px "Playfair Display";
   word-spacing: normal;
   align-content: "middle";
   color: #424242;
