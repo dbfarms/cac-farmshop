@@ -173,7 +173,7 @@
 
 @media screen and (max-width: 595px) {
   .test-container-small {
-    height: 250px;
+    height: 200px;
     position: relative;
   }
 }
@@ -192,10 +192,28 @@
 }
 
 .mobile-mini-widgets-small-screen {
-  width: 15%;
-  top: 110px;
-  right: 0px;
-  position: absolute;
+  width: auto;
+  top: 145px;
+  right: 32px;
+  position: fixed;
+}
+
+@media screen and (max-width: 530px) {
+  .mobile-mini-widgets-small-screen {
+    width: auto;
+    top: 62px;
+    right: 60px;
+    position: absolute;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .mobile-mini-widgets-small-screen {
+    width: auto;
+    top: 120px;
+    left: 10px;
+    position: absolute;
+  }
 }
 
 .slide-enter {
@@ -348,8 +366,6 @@ body {
   }
 }
 
-
-
 .fg-grid {
   display: grid;
   grid-template-columns: 300px 300px 300px;
@@ -391,7 +407,6 @@ body {
     margin-left: 10px;
   }
 }
-
 
 .farmer-grid {
   display: grid;
@@ -562,6 +577,16 @@ li {
   height: 30px;
   right: 36px;
   top: 100px;
+}
+
+@media screen and (max-width: 530px) {
+  .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    right: 16px;
+    top: 100px;
+  }
 }
 
 /* Color/shape of burger icon bars */

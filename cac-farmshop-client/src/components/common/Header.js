@@ -272,38 +272,37 @@ class Header extends React.Component {
             
               <MediaQuery query="(max-width: 1064px)" >
                 <div className="test-container-small">
-                <div className="cac-logo-here" align="middle">
-                    <a href="http://www.chesteragcenter.com" align="left"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="110" height="102" align="left"/></a>
-                </div>
-                <div >
-                  <SideMenu routes={this.props.routes} logout={this.logOut}/>
-                </div>
-                <div className="mobile-mini-widgets-small-screen">
-                    <span className="widget">
+                  <div className="cac-logo-here" align="middle">
+                      <a href="http://www.chesteragcenter.com" align="left"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="110" height="102" align="left"/></a>
+                  </div>
+                  <div className="sideMenuSmall">
+                    <SideMenu routes={this.props.routes} logout={this.logOut}/>
+                  </div>
+                  <div className="mobile-mini-widgets-small-screen">
+                      <span className="widget">
+                        <ShareButton 
+                          compact
+                          socialMedia={'facebook'}
+                          url="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/"
+                        />
+                      </span>
+                      <span className="widget">
                       <ShareButton 
                         compact
-                        socialMedia={'facebook'}
-                        url="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/"
+                        socialMedia={'twitter'}
+                        url="https://twitter.com/ChesterAgCenter"
                       />
-                    </span>
-                    <span className="widget">
-                    <ShareButton 
-                      compact
-                      socialMedia={'twitter'}
-                      url="https://twitter.com/ChesterAgCenter"
-                    />
-                    </span>
-                    <span className="widget">
-                    <ShareButton 
-                      compact
-                      socialMedia={'google-plus'}
-                      url="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en"
-                    />
-                    </span>
-                  </div>
+                      </span>
+                      <span className="widget">
+                      <ShareButton 
+                        compact
+                        socialMedia={'google-plus'}
+                        url="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en"
+                      />
+                      </span>
+                    </div>
                   </div>
               </MediaQuery>
-
           </div>
           </div>
           <br />
