@@ -145,6 +145,28 @@ class FarmGoods extends Component {
     )
   }
 
+  /*
+
+        <MediaQuery query="(max-width: 639px)">
+        <div>
+          <div>
+            <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
+          </div>
+          {this.state.card !== '' && 
+            <div className="cartcardhere">
+            <h3>put cart here smallest</h3>
+            </div>
+          }
+          <div>
+            {this.showGoodsSplit()}
+          </div>
+          
+          <br />
+        </div>
+        </MediaQuery>
+
+  */
+
   render() {
     //debugger
     var objectToArrayDays = []
@@ -156,19 +178,29 @@ class FarmGoods extends Component {
           <div>
             <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
           </div>
+          <MediaQuery query="(max-width: 581px" >
+            <div className="cartcardhere">
+              <h3>cart counter icon now</h3>
+            </div>
+          </MediaQuery>
           <div className="page-tree-small">
+          <MediaQuery query="(min-width: 582px)" >
             {this.state.card !== '' && 
               <div className="cartcardhere">
               <h3>put cart here small</h3>
               </div>
             }
+          </MediaQuery>
+          
             <div>
               {this.showGoodsSplit()}
             </div>
             <br />
           </div>
+          
         </div>
         </MediaQuery>
+        
         <MediaQuery query="(min-width: 1294px)" >
         <div className="page-tree">
           <div className="dropdown">

@@ -362,8 +362,8 @@ body {
 
 .page-tree-small {
   display: grid;
-  grid-template-columns: 190px  auto;
-  padding: 10px;
+  grid-template-columns: auto auto;
+  padding: 0px;
 }
 
   @media screen and (max-width: 1423px){
@@ -397,7 +397,7 @@ body {
   }
 }
 
-@media screen and (max-width: 838px) {
+@media screen and (max-width: 552px) {
   .fg-grid {
     display: grid;
     grid-template-columns: auto;
