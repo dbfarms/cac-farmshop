@@ -94,33 +94,30 @@ class App extends Component {
     return (
       <div className="post-template-default single single-post postid-15038 single-format-standard no-comments title-off scale-on-hover small-hover-icons click-effect-on-img dt-responsive-on overlay-cursor-on accent-gradient srcset-enabled btn-material custom-btn-color custom-btn-hover-color outline-element-decoration accent-bullets bold-icons phantom-fade phantom-line-decoration phantom-custom-logo-on sticky-mobile-header top-header first-switch-logo-left first-switch-menu-right second-switch-logo-left second-switch-menu-right right-mobile-menu layzr-loading-on popup-message-style wpb-js-composer js-comp-ver-5.1.1 vc_responsive is-webkit no-mobile phantom-off closed-overlay-mobile-header">
           <StickyHeader header={<Header />}>
-          
-          {sessionStorage.jwt === "undefined" &&
-            <div>
-              <p className="welcome">Welcome VISITOR</p> 
-              
-              <DefaultRoutes /> 
-            </div>
-          }
-          {sessionStorage.role === "customer" &&
-            <div>
-                
-                <p className="welcome">Welcome {sessionStorage.name}</p>
-                <CustomerRoutes />
-            </div>
-          }
-          {sessionStorage.role === "admin" &&
-            <div>
-            <p className="welcome">auth level is {sessionStorage.role}</p>
-            <AdminRoutes />
-            </div>
-          }
-          {sessionStorage.role === "farmer" &&
-            <div>
-            <p className="welcome">Welcome {sessionStorage.name} / auth level is {sessionStorage.role}</p>
-            <FarmerRoutes />
-            </div>
-          }
+            {sessionStorage.jwt === "undefined" &&
+              <div>
+                <p className="welcome">Welcome VISITOR</p> 
+                <DefaultRoutes /> 
+              </div>
+            }
+            {sessionStorage.role === "customer" &&
+              <div>
+                  <p className="welcome">Welcome {sessionStorage.name}</p>
+                  <CustomerRoutes />
+              </div>
+            }
+            {sessionStorage.role === "admin" &&
+              <div>
+                <p className="welcome">auth level is {sessionStorage.role}</p>
+                <AdminRoutes />
+              </div>
+            }
+            {sessionStorage.role === "farmer" &&
+              <div>
+                <p className="welcome">Welcome {sessionStorage.name} / auth level is {sessionStorage.role}</p>
+                <FarmerRoutes />
+              </div>
+            }
           </StickyHeader>
       </div>
     );
