@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import Authorization from './authorization';
 import Home from './Home';
 import { getUser } from '../actions/sessionActions';
-import Header from '../components/common/Header';
 import Users from './Users';
 import AdminNewFarmgoodForm from './adminNewFarmGoodForm'; //actually this will have to be its own component
 import EditFarmgoodForm from './EditFarmgoodForm'; //same with this 
@@ -37,7 +36,6 @@ export default class AdminRoutes extends Component {
     return (  
       <BrowserRouter >
         <div className="background-here">
-          <Header roleRoutes={this.state.routes}/>
           <Route path="/signup" component={AdminSignUpPage} />
           <Route exact path="/home" />
           <Route exact path='/farmers' component={FarmersPage} />

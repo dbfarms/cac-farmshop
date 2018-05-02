@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 //import Authorization from './authorization';
 import Home from './Home';
 import { getUser } from '../actions/sessionActions';
-import Header from '../components/common/Header';
 import NewFarmgoodForm from './NewFarmgoodForm';
 import EditFarmgoodForm from './EditFarmgoodForm';
 import OrdersList from './Orders';
@@ -36,7 +35,6 @@ export default class FarmerRoutes extends Component {
     return (  
       <BrowserRouter >
         <div className="background-here">
-          <Header roleRoutes={this.state.routes}/>
           <Route exact path="/home" />
           <Route exact path='/farmers' component={FarmersPage} />
           <Route exact path="/farm-goods" component={FarmerFarmGoods} />
