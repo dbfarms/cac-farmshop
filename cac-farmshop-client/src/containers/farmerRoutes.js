@@ -26,12 +26,10 @@ export default class FarmerRoutes extends Component {
       routes: {
         profile: 'profile',
         farmers: 'farmers',
-        home: 'home',
         orders: 'orders',
         'my farmgoods': 'farm-goods'
       }
     }
-
   }
 
   render() {

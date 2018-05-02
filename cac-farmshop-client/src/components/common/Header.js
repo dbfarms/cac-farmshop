@@ -25,21 +25,26 @@ class Header extends React.Component {
 
   //{this.determineRoutes()}
   componentWillMount() {
+    //debugger
     switch(sessionStorage.role){
       case 'customer':
-        return ({
-          home: 'home',
-          farmers: 'farmers',
-          farmgoods: 'farm-goods',
-          cart: 'cart'
+        this.setState ({
+          routes: {
+            home: 'home',
+            farmers: 'farmers',
+            farmgoods: 'farm-goods',
+            cart: 'cart'
+          }
         }) 
       case 'farmer':
-        return ({
+        this.setState ({
+          routes: {
           profile: 'profile',
           farmers: 'farmers',
           home: 'home',
           orders: 'orders',
           'my farmgoods': 'farm-goods'
+          }
         }) 
       case 'admin':
         this.setState ({
@@ -52,11 +57,14 @@ class Header extends React.Component {
           }
         }) 
       default:
-        return ({
-          'Sign Up': 'signup',
-          farmers: 'farmers',
-          home: 'home',
-          farmgoods: 'farm-goods'
+      //debugger
+        this.setState ({
+          routes: {
+            'Sign Up': 'signup',
+            farmers: 'farmers',
+            home: 'home',
+            farmgoods: 'farm-goods'
+          }
         }) 
     }
   }
@@ -100,7 +108,7 @@ class Header extends React.Component {
   makeRoutes(){
     const routesLinks = [] 
     //debugger 
-    Object.entries(this.props.roleRoutes).map(function(keyName, keyIndex) {
+    Object.entries(this.state.routes).map(function(keyName, keyIndex) {
       routesLinks.push(keyName)
     })
     const routesLength = (routesLinks.length - 1)
@@ -207,28 +215,28 @@ class Header extends React.Component {
   miniWidgets = () => {
     return (
       <div className="widgetswidgets">
-                  <span className="widget">
-                  <ShareButton 
-                    compact
-                    socialMedia={'facebook'}
-                    url="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/"
-                  />
-                  </span>
-                  <span className="widget">
-                  <ShareButton 
-                    compact
-                    socialMedia={'twitter'}
-                    url="https://twitter.com/ChesterAgCenter"
-                  />
-                  </span>
-                  <span className="widget">
-                  <ShareButton 
-                    compact
-                    socialMedia={'google-plus'}
-                    url="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en"
-                  />
-                  </span>
-                </div>
+        <span className="widget">
+        <ShareButton 
+          compact
+          socialMedia={'facebook'}
+          url="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/"
+        />
+        </span>
+        <span className="widget">
+        <ShareButton 
+          compact
+          socialMedia={'twitter'}
+          url="https://twitter.com/ChesterAgCenter"
+        />
+        </span>
+        <span className="widget">
+        <ShareButton 
+          compact
+          socialMedia={'google-plus'}
+          url="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en"
+        />
+        </span>
+      </div>
     )
   }
 

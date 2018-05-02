@@ -32,11 +32,11 @@ export default class DefaultRoutes extends Component {
     }
   }
 
+  //<Header roleRoutes={this.state.routes}/>
   render() {
     return (  
       <BrowserRouter >
         <div className="">
-          <Header roleRoutes={this.state.routes}/>
           <Route exact path="/login" component={LogInPage} />
           <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/home" />

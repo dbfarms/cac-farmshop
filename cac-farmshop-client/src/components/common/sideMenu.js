@@ -67,7 +67,6 @@ export default class SideMenu extends React.Component {
         return (
             <div>
               {this.makeRoutes()}
-            
             </div>
         )
     }

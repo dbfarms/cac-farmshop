@@ -30,8 +30,8 @@ class App extends Component {
     this.state = {
       currentUser: null,
       auth: false,
-      //slide: 0,  // How much should the Navbar slide up or down
-      //lastScrollY: 0,  // Keep track of current position in state
+      slide: 0,  // How much should the Navbar slide up or down
+      lastScrollY: 0,  // Keep track of current position in state
     }
     //this.updateCurrentUser = this.updateCurrentUser.bind(this);
   }
@@ -51,7 +51,6 @@ class App extends Component {
     //window.removeEventListener('scroll', this.handleScroll);
   }
 
-  /*
   handleScroll = () => {
     const { lastScrollY } = this.state; 
     const currentScrollY = window.scrollY;
@@ -65,7 +64,6 @@ class App extends Component {
 
     console.log(this.state.slide)
   };
-  */
 
   componentWillReceiveProps(nextProps){
     this.setState({
@@ -97,6 +95,7 @@ class App extends Component {
           {sessionStorage.jwt === "undefined" &&
             <div>
               <p className="welcome">Welcome VISITOR</p> 
+              <Header/>
               <DefaultRoutes /> 
             </div>
           }
