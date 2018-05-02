@@ -167,16 +167,16 @@
 }
 
 .welcome {
-  font:  normal 27px / 29px "Playfair Display";
+  font:  normal 15px / 19px "Playfair Display";
 }
 
 .test-container {
-  height: 280px;
+  height: 130px;
   position: relative;
 }
 
 .test-container-small {
-  height: 200px;
+  height: 130px;
   position: relative;
 }
 
@@ -202,10 +202,16 @@
 
 .mobile-mini-widgets-small-screen {
   width: auto;
-  top: 145px;
+  top: 105px;
   right: 32px;
   position: fixed;
 }
+
+  .widgetswidgets {
+    width: 45px;
+    height: auto;
+    display: inline-block;
+  }
 
 @media screen and (max-width: 530px) {
   .mobile-mini-widgets-small-screen {
@@ -219,8 +225,8 @@
 @media screen and (max-width: 530px) {
   .mobile-mini-widgets-small-screen {
     width: auto;
-    top: 120px;
-    left: 10px;
+    top: 70px;
+    right: 10px;
     position: absolute;
   }
 }
@@ -609,7 +615,7 @@ li {
   width: 36px;
   height: 30px;
   right: 36px;
-  top: 100px;
+  top: 55px;
 }
 
 @media screen and (max-width: 530px) {
@@ -618,7 +624,7 @@ li {
     width: 36px;
     height: 30px;
     right: 16px;
-    top: 100px;
+    top: 55px;
   }
 }
 

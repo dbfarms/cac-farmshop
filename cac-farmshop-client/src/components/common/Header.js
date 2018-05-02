@@ -66,6 +66,11 @@ class Header extends React.Component {
     return (
       <nav className="nav">
         <ul className="nav__menu header-nav">
+          <li>
+            <div className="cac-logo-here" align="middle">
+              <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="110" height="102" align="middle"/></a>
+            </div>
+          </li>
           {routesLinks.map((route, keyIndex) => { 
             //debugger 
             return (
@@ -159,7 +164,7 @@ class Header extends React.Component {
 
   miniWidgets = () => {
     return (
-      <div className="">
+      <div className="widgetswidgets">
                   <span className="widget">
                   <ShareButton 
                     compact
@@ -196,9 +201,6 @@ class Header extends React.Component {
             <div className="branding">
               <MediaQuery query="(min-width: 965px)" >
                 <div className="test-container">
-                <div className="cac-logo-here" align="middle">
-                    <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="198" height="181" align="middle"/></a>
-                </div>
                 {sessionStorage.jwt !== "undefined" &&
                   <div>
                     <nav className="nav">
@@ -210,6 +212,11 @@ class Header extends React.Component {
                 //menu-item menu-item-type-post_type menu-item-object-post menu-item-has-children menu-item-15136 has-children
                 <nav className="nav">
                   <ul className="nav__menu header-nav">
+                    <li>
+                      <div className="cac-logo-here" align="middle">
+                        <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="110" height="102" align="middle"/></a>
+                      </div>
+                    </li>
                     <li className="nav__menu-item"
                         onMouseLeave={this.handleLeave}
                     >
@@ -231,7 +238,7 @@ class Header extends React.Component {
                       </div>
                     </li>
                     <li className="nav__menu-item left-menu">
-                    <Link to="/farm-goods" className="menu-item-text">Farmgoods</Link>
+                      <Link to="/farm-goods" className="menu-item-text">Farmgoods</Link>
                     </li>
                     <li className="nav__menu-item left-menu"
                         onMouseLeave={this.handleFarmersLeave}
@@ -261,10 +268,10 @@ class Header extends React.Component {
                       <Link to="/signup" className="menu-item-text">
                         Sign Up</Link>
                     </li>
-                    <li className="nav__menu-item">
-                      {this.miniWidgets()}
-                    </li>
                   </ul>
+                  <div className="nav__menu-item">
+                      {this.miniWidgets()}
+                  </div>
                 </nav>
                 }
                 </div>
