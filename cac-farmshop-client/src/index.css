@@ -1,3 +1,7 @@
+.headerspacer {
+  height: 150px;
+}
+
 
 .container-bg {
   background-size: auto;
@@ -173,18 +177,20 @@
 .test-container {
   height: 130px;
   position: relative;
+  background-color: white;
 }
 
 .test-container-small {
   height: 130px;
   position: relative;
+  background-color: white;
 }
 
 @media screen and (max-width: 595px) {
   .test-container-small {
     height: 200px;
     position: relative;
-    z-index: 1;
+    background-color: white;
   }
 }
 

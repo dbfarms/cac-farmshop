@@ -32,10 +32,7 @@ class App extends Component {
     this.state = {
       currentUser: null,
       auth: false,
-      slide: 0,  // How much should the Navbar slide up or down
-      lastScrollY: 0,  // Keep track of current position in state
     }
-    //this.updateCurrentUser = this.updateCurrentUser.bind(this);
   }
   
     //to find the nearest pickup location - UNCOMMENT BELOW 
@@ -45,27 +42,7 @@ class App extends Component {
 
   componentWillMount(){
     this.props.getFarmGoods();
-    window.addEventListener('scroll', this.handleScroll);
   }
-
-  componentWillUnmount() {
-    // If this component is unmounted, stop listening
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll = () => {
-    const { lastScrollY } = this.state; 
-    const currentScrollY = window.scrollY;
-
-    if (currentScrollY > lastScrollY) {
-      this.setState({ slide: '-48px' });
-    } else {
-      this.setState({ slide: '0px' });
-    }
-    this.setState({ lastScrollY: currentScrollY });
-
-    console.log(this.state.slide)
-  };
 
   componentWillReceiveProps(nextProps){
     this.setState({
@@ -91,8 +68,11 @@ class App extends Component {
 
   render() {
     this.determineUser(); //this just catches a bug that would occur when creating new users but may not be needed anymore who knows?
+    
+    //className="post-template-default single single-post postid-15038 single-format-standard no-comments title-off scale-on-hover small-hover-icons click-effect-on-img dt-responsive-on overlay-cursor-on accent-gradient srcset-enabled btn-material custom-btn-color custom-btn-hover-color outline-element-decoration accent-bullets bold-icons phantom-fade phantom-line-decoration phantom-custom-logo-on sticky-mobile-header top-header first-switch-logo-left first-switch-menu-right second-switch-logo-left second-switch-menu-right right-mobile-menu layzr-loading-on popup-message-style wpb-js-composer js-comp-ver-5.1.1 vc_responsive is-webkit no-mobile phantom-off closed-overlay-mobile-header"
     return (
-      <div className="post-template-default single single-post postid-15038 single-format-standard no-comments title-off scale-on-hover small-hover-icons click-effect-on-img dt-responsive-on overlay-cursor-on accent-gradient srcset-enabled btn-material custom-btn-color custom-btn-hover-color outline-element-decoration accent-bullets bold-icons phantom-fade phantom-line-decoration phantom-custom-logo-on sticky-mobile-header top-header first-switch-logo-left first-switch-menu-right second-switch-logo-left second-switch-menu-right right-mobile-menu layzr-loading-on popup-message-style wpb-js-composer js-comp-ver-5.1.1 vc_responsive is-webkit no-mobile phantom-off closed-overlay-mobile-header">
+      <div >
+          <div className="headerspacer"></div>
           <StickyHeader header={<Header />}>
             {sessionStorage.jwt === "undefined" &&
               <div>
