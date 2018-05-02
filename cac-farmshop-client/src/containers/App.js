@@ -30,8 +30,8 @@ class App extends Component {
     this.state = {
       currentUser: null,
       auth: false,
-      slide: 0,  // How much should the Navbar slide up or down
-      lastScrollY: 0,  // Keep track of current position in state
+      //slide: 0,  // How much should the Navbar slide up or down
+      //lastScrollY: 0,  // Keep track of current position in state
     }
     //this.updateCurrentUser = this.updateCurrentUser.bind(this);
   }
@@ -43,14 +43,15 @@ class App extends Component {
 
   componentWillMount(){
     this.props.getFarmGoods();
-    window.addEventListener('scroll', this.handleScroll);
+    //window.addEventListener('scroll', this.handleScroll);
   }
 
   componentWillUnmount() {
     // If this component is unmounted, stop listening
-    window.removeEventListener('scroll', this.handleScroll);
+    //window.removeEventListener('scroll', this.handleScroll);
   }
 
+  /*
   handleScroll = () => {
     const { lastScrollY } = this.state; 
     const currentScrollY = window.scrollY;
@@ -64,6 +65,7 @@ class App extends Component {
 
     console.log(this.state.slide)
   };
+  */
 
   componentWillReceiveProps(nextProps){
     this.setState({

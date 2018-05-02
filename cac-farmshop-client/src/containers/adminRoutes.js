@@ -26,7 +26,6 @@ export default class AdminRoutes extends Component {
       routes: {
         'create new user': 'signup',
         farmers: 'farmers',
-        home: 'home',
         farmgoods: 'farm-goods',
         users: 'users',
       }

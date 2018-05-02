@@ -16,10 +16,53 @@ class Header extends React.Component {
 
     this.state = {
       showAboutMenu: false,
-      showFarmerMenu: false
+      showFarmerMenu: false,
+      routes: undefined 
     };
 
     this.logOut = this.logOut.bind(this);
+  }
+
+  //{this.determineRoutes()}
+  componentWillMount() {
+    switch(sessionStorage.role){
+      case 'customer':
+        return ({
+          home: 'home',
+          farmers: 'farmers',
+          farmgoods: 'farm-goods',
+          cart: 'cart'
+        }) 
+      case 'farmer':
+        return ({
+          profile: 'profile',
+          farmers: 'farmers',
+          home: 'home',
+          orders: 'orders',
+          'my farmgoods': 'farm-goods'
+        }) 
+      case 'admin':
+        this.setState ({
+          routes: {
+            'create new user': 'signup',
+            farmers: 'farmers',
+            home: 'home',
+            farmgoods: 'farm-goods',
+            users: 'users'
+          }
+        }) 
+      default:
+        return ({
+          'Sign Up': 'signup',
+          farmers: 'farmers',
+          home: 'home',
+          farmgoods: 'farm-goods'
+        }) 
+    }
+  }
+  determineRoutes(){
+    //debugger 
+    
   }
 
   handleHover = (event) => {
@@ -54,15 +97,14 @@ class Header extends React.Component {
     
   }
 
-  makeRoutes(routes){
-    //debugger
+  makeRoutes(){
     const routesLinks = [] 
-    const routesLength = (Object.keys(this.props.roleRoutes).length - 1)
     //debugger 
     Object.entries(this.props.roleRoutes).map(function(keyName, keyIndex) {
       routesLinks.push(keyName)
     })
-    //debugger 
+    const routesLength = (routesLinks.length - 1)
+    
     return (
       <nav className="nav">
         <ul className="nav__menu header-nav">
@@ -193,6 +235,7 @@ class Header extends React.Component {
   render() {
     //debugger 
     const routes = this.makeRoutes() 
+    
     //debugger 
     return (
       <header>
@@ -283,7 +326,7 @@ class Header extends React.Component {
                       <a href="http://www.chesteragcenter.com" align="left"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="110" height="102" align="left"/></a>
                   </div>
                   <div className="sideMenuSmall">
-                    <SideMenu routes={this.props.routes} logout={this.logOut}/>
+                    <SideMenu routes={this.state.routes} logout={this.logOut}/>
                   </div>
                   <div className="mobile-mini-widgets-small-screen">
                       <span className="widget">
