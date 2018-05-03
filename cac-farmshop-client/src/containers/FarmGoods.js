@@ -14,6 +14,9 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 import './FarmGoods.css';
+import 'react-sticky-header/styles.css';
+import StickyHeader from 'react-sticky-header';
+import VisitorCartCard from '../components/visitorCartCard';
 
 class FarmGoods extends Component {
   constructor(props) {
@@ -25,6 +28,7 @@ class FarmGoods extends Component {
       showCategory: '',
       days: [],
       isEditing: false,
+      openLineitems: 'visitor', 
       farmgood: {
         name: '',
         farmer: '', //EVENTUALLY THIS WILL DEFAULT TO THE LOGGED IN FARMER BUT FOR NOW YOU CAN CHOOSE
@@ -145,28 +149,6 @@ class FarmGoods extends Component {
     )
   }
 
-  /*
-
-        <MediaQuery query="(max-width: 639px)">
-        <div>
-          <div>
-            <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
-          </div>
-          {this.state.card !== '' && 
-            <div className="cartcardhere">
-            <h3>put cart here smallest</h3>
-            </div>
-          }
-          <div>
-            {this.showGoodsSplit()}
-          </div>
-          
-          <br />
-        </div>
-        </MediaQuery>
-
-  */
-
   render() {
     //debugger
     var objectToArrayDays = []
@@ -175,22 +157,30 @@ class FarmGoods extends Component {
       <div>
         <MediaQuery query="(max-width: 1294px)" >
         <div>
-          <div>
-            <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
+          <div className="fgnav-small">
+            <StickyHeader 
+              header={<FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>}
+            >
+            </StickyHeader>
           </div>
           <MediaQuery query="(max-width: 581px" >
             <div className="cartcardhere">
-              <h3>cart counter icon now</h3>
+              <p>here </p>
+              <StickyHeader 
+                header = {<VisitorCartCard cart={this.state.openLineitems}/>}
+              >
+              </StickyHeader>
             </div>
           </MediaQuery>
           <div className="page-tree-small">
-          <MediaQuery query="(min-width: 582px)" >
-            {this.state.card !== '' && 
-              <div className="cartcardhere">
-              <h3>put cart here small</h3>
-              </div>
-            }
-          </MediaQuery>
+            <MediaQuery query="(min-width: 582px)" >
+              {this.state.card !== '' && 
+                <div className="cartcardhere">
+                  <p> maybe i'm actually here </p>
+                  <VisitorCartCard cart={this.state.openLineitems}/>
+                </div>
+              }
+            </MediaQuery>
           
             <div>
               {this.showGoodsSplit()}
@@ -204,12 +194,14 @@ class FarmGoods extends Component {
         <MediaQuery query="(min-width: 1294px)" >
         <div className="page-tree">
           <div className="dropdown">
-            <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
+          <StickyHeader header={<FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>}>
+          </StickyHeader>
           </div>
           <div>
           {this.state.card !== '' && 
             <div className="cartcardhere">
-              <span>put cart here large</span>
+              <p> this one </p>
+              <VisitorCartCard cart={this.state.openLineitems}/>
             </div>
           }
           </div>
@@ -224,8 +216,6 @@ class FarmGoods extends Component {
     )
   }
 }
-//ORIGINALLY: {this.props.farmGoods.data.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
-// ** this was in the FarmGoodsCard tag above
 
 const mapStateToProps = (state) => {
   //console.log(state)

@@ -135,7 +135,7 @@
 
 @media screen and (min-width: 1594px) {
   .dropdown {
-    margin-top: 24px;
+    margin-top: 120px;
     top: 21px;
     width: 100%;
     position: relative;
@@ -145,11 +145,13 @@
 
 @media screen and (max-width: 1595px) {
   .dropdown {
+    margin-top: 140px;
     width: 100%;
     position: relative;
     background: rgb(241, 208, 17);
   }
 }
+
 
 .farmnav-button {
   font-size: 18px;
@@ -181,14 +183,14 @@
 }
 
 .test-container-small {
-  height: 130px;
+  height: 140px;
   position: relative;
   background-color: white;
 }
 
 @media screen and (max-width: 595px) {
   .test-container-small {
-    height: 200px;
+    height: 140px;
     position: relative;
     background-color: white;
   }
@@ -223,7 +225,7 @@
 
 @media screen and (max-width: 530px) {
   .mobile-mini-widgets-small-screen {
-    width: auto;
+    width: a;
     top: 62px;
     right: 60px;
     position: absolute;
@@ -233,8 +235,8 @@
 @media screen and (max-width: 530px) {
   .mobile-mini-widgets-small-screen {
     width: auto;
-    top: 70px;
-    right: 10px;
+    top: 55px;
+    right: 75px;
     position: absolute;
   }
 }
@@ -515,6 +517,7 @@ body {
 
 .CartsCard {
   width: 75%;
+  max-width: 500px;
   height: auto;
   float: right;
   margin: 47px 33px 0px 0px;
@@ -522,6 +525,20 @@ body {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   font:  normal  17px / 21px "Laksaman";
+}
+
+@media screen and (max-width: 530px) {
+  .CartsCard {
+    width: 75%;
+    max-width: 100px;
+    margin: 178px 0px 0px 0px;
+    height: auto;
+    float: center;
+    background: palegoldenrod;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    font:  normal  17px / 21px "Laksaman";
+  }
 }
 
 .cartLine {
