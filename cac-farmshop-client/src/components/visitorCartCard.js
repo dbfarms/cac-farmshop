@@ -14,8 +14,8 @@ class CartCard extends Component {
     var total = 0;
     return (
         <div>
-            <MediaQuery query="(max-width: 581px)" >
-                <div className="CartsCard">
+            <MediaQuery query="(max-width: 635px)" >
+                <div className="cartcard-small">
                     <p>{sessionStorage.name}</p>
                     
                     <label>Total: {total}</label>
@@ -24,8 +24,8 @@ class CartCard extends Component {
                     </Link>
                 </div>
             </MediaQuery>
-            <MediaQuery query="(min-width: 582px)" >
-                <div className="CartsCard">
+            <MediaQuery query="(min-width: 636px)" >
+                <div className="cartcard-med">
                     <p>{sessionStorage.name}</p>
                     <img className="CartImage"  />
                     

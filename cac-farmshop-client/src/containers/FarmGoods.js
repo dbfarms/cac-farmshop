@@ -163,8 +163,8 @@ class FarmGoods extends Component {
             >
             </StickyHeader>
           </div>
-          <MediaQuery query="(max-width: 581px" >
-            <div className="cartcardhere">
+          <MediaQuery query="(max-width: 635px" >
+            <div className="">
               <p>here </p>
               <StickyHeader 
                 header = {<VisitorCartCard cart={this.state.openLineitems}/>}
@@ -173,11 +173,14 @@ class FarmGoods extends Component {
             </div>
           </MediaQuery>
           <div className="page-tree-small">
-            <MediaQuery query="(min-width: 582px)" >
+            <MediaQuery query="(min-width: 636px)" >
               {this.state.card !== '' && 
-                <div className="cartcardhere">
+                <div className="  ">
                   <p> maybe i'm actually here </p>
-                  <VisitorCartCard cart={this.state.openLineitems}/>
+                  <StickyHeader 
+                    header = {<VisitorCartCard cart={this.state.openLineitems}/>}
+                  >
+                  </StickyHeader>
                 </div>
               }
             </MediaQuery>
