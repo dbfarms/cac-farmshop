@@ -74,6 +74,7 @@ class App extends Component {
       <div >
           <div className="headerspacer"></div>
           <StickyHeader header={<Header />}>
+          </StickyHeader>
             {sessionStorage.jwt === "undefined" &&
               <div>
                 <p className="welcome">Welcome VISITOR</p> 
@@ -98,7 +99,6 @@ class App extends Component {
                 <FarmerRoutes />
               </div>
             }
-          </StickyHeader>
       </div>
     );
   }
