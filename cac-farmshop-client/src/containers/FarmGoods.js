@@ -14,8 +14,8 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 import './FarmGoods.css';
-import 'react-sticky-header/styles.css';
-import StickyHeader from 'react-sticky-header';
+//import 'react-sticky-header/styles.css';
+//import StickyHeader from 'react-sticky-header';
 import VisitorCartCard from '../components/visitorCartCard';
 
 class FarmGoods extends Component {
@@ -102,7 +102,7 @@ class FarmGoods extends Component {
         {this.state.showKey === "show all" && 
           <div>
               <div >
-                <span className="header-one">Currently For Sale:</span>
+                <span className="header-one">Currently For Sale</span>
               </div>
               <ul className="fg-grid">
                 {this.state.farmGoods_array.map(farmGood =>  
@@ -155,66 +155,34 @@ class FarmGoods extends Component {
    
     return (
       <div>
+        <div id="fixed" className="top">
+              <FarmgoodNav 
+                changeShow={this.handleShowChange} 
+                changeDay={this.handleDay} 
+                changeCategory={this.handleCategory}
+              />
+          </div>
         <MediaQuery query="(max-width: 1294px)" >
         <div>
-          <div className="fgnav-small">
-            <StickyHeader 
-              header={<FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>}
-            >
-            </StickyHeader>
-          </div>
-          <MediaQuery query="(max-width: 635px" >
-            <div className="">
-              <p>here </p>
-              <StickyHeader 
-                header = {<VisitorCartCard cart={this.state.openLineitems}/>}
-              >
-              </StickyHeader>
-            </div>
-          </MediaQuery>
           <div className="page-tree-small">
-            <MediaQuery query="(min-width: 636px)" >
-              {this.state.card !== '' && 
-                <div className="  ">
-                  <p> maybe i'm actually here </p>
-                  <StickyHeader 
-                    header = {<VisitorCartCard cart={this.state.openLineitems}/>}
-                  >
-                  </StickyHeader>
-                </div>
-              }
-            </MediaQuery>
-          
             <div>
               {this.showGoodsSplit()}
             </div>
             <br />
           </div>
-          
         </div>
         </MediaQuery>
         
-        <MediaQuery query="(min-width: 1294px)" >
-        <div className="page-tree">
-          <div className="dropdown">
-          <StickyHeader header={<FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>}>
-          </StickyHeader>
-          </div>
-          <div>
-          {this.state.card !== '' && 
-            <div className="cartcardhere">
-              <p> this one </p>
-              <VisitorCartCard cart={this.state.openLineitems}/>
+        <MediaQuery query="(min-width: 1294px)" > 
+          
+          <div className="page-tree">
+            <div>
             </div>
-          }
+            <div>
+              {this.showGoodsSplit()}
+            </div>
           </div>
-          <div>
-            {this.showGoodsSplit()}
-          </div>
-        </div>
         </MediaQuery>
-        
-          
       </div>
     )
   }
@@ -249,6 +217,9 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 import './FarmGoods.css';
+//import 'react-sticky-header/styles.css';
+//import StickyHeader from 'react-sticky-header';
+import VisitorCartCard from '../components/visitorCartCard';
 
 class FarmGoods extends Component {
   constructor(props) {
@@ -260,6 +231,7 @@ class FarmGoods extends Component {
       showCategory: '',
       days: [],
       isEditing: false,
+      openLineitems: 'visitor', 
       farmgood: {
         name: '',
         farmer: '', //EVENTUALLY THIS WILL DEFAULT TO THE LOGGED IN FARMER BUT FOR NOW YOU CAN CHOOSE
@@ -322,96 +294,117 @@ class FarmGoods extends Component {
   handleCategory = showCategory => this.setState({ showCategory: showCategory })
 
   showGoodsSplit() {
-    
+    var thisFilter = []
+    return (
+    <div>
+      {this.state.farmGoods_array === undefined &&
+        <p>loading loading</p>
+      }
+      {this.state.farmGoods_array != undefined &&
+        <div className="Farm-Goods-Container">
+        {this.state.showKey === "show all" && 
+          <div>
+              <div >
+                <span className="header-one">Currently For Sale</span>
+              </div>
+              <ul className="fg-grid">
+                {this.state.farmGoods_array.map(farmGood =>  
+                  <CustomerFarmGoodModal 
+                    key={farmGood.id} 
+                    farmGood={farmGood} 
+                    lineitems={this.state.openLineitems}
+                  />
+                  )
+                }
+              </ul>
+          </div>
+        }
+        {this.state.showKey === "day"  &&
+            <div>
+              <h1>{this.state.showDay}</h1>
+              
+              {this.state.farmGoods_array.map(farmGood => {
+                for (let i=0; i<farmGood.relationships.days.data.length; i++) {
+                  if (farmGood.relationships.days.data[i].name === this.state.showDay) {
+                    thisFilter.push(farmGood)
+                  }
+                }
+              })
+              }
+              {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} lineitems={this.state.openLineitems} />)}
+            </div>
+        }
+        {this.state.showKey === "category"  &&
+            <div>
+              <h1>{this.state.showCategory}</h1>
+              {this.state.farmGoods_array.map(farmGood => {
+                  if (farmGood.attributes.category.title === this.state.showCategory) {
+                    thisFilter.push(farmGood)
+                  }
+              })
+              }
+              {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} lineitems={this.state.openLineitems} />)}
+            </div>
+        }
+        </div>
+        }
+      </div>
+    )
   }
 
   render() {
     //debugger
     var objectToArrayDays = []
-    var thisFilter = []
+   
     return (
-      <div className="page-tree">
+      <div>
         <MediaQuery query="(max-width: 1294px)" >
-            <div className="">
-              <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
+        <div>
+          <div className="top">
+              <FarmgoodNav 
+                changeShow={this.handleShowChange} 
+                changeDay={this.handleDay} 
+                changeCategory={this.handleCategory}
+              />
+               <VisitorCartCard cart={this.state.openLineitems}/>
+          </div>
+          <p> how about now? </p>
+          <div className="page-tree-small">
+            <div>
+              {this.showGoodsSplit()}
             </div>
-            {this.state.card !== '' && 
-              <div className="cartcardhere">
-              <h3>put cart here small</h3>
-              </div>
-            }
             <br />
+          </div>
+        </div>
         </MediaQuery>
-          <MediaQuery query="(min-width: 1294px)" >
-            <div className="dropdown">
-              <FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>
-            </div>
+        
+        <MediaQuery query="(min-width: 1294px)" > 
+          <div id="fixed" className="top">
+              <FarmgoodNav 
+                changeShow={this.handleShowChange} 
+                changeDay={this.handleDay} 
+                changeCategory={this.handleCategory}
+              />
+               <VisitorCartCard cart={this.state.openLineitems}/>
+          </div>
+          <div className="page-tree">
             <div>
             {this.state.card !== '' && 
-              <div className="cartcardhere">
-                <span>put cart here large</span>
+              <div id="fixed">
               </div>
             }
             </div>
-          </MediaQuery>
+            <div>
+              {this.showGoodsSplit()}
+            </div>
+          </div>
+        </MediaQuery>
+        
           
-          {this.state.farmGoods_array === undefined &&
-            <p>loading loading</p>
-          }
-          {this.state.farmGoods_array != undefined &&
-            <div className="Farm-Goods-Container">
-            {this.state.showKey === "show all" && 
-              <div>
-                  <div >
-                    <span className="header-one">Currently For Sale:</span>
-                  </div>
-                  <ul className="fg-grid">
-                    {this.state.farmGoods_array.map(farmGood =>  
-                      <CustomerFarmGoodModal 
-                        key={farmGood.id} 
-                        farmGood={farmGood} 
-                        lineitems={this.state.openLineitems}
-                      />
-                      )
-                    }
-                  </ul>
-              </div>
-            }
-            {this.state.showKey === "day"  &&
-                <div>
-                  <h1>{this.state.showDay}</h1>
-                  
-                  {this.state.farmGoods_array.map(farmGood => {
-                    for (let i=0; i<farmGood.relationships.days.data.length; i++) {
-                      if (farmGood.relationships.days.data[i].name === this.state.showDay) {
-                        thisFilter.push(farmGood)
-                      }
-                    }
-                  })
-                  }
-                  {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} lineitems={this.state.openLineitems} />)}
-                </div>
-            }
-            {this.state.showKey === "category"  &&
-                <div>
-                  <h1>{this.state.showCategory}</h1>
-                  {this.state.farmGoods_array.map(farmGood => {
-                      if (farmGood.attributes.category.title === this.state.showCategory) {
-                        thisFilter.push(farmGood)
-                      }
-                  })
-                  }
-                  {thisFilter.map(farmGood => <CustomerFarmGoodModal  key={farmGood.id} farmGood={farmGood} lineitems={this.state.openLineitems} />)}
-                </div>
-            }
-            </div>
-            }
       </div>
     )
   }
 }
-//ORIGINALLY: {this.props.farmGoods.data.map(farmGood => <FarmGoodsCard  key={farmGood.id} farmGood={farmGood} isEditing={this.handleIsEditing}  />)}
-// ** this was in the FarmGoodsCard tag above
 
 const mapStateToProps = (state) => {
   //console.log(state)
@@ -424,7 +417,14 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, { getFarmGoods, deleteFarmGoods })(FarmGoods); // 
 
-/*
+
+<StickyHeader header={<FarmgoodNav changeShow={this.handleShowChange} changeDay={this.handleDay} changeCategory={this.handleCategory}/>}>
+              </StickyHeader>
+
+<StickyHeader header={<VisitorCartCard cart={this.state.openLineitems}/>}>
+                </StickyHeader>  
+
+              
 
 
 

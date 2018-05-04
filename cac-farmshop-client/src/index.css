@@ -2,7 +2,6 @@
   height: 150px;
 }
 
-
 .container-bg {
   background-size: auto;
   border-bottom: 1px solid rgba(117,117,117,0.2);
@@ -14,6 +13,16 @@
   background-repeat: no-repeat;
   background-size: auto;
   font:  normal 27px / 29px "Playfair Display";
+}
+
+.top {
+  top: 0px;
+  margin: 0px 0;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
 }
 
 
@@ -129,17 +138,45 @@
   box-sizing: border-box;
 }
 
+
+#fixed {
+  position: fixed;
+  top: 0px;
+}
+
+#cartcardbar {
+  float: right;   
+  margin: 0px 300px 0px 0px;
+  right: 100px
+}
+
+.barbar {
+  float: left;
+}
+
 .header-bottom {
   padding-bottom: 0px;
 }
 
+
+.dropdown {
+  display: block;
+  margin-top: 120px;
+  top: 21px;
+  max-width: 100%;
+  background: rgb(241, 208, 17);
+  z-index: 1;
+}
+
+/*
 @media screen and (min-width: 1594px) {
   .dropdown {
     margin-top: 120px;
     top: 21px;
     width: 100%;
-    position: relative;
+    position: fixed;
     background: rgb(241, 208, 17);
+    display: block;
   }
 }
 
@@ -147,10 +184,11 @@
   .dropdown {
     margin-top: 140px;
     width: 100%;
-    position: relative;
+    position: fixed;
     background: rgb(241, 208, 17);
   }
 }
+*/
 
 
 .farmnav-button {
@@ -164,7 +202,7 @@
   width: 150px;
 }
 
-.dropdown-text{
+.dropdowntext{
   text-align: left;
 }
 
@@ -197,7 +235,7 @@
 }
 
 .header-one {
-  font:  normal 37px / 39px "Playfair Display";
+  font:  bold 37px / 39px "Playfair Display";
   font-weight: 300;
   padding: 30px 0 0 42px;
   
@@ -372,7 +410,8 @@ body {
 
 .page-tree {
   display: grid;
-  grid-template-columns: 190px auto auto;
+  margin: 0px 100px 0px 100px;
+  grid-template-columns: auto auto;
   padding: 10px;
 }
 
@@ -397,6 +436,10 @@ body {
     grid-template-rows: auto auto;
     padding: 10px;
   }
+}
+
+.fg-nav {
+  margin: 100px 100px 100px 0px;
 }
 
 .fg-grid {
@@ -540,11 +583,23 @@ body {
 }
 
 .cartcard-med {
-  width: 75%;
+  width: 19%;
   max-width: 300px;
   height: auto;
   float: left;
   margin: 178px 0px 0px 0px;
+  background: palegoldenrod;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  font:  normal  17px / 21px "Laksaman";
+}
+
+.cartcard-large {
+  width: 90%;
+  max-width: 300px;
+  height: auto;
+  float: left;
+  margin: 0px 0px 0px 0px;
   background: palegoldenrod;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -610,8 +665,8 @@ max-height:50%;
   word-spacing: normal;
   align-content: "middle";
   color: #424242;
-  padding-right: 50px;
-  padding-left: 50px;
+  padding-right: 35px;
+  padding-left: 35px;
 }
 
 .menu-item-text:after {
