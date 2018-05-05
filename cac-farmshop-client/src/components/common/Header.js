@@ -101,16 +101,62 @@ class Header extends React.Component {
     
   }
 
+  checkRoutes() {
+    switch(sessionStorage.role){
+      case 'customer':
+        return (
+           {
+            home: 'home',
+            farmers: 'farmers',
+            farmgoods: 'farm-goods',
+            cart: 'cart'
+          }
+        ) 
+      case 'farmer':
+        return (
+          {
+          profile: 'profile',
+          farmers: 'farmers',
+          home: 'home',
+          orders: 'orders',
+          'my farmgoods': 'farm-goods'
+          }
+        ) 
+      case 'admin':
+        return (
+          {
+            'create new user': 'signup',
+            farmers: 'farmers',
+            home: 'home',
+            farmgoods: 'farm-goods',
+            users: 'users'
+          }
+        ) 
+      default:
+      //debugger
+        return (
+          {
+            'Sign Up': 'signup',
+            farmers: 'farmers',
+            home: 'home',
+            farmgoods: 'farm-goods'
+          }
+        ) 
+    }
+  }
+
   makeRoutes(){
     const routesLinks = [] 
     //debugger 
-    Object.entries(this.state.routes).map(function(keyName, keyIndex) {
+    const routesObject = this.checkRoutes(); 
+    //debugger 
+    Object.entries(routesObject).map(function(keyName, keyIndex) {
       routesLinks.push(keyName)
     })
     const routesLength = (routesLinks.length - 1)
-    
+    //debugger 
     return (
-      <nav className="nav">
+      <nav className="nav1">
         <ul className="nav__menu header-nav">
           <li>
             <div className="cac-logo-here" align="middle">
@@ -122,19 +168,19 @@ class Header extends React.Component {
             return (
                 <span key={keyIndex}>
                   {keyIndex === routesLength &&
-                    <span>
+                    <span key={keyIndex}>
                       {this.menuSelector(route)}
                       <li className="nav__menu-item left-menu">
                       <a className="menu-item-text" 
                          href="/" onClick={this.logOut}>log out</a>
                       </li>
-                      <li className="nav__menu-item">
+                      <div className="nav__menu-item">
                         {this.miniWidgets()}
-                      </li>
+                      </div>
                     </span>
                   }
-                  {keyIndex !== (routesLinks.length-1) &&
-                  <span>
+                  {keyIndex !== (routesLength) &&
+                  <span key={keyIndex}>
                     {this.menuSelector(route)}
                   </span>
                   }
@@ -247,80 +293,79 @@ class Header extends React.Component {
           <div className="top-bar full-width-line"></div>
             <div className="branding">
               <MediaQuery query="(min-width: 965px)" >
-                <div className="test-container">
-                {sessionStorage.jwt !== "undefined" &&
-                  <div>
+                <div>
+                  {sessionStorage.jwt !== "undefined" &&
+                    <div className="test-container1">
+                        {routes}
+                    </div>
+                  }
+                  {sessionStorage.jwt === "undefined" && 
+                  <div className="test-container">
                     <nav className="nav">
-                      {routes}
+                      <ul className="nav__menu header-nav">
+                        <li>
+                          <div className="cac-logo-here" align="middle">
+                            <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="110" height="102" align="middle"/></a>
+                          </div>
+                        </li>
+                        <li className="nav__menu-item"
+                            onMouseLeave={this.handleLeave}
+                        >
+                          <a href="/" 
+                            className="menu-item-text"
+                            onMouseEnter={this.handleHover}
+                            >Home
+                          </a>
+                          <div className="submenu-container">
+                            <ReactCSSTransitionGroup
+                              transitionName="slide"
+                              transitionEnterTimeout={300}
+                              transitionLeaveTimeout={300}
+                            >
+                              { this.state.showAboutMenu && 
+                                <Submenu selector="home"/> 
+                              }
+                            </ReactCSSTransitionGroup>
+                          </div>
+                        </li>
+                        <li className="nav__menu-item left-menu">
+                          <a href="/farm-goods" className="menu-item-text">Farmgoods</a>
+                        </li>
+                        <li className="nav__menu-item left-menu"
+                            onMouseLeave={this.handleFarmersLeave}
+                        >
+                          <a href="/farmers" 
+                            className="menu-item-text"
+                            onMouseEnter={this.handleFarmersHover}
+                            >Farmers
+                          </a>
+                          <div className="submenu-container">
+                            <ReactCSSTransitionGroup
+                              transitionName="slide"
+                              transitionEnterTimeout={300}
+                              transitionLeaveTimeout={300}
+                            >
+                              { this.state.showFarmerMenu && 
+                                <Submenu selector="farmers"/> 
+                              }
+                            </ReactCSSTransitionGroup>
+                          </div>
+                        </li>
+                        <li className="nav__menu-item left-menu">
+                          <a href="/login" className="menu-item-text">
+                            Log In</a>
+                        </li>
+                        <li className="nav__menu-item left-menu">
+                          <a href="/signup" className="menu-item-text">
+                            Sign Up</a>
+                        </li>
+                      </ul>
+                      <div className="nav__menu-item">
+                          {this.miniWidgets()}
+                      </div>
                     </nav>
-                  </div>
-                }
-                {sessionStorage.jwt === "undefined" && 
-                //menu-item menu-item-type-post_type menu-item-object-post menu-item-has-children menu-item-15136 has-children
-                <nav className="nav">
-                  <ul className="nav__menu header-nav">
-                    <li>
-                      <div className="cac-logo-here" align="middle">
-                        <a href="http://www.chesteragcenter.com" align="middle"><img src="https://static1.squarespace.com/static/541b4499e4b09b50ed990ebc/5adf88708a922dc9c0519e2a/5adf932570a6add7bc7cb2e0/1524601641517/Chester-Agricultural-Center-220.jpg?format=750w" alt="logo" width="110" height="102" align="middle"/></a>
-                      </div>
-                    </li>
-                    <li className="nav__menu-item"
-                        onMouseLeave={this.handleLeave}
-                    >
-                      <a href="/" 
-                        className="menu-item-text"
-                        onMouseEnter={this.handleHover}
-                        >Home
-                      </a>
-                      <div className="submenu-container">
-                        <ReactCSSTransitionGroup
-                          transitionName="slide"
-                          transitionEnterTimeout={300}
-                          transitionLeaveTimeout={300}
-                        >
-                          { this.state.showAboutMenu && 
-                            <Submenu selector="home"/> 
-                          }
-                        </ReactCSSTransitionGroup>
-                      </div>
-                    </li>
-                    <li className="nav__menu-item left-menu">
-                      <a href="/farm-goods" className="menu-item-text">Farmgoods</a>
-                    </li>
-                    <li className="nav__menu-item left-menu"
-                        onMouseLeave={this.handleFarmersLeave}
-                    >
-                      <a href="/farmers" 
-                        className="menu-item-text"
-                        onMouseEnter={this.handleFarmersHover}
-                        >Farmers
-                      </a>
-                      <div className="submenu-container">
-                        <ReactCSSTransitionGroup
-                          transitionName="slide"
-                          transitionEnterTimeout={300}
-                          transitionLeaveTimeout={300}
-                        >
-                          { this.state.showFarmerMenu && 
-                            <Submenu selector="farmers"/> 
-                          }
-                        </ReactCSSTransitionGroup>
-                      </div>
-                    </li>
-                    <li className="nav__menu-item left-menu">
-                      <a href="/login" className="menu-item-text">
-                        Log In</a>
-                    </li>
-                    <li className="nav__menu-item left-menu">
-                      <a href="/signup" className="menu-item-text">
-                        Sign Up</a>
-                    </li>
-                  </ul>
-                  <div className="nav__menu-item">
-                      {this.miniWidgets()}
-                  </div>
-                </nav>
-                }
+                    </div>
+                  }
                 </div>
               </MediaQuery>
             

@@ -138,10 +138,20 @@
   box-sizing: border-box;
 }
 
+#logout {
+  color: black;
+}
+
 
 #fixed {
   position: fixed;
   top: 0px;
+}
+
+
+#fixed1 {
+  position: fixed;
+  top: 50px;
 }
 
 #cartcardbar {
@@ -215,7 +225,13 @@
 }
 
 .test-container {
-  height: 130px;
+  height: 135px;
+  position: relative;
+  background-color: white;
+}
+
+.test-container1 {
+  height: 170px;
   position: relative;
   background-color: white;
 }
@@ -327,7 +343,16 @@ body {
 .nav {
   align-content: "middle";
   display: inline-block;
-  margin: 10px auto 0px auto;
+  margin: 0px auto 0px auto;
+  background: #fff;
+  color: #0d2035;
+  text-align: middle;
+}
+
+.nav1 {
+  align-content: "middle";
+  display: inline-block;
+  margin: 0px auto 100px auto;
   background: #fff;
   color: #0d2035;
   text-align: middle;
@@ -354,7 +379,6 @@ body {
   text-transform: uppercase;
   width: 100%;
   margin: auto;
-
 }
   
 .nav__menu-item {

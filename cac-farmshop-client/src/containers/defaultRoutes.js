@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import './App.css';
 import FarmGoods from './FarmGoods';
-//import FarmersPage from './FarmersPage';
 import FarmersList from '../components/FarmersList';
 import FarmerShow from './FarmerShow';
 import FarmgoodShow from './FarmgoodShow';

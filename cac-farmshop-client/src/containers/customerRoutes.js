@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import CustomerFarmGoods from './customerFarmGoodsPage';
-import FarmersPage from './FarmersPage';
+import FarmersList from '../components/FarmersList';
 import FarmerShow from './FarmerShow';
+import FarmgoodShow from './FarmgoodShow';
+import FarmgoodIndex from './FarmgoodIndex';
 import FarmGoodCard from '../components/farmGoodCard'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -33,14 +35,16 @@ export default class CustomerRoutes extends Component {
   render() {
     return (  
       <BrowserRouter >
-        <div className="background-here">
+        <div className="">
           <Route exact path="/home" />
-          <Route path='/farmers' component={FarmersPage} />
+          <Route path='/farmers' component={FarmersList} />
+          <Route exact path='/farmers/:id' component={FarmerShow} />
+          <Route exact path='/farmers/:id/farmgoods' component={FarmgoodIndex} />
+          <Route exact path='/farmers/:id/farmgoods/:id' component={FarmgoodShow} />
           <Route exact path="/farm-goods" component={CustomerFarmGoods} />
           <Route path="*" render={() => <div></div>} />
           <Route exact path='/cart' component={Cart}/>
           <Route exact path='/checkout' component={Checkout}/>
-
         </div>
       </BrowserRouter >
     );

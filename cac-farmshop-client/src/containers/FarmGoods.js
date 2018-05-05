@@ -14,7 +14,6 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 import './FarmGoods.css';
-//import 'react-sticky-header/styles.css';
 //import StickyHeader from 'react-sticky-header';
 import VisitorCartCard from '../components/visitorCartCard';
 
