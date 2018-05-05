@@ -77,25 +77,21 @@ class App extends Component {
           </StickyHeader>
             {sessionStorage.jwt === "undefined" &&
               <div>
-                <p className="welcome">Welcome VISITOR</p> 
                 <DefaultRoutes /> 
               </div>
             }
             {sessionStorage.role === "customer" &&
               <div>
-                  <p className="welcome">Welcome {sessionStorage.name}</p>
                   <CustomerRoutes />
               </div>
             }
             {sessionStorage.role === "admin" &&
               <div>
-                <p className="welcome">auth level is {sessionStorage.role}</p>
                 <AdminRoutes />
               </div>
             }
             {sessionStorage.role === "farmer" &&
               <div>
-                <p className="welcome">Welcome {sessionStorage.name} / auth level is {sessionStorage.role}</p>
                 <FarmerRoutes />
               </div>
             }
