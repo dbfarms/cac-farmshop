@@ -439,7 +439,7 @@ body {
 .page-tree {
   display: grid;
   margin: 0px 100px 0px 100px;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto;
   padding: 10px;
 }
 
@@ -466,6 +466,20 @@ body {
   }
 }
 
+.footer {
+  border-top: 1px solid rgba(117,117,117,0.2);
+  width: 100%;
+  height: 100px;
+  background-color: #f9f8f4;
+  display: inline-flex;
+}
+
+li > a {
+  font: bold ariel 16px;
+  color: #403e3b ;
+  text-decoration: none;
+}
+
 .fg-nav {
   margin: 100px 100px 100px 0px;
 }
@@ -474,6 +488,7 @@ body {
   display: grid;
   grid-template-columns: auto auto auto;
   grid-row-gap: 20px ;
+  padding: 10px 50px 0px 100px;
 }
 
 @media screen and (max-width: 1120px) {

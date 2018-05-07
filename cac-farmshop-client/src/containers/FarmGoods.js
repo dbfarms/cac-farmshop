@@ -100,8 +100,8 @@ class FarmGoods extends Component {
         <div className="Farm-Goods-Container">
         {this.state.showKey === "show all" && 
           <div>
-              <div >
-                <span className="header-one">Currently For Sale</span>
+              <div className="header-one">
+                <span>Currently For Sale</span>
               </div>
               <ul className="fg-grid">
                 {this.state.farmGoods_array.map(farmGood =>  

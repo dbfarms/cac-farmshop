@@ -376,10 +376,11 @@ class Header extends React.Component {
                             <a href="/signup" className="menu-item-text">
                               Sign Up</a>
                           </li>
+                        
+                          <div className="nav__widget">
+                              {this.miniWidgets()}
+                          </div>
                         </ul>
-                        <div className="nav__menu-item">
-                            {this.miniWidgets()}
-                        </div>
                       </nav>
                     </div>
                   }
