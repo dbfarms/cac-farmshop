@@ -114,7 +114,7 @@ class CustomerFarmGoodModal extends React.Component {
               </div>
             }
             {farmGood.farmGood.attributes.inventory <= 0 &&
-              <p>No longer available. Check back soon</p>
+              <p>No longer available. Check back soon!</p>
             }
           </div>
         </span>
