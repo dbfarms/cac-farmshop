@@ -16,6 +16,7 @@ import MediaQuery from 'react-responsive';
 import './FarmGoods.css';
 //import StickyHeader from 'react-sticky-header';
 import CartCard from '../components/CartCard';
+import VisitorCartCard from '../components/visitorCartCard';
 
 class FarmGoods extends Component {
   constructor(props) {
@@ -27,7 +28,6 @@ class FarmGoods extends Component {
       showCategory: '',
       days: [],
       isEditing: false,
-      openLineitems: 'visitor', 
       farmgood: {
         name: '',
         farmer: '', //EVENTUALLY THIS WILL DEFAULT TO THE LOGGED IN FARMER BUT FOR NOW YOU CAN CHOOSE
@@ -103,7 +103,7 @@ class FarmGoods extends Component {
               <div className="header-one">
                 <span>Currently For Sale</span>
               </div>
-              <ul className="fg-grid">
+              <div className="fg-grid">
                 {this.state.farmGoods_array.map(farmGood =>  
                   <CustomerFarmGoodModal 
                     key={farmGood.id} 
@@ -112,7 +112,7 @@ class FarmGoods extends Component {
                   />
                   )
                 }
-              </ul>
+              </div>
           </div>
         }
         {this.state.showKey === "day"  &&
@@ -155,20 +155,26 @@ class FarmGoods extends Component {
     return (
       <div>
         <div id="fixed1" className="top">
-              <FarmgoodNav 
-                changeShow={this.handleShowChange} 
-                changeDay={this.handleDay} 
-                changeCategory={this.handleCategory}
-              />
+          <div>
+            <FarmgoodNav 
+              changeShow={this.handleShowChange} 
+              changeDay={this.handleDay} 
+              changeCategory={this.handleCategory}
+            />
+          </div>
+            <CartCard />
           </div>
         <MediaQuery query="(max-width: 1294px)" >
         <div>
+          <MediaQuery query="(max-width: 1293px)" >
           <div className="page-tree-small">
+            
             <div>
               {this.showGoodsSplit()}
             </div>
             <br />
           </div>
+          </MediaQuery>
         </div>
         </MediaQuery>
         
@@ -176,6 +182,7 @@ class FarmGoods extends Component {
           
           <div className="page-tree">
             <div>
+              <p>category filler</p>
             </div>
             <div>
               {this.showGoodsSplit()}

@@ -25,6 +25,7 @@ class CustomerFarmGoodModal extends React.Component {
         farmgoodscard: this.props.farmgoodscard
       })
     }
+
   }
 
   daysAvailable = () => {
@@ -47,6 +48,7 @@ class CustomerFarmGoodModal extends React.Component {
 
   addToCart(event){
     event.preventDefault();
+    
     //debugger
     if (sessionStorage.jwt === "undefined") {
       alert("please log in to add to cart!")
@@ -56,7 +58,7 @@ class CustomerFarmGoodModal extends React.Component {
       //debugger 
       var newItem = true 
       //debugger 
-      this.props.lineitems.map(li => {
+      this.props.openLineitems.map(li => {
         //debugger 
         if (li.attributes.farmgood.id === farmGood_id) {
           newItem = false 
@@ -99,8 +101,11 @@ class CustomerFarmGoodModal extends React.Component {
     const farmGood = this.props
     
     //debugger 
+
     return (
       <div>
+      {
+        <div>
       <MediaQuery query="(min-width: 366px)" > 
         <div className={this.state.farmgoodscard}>
           <span onMouseLeave={this.fgReg}>
@@ -144,13 +149,16 @@ class CustomerFarmGoodModal extends React.Component {
                 </div>
               }
               {farmGood.farmGood.attributes.inventory <= 0 &&
-                <p>No longer available. Check back soon!</p>
+                <p>Check back soon!</p>
               }
           </span>
           <div className="fg-li"></div>
         </div>
       </MediaQuery>
     </div>
+
+      }
+      </div>
     )
   }
 }
