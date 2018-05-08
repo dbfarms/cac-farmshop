@@ -271,6 +271,34 @@ class Header extends React.Component {
     }
   }
 
+  showWidgets = () => {
+    return (
+      <div className="mobile-mini-widgets-small-screen">
+        <span className="widget">
+          <ShareButton 
+            compact
+            socialMedia={'facebook'}
+            url="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/"
+          />
+        </span>
+        <span className="widget">
+        <ShareButton 
+          compact
+          socialMedia={'twitter'}
+          url="https://twitter.com/ChesterAgCenter"
+        />
+        </span>
+        <span className="widget">
+        <ShareButton 
+          compact
+          socialMedia={'google-plus'}
+          url="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en"
+        />
+        </span>
+      </div>
+    )
+  }
+
   miniWidgets = () => {
     return (
       <div className="widgetswidgets">
@@ -395,29 +423,9 @@ class Header extends React.Component {
                   <div className="sideMenuSmall">
                     <SideMenu routes={this.state.routes} logout={this.logOut}/>
                   </div>
-                  <div className="mobile-mini-widgets-small-screen">
-                      <span className="widget">
-                        <ShareButton 
-                          compact
-                          socialMedia={'facebook'}
-                          url="https://www.facebook.com/Chesteragriculturalcenter-266309927207713/"
-                        />
-                      </span>
-                      <span className="widget">
-                      <ShareButton 
-                        compact
-                        socialMedia={'twitter'}
-                        url="https://twitter.com/ChesterAgCenter"
-                      />
-                      </span>
-                      <span className="widget">
-                      <ShareButton 
-                        compact
-                        socialMedia={'google-plus'}
-                        url="https://business.google.com/b/111195640342033814688/dashboard/l/04359502499373104089?hl=en"
-                      />
-                      </span>
-                    </div>
+                  <MediaQuery query="(min-width: 328px)" >
+                    {this.showWidgets()}
+                  </MediaQuery>
                   </div>
               </MediaQuery>
           </div>

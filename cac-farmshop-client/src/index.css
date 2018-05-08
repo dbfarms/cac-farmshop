@@ -256,8 +256,8 @@
 .header-one {
   font: bold 35px / 35px "Playfair Display";
   font-weight: 300;
-  text-align: center;
-  padding: 35px 0px 0px 0px;
+  text-align: left;
+  padding-top: 80px;
   width: 100%;
 }
 
@@ -438,8 +438,9 @@ body {
 
 .page-tree {
   display: grid;
-  margin: 0px 100px 0px 100px;
-  grid-template-columns: auto;
+  float: center;
+  margin: 0px 0px 0px 0px;
+  grid-template-columns: auto auto;
   padding: 10px;
 }
 
@@ -468,6 +469,7 @@ body {
 
 .footer {
   border-top: 1px solid rgba(117,117,117,0.2);
+  margin-top: 50px;
   width: 100%;
   height: 100px;
   background-color: #f9f8f4;
@@ -486,9 +488,11 @@ li > a {
 
 .fg-grid {
   display: grid;
+  float: center;
   grid-template-columns: auto auto auto;
+  width: 80%;
   grid-row-gap: 20px ;
-  padding: 10px 50px 0px 100px;
+  padding: 10px auto 0px auto;
 }
 
 @media screen and (max-width: 1120px) {
@@ -553,23 +557,59 @@ li > a {
   padding: 16px;
 }
 
-.FarmGoodsCard {
-  width: 80vw;
-  height: 80vh;
-  max-width: 600px;
-  max-height: 458px;
+/*
+
+
+.fgcardImg {
+  width: 30vw;
+  height: 30vh;
+}
+
+*/
+
+.smallfgcardImg {
   float: left;
-  margin: 6px 6px 6px 6px;
-  background: beige;
+  width: 150px;
+  height: auto;
+}
+
+.smallFarmGoodsCard {
+  width: 100%;
+  height: 113px;
+  float: center;
+  margin: 6px 0px 0px;
+  background: #f9f8f4;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-  font:  bold  17px / 21px "Laksaman";
+  font:  normal 17px / 17px "Ariel";
   box-sizing: border-box;
 }
 
+/*
+.smallFarmGoodsCard:hover {
+  height: 150px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  z-index: 1;
+  display: block;
+}
+*/
+
+.FarmGoodsCard {
+  width: 300px;
+  height: 350px;
+  float: left;
+  margin: 6px 6px 6px 6px;
+  background: #f9f8f4;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  font:  normal  17px / 21px "Ariel";
+  box-sizing: border-box;
+}
+
+
 img {
-  max-width: 600px;
-  max-height: 458px;
+  max-width: 300px;
+  max-height: 229px;
   height: auto; 
 }
 
