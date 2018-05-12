@@ -10,6 +10,7 @@ import SideMenu from '../../components/common/sideMenu';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 import ShareButton from 'react-social-share-buttons';
 import CartCardDropDown from '../CartCardDropDown';
+import { removeLineItem } from '../../actions/lineitems';
 import { getOpenLineItems } from '../../actions/lineitems';
 
 class Header extends React.Component {  
@@ -170,6 +171,14 @@ class Header extends React.Component {
     }
   }
 
+  deleteItem = (li) => {
+    //debugger 
+    const lineItemId = Number(li.id)
+    const initialQuantity = li.attributes.quantity
+    //debugger
+    this.props.removeLineItem(lineItemId, initialQuantity)
+  }
+
   makeRoutes(){
     const routesLinks = [] 
     //debugger 
@@ -283,7 +292,7 @@ class Header extends React.Component {
                 transitionLeaveTimeout={300}
               >
                 {this.state.showCart && 
-                    <CartCardDropDown openLineitems={this.state.openLineitems} /> 
+                    <CartCardDropDown openLineitems={this.state.openLineitems} deleteItem={this.deleteItem} /> 
                 }
               </ReactCSSTransitionGroup>
             </div>
@@ -494,7 +503,7 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getOpenLineItems })(Header);
+export default connect(mapStateToProps, { getOpenLineItems, removeLineItem })(Header);
 
 
 //Header.propTypes = {  
