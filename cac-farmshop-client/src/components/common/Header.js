@@ -9,6 +9,8 @@ import Submenu from '../../components/common/Submenu';
 import SideMenu from '../../components/common/sideMenu';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 import ShareButton from 'react-social-share-buttons';
+import CartCardDropDown from '../CartCardDropDown';
+import { getOpenLineItems } from '../../actions/lineitems';
 
 class Header extends React.Component {  
   constructor(props) {
@@ -16,6 +18,7 @@ class Header extends React.Component {
 
     this.state = {
       showAboutMenu: false,
+      showCart: false,
       showFarmerMenu: false,
       routes: undefined 
     };
@@ -67,7 +70,20 @@ class Header extends React.Component {
           }
         }) 
     }
+    if (sessionStorage.role === "customer") {
+      this.props.getOpenLineItems();
+    }
   }
+
+  componentWillReceiveProps(nextProps){
+    //debugger 
+    this.setState({
+        openLineitems: nextProps.openLineitems,
+        cart: nextProps.cart 
+        //oldLineItems: nextProps.allLineItems 
+    })
+}
+
 
   handleHover = (event) => {
     //debugger 
@@ -76,6 +92,15 @@ class Header extends React.Component {
   
   handleLeave = (event) => {
     this.setState({ showAboutMenu: false });
+  };
+
+  handleCartHover = (event) => {
+    //debugger 
+    this.setState({ showCart: true });
+  };
+  
+  handleCartLeave = (event) => {
+    this.setState({ showCart: false });
   };
 
   handleFarmersHover = (event) => {
@@ -238,6 +263,27 @@ class Header extends React.Component {
               >
                 {this.state.showFarmerMenu && 
                   <Submenu selector="farmers"/> 
+                }
+              </ReactCSSTransitionGroup>
+            </div>
+          </li>
+        )
+      case 'cart':
+        return (
+          <li className="nav__menu-item left-menu"
+              onMouseLeave={this.handleCartLeave}>
+            <a href={`/${route[1]}`} 
+              className="menu-item-text"
+              onMouseEnter={this.handleCartHover}> {route[0]} 
+            </a>
+            <div className="submenu-container_cart">
+              <ReactCSSTransitionGroup
+                transitionName="slide"
+                transitionEnterTimeout={300}
+                transitionLeaveTimeout={300}
+              >
+                {this.state.showCart && 
+                    <CartCardDropDown openLineitems={this.state.openLineitems} /> 
                 }
               </ReactCSSTransitionGroup>
             </div>
@@ -437,10 +483,25 @@ class Header extends React.Component {
   }
 
 
+
+const mapStateToProps = (state) => {
+  //debugger 
+  return ({
+      cart: state.cart,
+      openLineitems: state.openLineitems, 
+      logged_in: state.session
+
+  })
+}
+
+export default connect(mapStateToProps, { getOpenLineItems })(Header);
+
+
 //Header.propTypes = {  
 //  actions: PropTypes.object.isRequired
 //}
 
+/*
 function mapStateToProps(state, ownProps) {
   //debugger 
   return {logged_in: state.session};
@@ -452,7 +513,10 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, { getOpenLineItems }, mapDispatchToProps)(Header);
+*/
+
+
 
 /*
 

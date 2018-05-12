@@ -213,6 +213,7 @@
 }
 
 .dropdowntext{
+  top: 200px;
   text-align: left;
 }
 
@@ -320,6 +321,14 @@
   z-index: 1;  
 }
 
+.submenu-container_cart {
+  height: 150px; 
+  min-width: 500px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 1;  
+}
+
 html {
   box-sizing: border-box;
 }
@@ -407,6 +416,16 @@ body {
   display: block;
   position: absolute;
   width: 180px;
+  background-color: black;
+}
+
+.nav__submenu_cart {
+  font:  normal 17px / 17px "Playfair Display";
+  font-weight: 300;
+  text-transform: none;
+  display: block;
+  position: absolute;
+  width: auto;
   background-color: black;
 }
 

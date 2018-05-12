@@ -4,6 +4,136 @@ import { getOpenLineItems } from '../actions/lineitems';
 import { removeLineItem } from '../actions/lineitems';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+//import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, NavLink } from 'reactstrap';
+//import Button from 'material-ui/Button';
+
+class CartCard extends Component {
+    constructor(props){
+        super(props)
+        
+        this.state = {
+            //dropdownOpen: false,
+            openLineitems: [],
+            cart: this.props.cart, 
+            total: 0,
+        };
+    }
+
+    componentWillMount(){
+        if (this.state.openLineitems === []) {
+            this.props.getOpenLineItems();
+        }
+    }
+
+    componentWillReceiveProps(nextProps){
+        //debugger 
+        this.setState({
+            openLineitems: nextProps.openLineitems,
+            cart: nextProps.cart 
+            //oldLineItems: nextProps.allLineItems 
+        })
+    }
+
+    /*
+    handleHover = (event) => {
+        this.setState({ dropdownOpen: true })
+    };
+
+    handleLeave = (event) => {
+        this.setState({ dropdownOpen: false })
+    };
+    */
+
+    deleteItem = (li) => {
+        //debugger 
+        const lineItemId = Number(li.id)
+        const initialQuantity = li.attributes.quantity
+        //debugger
+        this.props.removeLineItem(lineItemId, initialQuantity)
+    }
+
+    sortLineItems(lineitems){
+        var sortedLI = lineitems.sort(function(a, b) {
+            return a.id = b.id;
+        })
+    }
+
+    makeCart() {
+          
+        if (this.state.openLineitems.length > 0 ) {
+            //debugger
+            return this.state.openLineitems.map((fg, keyIndex) => {
+                return (
+                    <div>
+                        {keyIndex !== (this.state.openLineitems.length - 1) &&
+                            <li className="nav__submenu-item">
+                                {fg.attributes.farmgood.name} 
+                                - {fg.attributes.quantity} at ${fg.attributes.farmgood.price}
+                                <button 
+                                    float="right" 
+                                    onClick={() => {this.deleteItem(fg)
+                                }}>X</button>
+                            </li>
+                        }
+                        {keyIndex === (this.state.openLineitems.length - 1) &&
+                            <li className="nav__submenu-item">
+                                {fg.attributes.farmgood.name} 
+                                - {fg.attributes.quantity} at ${fg.attributes.farmgood.price}
+                                <button 
+                                    float="right" 
+                                    onClick={() => {this.deleteItem(fg)
+                                }}>X</button>
+                                Total: {this.state.total}
+                                <a href="/checkout">
+                                    <button>Checkout</button>
+                                </a>
+                            </li>
+                        }
+                    </div>
+                )
+            })
+        }
+        
+    }
+
+    render(){
+    
+    //debugger 
+    //var total = 0;
+    if (this.state.openLineitems.length > 0) {
+        this.state.openLineitems.forEach(lineItem => this.state.total += (lineItem.attributes.farmgood.price * lineItem.attributes.quantity))
+    }
+    const cartList = this.makeCart()
+
+    return (
+            <div>
+                {cartList}
+            </div>
+    )
+    }
+}
+
+
+const mapStateToProps = (state) => {
+    //debugger 
+    return ({
+        cart: state.cart,
+        openLineitems: state.openLineitems 
+
+    })
+  }
+  
+  export default connect(mapStateToProps, { getOpenLineItems, removeLineItem })(CartCard); // 
+
+/*
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getOpenLineItems } from '../actions/lineitems';
+import { removeLineItem } from '../actions/lineitems';
+import { Link } from 'react-router-dom';
+import MediaQuery from 'react-responsive';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, NavLink } from 'reactstrap';
 //import Button from 'material-ui/Button';
 
@@ -110,58 +240,6 @@ const mapStateToProps = (state) => {
   }
   
   export default connect(mapStateToProps, { getOpenLineItems, removeLineItem })(CartCard); // 
-
-/*
-<DropdownItem onClick={() => {
-                    this.props.changeShow('day')
-                    this.props.changeDay('Monday')
-                    }}>Monday</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.props.changeShow('day')
-                    this.props.changeDay('Tuesday')
-                    }}>Tuesday</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.props.changeShow('day')
-                    this.props.changeDay('Wednesday')
-                    }}>Wednesday</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.props.changeShow('day')
-                    this.props.changeDay('Thursday')
-                    }}>Thursday</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.props.changeShow('day')
-                    this.props.changeDay('Friday')
-                    }}>Friday</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.props.changeShow('day')
-                    this.props.changeDay('Saturday')
-                    }}>Saturday</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.props.changeShow('day')
-                    this.props.changeDay('Sunday')
-                    }}>Sunday</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.props.changeShow('show all')
-                    this.props.changeDay('Any Day')
-                    }}>Show All</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem header>By Category</DropdownItem>
-                <DropdownItem onClick={() => {
-                    this.props.changeShow('category')
-                    this.props.changeCategory('Vegetables/Fruit')
-                    }}>Fruit & Vegetables</DropdownItem>
-                <DropdownItem onClick={() => {
-                    this.props.changeShow('category')
-                    this.props.changeCategory('Meat')
-                    }}>Meat</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.props.changeShow('category')
-                    this.props.changeCategory('Dairy')
-                    }}>Dairy</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.props.changeShow('category')
-                    this.props.changeCategory('Eggs')
-                    }}>Eggs</DropdownItem>
 
 
 ///
