@@ -393,6 +393,7 @@ class Header extends React.Component {
 
   render() {
     //debugger 
+    const cartCountTotal = this.cartCountFunc()
     const routes = this.makeRoutes() 
     const miniWidgetShow = this.miniWidgets()
     //debugger 
@@ -487,9 +488,29 @@ class Header extends React.Component {
                   <div className="sideMenuSmall">
                     <SideMenu routes={this.state.routes} logout={this.logOut}/>
                   </div>
-                    <MediaQuery query="(min-width: 328px)" >
-                      {miniWidgetShow}
-                    </MediaQuery>
+                  <div className="cartSmallHeader">
+                    <li className="nav__menu-item"
+                        onMouseLeave={this.handleCartLeave}>
+                      <a href="cart"
+                        className="menu-item-text"
+                        onMouseEnter={this.handleCartHover}> Cart <span className="cartCount">{cartCountTotal}</span>
+                      </a>
+                      <div className="submenu-container_cart_small">
+                        <ReactCSSTransitionGroup
+                          transitionName="slide"
+                          transitionEnterTimeout={300}
+                          transitionLeaveTimeout={300}
+                        >
+                          {this.state.showCart && 
+                              <CartCardDropDown openLineitems={this.state.openLineitems} deleteItem={this.deleteItem} /> 
+                          }
+                        </ReactCSSTransitionGroup>
+                      </div>
+                    </li>
+                  </div>
+                  <MediaQuery query="(min-width: 328px)" >
+                    {miniWidgetShow}
+                  </MediaQuery>
                   </div>
               </MediaQuery>
           </div>
