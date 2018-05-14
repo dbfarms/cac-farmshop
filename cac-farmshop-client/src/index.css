@@ -340,6 +340,16 @@
   z-index: 1;  
 }
 
+.checkoutButton:hover {
+  border-radius: 5px;
+  background-color: beige
+}
+
+.subtractItem:hover {
+  background-color: lightblue;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
 html {
   box-sizing: border-box;
 }
@@ -434,7 +444,7 @@ body {
   font:  normal 15px / 15px "Playfair Display";
   text-transform: none;
   display: block;
-  position: absolute;
+  position: relative;
   width: auto;
   height: auto;
   background-color: black;

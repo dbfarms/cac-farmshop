@@ -12,30 +12,6 @@ const loginSuccess = () => { //cart
   }
 }
 
-/*
-const setCart = (carts, user_id) => {
-  //debugger
-  const userCarts = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
-  //debugger 
-  const current_cart = userCarts[userCarts.length - 1]
-  return {
-    type: 'GET_CART_SUCCESS',
-    current_cart
-  }
-}
-
-export const getCart = (user_id) => {
-  //debugger
-  return dispatch => {
-    return fetch('http://localhost:3000/api/carts', header)
-      //fetch(`${API_URL}/carts`)
-      .then(response => response.json())
-      .then(carts => dispatch(setCart(carts, user_id)))
-      .catch(error => console.log(error));
-  }
-}
-*/
-
 export function logInUser(credentials, history) {  
   //debugger
   return function(dispatch) {
@@ -164,10 +140,6 @@ export function getCustomerUsers() {
   };
 }
 
-////
-
-
-
 const setCombinedUsers = users => {
   //debugger
   return {
@@ -191,6 +163,54 @@ export function getCombinedUsers() {
     })
   };
 }
+
+const setUser = user => {
+  //debugger 
+  return {
+    type: 'USER_SUCCESS',
+    user
+  }
+}
+
+
+/*
+export const getFarmGoods = () => {
+  return dispatch => {
+   // debugger
+    return fetch('http://localhost:3000/api/farmgoods', header)
+   // fetch('http://localhost:3000/api/days', header) ///
+      .then(response => response.json())
+      .then(farmGoods => dispatch(setFarmGoods(farmGoods)))
+      .catch(error => console.log(error));
+  }
+}
+
+*/
+
+
+/*
+const setCart = (carts, user_id) => {
+  //debugger
+  const userCarts = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
+  //debugger 
+  const current_cart = userCarts[userCarts.length - 1]
+  return {
+    type: 'GET_CART_SUCCESS',
+    current_cart
+  }
+}
+
+export const getCart = (user_id) => {
+  //debugger
+  return dispatch => {
+    return fetch('http://localhost:3000/api/carts', header)
+      //fetch(`${API_URL}/carts`)
+      .then(response => response.json())
+      .then(carts => dispatch(setCart(carts, user_id)))
+      .catch(error => console.log(error));
+  }
+}
+*/
 
 
 
@@ -232,27 +252,4 @@ export const getUser = () => {
     .catch(error => console.log(error))
   }
 }
-*/
-
-const setUser = user => {
-  //debugger 
-  return {
-    type: 'USER_SUCCESS',
-    user
-  }
-}
-
-
-/*
-export const getFarmGoods = () => {
-  return dispatch => {
-   // debugger
-    return fetch('http://localhost:3000/api/farmgoods', header)
-   // fetch('http://localhost:3000/api/days', header) ///
-      .then(response => response.json())
-      .then(farmGoods => dispatch(setFarmGoods(farmGoods)))
-      .catch(error => console.log(error));
-  }
-}
-
 */

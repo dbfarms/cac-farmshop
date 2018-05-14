@@ -15,6 +15,16 @@ export default class CartCardDropDown extends React.Component {
 
   }
 
+
+  componentWillReceiveProps(nextProps){
+    //debugger 
+    this.setState({
+        openLineitems: nextProps.openLineitems,
+        cart: nextProps.cart 
+        //oldLineItems: nextProps.allLineItems 
+    })
+}
+
   cartList() {
     var total = 0;
     this.state.openLineitems.forEach(lineItem => total += (lineItem.attributes.farmgood.price * lineItem.attributes.quantity))
@@ -31,8 +41,9 @@ export default class CartCardDropDown extends React.Component {
                         - {fg.attributes.quantity} at ${fg.attributes.farmgood.price}
                         <button 
                             float="right" 
-                            onClick={() => {this.props.deleteItem(fg)
-                        }}>X</button>
+                            className="subtractItem"
+                            onClick={() => {this.props.deleteItem(fg)}}
+                        >-</button>
                     </li>
                 }
                 {keyIndex === (this.state.openLineitems.length - 1) &&
@@ -41,14 +52,15 @@ export default class CartCardDropDown extends React.Component {
                             {fg.attributes.farmgood.name} 
                             - {fg.attributes.quantity} at ${fg.attributes.farmgood.price}
                             <button 
+                                className="subtractItem"
                                 float="right" 
                                 onClick={() => {this.props.deleteItem(fg)
-                            }}>X</button>
+                            }}>-</button>
                         </li>
                         <li className="nav__submenu-item">
                             <p>Total: {total}</p>
                             <a href="/checkout">
-                                <button>Checkout</button>
+                                <button className="checkoutButton">Checkout</button>
                             </a>
                         </li>
                     </div>
@@ -77,3 +89,12 @@ export default class CartCardDropDown extends React.Component {
 
   }
 }
+
+const mapStateToProps = (state) => {
+    debugger 
+    return ({
+        cart: state.cart,
+        openLineitems: state.openLineitems, 
+    })
+  }
+  

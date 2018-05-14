@@ -12,6 +12,7 @@ import ShareButton from 'react-social-share-buttons';
 import CartCardDropDown from '../CartCardDropDown';
 import { removeLineItem } from '../../actions/lineitems';
 import { getOpenLineItems } from '../../actions/lineitems';
+import { logOutUser } from '../../actions/sessionActions';
 
 class Header extends React.Component {  
   constructor(props) {
@@ -86,7 +87,6 @@ class Header extends React.Component {
     })
 }
 
-
   handleHover = (event) => {
     //debugger 
     this.setState({ showAboutMenu: true });
@@ -118,12 +118,10 @@ class Header extends React.Component {
     if (event.preventDefault) {
       event.preventDefault();
       alert('you are logged out')
-      //one day i'd like the redirect to work?
-      this.props.actions.logOutUser();
+      this.props.logOutUser();
     } else {
       alert('you are logged out')
-      //one day i'd like the redirect to work?
-      this.props.actions.logOutUser();
+      this.props.logOutUser();
     }
     
   }
@@ -521,8 +519,6 @@ class Header extends React.Component {
     }
   }
 
-
-
 const mapStateToProps = (state) => {
   //debugger 
   return ({
@@ -533,7 +529,7 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getOpenLineItems, removeLineItem })(Header);
+export default connect(mapStateToProps, { getOpenLineItems, removeLineItem, logOutUser })(Header);
 
 
 //Header.propTypes = {  

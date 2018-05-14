@@ -1,3 +1,4 @@
+/*
 import React, {Component} from 'react';  
 import { Link, Redirect } from 'react-router-dom';  
 import {connect} from 'react-redux';  
@@ -44,5 +45,5 @@ const mapStateToProps = (state) => {
   }
 */
   
-export default Logout 
+//export default Logout 
 //export default connect(mapStateToProps, { })(Logout);
