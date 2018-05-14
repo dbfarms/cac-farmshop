@@ -8,13 +8,16 @@ import './index.css';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 import store from './store.js'
-
+import Footer from './components/common/Footer'
 import 'bootstrap/dist/css/bootstrap.css'; // for dropdown
 
 ReactDOM.render(
   <Provider store={store} >
       <div>
-         <App />
+        <App />
+        <footer>
+            <Footer />
+        </footer>
       </div>
   </Provider>,
     document.getElementById('root')

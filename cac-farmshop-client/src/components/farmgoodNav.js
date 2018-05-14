@@ -103,7 +103,7 @@ export default class FarmgoodNav extends React.Component {
                     Sort Farmgoods
                     </DropdownToggle>
                     <DropdownMenu>
-                        <DropdownItem header>By Day</DropdownItem>
+                        <DropdownItem header>Available By Day</DropdownItem>
                         <DropdownItem onClick={() => {
                             this.props.changeShow('day')
                             this.props.changeDay('Monday')
@@ -137,7 +137,16 @@ export default class FarmgoodNav extends React.Component {
                             this.props.changeDay('Any Day')
                             }}>Show All</DropdownItem>
                         <DropdownItem divider />
-                        <DropdownItem header>By Category</DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
+            )
+        }
+    }
+}
+
+/*
+
+<DropdownItem header>By Category</DropdownItem>
                         <DropdownItem onClick={() => {
                             this.props.changeShow('category')
                             this.props.changeCategory('Vegetables/Fruit')
@@ -154,14 +163,6 @@ export default class FarmgoodNav extends React.Component {
                             this.props.changeShow('category')
                             this.props.changeCategory('Eggs')
                             }}>Eggs</DropdownItem>
-                    </DropdownMenu>
-                </Dropdown>
-            )
-        }
-    }
-}
-
-/*
 
 import React from 'react'
 import '../containers/farmgoodNav.css';

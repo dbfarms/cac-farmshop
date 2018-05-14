@@ -65,7 +65,7 @@ class CartCard extends Component {
             //debugger
             return this.state.openLineitems.map((fg, keyIndex) => {
                 return (
-                    <div>
+                    <div key={keyIndex}>
                         {keyIndex !== (this.state.openLineitems.length - 1) &&
                             <li className="nav__submenu-item">
                                 {fg.attributes.farmgood.name} 

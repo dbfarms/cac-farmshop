@@ -23,7 +23,6 @@ import CustomerRoutes from './customerRoutes';
 import DefaultRoutes from './defaultRoutes';
 import 'react-sticky-header/styles.css';
 import StickyHeader from 'react-sticky-header';
-import Footer from '../components/common/Footer'
 import '../index.css'
 
 class App extends Component {
@@ -96,7 +95,6 @@ class App extends Component {
                 <FarmerRoutes />
               </div>
             }
-            <Footer />
       </div>
     );
   }

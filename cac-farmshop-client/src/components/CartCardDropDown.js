@@ -6,8 +6,13 @@ export default class CartCardDropDown extends React.Component {
 
     this.state = {
       openLineitems: this.props.openLineitems,
-      total: 0
+      //total: 0
     }
+  }
+
+  handleHover(){
+      //debugger 
+
   }
 
   cartList() {
@@ -16,9 +21,12 @@ export default class CartCardDropDown extends React.Component {
 
     return this.state.openLineitems.map((fg, keyIndex) => {
         return (
-            <div>
+            <div key={keyIndex}>
                 {keyIndex !== (this.state.openLineitems.length - 1) &&
-                    <li className="nav__submenu-item">
+                    <li 
+                        className="nav__submenu-item_cart"
+                        onMouseEnter={this.handleHover}
+                    >
                         {fg.attributes.farmgood.name} 
                         - {fg.attributes.quantity} at ${fg.attributes.farmgood.price}
                         <button 
@@ -29,20 +37,20 @@ export default class CartCardDropDown extends React.Component {
                 }
                 {keyIndex === (this.state.openLineitems.length - 1) &&
                     <div>
-                    <li className="nav__submenu-item">
-                        {fg.attributes.farmgood.name} 
-                        - {fg.attributes.quantity} at ${fg.attributes.farmgood.price}
-                        <button 
-                            float="right" 
-                            onClick={() => {this.props.deleteItem(fg)
-                        }}>X</button>
-                    </li>
-                    <li className="nav__submenu-item">
-                        <p>Total: {total}</p>
-                        <a href="/checkout">
-                            <button>Checkout</button>
-                        </a>
-                    </li>
+                        <li className="nav__submenu-item_cart">
+                            {fg.attributes.farmgood.name} 
+                            - {fg.attributes.quantity} at ${fg.attributes.farmgood.price}
+                            <button 
+                                float="right" 
+                                onClick={() => {this.props.deleteItem(fg)
+                            }}>X</button>
+                        </li>
+                        <li className="nav__submenu-item">
+                            <p>Total: {total}</p>
+                            <a href="/checkout">
+                                <button>Checkout</button>
+                            </a>
+                        </li>
                     </div>
                 }
             </div>

@@ -162,7 +162,7 @@ class FarmGoods extends Component {
               changeCategory={this.handleCategory}
             />
           </div>
-            <CartCard />
+           
           </div>
         <MediaQuery query="(max-width: 1294px)" >
         <div>

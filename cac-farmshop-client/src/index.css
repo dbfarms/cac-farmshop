@@ -213,7 +213,6 @@
 }
 
 .dropdowntext{
-  top: 200px;
   text-align: left;
 }
 
@@ -311,6 +310,12 @@
 
 .slide-leave-active {
   transform: translateY(-100%);
+}
+
+.cartCount {
+  background-color: lightblue;
+  border-radius: 25px;
+  padding: 5px; 
 }
 
 .submenu-container {
@@ -419,12 +424,12 @@ body {
 }
 
 .nav__submenu_cart {
-  font:  normal 17px / 17px "Playfair Display";
-  font-weight: 300;
+  font:  normal 15px / 15px "Playfair Display";
   text-transform: none;
   display: block;
   position: absolute;
   width: auto;
+  height: auto;
   background-color: black;
 }
 
@@ -453,6 +458,17 @@ body {
   background: rgba(#000, 0.1);
   color: #86af2d;
 }
+
+.nav__submenu-item_cart {
+  align-content: "left";
+  padding: 10px 0px 10px 0px;
+}
+
+.nav__submenu-item_cart:hover {
+  background: rgba(#000, 0.1);
+  color: #86af2d;
+}
+
 
 .page-tree {
   display: grid;
@@ -491,7 +507,12 @@ body {
   width: 100%;
   height: 100px;
   background-color: #f9f8f4;
-  display: inline-flex;
+  display: block;
+  bottom: 10px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  text-align: center;
 }
 
 li > a {

@@ -21,7 +21,8 @@ class Header extends React.Component {
       showAboutMenu: false,
       showCart: false,
       showFarmerMenu: false,
-      routes: undefined 
+      routes: undefined, 
+      openLineitems: []
     };
 
     this.logOut = this.logOut.bind(this);
@@ -231,6 +232,14 @@ class Header extends React.Component {
     visibility: "visible"
   };
 
+  cartCountFunc(){
+    //debugger 
+    var cartCount = 0;
+    this.state.openLineitems.forEach(lineItem => {cartCount += lineItem.attributes.quantity})
+    return cartCount //debugger 
+    //cartCount = this.state.openLineitems.forEach(lineItem => {debugger})
+  }
+
   menuSelector = (route) => {
     //debugger 
     switch(route[1]){
@@ -253,7 +262,6 @@ class Header extends React.Component {
                 }
               </ReactCSSTransitionGroup>
             </div>
-            {console.log(route[1])}
           </li>
         )
       case 'farmers':
@@ -278,12 +286,13 @@ class Header extends React.Component {
           </li>
         )
       case 'cart':
+        const cartCountTotal = this.cartCountFunc()
         return (
           <li className="nav__menu-item left-menu"
               onMouseLeave={this.handleCartLeave}>
             <a href={`/${route[1]}`} 
               className="menu-item-text"
-              onMouseEnter={this.handleCartHover}> {route[0]} 
+              onMouseEnter={this.handleCartHover}> {route[0]} <span className="cartCount">{cartCountTotal}</span>
             </a>
             <div className="submenu-container_cart">
               <ReactCSSTransitionGroup
@@ -385,7 +394,7 @@ class Header extends React.Component {
   render() {
     //debugger 
     const routes = this.makeRoutes() 
-    
+    const miniWidgetShow = this.miniWidgets()
     //debugger 
     return (
       <header>
@@ -422,7 +431,7 @@ class Header extends React.Component {
                                 transitionEnterTimeout={300}
                                 transitionLeaveTimeout={300}
                               >
-                                { this.state.showAboutMenu && 
+                                {this.state.showAboutMenu && 
                                   <Submenu selector="home"/> 
                                 }
                               </ReactCSSTransitionGroup>
@@ -445,7 +454,7 @@ class Header extends React.Component {
                                 transitionEnterTimeout={300}
                                 transitionLeaveTimeout={300}
                               >
-                                { this.state.showFarmerMenu && 
+                                {this.state.showFarmerMenu && 
                                   <Submenu selector="farmers"/> 
                                 }
                               </ReactCSSTransitionGroup>
@@ -461,7 +470,7 @@ class Header extends React.Component {
                           </li>
                         
                           <div className="nav__widget">
-                              {this.miniWidgets()}
+                              {miniWidgetShow}
                           </div>
                         </ul>
                       </nav>
@@ -478,9 +487,9 @@ class Header extends React.Component {
                   <div className="sideMenuSmall">
                     <SideMenu routes={this.state.routes} logout={this.logOut}/>
                   </div>
-                  <MediaQuery query="(min-width: 328px)" >
-                    {this.showWidgets()}
-                  </MediaQuery>
+                    <MediaQuery query="(min-width: 328px)" >
+                      {miniWidgetShow}
+                    </MediaQuery>
                   </div>
               </MediaQuery>
           </div>
