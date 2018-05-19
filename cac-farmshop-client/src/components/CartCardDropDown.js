@@ -25,13 +25,13 @@ class CartCardDropDown extends React.Component {
 
   componentWillReceiveProps(nextProps){
     //debugger 
-    console.log("next props in carcarddropdown")
+    //console.log("next props in carcarddropdown")
     if (sessionStorage.id === undefined) {
         this.setState({
             openLineitems: [],
             cart: [],
         })
-        console.log(this.state.openLineitems)
+        //console.log(this.state.openLineitems)
     } else {
         this.setState({
             openLineitems: nextProps.openLineitems,
@@ -108,7 +108,7 @@ class CartCardDropDown extends React.Component {
 
 const mapStateToProps = (state) => {
     //debugger 
-    console.log("mapstatetoprops in carcarddropdown")
+    //console.log("mapstatetoprops in carcarddropdown")
     //debugger 
     return ({
         cart: state.cart,

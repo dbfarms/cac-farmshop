@@ -84,7 +84,7 @@ export function logInUser(credentials, history) {
         dispatch(loginSuccess());
       }
       */
-      dispatch(loginSuccess());
+      //dispatch(loginSuccess());
       history.push('/farm-goods')
     }).catch(error => {
       throw(error);
@@ -148,11 +148,12 @@ export function adminCustomerSignUpUser(credentials, history) {
 
 export function logOutUser() {  
     //debugger 
-    showNoLineItems();
+    //showNoLineItems();
     auth.logOut();
     return {type: types.LOG_OUT}
 }
 
+/*
 const showNoLineItems = () => {
   //debugger 
   const openLineitems = []
@@ -162,6 +163,7 @@ const showNoLineItems = () => {
     openLineitems
   }
 }
+*/
 
 let header = new Headers({
   'Access-Control-Allow-Origin':'',

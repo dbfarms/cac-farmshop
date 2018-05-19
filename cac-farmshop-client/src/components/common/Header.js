@@ -78,7 +78,6 @@ class Header extends React.Component {
       this.props.getOpenLineItems();
     } else {
       //debugger
-      console.log("not a customer so no openline items allegedly?")
       this.setState({
         openLineitems: []
       })
@@ -87,17 +86,17 @@ class Header extends React.Component {
 
   componentWillReceiveProps(nextProps){
     //debugger 
-    console.log("next props header")
-    console.log(nextProps)
+    //console.log("next props header")
+    //console.log(nextProps)
     
     if (sessionStorage.id === undefined) {
       //debugger 
-      console.log("session is undefined")
+      //console.log("session is undefined")
       this.setState({
           openLineitems: [],
           cart: [],
       })
-      console.log(this.state.openLineitems)
+      //console.log(this.state.openLineitems)
     } else {
       //debugger 
       this.setState({
@@ -334,8 +333,6 @@ class Header extends React.Component {
               >
                 {this.state.showCart && 
                   <div>
-                    {console.log("here")}
-                    {console.log(this.props.openLineitems)}
                     <CartCardDropDown openLineitems={this.state.openLineitems} deleteItem={this.deleteItem} /> 
                   </div>
                 }
@@ -355,6 +352,8 @@ class Header extends React.Component {
   }
 
   welcomeFunc(){
+    // move to below cart / burger menu/////////////////////////////////////////////////
+    /*
     switch (sessionStorage.role){
       case 'undefined':
         return (<p className="welcome">Welcome VISITOR</p> )
@@ -368,7 +367,7 @@ class Header extends React.Component {
       case 'admin':
         return (<p className="welcome">Welcome {sessionStorage.name}</p>)
       */
-    }
+    //}
   }
 
   showWidgets = () => {
@@ -429,10 +428,11 @@ class Header extends React.Component {
 
   render() {
     //debugger 
-    console.log("header")
+    //console.log("header")
     const cartCountTotal = this.cartCountFunc()
     const routes = this.makeRoutes() 
     const miniWidgetShow = this.miniWidgets()
+    const welcomeUser = this.welcomeFunc();
     //debugger 
     return (
       <header>
@@ -540,9 +540,6 @@ class Header extends React.Component {
                         >
                           {this.state.showCart && 
                             <div>
-                              {console.log("no here")}
-                              {console.log(this.props.openLineitems)}
-                              {console.log(this.state.openLineitems)}
                               <CartCardDropDown openLineitems={this.state.openLineitems} deleteItem={this.deleteItem} /> 
                             </div>
                           }
@@ -556,7 +553,7 @@ class Header extends React.Component {
                   </div>
               </MediaQuery>
           </div>
-          {this.welcomeFunc}
+          {welcomeUser}
         </div>
       </header>
     )

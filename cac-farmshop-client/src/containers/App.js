@@ -114,7 +114,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state)
+  //console.log(state)
   return ({
       farmGoods: state.farmGoods,
       logged_in: state.session, //changing this to check in header.js for sessionStorage that isn't undefined

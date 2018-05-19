@@ -24,12 +24,8 @@ export default function sessionReducer(state = [initialState.session, initialSta
       //debugger 
       return action.current_cart 
     case types.LOG_OUT:
-      //browserHistory.push('/farm-goods')
-      //state = undefined 
-      //debugger 
-      console.log("initial state")
-      console.log(initialState)
-      //debugger 
+      //console.log("initial state")
+      //console.log(initialState)
       return (
         state,
         initialState,

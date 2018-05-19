@@ -288,18 +288,26 @@ const setAllUserLineItems = (lineitems, cart) => {
 
 const setCart = (carts, user_id) => {
   //debugger
-  const userCarts = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
-  //debugger 
-  const current_cart = userCarts[userCarts.length - 1]
-  return {
-    type: 'GET_CART_SUCCESS',
-    current_cart
+  if (user_id != undefined ) {
+    const userCarts = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
+    //debugger 
+    const current_cart = userCarts[userCarts.length - 1]
+    return {
+      type: 'GET_CART_SUCCESS',
+      current_cart
+    }
+  } else {
+    const current_cart = []
+    return {
+      type: 'GET_CART_SUCCESS',
+      current_cart
+    }
   }
 }
 
 export const getCart = (user_id) => {
   //debugger
-  if (sessionStorage.jwt != "undefined"){
+  //if (sessionStorage.jwt != "undefined"){
     return dispatch => {
       return fetch('http://localhost:3000/api/carts', header)
         //fetch(`${API_URL}/carts`)
@@ -307,11 +315,11 @@ export const getCart = (user_id) => {
         .then(carts => dispatch(setCart(carts, user_id)))
         .catch(error => console.log(error));
     }
-  } else {
+  //} else {
     //debugger 
-    const cart = []
-    return cart
-  }
+  //  const cart = []
+  //  return cart
+ // }
 }
 
 ///////////////////////////////
