@@ -1,5 +1,7 @@
 export default {  
     //cats: [],
     //hobbies: [],
-    session: !!sessionStorage.jwt
+    session: !!sessionStorage.jwt,
+    openLineitems: [],
+    cart: []
   }

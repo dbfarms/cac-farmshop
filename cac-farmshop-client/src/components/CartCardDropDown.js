@@ -1,6 +1,8 @@
 import React from 'react'
+import { getOpenLineItems } from '../actions/lineitems';
+import {connect} from 'react-redux';  
 
-export default class CartCardDropDown extends React.Component {
+class CartCardDropDown extends React.Component {
   constructor(props) {
     super(props)
 
@@ -15,14 +17,28 @@ export default class CartCardDropDown extends React.Component {
 
   }
 
+  componentWillMount(){
+      //debugger 
+    //this.props.getOpenLineItems();
+  }
+
 
   componentWillReceiveProps(nextProps){
     //debugger 
-    this.setState({
-        openLineitems: nextProps.openLineitems,
-        cart: nextProps.cart 
-        //oldLineItems: nextProps.allLineItems 
-    })
+    console.log("next props in carcarddropdown")
+    if (sessionStorage.id === undefined) {
+        this.setState({
+            openLineitems: [],
+            cart: [],
+        })
+        console.log(this.state.openLineitems)
+    } else {
+        this.setState({
+            openLineitems: nextProps.openLineitems,
+            cart: nextProps.cart 
+            //oldLineItems: nextProps.allLineItems 
+        })
+    }
 }
 
   cartList() {
@@ -91,10 +107,13 @@ export default class CartCardDropDown extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    debugger 
+    //debugger 
+    console.log("mapstatetoprops in carcarddropdown")
+    //debugger 
     return ({
         cart: state.cart,
         openLineitems: state.openLineitems, 
     })
   }
   
+  export default connect(mapStateToProps, { getOpenLineItems })(CartCardDropDown);

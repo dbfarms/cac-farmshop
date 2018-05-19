@@ -87,6 +87,48 @@ export const getFarmGoods = () => {
   }
 }
 
+export const getAll = () => {
+  //debugger
+  //const user_id = Number(sessionStorage.id)
+
+  if (sessionStorage.id != undefined) {
+   //debugger 
+    return dispatch => {
+      return fetch('http://localhost:3000/api/farmgoods', header)
+        .then(response => response.json())
+        .then(farmGoods => dispatch(setFarmGoods(farmGoods))),
+        fetch('http://localhost:3000/api/line_items', {
+          headers: {
+            'Access-Control-Allow-Origin':'',
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(response => response.json())
+        .then(lineitems => { 
+          //debugger 
+         dispatch(getCart(sessionStorage.id))
+        .then(response => {debugger} )//dispatch(showOpenLineItems(lineitems, response.current_cart)))//,
+        })
+        .catch(error => console.log(error))
+    }
+  } else {
+    getFarmGoods();
+  }
+}
+
+const showOpenLineItems = (lineitems, cart) => {
+
+  const openLineitems = lineitems.data.filter(li =>
+    li.attributes["cart-id"] === Number(cart.id)
+  )
+  //debugger 
+  return {
+    type: 'GET_LINEITEM_SUCCESS',
+    openLineitems
+  }
+}
+
+
 //
 export const getCustomerFarmGoods = () => {
   return dispatch => {
@@ -99,7 +141,7 @@ export const getCustomerFarmGoods = () => {
 }
 
 export const getCart = (user_id) => {
-  debugger
+  //debugger
   return dispatch => {
     return fetch('http://localhost:3000/api/carts', header)
       //fetch(`${API_URL}/carts`)
@@ -111,7 +153,9 @@ export const getCart = (user_id) => {
 
 const setCart = (carts, user_id) => {
   //debugger
-  const cart = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
+  //var cart = []
+  //if (user_id != "undefined"){
+   const cart = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
   //debugger 
   return {
     type: 'GET_CART_SUCCESS',

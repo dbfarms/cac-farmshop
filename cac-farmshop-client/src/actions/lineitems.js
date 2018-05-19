@@ -160,6 +160,16 @@ const showOpenLineItems = (lineitems, user_id, cart) => {
   }
 }
 
+const showNoLineItems = () => {
+  //debugger 
+  const openLineitems = []
+  //debugger 
+  return {
+    type: 'GET_LINEITEM_SUCCESS',
+    openLineitems
+  }
+}
+
 const showClosedLineItems = (gotLineitems, cart) => {
   //debugger 
   const closedLineitems = gotLineitems.data.filter(li =>
@@ -206,9 +216,10 @@ export const getOpenLineItems = (user_id) => {
     .then(lineitems => {
       //debugger 
       dispatch(getCart(sessionStorage.id))
-      .then(response =>  { // {debugger}
+      .then(response =>  {  //{debugger}
       //debugger 
-      dispatch(showOpenLineItems(lineitems, user_id, response.current_cart))//,
+    
+        dispatch(showOpenLineItems(lineitems, user_id, response.current_cart))//,
       //dispatch(showClosedLineItems(lineitems, user_id, response.current_cart))
       })
     })
@@ -288,12 +299,18 @@ const setCart = (carts, user_id) => {
 
 export const getCart = (user_id) => {
   //debugger
-  return dispatch => {
-    return fetch('http://localhost:3000/api/carts', header)
-      //fetch(`${API_URL}/carts`)
-      .then(response => response.json())
-      .then(carts => dispatch(setCart(carts, user_id)))
-      .catch(error => console.log(error));
+  if (sessionStorage.jwt != "undefined"){
+    return dispatch => {
+      return fetch('http://localhost:3000/api/carts', header)
+        //fetch(`${API_URL}/carts`)
+        .then(response => response.json())
+        .then(carts => dispatch(setCart(carts, user_id)))
+        .catch(error => console.log(error));
+    }
+  } else {
+    //debugger 
+    const cart = []
+    return cart
   }
 }
 

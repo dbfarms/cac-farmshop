@@ -17,16 +17,17 @@ import { logOutUser } from '../../actions/sessionActions';
 class Header extends React.Component {  
   constructor(props) {
     super();
-
+    //debugger 
     this.state = {
       showAboutMenu: false,
       showCart: false,
       showFarmerMenu: false,
       routes: undefined, 
-      openLineitems: []
+      openLineitems: props.openLineitems
     };
-
+    //console.log(this.state.openLineitems)
     this.logOut = this.logOut.bind(this);
+
   }
 
   //{this.determineRoutes()}
@@ -75,16 +76,36 @@ class Header extends React.Component {
     }
     if (sessionStorage.role === "customer") {
       this.props.getOpenLineItems();
+    } else {
+      //debugger
+      console.log("not a customer so no openline items allegedly?")
+      this.setState({
+        openLineitems: []
+      })
     }
   }
 
   componentWillReceiveProps(nextProps){
     //debugger 
-    this.setState({
-        openLineitems: nextProps.openLineitems,
-        cart: nextProps.cart 
-        //oldLineItems: nextProps.allLineItems 
-    })
+    console.log("next props header")
+    console.log(nextProps)
+    
+    if (sessionStorage.id === undefined) {
+      //debugger 
+      console.log("session is undefined")
+      this.setState({
+          openLineitems: [],
+          cart: [],
+      })
+      console.log(this.state.openLineitems)
+    } else {
+      //debugger 
+      this.setState({
+          openLineitems: nextProps.openLineitems,
+          cart: nextProps.cart 
+          //oldLineItems: nextProps.allLineItems 
+      })
+    }
 }
 
   handleHover = (event) => {
@@ -115,15 +136,19 @@ class Header extends React.Component {
 
   logOut(event) {
     //debugger
+    this.setState({
+      openLineitems: []
+    })
+    this.props.getOpenLineItems();
     if (event.preventDefault) {
       event.preventDefault();
       alert('you are logged out')
+      //this.state.openLineitems = []
       this.props.logOutUser();
     } else {
       alert('you are logged out')
       this.props.logOutUser();
     }
-    
   }
 
   checkRoutes() {
@@ -233,7 +258,16 @@ class Header extends React.Component {
   cartCountFunc(){
     //debugger 
     var cartCount = 0;
-    this.state.openLineitems.forEach(lineItem => {cartCount += lineItem.attributes.quantity})
+   // if (sessionStorage.jwt === "undefined" && this.state.openLineitems.length != 0) {
+      //debugger
+    //  this.setState({
+    //    openLineitems: []
+    //  })
+    //} else 
+    //{
+      this.state.openLineitems.forEach(lineItem => {cartCount += lineItem.attributes.quantity})
+    //}
+    
     return cartCount //debugger 
     //cartCount = this.state.openLineitems.forEach(lineItem => {debugger})
   }
@@ -299,7 +333,11 @@ class Header extends React.Component {
                 transitionLeaveTimeout={300}
               >
                 {this.state.showCart && 
+                  <div>
+                    {console.log("here")}
+                    {console.log(this.props.openLineitems)}
                     <CartCardDropDown openLineitems={this.state.openLineitems} deleteItem={this.deleteItem} /> 
+                  </div>
                 }
               </ReactCSSTransitionGroup>
             </div>
@@ -391,6 +429,7 @@ class Header extends React.Component {
 
   render() {
     //debugger 
+    console.log("header")
     const cartCountTotal = this.cartCountFunc()
     const routes = this.makeRoutes() 
     const miniWidgetShow = this.miniWidgets()
@@ -500,7 +539,12 @@ class Header extends React.Component {
                           transitionLeaveTimeout={300}
                         >
                           {this.state.showCart && 
+                            <div>
+                              {console.log("no here")}
+                              {console.log(this.props.openLineitems)}
+                              {console.log(this.state.openLineitems)}
                               <CartCardDropDown openLineitems={this.state.openLineitems} deleteItem={this.deleteItem} /> 
+                            </div>
                           }
                         </ReactCSSTransitionGroup>
                       </div>

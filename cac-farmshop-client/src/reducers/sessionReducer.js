@@ -2,7 +2,11 @@ import * as types from '../actions/actionTypes';
 import initialState from './initialState';  
 //import {browserHistory} from 'react-router-dom';
 
-export default function sessionReducer(state = initialState.session, action) {  
+//const initialState = null
+
+export default function sessionReducer(state = [initialState.session, initialState.openLineitems], action) {  
+//debugger 
+  
   //debugger 
   switch(action.type) {
     case types.SIGN_UP_SUCCESS:
@@ -20,8 +24,15 @@ export default function sessionReducer(state = initialState.session, action) {
       //debugger 
       return action.current_cart 
     case types.LOG_OUT:
-      //browserHistory.push('/')
+      //browserHistory.push('/farm-goods')
+      //state = undefined 
+      //debugger 
+      console.log("initial state")
+      console.log(initialState)
+      //debugger 
       return (
+        state,
+        initialState,
         !!sessionStorage.jwt,
         !!sessionStorage.role
       )

@@ -5,6 +5,7 @@ import FarmGoods from './FarmGoods';
 //import FarmersPage from './FarmersPage';
 //import FarmerShow from './FarmerShow';
 import { getFarmGoods } from '../actions/farmGoods';
+import { getAll } from '../actions/farmGoods';
 import Carts from './carts';
 import NewFarmgoodForm from './NewFarmgoodForm';
 import EditFarmgoodForm from './EditFarmgoodForm';
@@ -24,6 +25,7 @@ import DefaultRoutes from './defaultRoutes';
 import 'react-sticky-header/styles.css';
 import StickyHeader from 'react-sticky-header';
 import '../index.css'
+import { getOpenLineItems } from '../actions/lineitems';
 
 class App extends Component {
   constructor() {
@@ -32,6 +34,7 @@ class App extends Component {
     this.state = {
       currentUser: null,
       auth: false,
+      openLineitems: []
     }
   }
   
@@ -41,12 +44,22 @@ class App extends Component {
   //  });
 
   componentWillMount(){
-    this.props.getFarmGoods();
+   // if (sessionStorage.id != undefined) {
+    //  this.props.getAll();
+    //} else {
+      this.props.getFarmGoods();
+      this.props.getOpenLineItems(sessionStorage.id);
+
+    //}
   }
+    //
 
   componentWillReceiveProps(nextProps){
+    //debugger 
+    //console.log(nextProps.openLineitems)
     this.setState({
-      farmGoods_array: nextProps.farmGoods.data
+      farmGoods_array: nextProps.farmGoods.data,
+      openLineitems: nextProps.openLineitems
     })
   }
 
@@ -73,7 +86,7 @@ class App extends Component {
     return (
       <div >
           <div className="headerspacer"></div>
-          <StickyHeader header={<Header />}>
+          <StickyHeader header={<Header openLineitems={this.state.openLineitems}/>}>
           </StickyHeader>
             {sessionStorage.jwt === "undefined" &&
               <div>
@@ -101,15 +114,16 @@ class App extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  //debugger 
+  console.log(state)
   return ({
       farmGoods: state.farmGoods,
       logged_in: state.session, //changing this to check in header.js for sessionStorage that isn't undefined
+      openLineitems: state.openLineitems
       //users: state.users // i suspect i no longer need this line... >
   })
 }
 
-export default connect(mapStateToProps, { getFarmGoods /*, getUser */ })(App); // 
+export default connect(mapStateToProps, { getFarmGoods, getOpenLineItems, /* getAll, getUser */ })(App); // 
 
 
 /*

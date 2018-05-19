@@ -17,6 +17,7 @@ import './FarmGoods.css';
 //import StickyHeader from 'react-sticky-header';
 import CartCard from '../components/CartCard';
 import VisitorCartCard from '../components/visitorCartCard';
+import { getOpenLineItems } from '../actions/lineitems';
 
 class FarmGoods extends Component {
   constructor(props) {
@@ -57,6 +58,7 @@ class FarmGoods extends Component {
     if (this.state.farmGoods_array === undefined){
       this.props.getFarmGoods()
     }
+    this.props.getOpenLineItems(sessionStorage.id);
   }
 
   componentWillReceiveProps(nextProps){
@@ -203,7 +205,7 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getFarmGoods, deleteFarmGoods })(FarmGoods); // 
+export default connect(mapStateToProps, { getFarmGoods, getOpenLineItems, deleteFarmGoods })(FarmGoods); // 
 
 /*
 getCart

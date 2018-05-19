@@ -26,6 +26,7 @@ export default (state = [], action) => {
       //const userLineItems = action.userLineItems
           //const openState = Object.assign({}, ...action.openLineitems)
           //debugger 
+          console.log(action.openLineitems)
         return (action.openLineitems)//)
       case 'GET_ALL_LINEITEMS_SUCCESS':
         //debugger 

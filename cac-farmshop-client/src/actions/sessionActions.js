@@ -12,6 +12,34 @@ const loginSuccess = () => { //cart
   }
 }
 
+export const getCart = (user_id) => {
+  //debugger
+  if (sessionStorage.jwt != "undefined"){
+    return dispatch => {
+      return fetch('http://localhost:3000/api/carts', header)
+        //fetch(`${API_URL}/carts`)
+        .then(response => response.json())
+        .then(carts => dispatch(setCart(carts, user_id)))
+        .catch(error => console.log(error));
+    }
+  } else {
+    const cart = []
+    return cart
+  }
+}
+
+const setCart = (carts, user_id) => {
+  //debugger
+  const userCarts = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
+  //debugger 
+  const current_cart = userCarts[userCarts.length - 1]
+  return {
+    type: 'GET_CART_SUCCESS',
+    current_cart
+  }
+}
+
+
 export function logInUser(credentials, history) {  
   //debugger
   return function(dispatch) {
@@ -20,15 +48,31 @@ export function logInUser(credentials, history) {
       //debugger 
       if (response.role === "customer") {
         sessionStorage.setItem('jwt', response.jwt);
-      sessionStorage.setItem('role', response.role);
-      sessionStorage.setItem('id', response.user_id);
-      sessionStorage.setItem('name', response.email);
+        sessionStorage.setItem('role', response.role);
+        sessionStorage.setItem('id', response.user_id);
+        sessionStorage.setItem('name', response.email);
+        /*
+        return fetch('http://localhost:3000/api/line_items', {
+          headers: {
+            'Access-Control-Allow-Origin':'',
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(response => response.json())
+        .then(lineitems => {
+          //debugger 
+         dispatch(getCart(sessionStorage.id))
+        .then(response => dispatch(showOpenLineItems(lineitems, response.current_cart)))//,
+        })
+        */
       } else {
-      sessionStorage.setItem('jwt', response.jwt);
-      sessionStorage.setItem('role', response.role);
-      sessionStorage.setItem('id', response.user_id);
-      sessionStorage.setItem('name', response.name);
+        sessionStorage.setItem('jwt', response.jwt);
+        sessionStorage.setItem('role', response.role);
+        sessionStorage.setItem('id', response.user_id);
+        sessionStorage.setItem('name', response.name);
       }
+
+      
       /*
       var cart; 
       if (sessionStorage.role === 'customer') {
@@ -46,6 +90,18 @@ export function logInUser(credentials, history) {
       throw(error);
     });
   };
+}
+
+const showOpenLineItems = (lineitems, cart) => {
+
+  const openLineitems = lineitems.data.filter(li =>
+    li.attributes["cart-id"] === Number(cart.id)
+  )
+  //debugger 
+  return {
+    type: 'GET_LINEITEM_SUCCESS',
+    openLineitems
+  }
 }
 
 export function signUpSuccess() {
@@ -91,8 +147,20 @@ export function adminCustomerSignUpUser(credentials, history) {
 }
 
 export function logOutUser() {  
+    //debugger 
+    showNoLineItems();
     auth.logOut();
     return {type: types.LOG_OUT}
+}
+
+const showNoLineItems = () => {
+  //debugger 
+  const openLineitems = []
+  //debugger 
+  return {
+    type: 'GET_LINEITEM_SUCCESS',
+    openLineitems
+  }
 }
 
 let header = new Headers({
