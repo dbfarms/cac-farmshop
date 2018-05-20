@@ -3,15 +3,6 @@ import sessionApi from '../api/sessionApi';
 import auth from '../auth/authenticator';
 
 
-const loginSuccess = () => { //cart
-  //debugger 
-  //const current_cart = cart.current_cart
-  return {
-    type: 'LOG_IN_SUCCESS',
-    //current_cart
-  }
-}
-
 export const getCart = (user_id) => {
   //debugger
   if (sessionStorage.jwt != "undefined"){
@@ -51,40 +42,13 @@ export function logInUser(credentials, history) {
         sessionStorage.setItem('role', response.role);
         sessionStorage.setItem('id', response.user_id);
         sessionStorage.setItem('name', response.email);
-        /*
-        return fetch('http://localhost:3000/api/line_items', {
-          headers: {
-            'Access-Control-Allow-Origin':'',
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(response => response.json())
-        .then(lineitems => {
-          //debugger 
-         dispatch(getCart(sessionStorage.id))
-        .then(response => dispatch(showOpenLineItems(lineitems, response.current_cart)))//,
-        })
-        */
+        
       } else {
         sessionStorage.setItem('jwt', response.jwt);
         sessionStorage.setItem('role', response.role);
         sessionStorage.setItem('id', response.user_id);
         sessionStorage.setItem('name', response.name);
       }
-
-      
-      /*
-      var cart; 
-      if (sessionStorage.role === 'customer') {
-         dispatch(getCart(sessionStorage.id))
-         .then(response =>  dispatch(loginSuccess(response))) //response.json()
-         //.then(cart => {debugger})
-         //.then(dispatch(loginSuccess(cart)))
-      } else {
-        dispatch(loginSuccess());
-      }
-      */
-      //dispatch(loginSuccess());
       history.push('/farm-goods')
     }).catch(error => {
       throw(error);

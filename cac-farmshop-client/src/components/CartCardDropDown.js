@@ -49,7 +49,17 @@ class CartCardDropDown extends React.Component {
         return (
             <div key={keyIndex}>
                 {keyIndex !== (this.state.openLineitems.length - 1) &&
-                    <li 
+                    <div>
+                    {keyIndex === 0 &&
+                        <div>
+                            <button
+                                float="left"
+                                className="addSubtractItem"
+                                onClick={() => {this.props.addItem(fg)}}
+                            >+</button>
+                        </div> 
+                    }
+                    <div 
                         className="nav__submenu-item_cart"
                         onMouseEnter={this.handleHover}
                     >
@@ -57,14 +67,15 @@ class CartCardDropDown extends React.Component {
                         - {fg.attributes.quantity} at ${fg.attributes.farmgood.price}
                         <button 
                             float="right" 
-                            className="subtractItem"
+                            className="addSubtractItem"
                             onClick={() => {this.props.deleteItem(fg)}}
                         >-</button>
-                    </li>
+                    </div>
+                    </div>
                 }
                 {keyIndex === (this.state.openLineitems.length - 1) &&
                     <div>
-                        <li className="nav__submenu-item_cart">
+                        <div className="nav__submenu-item_cart">
                             {fg.attributes.farmgood.name} 
                             - {fg.attributes.quantity} at ${fg.attributes.farmgood.price}
                             <button 
@@ -72,13 +83,13 @@ class CartCardDropDown extends React.Component {
                                 float="right" 
                                 onClick={() => {this.props.deleteItem(fg)
                             }}>-</button>
-                        </li>
-                        <li className="nav__submenu-item">
+                        </div>
+                        <div className="nav__submenu-item">
                             <p>Total: {total}</p>
                             <a href="/checkout">
                                 <button className="checkoutButton">Checkout</button>
                             </a>
-                        </li>
+                        </div>
                     </div>
                 }
             </div>
@@ -93,9 +104,9 @@ class CartCardDropDown extends React.Component {
     if (this.state.openLineitems.length > 0 ) {
         //debugger
         return (
-            <ul className="nav__submenu_cart">
+            <div className="navcart">
                 {cartListMenu}    
-            </ul>
+            </div>
         )
     } else {
         return (
@@ -107,7 +118,6 @@ class CartCardDropDown extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    //debugger 
     //console.log("mapstatetoprops in carcarddropdown")
     //debugger 
     return ({

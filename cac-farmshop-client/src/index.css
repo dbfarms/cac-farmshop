@@ -333,19 +333,87 @@
   z-index: 1;  
 }
 
+/*
 .submenu-container_cart_small {
   height: auto; 
   width: auto;
-  position: fixed;
-  z-index: 1;  
+  display: block;
+  position: absolute;
+  z-index: 1; 
 }
+*/
+
+/*
+.nav__submenu_cart {
+  top: 30px;
+  font:  normal 15px / 15px "Playfair Display";
+  text-transform: none;
+  align-content: left;
+  display: block;
+  width: 400px;
+  position: relative;
+  height: auto;
+  background-color: black;
+}
+*/
+
+.navcart {
+  font:  normal 15px / 15px "Playfair Display";
+  font-weight: 300;
+  text-transform: none;
+  display: block;
+  position: absolute;
+  min-width: 500px;
+  width: 100%;
+  background-color: black;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.cartinheader {
+  display: inline-block;
+  position: fixed;
+  color: white;
+  width: 500px;
+  align-content: "right";
+  top: 65px;
+  right: -200px;
+} 
+
+/*
+.cartSmallHeader {
+  position: fixed;
+  right: 200px;
+  top: 55px; 
+  width: auto;
+}
+*/
+
+.cart-item-text {
+  font:  normal  15px / 19px "Playfair Display";
+  word-spacing: normal;
+  align-content: "right";
+  color: #424242;
+  padding-right: 0px;
+  padding-left: 165px;
+}
+
+.cart-item-text:after {
+  margin: 30px;
+  border-left: 1px solid rgba(117,117,117,0.2);
+}
+
+.cart-item-text:hover {
+  text-decoration: none;
+  color: #86af2d;
+}
+
 
 .checkoutButton:hover {
-  border-radius: 5px;
-  background-color: beige
+  background-color: lightblue
 }
 
-.subtractItem:hover {
+.addSubtractItem:hover {
   background-color: lightblue;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
@@ -437,16 +505,6 @@ body {
   display: block;
   position: absolute;
   width: 180px;
-  background-color: black;
-}
-
-.nav__submenu_cart {
-  font:  normal 15px / 15px "Playfair Display";
-  text-transform: none;
-  display: block;
-  position: relative;
-  width: auto;
-  height: auto;
   background-color: black;
 }
 
@@ -867,13 +925,6 @@ ul { text-align: center; }
 
 li {
   list-style-type: none;
-}
-
-
-.cartSmallHeader {
-  position: fixed;
-  right: 50px;
-  top: 55px; 
 }
 
 /*

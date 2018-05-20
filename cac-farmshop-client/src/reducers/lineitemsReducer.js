@@ -54,6 +54,17 @@ export default (state = [], action) => {
         return (
           newState
         );
+      case 'ADD_LINEITEM_SUCCESS':
+        var newStateAdd = Object.assign([], state);
+        if (action.initialQuantity === state[0].attributes.quantity) {
+          const indexOfLineItemToAdd = state.findIndex(li => {
+            return Number(li.id) === action.lineItemId
+          })
+          const lineItemtoAddto = state[indexOfLineItemToAdd]
+          newStateAdd[indexOfLineItemToAdd].attributes.quantity += 1
+        }
+
+        return newStateAdd;
       case 'GET_ALL_USER_LINEITEMS':
         //debugger 
         return action.allLineItems 

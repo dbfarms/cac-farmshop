@@ -11,6 +11,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ShareButton from 'react-social-share-buttons';
 import CartCardDropDown from '../CartCardDropDown';
 import { removeLineItem } from '../../actions/lineitems';
+import { addLineItem } from '../../actions/lineitems';
 import { getOpenLineItems } from '../../actions/lineitems';
 import { logOutUser } from '../../actions/sessionActions';
 
@@ -194,6 +195,13 @@ class Header extends React.Component {
     }
   }
 
+  addItem = (li) =>{
+    const lineItemId = Number(li.id)
+    const initialQuantity = li.attributes.quantity
+
+    this.props.addLineItem(lineItemId, initialQuantity)
+  }
+
   deleteItem = (li) => {
     //debugger 
     const lineItemId = Number(li.id)
@@ -333,7 +341,7 @@ class Header extends React.Component {
               >
                 {this.state.showCart && 
                   <div>
-                    <CartCardDropDown openLineitems={this.state.openLineitems} deleteItem={this.deleteItem} /> 
+                    <CartCardDropDown openLineitems={this.state.openLineitems} addItem={this.addItem} deleteItem={this.deleteItem} /> 
                   </div>
                 }
               </ReactCSSTransitionGroup>
@@ -526,26 +534,28 @@ class Header extends React.Component {
                     <SideMenu routes={this.state.routes} logout={this.logOut}/>
                   </div>
                   <div className="cartSmallHeader">
-                    <li className="nav__menu-item"
+                    <div className="cartinheader"
                         onMouseLeave={this.handleCartLeave}>
                       <a href="cart"
-                        className="menu-item-text"
+                        className="cart-item-text"
                         onMouseEnter={this.handleCartHover}> Cart <span className="cartCount">{cartCountTotal}</span>
                       </a>
                       <div className="submenu-container_cart_small">
+                        {/*
                         <ReactCSSTransitionGroup
                           transitionName="slide"
                           transitionEnterTimeout={300}
                           transitionLeaveTimeout={300}
-                        >
+                        > */}
+                        {console.log("this now")}
                           {this.state.showCart && 
                             <div>
-                              <CartCardDropDown openLineitems={this.state.openLineitems} deleteItem={this.deleteItem} /> 
+                              <CartCardDropDown openLineitems={this.state.openLineitems} addItem={this.addItem} deleteItem={this.deleteItem} /> 
                             </div>
                           }
-                        </ReactCSSTransitionGroup>
+                        {/*</ReactCSSTransitionGroup>*/}
                       </div>
-                    </li>
+                    </div>
                   </div>
                   <MediaQuery query="(min-width: 328px)" >
                     {miniWidgetShow}
@@ -570,7 +580,7 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getOpenLineItems, removeLineItem, logOutUser })(Header);
+export default connect(mapStateToProps, { getOpenLineItems, addLineItem, removeLineItem, logOutUser })(Header);
 
 
 //Header.propTypes = {  
