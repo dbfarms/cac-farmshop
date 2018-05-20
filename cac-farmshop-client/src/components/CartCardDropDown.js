@@ -49,20 +49,15 @@ class CartCardDropDown extends React.Component {
         return (
             <div key={keyIndex}>
                 {keyIndex !== (this.state.openLineitems.length - 1) &&
-                    <div>
-                    {keyIndex === 0 &&
-                        <div>
-                            <button
-                                float="left"
-                                className="addSubtractItem"
-                                onClick={() => {this.props.addItem(fg)}}
-                            >+</button>
-                        </div> 
-                    }
                     <div 
                         className="nav__submenu-item_cart"
                         onMouseEnter={this.handleHover}
                     >
+                        <button
+                            float="left"
+                            className="addSubtractItem"
+                            onClick={() => {this.props.addItem(fg)}}
+                        >+</button>
                         {fg.attributes.farmgood.name} 
                         - {fg.attributes.quantity} at ${fg.attributes.farmgood.price}
                         <button 
@@ -71,15 +66,19 @@ class CartCardDropDown extends React.Component {
                             onClick={() => {this.props.deleteItem(fg)}}
                         >-</button>
                     </div>
-                    </div>
                 }
                 {keyIndex === (this.state.openLineitems.length - 1) &&
                     <div>
                         <div className="nav__submenu-item_cart">
+                            <button
+                                float="left"
+                                className="addSubtractItem"
+                                onClick={() => {this.props.addItem(fg)}}
+                            >+</button>
                             {fg.attributes.farmgood.name} 
                             - {fg.attributes.quantity} at ${fg.attributes.farmgood.price}
                             <button 
-                                className="subtractItem"
+                                className="addSubtractItem"
                                 float="right" 
                                 onClick={() => {this.props.deleteItem(fg)
                             }}>-</button>
