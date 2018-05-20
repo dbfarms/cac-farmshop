@@ -11,7 +11,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ShareButton from 'react-social-share-buttons';
 import CartCardDropDown from '../CartCardDropDown';
 import { removeLineItem } from '../../actions/lineitems';
-import { addLineItem } from '../../actions/lineitems';
+import { addAnotherToCart } from '../../actions/lineitems';
 import { getOpenLineItems } from '../../actions/lineitems';
 import { logOutUser } from '../../actions/sessionActions';
 
@@ -196,10 +196,14 @@ class Header extends React.Component {
   }
 
   addItem = (li) =>{
-    const lineItemId = Number(li.id)
-    const initialQuantity = li.attributes.quantity
+    //debugger 
+    const farmgoodid = li.attributes["farmgood-id"]
+    const userid = sessionStorage.id 
+    //userid 
+    //const lineItemId = Number(li.id)
+    //const initialQuantity = li.attributes.quantity
 
-    this.props.addLineItem(lineItemId, initialQuantity)
+    this.props.addAnotherToCart(farmgoodid, userid)
   }
 
   deleteItem = (li) => {
@@ -580,7 +584,7 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getOpenLineItems, addLineItem, removeLineItem, logOutUser })(Header);
+export default connect(mapStateToProps, { getOpenLineItems, addAnotherToCart, removeLineItem, logOutUser })(Header);
 
 
 //Header.propTypes = {  

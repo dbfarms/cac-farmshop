@@ -333,28 +333,6 @@ const deleteLineItem = (lineItemId, initialQuantity) =>{
   }
 }
 
-const addALineItem = (lineItemId, initialQuantity) =>{
-  return {
-    type: 'ADD_LINEITEM_SUCCESS',
-    lineItemId,
-    initialQuantity
-  }
-}
-
-export const addLineItem = (lineItemId, initialQuantity) => {
-  return dispatch => {
-    return fetch(`http://localhost:3000/api/line_items/${lineItemId}`, {
-      headers: {
-        'Access-Control-Allow-Origin':'',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST'
-    })
-    .then(()=> {
-      dispatch(addALineItem(lineItemId, initialQuantity))
-    })
-  }
-}
 
 export const removeLineItem = (lineItemId, initialQuantity) => {
   //debugger
