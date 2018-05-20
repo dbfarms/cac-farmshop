@@ -78,10 +78,10 @@ class CartCardDropDown extends React.Component {
                             {fg.attributes.farmgood.name} 
                             - {fg.attributes.quantity} at ${fg.attributes.farmgood.price}
                             <button 
-                                className="addSubtractItem"
                                 float="right" 
-                                onClick={() => {this.props.deleteItem(fg)
-                            }}>-</button>
+                                className="addSubtractItem"
+                                onClick={() => {this.props.deleteItem(fg)}}
+                            >-</button>
                         </div>
                         <div className="nav__submenu-item">
                             <p>Total: {total}</p>

@@ -11,7 +11,7 @@ import farmers from './reducers/farmersReducer'
 import carts from './reducers/carts';
 import cart from './reducers/carts';
 import openLineitems from './reducers/lineitemsReducer';
-import closedLineitems from './reducers/lineitemsReducer';
+//import closedLineitems from './reducers/lineitemsReducer';
 import cartFormData from './reducers/cartFormData';
 import FarmgoodFormData from './reducers/farmGoodFormData';
 import EditedFarmgoodFormData from './reducers/farmGoodFormData';
@@ -21,7 +21,7 @@ import users from './reducers/sessionReducer';
 import customers from './reducers/sessionReducer';
 import orders from './reducers/orderReducer';
 //import order from './reducers/orderReducer';
-import farmerLineItems from './reducers/lineitemsReducer';
+//import farmerLineItems from './reducers/lineitemsReducer';
 //import farmerOrder from './reducers/orderReducer';
 
 const appReducer = combineReducers({
@@ -38,10 +38,10 @@ const appReducer = combineReducers({
   users,
   customers,
   openLineitems,
-  closedLineitems,
+  //closedLineitems,
   orders,
   //order,
-  farmerLineItems,
+  //farmerLineItems,
   //farmerOrder,
 });
 
