@@ -357,6 +357,30 @@
 }
 */
 
+.cartgrid{
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+table, th, td , tr{
+  /*border: 1px solid blue;*/
+  width: 100%;
+  padding: 10px;
+}
+
+.fgName {
+  width: 50vw;
+}
+
+.fgQuantity {
+  width: 25vw;
+}
+
+.fgPrice {
+  width: 25vw;
+  padding-right: 10px;
+}
+
 .navcart {
   font:  normal 15px / 15px "Playfair Display";
   font-weight: 300;
@@ -536,11 +560,12 @@ body {
 
 .nav__submenu-item_cart {
   align-content: "left";
-  padding: 10px 0px 10px 0px;
+  padding: 10px 10px 10px 10px;
 }
 
 .nav__submenu-item_cart:hover {
   background: rgba(#000, 0.1);
+  background-color: whitesmoke;
   color: #86af2d;
 }
 
