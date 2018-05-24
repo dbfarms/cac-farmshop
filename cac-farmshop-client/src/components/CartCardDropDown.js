@@ -132,13 +132,13 @@ class CartCardDropDown extends React.Component {
                 <tbody key={keyIndex}>
                     {keyIndex === 0 &&
                         <tr>
-                            <th>
+                            <th className="fgName">
                                 <span></span>
                             </th>
-                            <th>
+                            <th className="fgQuantity">
                                 <span>Quantity</span>
                             </th>
-                            <th>
+                            <th className="fgPrice">
                                 <span>Price</span>
                             </th>
                         </tr>
@@ -188,7 +188,6 @@ class CartCardDropDown extends React.Component {
                     {keyIndex === (this.state.openLineitems.length - 1) && this.state.showAddSubtract[keyIndex] === false &&
                         <tr
                             className="nav__submenu-item_cart"
-                            //onMouseLeave={this.handleHover(keyIndex)}
                             onMouseEnter={this.handleHover.bind(this, keyIndex)}
                         >   
                                 <td className="fgName">
@@ -214,8 +213,8 @@ class CartCardDropDown extends React.Component {
                                 float="left"
                                 className="addSubtractItem"
                                 onClick={() => {this.props.addItem(fg)}}
-                            >+</button>
-                                {fg.attributes.quantity}
+                            >+</button> 
+                                {fg.attributes.quantity} 
                                 <button 
                                 float="right" 
                                 className="addSubtractItem"
@@ -229,10 +228,10 @@ class CartCardDropDown extends React.Component {
                         </tr>
                     }
                     {keyIndex === (this.state.openLineitems.length - 1) &&
-                        <tr className="nav__submenu-item">
-                            <td>Total: {total}</td>
+                        <tr className="nav__submenu-item checkoutBar">
+                            <td>Total: ${total}</td>
                             <td href="/checkout">
-                                <button className="checkoutButton">Checkout</button>
+                                <button className="checkoutButton">checkout</button>
                             </td>
                             <td>
                             </td>
