@@ -243,7 +243,43 @@ class CartCardDropDown extends React.Component {
     </table>
 
     )
-        /*
+        
+
+  }
+
+  render() {
+    //debugger 
+    const cartListMenu = this.cartList()//.bind(this)
+    //debugger
+    if (this.props.openLineitems.length > 0 ) {
+        //debugger
+        //const settingFalse = this.setCartAddSubtract();
+        return (
+            <div className="navcart">
+                {cartListMenu}  
+            </div>
+        )
+    } else { //<CartCardDropDown cartCardList={this.cartList()} handleHover={this.handleHover()} /> 
+        return (
+            <p>loading</p>
+        )
+    } 
+
+  }
+}
+
+const mapStateToProps = (state) => {
+    //console.log("mapstatetoprops in carcarddropdown")
+    //debugger 
+    return ({
+        cart: state.cart,
+        openLineitems: state.openLineitems, 
+    })
+  }
+  
+  export default connect(mapStateToProps, { getOpenLineItems })(CartCardDropDown);
+
+/*
         <div className="cartgrid">
             <div>
 
@@ -338,40 +374,6 @@ class CartCardDropDown extends React.Component {
         })}
     </div>
     ) */
-
-  }
-
-  render() {
-    //debugger 
-    const cartListMenu = this.cartList()//.bind(this)
-    //debugger
-    if (this.props.openLineitems.length > 0 ) {
-        //debugger
-        //const settingFalse = this.setCartAddSubtract();
-        return (
-            <div className="navcart">
-                {cartListMenu}  
-            </div>
-        )
-    } else { //<CartCardDropDown cartCardList={this.cartList()} handleHover={this.handleHover()} /> 
-        return (
-            <p>loading</p>
-        )
-    } 
-
-  }
-}
-
-const mapStateToProps = (state) => {
-    //console.log("mapstatetoprops in carcarddropdown")
-    //debugger 
-    return ({
-        cart: state.cart,
-        openLineitems: state.openLineitems, 
-    })
-  }
-  
-  export default connect(mapStateToProps, { getOpenLineItems })(CartCardDropDown);
 
   /*
 

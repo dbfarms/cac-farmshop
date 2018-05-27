@@ -10,6 +10,7 @@ import { deleteFarmGoods } from '../actions/farmGoods';
 import NewFarmgoodForm from './NewFarmgoodForm';
 import EditFarmgoodForm from './EditFarmgoodForm';
 import FarmgoodNav from '../components/farmgoodNav'
+import ShopForDay from '../components/shopforday'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
@@ -153,19 +154,25 @@ class FarmGoods extends Component {
   render() {
     //debugger
     var objectToArrayDays = []
-   
+   //className="top"
     return (
       <div>
-        <div id="fixed1" className="top">
+        <div className="subheader">
           <div>
-            <FarmgoodNav 
-              changeShow={this.handleShowChange} 
-              changeDay={this.handleDay} 
-              changeCategory={this.handleCategory}
-            />
+            <div id="fixed1">
+              <FarmgoodNav 
+                changeShow={this.handleShowChange} 
+                changeDay={this.handleDay} 
+                changeCategory={this.handleCategory}
+              />
+            </div>
           </div>
-           
+          <div className="shoppingFor">
+            <ShopForDay />
           </div>
+          <div>
+          </div>
+        </div>
         <MediaQuery query="(max-width: 1294px)" >
         <div>
           <MediaQuery query="(max-width: 1293px)" >
