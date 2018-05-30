@@ -12,6 +12,8 @@ export default class ShopForDay extends React.Component {
             dropdownOpen: false,
             showDate: false,
             weekOrder: [],
+            selectedOption: 'option0',
+            daysTo: 1,
         };
     }
 
@@ -37,11 +39,15 @@ export default class ShopForDay extends React.Component {
         })
     }
 
-    hoverMenu(){
+    hoverMenu(event){
         //debugger
         this.setState({
-            showDate: !this.state.showDate,
+            showDate: true,
         });
+    }
+
+    leaveHoverMenu(event){
+        this.setState({ showDate: false})
     }
 
     setPickupDate(){    
@@ -53,7 +59,7 @@ export default class ShopForDay extends React.Component {
           
         var dat = new Date();
         
-        return dat.addDays(1).toDateString();
+        return dat.addDays(this.state.daysTo).toDateString();
 
     }
 
@@ -63,8 +69,20 @@ export default class ShopForDay extends React.Component {
         <div>
             {this.state.weekOrder.map((nextDay, keyIndex)=> {
             return (
-                    <div key={keyIndex}>
-                        {nextDay}
+                    <div 
+                        key={keyIndex}
+                        className="setDate"
+                    >   
+                        <label>
+                            <input 
+                                type="radio" 
+                                value={keyIndex} 
+                                checked={this.state.selectedOption === `option${keyIndex}`}
+                                onChange={this.handleOptionChange.bind(this)}    
+                            />
+                            {nextDay}
+                        </label>
+                            
                     </div>
             )
         })
@@ -73,17 +91,26 @@ export default class ShopForDay extends React.Component {
         )
     }
 
+    handleOptionChange(event){
+        //debugger 
+        const daysToPickup = Number(event.target.value) + 1
+        this.setState({
+            selectedOption: event.target.value, 
+            daysTo: daysToPickup
+        })
+    }
+
     render(){
         const showRestOfWeek = this.htmlWeek();
         const dateToPickup = this.setPickupDate();
         //debugger 
         return(
             <div 
-                onMouseLeave={this.hoverMenu.bind(this)}
+                onMouseLeave={this.leaveHoverMenu.bind(this)}
             >
                 <div 
                     onMouseEnter={this.hoverMenu.bind(this)}
-                    >Shopping for tomorrow, {dateToPickup}
+                    >Shopping for {dateToPickup}
                 </div>
                 {this.state.showDate === true &&
                     <div>

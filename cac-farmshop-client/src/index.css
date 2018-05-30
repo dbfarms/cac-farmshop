@@ -1,6 +1,17 @@
+
+
 .subheader {
   display: grid;
   grid-template-columns: auto auto auto;
+}
+
+.setDate{
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+.setDate:hover {
+  background-color: lightblue;
 }
 
 .shoppingFor {
