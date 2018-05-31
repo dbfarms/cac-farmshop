@@ -12,7 +12,7 @@ export default class ShopForDay extends React.Component {
             dropdownOpen: false,
             showDate: false,
             weekOrder: [],
-            selectedOption: 'option0',
+            selectedOption: 0,
             daysTo: 1,
         };
     }
@@ -29,11 +29,12 @@ export default class ShopForDay extends React.Component {
         var i;
         const date = new Date();
         const dateArray = [];
-
-        for (i = 2; i < 8; i++) {
+        //debugger 
+        for (i = 1; i < 8; i++) {
             var dateToAdd = date.addDays(i).toDateString();
             dateArray.push(dateToAdd)
         }
+
         this.setState({
             weekOrder: dateArray
         })
@@ -53,6 +54,7 @@ export default class ShopForDay extends React.Component {
     setPickupDate(){    
         Date.prototype.addDays = function(days) {
         var dat = new Date(this.valueOf());
+        //debugger 
         dat.setDate(dat.getDate() + days);
         return dat;
         }
@@ -77,12 +79,11 @@ export default class ShopForDay extends React.Component {
                             <input 
                                 type="radio" 
                                 value={keyIndex} 
-                                checked={this.state.selectedOption === `option${keyIndex}`}
+                                checked={this.state.selectedOption == keyIndex}
                                 onChange={this.handleOptionChange.bind(this)}    
                             />
                             {nextDay}
                         </label>
-                            
                     </div>
             )
         })
@@ -92,6 +93,7 @@ export default class ShopForDay extends React.Component {
     }
 
     handleOptionChange(event){
+        //DAY IS OFF WHEN SELECTED, RADIO DIAL DOESN'T STAY CHOSEN
         //debugger 
         const daysToPickup = Number(event.target.value) + 1
         this.setState({
