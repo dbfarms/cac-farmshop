@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180430203648) do
+ActiveRecord::Schema.define(version: 20180531211751) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "customer_user_id"
@@ -115,6 +115,17 @@ ActiveRecord::Schema.define(version: 20180430203648) do
     t.string "status", default: "open"
     t.integer "total"
     t.date "due_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sub_categories", force: :cascade do |t|
+    t.string "title"
+  end
+
+  create_table "sub_category_categories", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "sub_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

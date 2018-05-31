@@ -27,6 +27,9 @@ let sentData={
 
 
 const setFarmGoods = farmGoods => {
+
+  debugger 
+
   return {
     type: 'GET_FARMGOOD_SUCCESS',
     farmGoods

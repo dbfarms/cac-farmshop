@@ -11,7 +11,7 @@ where i left off:
   1a) consider turning dropdown into list that highlights as you scroll down
 2) cart, add ability to simply change number of item instead of adding, see form that updates as you change it to make sure amount is ok
 3) catching errors?
-4) what's the turnaround on an order? / change display to show what's available for the next day / in order of category
+4) catch farmgood in cart that was added for a pickupdate and then changing pickup date 
 5) forms
 6) farmer and admin stylizing 
 7)  

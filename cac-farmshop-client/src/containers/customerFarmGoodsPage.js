@@ -142,9 +142,10 @@ class FarmGoods extends Component {
     )
   }
 
+
   render() {
     //debugger
-    var objectToArrayDays = []
+    //const sortedFGs = this.sortFgs()
    //className="top"
     return (
       <div>
