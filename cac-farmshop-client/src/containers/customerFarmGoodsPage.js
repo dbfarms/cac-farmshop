@@ -60,6 +60,20 @@ class FarmGoods extends Component {
       this.props.getFarmGoods()
     }
     this.props.getOpenLineItems(sessionStorage.id);
+
+    Date.prototype.addDays = function(days) {
+      var dat = new Date(this.valueOf());
+      dat.setDate(dat.getDate() + days);
+      return dat;
+    }
+    const date = new Date
+    const dayOfPickup = date.addDays(1).toDateString();
+    const substringDaySelector = dayOfPickup.substr(0, dayOfPickup.indexOf(' '));
+    this.setState({
+      showDay: substringDaySelector
+    })
+    //debugger
+
   }
 
   componentWillReceiveProps(nextProps){
@@ -93,6 +107,109 @@ class FarmGoods extends Component {
   handleCategory = showCategory => this.setState({ showCategory: showCategory })
 
   showGoodsSplit() {
+    var thisFilter = []
+    return (
+      <div>
+      {this.state.farmGoods_array === undefined &&
+        <p>loading loading</p>
+      }
+      {this.state.farmGoods_array != undefined &&
+        <div className="Farm-Goods-Container">
+          <div>
+              <div className="header-one">
+                <span>Currently For Sale</span>
+              </div>
+              <div className="fg-grid">
+              {this.state.farmGoods_array.map(farmGood => {
+                //debugger 
+                for (let i=0;i<farmGood.relationships.days.data.length; i++) {
+                  if (farmGood.relationships.days.data[i].name.substr(0, 2) === this.state.showDay.substr(0,2)) {
+                    thisFilter.push(farmGood)
+                  }
+                }
+              })}
+                {thisFilter.map(farmGood => 
+                  <CustomerFarmGoodModal  
+                    key={farmGood.id} 
+                    farmGood={farmGood} 
+                    lineitems={this.state.openLineitems} />)
+                }
+              </div>
+          </div>
+        </div>
+        }
+      </div>
+    )
+  }
+
+  render() {
+    //debugger
+    var objectToArrayDays = []
+   //className="top"
+    return (
+      <div>
+        <div className="subheader">
+          <div>
+            <div id="fixed1">
+              <FarmgoodNav 
+                changeShow={this.handleShowChange} 
+                //changeDay={this.handleDay} 
+                changeCategory={this.handleCategory}
+              />
+            </div>
+          </div>
+          <div className="shoppingFor">
+            <ShopForDay 
+            changeDay={this.handleDay}
+            />
+          </div>
+          <div>
+          </div>
+        </div>
+        <MediaQuery query="(max-width: 1294px)" >
+        <div>
+          <MediaQuery query="(max-width: 1293px)" >
+          <div className="page-tree-small">
+            
+            <div>
+              {this.showGoodsSplit()}
+            </div>
+            <br />
+          </div>
+          </MediaQuery>
+        </div>
+        </MediaQuery>
+        
+        <MediaQuery query="(min-width: 1294px)" > 
+          
+          <div className="page-tree">
+            <div>
+              <p>category filler</p>
+            </div>
+            <div>
+              {this.showGoodsSplit()}
+            </div>
+          </div>
+        </MediaQuery>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  //console.log(state)
+  //const stateDays = Object.assign([], state.days)
+  return ({
+      farmGoods: state.farmGoods,
+      days: state.days 
+  })
+}
+
+export default connect(mapStateToProps, { getFarmGoods, getOpenLineItems, deleteFarmGoods })(FarmGoods); // 
+
+/*
+
+showGoodsSplit() {
     var thisFilter = []
     return (
       <div>
@@ -150,71 +267,5 @@ class FarmGoods extends Component {
       </div>
     )
   }
-
-  render() {
-    //debugger
-    var objectToArrayDays = []
-   //className="top"
-    return (
-      <div>
-        <div className="subheader">
-          <div>
-            <div id="fixed1">
-              <FarmgoodNav 
-                changeShow={this.handleShowChange} 
-                changeDay={this.handleDay} 
-                changeCategory={this.handleCategory}
-              />
-            </div>
-          </div>
-          <div className="shoppingFor">
-            <ShopForDay />
-          </div>
-          <div>
-          </div>
-        </div>
-        <MediaQuery query="(max-width: 1294px)" >
-        <div>
-          <MediaQuery query="(max-width: 1293px)" >
-          <div className="page-tree-small">
-            
-            <div>
-              {this.showGoodsSplit()}
-            </div>
-            <br />
-          </div>
-          </MediaQuery>
-        </div>
-        </MediaQuery>
-        
-        <MediaQuery query="(min-width: 1294px)" > 
-          
-          <div className="page-tree">
-            <div>
-              <p>category filler</p>
-            </div>
-            <div>
-              {this.showGoodsSplit()}
-            </div>
-          </div>
-        </MediaQuery>
-      </div>
-    )
-  }
-}
-
-const mapStateToProps = (state) => {
-  //console.log(state)
-  //const stateDays = Object.assign([], state.days)
-  return ({
-      farmGoods: state.farmGoods,
-      days: state.days 
-  })
-}
-
-export default connect(mapStateToProps, { getFarmGoods, getOpenLineItems, deleteFarmGoods })(FarmGoods); // 
-
-/*
-getCart
 
 */

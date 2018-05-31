@@ -551,7 +551,6 @@ class Header extends React.Component {
                           transitionEnterTimeout={300}
                           transitionLeaveTimeout={300}
                         > */}
-                        {console.log("this now")}
                           {this.state.showCart && 
                             <div>
                               <CartCardDropDown openLineitems={this.state.openLineitems} addItem={this.addItem} deleteItem={this.deleteItem} /> 

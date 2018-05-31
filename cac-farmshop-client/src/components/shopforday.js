@@ -1,6 +1,5 @@
 import React from 'react'
 import '../containers/farmgoodNav.css';
-//import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, NavLink } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 
@@ -93,9 +92,12 @@ export default class ShopForDay extends React.Component {
     }
 
     handleOptionChange(event){
-        //DAY IS OFF WHEN SELECTED, RADIO DIAL DOESN'T STAY CHOSEN
         //debugger 
         const daysToPickup = Number(event.target.value) + 1
+        const daySelector = this.state.weekOrder[Number(event.target.value)]
+        const substringDaySelector = daySelector.substr(0, daySelector.indexOf(' '));
+
+        this.props.changeDay(substringDaySelector)
         this.setState({
             selectedOption: event.target.value, 
             daysTo: daysToPickup
