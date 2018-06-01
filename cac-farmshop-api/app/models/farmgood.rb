@@ -6,6 +6,7 @@ class Farmgood < ApplicationRecord
     
     has_many :farmerfarmgoods
     belongs_to :category
+    belongs_to :sub_category #, through: :category
     belongs_to :farmer #s, through: :farmerfarmgoods
     has_many :days_available
     has_many :days, through: :days_available
