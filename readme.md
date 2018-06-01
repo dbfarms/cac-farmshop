@@ -14,7 +14,7 @@ where i left off:
 4) catch farmgood in cart that was added for a pickupdate and then changing pickup date 
 5) forms
 6) farmer and admin stylizing 
-7)  
+7) add sub_Category to new and edit farmgood form
 ***************
 
 TO DO LIST:
