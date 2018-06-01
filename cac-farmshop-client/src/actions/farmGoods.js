@@ -28,7 +28,27 @@ let sentData={
 
 const setFarmGoods = farmGoods => {
 
-  debugger 
+  function compare(a,b) {
+    //debugger 
+    if (a.attributes.category.id < b.attributes.category.id)
+      return -1;
+    if (a.attributes.category.id > b.attributes.category.id)
+      return 1;
+    return 0;
+  }
+
+  function subCatcompare(a,b) {
+    //debugger 
+    if (a.attributes["sub-category"].id < b.attributes["sub-category"].id)
+      return -1;
+    if (a.attributes["sub-category"].id > b.attributes["sub-category"].id)
+      return 1;
+    return 0;
+  }
+
+  const sortedFarmgoods = farmGoods.data.sort(compare)
+  const subcatSorted = sortedFarmgoods.sort(subCatcompare)
+  //debugger 
 
   return {
     type: 'GET_FARMGOOD_SUCCESS',

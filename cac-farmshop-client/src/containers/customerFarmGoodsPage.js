@@ -107,6 +107,7 @@ class FarmGoods extends Component {
   handleCategory = showCategory => this.setState({ showCategory: showCategory })
 
   showGoodsSplit() {
+    //debugger 
     var thisFilter = []
     return (
       <div>
@@ -128,11 +129,34 @@ class FarmGoods extends Component {
                   }
                 }
               })}
-                {thisFilter.map(farmGood => 
-                  <CustomerFarmGoodModal  
-                    key={farmGood.id} 
-                    farmGood={farmGood} 
-                    lineitems={this.state.openLineitems} />)
+                {thisFilter.map((farmGood, keyIndex) => {
+                  let category = ''
+                  let subcat = ''
+                  //debugger 
+                  return (
+                    <div key={keyIndex}>
+                    {category != farmGood.attributes.category.title &&
+                      <div>
+                        {console.log(category == farmGood.attributes.category.title)}
+                        {category = farmGood.attributes.category.title}
+                        <h3>{category}</h3>
+                      </div>
+                    }
+                    {subcat != farmGood.attributes["sub-category"].title &&
+                      <div>
+                        {subcat = farmGood.attributes["sub-category"].title}
+                        <h3>{subcat}</h3>
+                      </div>
+                    }
+                    <CustomerFarmGoodModal  
+                      key={farmGood.id} 
+                      farmGood={farmGood} 
+                      lineitems={this.state.openLineitems} />
+                  </div>
+                  )
+                }
+                  
+                  )
                 }
               </div>
           </div>
