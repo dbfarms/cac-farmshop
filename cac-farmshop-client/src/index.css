@@ -1,4 +1,10 @@
+.section {
+  font:  normal 17px / 19px "Playfair Display";
+}
 
+.sectionSub {
+  font:  normal 17px / 19px "Playfair Display";
+}
 
 .subheader {
   display: grid;

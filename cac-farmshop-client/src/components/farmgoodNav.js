@@ -32,7 +32,6 @@ export default class FarmgoodNav extends React.Component {
 
     render(){
 
-
         if (sessionStorage.role === "farmer") {
             return(
                 <Dropdown className="dropdowntext" isOpen={this.state.dropdownOpen} toggle={this.toggle}>

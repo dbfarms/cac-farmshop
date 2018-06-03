@@ -7,6 +7,10 @@ git fsck --full
 
 ***************
 where i left off:
+1) sidebarcategory should be able to tell position of page in relation to farmgood on left most and then 
+  highlight differently the map tree 
+
+to do:
 1) left border on fgs and maybe center them better
   1a) consider turning dropdown into list that highlights as you scroll down
 2) cart, add ability to simply change number of item instead of adding, see form that updates as you change it to make sure amount is ok
@@ -15,6 +19,9 @@ where i left off:
 5) forms
 6) farmer and admin stylizing 
 7) add sub_Category to new and edit farmgood form
+8) if old cart item is no longer available on day you want to pick up, have section of cart for items unavailable for day you want to pick up and removed from current cart? or just make everything available every day
+9) farmgoods still have bad information, which farmer they're associated with, etc, new stuff only i think
+10) see if Admin can change days available for fgs that don't have it, which so far are broc, dill and maybe something else who knwos naymore
 ***************
 
 TO DO LIST:
