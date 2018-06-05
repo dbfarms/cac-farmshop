@@ -93,37 +93,43 @@ class FarmGoods extends Component {
     var catArray = []
     var category = '';
     var subcat = ''
+    var lengthOfFg = this.state.farmGoods_array.length 
+    
     this.state.farmGoods_array.map((farmGood, keyIndex) => {
       for (let i=0;i<farmGood.relationships.days.data.length; i++) {
         if (farmGood.relationships.days.data[i].name.substr(0, 2) === this.state.showDay.substr(0,2)) {
           if (farmGood.attributes.category.title != category) {
+            
             category = farmGood.attributes.category.title
             const header = this.createHeader(category);
             //debugger 
             thisFilter.push(header)
           } 
           if (farmGood.attributes["sub-category"].title != subcat) {
-            //debugger 
+            
             subcat = farmGood.attributes["sub-category"].title
             const subheader = this.createSubHeader(subcat);
             //debugger 
-            thisFilter.push(subheader)
-            if (catArray.length == 0) {
-              //debugger 
-              catArray.push(farmGood)
-            } else {
-              thisFilter.push(catArray)  
-              catArray = []
-              catArray.push(farmGood)
+            if (catArray.length > 0) {
+              thisFilter.push(catArray)
             }
+              
+            thisFilter.push(subheader)
+            catArray = []
+            catArray.push(farmGood)
+            
           } else {
             debugger 
             catArray.push(farmGood)
           }
           //thisFilter.push(farmGood)
+          
         }
       }
     })
+    
+    thisFilter.push(catArray)
+    
     //checks to see if thisFilter is equal to this.state.filteredList and only sets State if necessary
     var equalArray = true;
     thisFilter.forEach((fg, keyIndex) => {
@@ -131,8 +137,9 @@ class FarmGoods extends Component {
         equalArray = false
       }
     })
-    debugger 
+    
     if (equalArray == false) {
+      //debugger
       this.setState({
         filteredList: thisFilter
       })
@@ -209,20 +216,25 @@ class FarmGoods extends Component {
               {this.state.filteredList.map((farmGood, keyIndex) => {
                 //debugger 
 
-                if (farmGood.attributes === undefined) {
+                if (farmGood.length === undefined) {
                   //debugger 
                   return (
-                    <div>
+                    <div key={keyIndex}>
                       {farmGood}
                     </div>
                   )
-                } else {
+                } else if (farmGood.length > 0) {
+                  //debugger 
                   return (
                     <div className="fg-grid" key={keyIndex}>
-                    <CustomerFarmGoodModal  
-                      key={farmGood.id} 
-                      farmGood={farmGood} 
-                      lineitems={this.state.openLineitems} />
+                    {farmGood.map(fg => {
+                      return (<CustomerFarmGoodModal  
+                      key={fg.id} 
+                      farmGood={fg} 
+                      //lineitems={this.state.openLineitems} 
+                    />)
+                    })}
+                    
                   </div>
                   )
                 }
