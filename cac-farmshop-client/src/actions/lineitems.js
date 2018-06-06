@@ -289,13 +289,24 @@ const setAllUserLineItems = (lineitems, cart) => {
 const setCart = (carts, user_id) => {
   //debugger
   if (user_id != undefined ) {
-    const userCarts = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
-    //debugger 
-    const current_cart = userCarts[userCarts.length - 1]
-    return {
-      type: 'GET_CART_SUCCESS',
-      current_cart
+    if (sessionStorage.role === "customer") {
+      const userCarts = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
+      //debugger 
+      const current_cart = userCarts[userCarts.length - 1]
+      return {
+        type: 'GET_CART_SUCCESS',
+        current_cart
+      }
+    } else {
+      //const userCarts = carts.data.filter(cart => cart.attributes["customer-user-id"] === Number(user_id))
+      //debugger 
+      const current_cart = [] //userCarts[userCarts.length - 1]
+      return {
+        type: 'GET_CART_SUCCESS',
+        current_cart
+      }
     }
+    
   } else {
     const current_cart = []
     return {
