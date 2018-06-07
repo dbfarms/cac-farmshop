@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import './App.css';
-import FarmGoods from './FarmGoods';
+import FarmGoods from './adminFarmGoods';
 import FarmersPage from './FarmersPage';
 import FarmerShow from './FarmerShow';
+import FarmgoodShow from './FarmgoodShow';
+import FarmgoodIndex from './FarmgoodIndex';
 import LogInPage from '../components/LogInPage';
 import AdminSignUpPage from '../components/admin/AdminSignUp';
 import FarmGoodCard from '../components/farmGoodCard'
@@ -14,7 +16,7 @@ import Home from './Home';
 import { getUser } from '../actions/sessionActions';
 import Users from './Users';
 import AdminNewFarmgoodForm from './adminNewFarmGoodForm'; //actually this will have to be its own component
-import EditFarmgoodForm from './EditFarmgoodForm'; //same with this 
+import AdminEditFarmgoodForm from './AdminEditFarmgoodForm'; //same with this 
 
 //<IndexRoute component={HomePage} /> /// NEED TO ADD 
 export default class AdminRoutes extends Component {
@@ -39,7 +41,11 @@ export default class AdminRoutes extends Component {
           <Route path="/signup" component={AdminSignUpPage} />
           <Route exact path="/home" />
           <Route exact path='/farmers' component={FarmersPage} />
-          <Route exact path="/farm-goods" component={FarmGoods} />
+          <Route exact path='/farmers/:id' component={FarmerShow} />
+          <Route exact path='/farmers/:id/farmgoods' component={FarmgoodIndex} />
+          <Route exact path='/farmers/:id/farmgoods/:id' component={FarmgoodShow} />
+          <Route path ="/farmers/:id/farmgoods/:id/edit" component={AdminEditFarmgoodForm} />
+          <Route exact path="/farmgoods" component={FarmGoods} />
           <Route exact path="/new-farm-good" component={AdminNewFarmgoodForm} />
           <Route exact path="/users" component={Users} />
           <Route path="*" render={() => <div></div>} />

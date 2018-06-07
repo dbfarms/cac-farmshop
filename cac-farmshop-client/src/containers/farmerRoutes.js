@@ -3,7 +3,9 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import FarmerFarmGoods from './FarmerFarmGoods';
 import FarmersPage from './FarmersPage';
-//import FarmerShow from './FarmerShow';
+import FarmerShow from './FarmerShow';
+import FarmgoodShow from './FarmgoodShow';
+import FarmgoodIndex from './FarmgoodIndex';
 import LogInPage from '../components/LogInPage';
 import Logout from '../components/LogoutPage';
 //import FarmGoodCard from '../components/farmGoodCard'
@@ -37,7 +39,10 @@ export default class FarmerRoutes extends Component {
         <div className="background-here">
           <Route exact path="/home" />
           <Route exact path='/farmers' component={FarmersPage} />
-          <Route exact path="/farm-goods" component={FarmerFarmGoods} />
+          <Route exact path='/farmers/:id' component={FarmerShow} />
+          <Route exact path='/farmers/:id/farmgoods' component={FarmgoodIndex} />
+          <Route exact path='/farmers/:id/farmgoods/:id' component={FarmgoodShow} />
+          <Route exact path="/farmgoods" component={FarmerFarmGoods} />
           <Route exact path="/new-farm-good" component={NewFarmgoodForm} />
           <Route path ="/farm-goods/:id/edit" component={EditFarmgoodForm} />
           <Route path="/orders" component={OrdersList} />

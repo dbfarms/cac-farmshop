@@ -1,15 +1,31 @@
 import React from 'react';
-import SkyLight from 'react-skylight';
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addFarmgoodToCart } from '../actions/lineitems';
+import { addAnotherToCart } from '../actions/lineitems';
+import { NavLink, Link } from 'react-router-dom';
+import MediaQuery from 'react-responsive';
 
 class FarmGoodModal extends React.Component {
   constructor(props){
     super(props);
+
+    this.state = {
+      openLineItems: this.props.openLineitems,
+      showFGMenu: true,
+      farmgoodscard: "FarmGoodsCard",
+    }
+  }
+
+  componentWillMount(){
+    if (this.props.farmgoodscard) {
+      this.setState({
+        farmgoodscard: this.props.farmgoodscard
+      })
+    }
   }
 
   daysAvailable = () => {
-    
-    //debugger
     if (this.props.farmGood.relationships !== undefined ){
       var days = this.props.farmGood.relationships.days.data //this.props.farmGood.data.relationships.days.data 
 
@@ -27,39 +43,80 @@ class FarmGoodModal extends React.Component {
     }
   }
 
+  fgMenu = (event) => {
+    this.setState({ showFGMenu: true })
+  }
+
   render() {
     const displayDays = this.daysAvailable();
     const farmGood = this.props
     //debugger 
     return (
       <div>
-        <button className="FarmGoodsCard" onClick={() => this.simpleDialog.show()}>
-          <p>{farmGood.farmGood.attributes.name}</p>
-          <p>image of farmgood here</p>
-          <p>Available: {farmGood.farmGood.attributes.inventory}</p>
-        </button>
-        <SkyLight hideOnOverlayClicked ref={ref => this.simpleDialog = ref} title={this.props.farmGood.attributes.name}>
-          <img className="farmGoodImage" src={farmGood.img_url} alt={farmGood.user_id} />
-          {farmGood.farmGood.attributes.inventory > 0 && //
-          <div>
-          <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>
-          </div>
-          }
-          {farmGood.farmGood.attributes.inventory <= 0 &&
-            <p>No longer available. Check back soon</p>
-          }
-          {displayDays}
-          <Link to={{
-            pathname: `/farm-goods/${this.props.farmGood.id}/edit`,
-            farmGood: this.props.farmGood
-        }}> edit farmgood </Link>
-        </SkyLight>
-      </div>
+      {
+        <div>
+          <MediaQuery query="(min-width: 366px)" > 
+            <div className={this.state.farmgoodscard}>
+              <span onMouseLeave={this.fgReg}>
+                <div onMouseEnter={this.fgMenu}>
+                  <a href={"http://localhost:3001/farmers/" + farmGood.farmGood.attributes.farmer.id + "/farmgoods/" + farmGood.farmGood.id}><img className="fgcardImg" src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/></a>
+                  <span>{farmGood.farmGood.attributes.name}</span>
+                  <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>
+                  <a href={farmGood.farmGood.attributes.farmer.link}>{farmGood.farmGood.attributes.farmer.name}</a>
+                  {farmGood.farmGood.attributes.inventory > 0 && //
+                    <div>
+                      {this.state.showFGMenu &&
+                        <div>
+                          <Link to={{
+                              pathname: `/farm-goods/${this.props.farmGood.id}/edit`,
+                              farmGood: this.props.farmGood
+                          }}> edit farmgood </Link>
+                        </div>
+                      }
+                    </div>
+                  }
+                  {farmGood.farmGood.attributes.inventory <= 0 &&
+                    <p>None left, check back soon!</p>
+                  }
+                </div>
+              </span>
+              <div className="fg-li"></div>
+            </div>
+          </MediaQuery>
+          <MediaQuery query="(max-width: 365px)" > 
+            <div className="smallFarmGoodsCard">
+              <span onMouseLeave={this.fgReg}>
+                <div onMouseEnter={this.fgMenu}>
+                  <a href={"http://localhost:3001/farmers/" + farmGood.farmGood.attributes.farmer.id + "/farmgoods/" + farmGood.farmGood.id}><img className="smallfgcardImg" src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/></a>
+                </div>
+                  <span>{farmGood.farmGood.attributes.name}</span>
+                  <p>${farmGood.farmGood.attributes.price}</p>
+                  {farmGood.farmGood.attributes.inventory > 0 && //
+                    <div>
+                      {this.state.showFGMenu &&
+                        <div>
+                          <Link to={{
+                              pathname: `/farm-goods/${this.props.farmGood.id}/edit`,
+                              farmGood: this.props.farmGood
+                          }}> edit farmgood </Link>
+                        </div>
+                      }
+                    </div>
+                  }
+                  {farmGood.farmGood.attributes.inventory <= 0 &&
+                    <p>Check back soon!</p>
+                  }
+              </span>
+              <div className="fg-li"></div>
+            </div>
+          </MediaQuery>
+        </div>
+      }
+    </div>
     )
   }
 }
 
-FarmGoodModal.displayName = 'FarmGoodmodal';
 
 export default FarmGoodModal;
 

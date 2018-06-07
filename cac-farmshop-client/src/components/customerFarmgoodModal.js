@@ -25,7 +25,6 @@ class CustomerFarmGoodModal extends React.Component {
         farmgoodscard: this.props.farmgoodscard
       })
     }
-
   }
 
   daysAvailable = () => {
@@ -106,57 +105,56 @@ class CustomerFarmGoodModal extends React.Component {
       <div>
       {
         <div>
-      <MediaQuery query="(min-width: 366px)" > 
-        <div className={this.state.farmgoodscard}>
-          <span onMouseLeave={this.fgReg}>
-            <div onMouseEnter={this.fgMenu}>
-              <a href={"http://localhost:3001/farmers/" + farmGood.farmGood.attributes.farmer.id + "/farmgoods/" + farmGood.farmGood.id}><img className="fgcardImg" src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/></a>
-              <span>{farmGood.farmGood.attributes.name}</span>
-              <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>
-              <a href={farmGood.farmGood.attributes.farmer.link}>{farmGood.farmGood.attributes.farmer.name}</a>
-              {farmGood.farmGood.attributes.inventory > 0 && //
-                <div>
-                  {this.state.showFGMenu &&
+          <MediaQuery query="(min-width: 366px)" > 
+            <div className={this.state.farmgoodscard}>
+              <span onMouseLeave={this.fgReg}>
+                <div onMouseEnter={this.fgMenu}>
+                  <a href={"http://localhost:3001/farmers/" + farmGood.farmGood.attributes.farmer.id + "/farmgoods/" + farmGood.farmGood.id}><img className="fgcardImg" src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/></a>
+                  <span>{farmGood.farmGood.attributes.name}</span>
+                  <p>Available: {farmGood.farmGood.attributes.inventory} at ${farmGood.farmGood.attributes.price} each</p>
+                  <a href={farmGood.farmGood.attributes.farmer.link}>{farmGood.farmGood.attributes.farmer.name}</a>
+                  {farmGood.farmGood.attributes.inventory > 0 && //
                     <div>
-                      {this.addFG()}
+                      {this.state.showFGMenu &&
+                        <div>
+                          {this.addFG()}
+                        </div>
+                      }
                     </div>
                   }
-                </div>
-              }
-              {farmGood.farmGood.attributes.inventory <= 0 &&
-                <p>None left, check back soon!</p>
-              }
-            </div>
-          </span>
-          <div className="fg-li"></div>
-        </div>
-      </MediaQuery>
-      <MediaQuery query="(max-width: 365px)" > 
-        <div className="smallFarmGoodsCard">
-          <span onMouseLeave={this.fgReg}>
-            <div onMouseEnter={this.fgMenu}>
-              <a href={"http://localhost:3001/farmers/" + farmGood.farmGood.attributes.farmer.id + "/farmgoods/" + farmGood.farmGood.id}><img className="smallfgcardImg" src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/></a>
-            </div>
-              <span>{farmGood.farmGood.attributes.name}</span>
-              <p>${farmGood.farmGood.attributes.price}</p>
-              {farmGood.farmGood.attributes.inventory > 0 && //
-                <div>
-                  {this.state.showFGMenu &&
-                    <div>
-                      {this.addFG()}
-                    </div>
+                  {farmGood.farmGood.attributes.inventory <= 0 &&
+                    <p>None left, check back soon!</p>
                   }
                 </div>
-              }
-              {farmGood.farmGood.attributes.inventory <= 0 &&
-                <p>Check back soon!</p>
-              }
-          </span>
-          <div className="fg-li"></div>
+              </span>
+              <div className="fg-li"></div>
+            </div>
+          </MediaQuery>
+          <MediaQuery query="(max-width: 365px)" > 
+            <div className="smallFarmGoodsCard">
+              <span onMouseLeave={this.fgReg}>
+                <div onMouseEnter={this.fgMenu}>
+                  <a href={"http://localhost:3001/farmers/" + farmGood.farmGood.attributes.farmer.id + "/farmgoods/" + farmGood.farmGood.id}><img className="smallfgcardImg" src={farmGood.farmGood.attributes["img-url"]} alt={farmGood.farmGood.img_url}/></a>
+                </div>
+                  <span>{farmGood.farmGood.attributes.name}</span>
+                  <p>${farmGood.farmGood.attributes.price}</p>
+                  {farmGood.farmGood.attributes.inventory > 0 && //
+                    <div>
+                      {this.state.showFGMenu &&
+                        <div>
+                          {this.addFG()}
+                        </div>
+                      }
+                    </div>
+                  }
+                  {farmGood.farmGood.attributes.inventory <= 0 &&
+                    <p>Check back soon!</p>
+                  }
+              </span>
+              <div className="fg-li"></div>
+            </div>
+          </MediaQuery>
         </div>
-      </MediaQuery>
-    </div>
-
       }
       </div>
     )

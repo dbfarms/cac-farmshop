@@ -41,7 +41,7 @@ export default class CustomerRoutes extends Component {
           <Route exact path='/farmers/:id' component={FarmerShow} />
           <Route exact path='/farmers/:id/farmgoods' component={FarmgoodIndex} />
           <Route exact path='/farmers/:id/farmgoods/:id' component={FarmgoodShow} />
-          <Route exact path="/farm-goods" component={CustomerFarmGoods} />
+          <Route exact path="/farmgoods" component={CustomerFarmGoods} />
           <Route path="*" render={() => <div></div>} />
           <Route exact path='/cart' component={Cart}/>
           <Route exact path='/checkout' component={Checkout}/>
