@@ -12,9 +12,11 @@ export default (state = [], action) => {
         editState 
       );
     case 'GET_A_FARMGOOD_SUCCESS':
-      const farmGood = action.farmGood
+      //debugger 
+      const single_farmGood = action.farmGood
+      //debugger
       return (
-        farmGood
+        single_farmGood
       )
     case 'GET_FARMGOOD_SUCCESS':
     //debugger 

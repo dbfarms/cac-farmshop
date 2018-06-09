@@ -90,7 +90,7 @@ const deletingFarmgood = farmGood => {
 // ** async actions **
 
 export const getSingleFarmGood = (farmer_id, farmgood_id) => {
-  //debugger
+ //debugger
   return dispatch => {
    // debugger
     return fetch(`http://localhost:3000/api/farmers/${farmer_id}/farmgoods/${farmgood_id}`, header)

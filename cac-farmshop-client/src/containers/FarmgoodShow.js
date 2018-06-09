@@ -61,13 +61,11 @@ class FarmgoodShow extends Component {
             var displayFarmgood = "test"
         }
 
+        //debugger 
+
         return(
             <div>
-            {this.state.farmgood.length === undefined &&
-                <div>
-                    {displayFarmgood}
-                </div>
-            }
+                {displayFarmgood}
             </div>
 
         )

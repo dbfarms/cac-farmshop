@@ -68,7 +68,7 @@ class FarmGoodModal extends React.Component {
                       {this.state.showFGMenu &&
                         <div>
                           <Link to={{
-                              pathname: `/farm-goods/${this.props.farmGood.id}/edit`,
+                              pathname: `/farmers/${this.props.farmGood.attributes.farmer.id}/farmgoods/${this.props.farmGood.id}/edit`,
                               farmGood: this.props.farmGood
                           }}> edit farmgood </Link>
                         </div>

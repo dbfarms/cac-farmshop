@@ -40,7 +40,7 @@ class Header extends React.Component {
           routes: {
             home: 'home',
             farmers: 'farmers',
-            farmgoods: 'farm-goods',
+            farmgoods: 'farmgoods',
             cart: 'cart'
           }
         }) 
@@ -51,7 +51,7 @@ class Header extends React.Component {
           farmers: 'farmers',
           home: 'home',
           orders: 'orders',
-          'my farmgoods': 'farm-goods'
+          'my farmgoods': 'farmgoods'
           }
         }) 
       case 'admin':
@@ -60,7 +60,7 @@ class Header extends React.Component {
             'create new user': 'signup',
             farmers: 'farmers',
             home: 'home',
-            farmgoods: 'farm-goods',
+            farmgoods: 'farmgoods',
             users: 'users'
           }
         }) 
@@ -71,7 +71,7 @@ class Header extends React.Component {
             'Sign Up': 'signup',
             farmers: 'farmers',
             home: 'home',
-            farmgoods: 'farm-goods'
+            farmgoods: 'farmgoods'
           }
         }) 
     }
@@ -158,7 +158,7 @@ class Header extends React.Component {
            {
             home: 'home',
             farmers: 'farmers',
-            farmgoods: 'farm-goods',
+            farmgoods: 'farmgoods',
             cart: 'cart'
           }
         ) 
@@ -169,7 +169,7 @@ class Header extends React.Component {
           farmers: 'farmers',
           home: 'home',
           orders: 'orders',
-          'my farmgoods': 'farm-goods'
+          'my farmgoods': 'farmgoods'
           }
         ) 
       case 'admin':
@@ -178,7 +178,7 @@ class Header extends React.Component {
             'create new user': 'signup',
             farmers: 'farmers',
             home: 'home',
-            farmgoods: 'farm-goods',
+            farmgoods: 'farmgoods',
             users: 'users'
           }
         ) 
@@ -189,7 +189,7 @@ class Header extends React.Component {
             'Sign Up': 'signup',
             farmers: 'farmers',
             home: 'home',
-            farmgoods: 'farm-goods'
+            farmgoods: 'farmgoods'
           }
         ) 
     }
@@ -488,7 +488,7 @@ class Header extends React.Component {
                             </div>
                           </li>
                           <li className="nav__menu-item left-menu">
-                            <a href="/farm-goods" className="menu-item-text">Farmgoods</a>
+                            <a href="/farmgoods" className="menu-item-text">Farmgoods</a>
                           </li>
                           <li className="nav__menu-item left-menu"
                               onMouseLeave={this.handleFarmersLeave}
