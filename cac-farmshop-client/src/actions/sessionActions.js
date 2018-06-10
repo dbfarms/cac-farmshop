@@ -49,7 +49,7 @@ export function logInUser(credentials, history) {
         sessionStorage.setItem('id', response.user_id);
         sessionStorage.setItem('name', response.name);
       }
-      history.push('/farm-goods')
+      history.push('/farmgoods')
     }).catch(error => {
       throw(error);
     });
@@ -77,7 +77,7 @@ export function signUpUser(credentials, history) {
     return sessionApi.signup(credentials).then(response => {
       sessionStorage.setItem('jwt', response.jwt);
       dispatch(signUpSuccess());
-      history.push('/farm-goods')
+      history.push('/farmgoods')
     }).catch(error => {
       throw(error);
     });
