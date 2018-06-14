@@ -8,7 +8,7 @@ import { getFarmGoods } from '../actions/farmGoods'; // requests list of farmgoo
 import { getDays } from '../actions/days'; // requests from server
 import { deleteFarmGoods } from '../actions/farmGoods';
 import NewFarmgoodForm from './NewFarmgoodForm';
-import EditFarmgoodForm from './EditFarmgoodForm';
+import AdminEditFarmgoodForm from './AdminEditFarmgoodForm';
 import FarmgoodNav from '../components/farmgoodNav'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ import './FarmGoods.css';
 //import StickyHeader from 'react-sticky-header';
 import VisitorCartCard from '../components/visitorCartCard';
 
-class FarmGoods extends Component {
+class AdminFarmGoods extends Component {
   constructor(props) {
     super(props);
     
@@ -198,7 +198,7 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getFarmGoods, deleteFarmGoods })(FarmGoods); // 
+export default connect(mapStateToProps, { getFarmGoods, deleteFarmGoods })(AdminFarmGoods); // 
 
 /*
 

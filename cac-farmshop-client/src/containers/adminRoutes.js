@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import './App.css';
-import FarmGoods from './adminFarmGoods';
+import AdminFarmGoods from './adminFarmGoods';
 import FarmersPage from './FarmersPage';
 import FarmerShow from './FarmerShow';
 import FarmgoodShow from './FarmgoodShow';
@@ -27,7 +27,7 @@ export default class AdminRoutes extends Component {
       routes: {
         'create new user': 'signup',
         farmers: 'farmers',
-        farmgoods: 'farm-goods',
+        farmgoods: 'farmgoods',
         users: 'users',
       }
     }
@@ -45,7 +45,7 @@ export default class AdminRoutes extends Component {
           <Route exact path='/farmers/:id/farmgoods' component={FarmgoodIndex} />
           <Route exact path='/farmers/:id/farmgoods/:id' component={FarmgoodShow} />
           <Route path ="/farmers/:id/farmgoods/:id/edit" component={AdminEditFarmgoodForm} />
-          <Route exact path="/farmgoods" component={FarmGoods} />
+          <Route exact path="/farmgoods" component={AdminFarmGoods} />
           <Route exact path="/new-farm-good" component={AdminNewFarmgoodForm} />
           <Route exact path="/users" component={Users} />
           <Route path="*" render={() => <div></div>} />

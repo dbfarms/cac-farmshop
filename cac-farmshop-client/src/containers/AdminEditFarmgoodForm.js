@@ -14,8 +14,6 @@ import { deleteFarmGoods } from '../actions/farmGoods';
 import { Link } from 'react-router-dom';
 
 class AdminEditFarmgoodForm extends Component {
-// the state is added for days available 
-  
   constructor(props) {
     super(props)
 
@@ -72,6 +70,7 @@ componentWillMount = () => {
   })
   
   //console.log(days_array)
+  //debugger 
   this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
 
   const currentFarmgoodFormData = Object.assign({}, this.state.initialFarmgood, {
@@ -81,30 +80,48 @@ componentWillMount = () => {
 }
 
 componentWillReceiveProps(nextProps){
-  debugger 
+  //debugger 
 
   if (nextProps.initialFarmgood != undefined) {
+    //debugger 
     this.setState({
       initialFarmgood: {
-        id: Number(nextProps.initialFarmgood.data.id),
-        name: nextProps.initialFarmgood.data.attributes.name,
-        inventory: nextProps.initialFarmgood.data.attributes.inventory,
-        price: nextProps.initialFarmgood.data.attributes.price,
-        category: nextProps.initialFarmgood.data.attributes.category,
-        daysAvailable: nextProps.initialFarmgood.data.relationships.days.data, 
-        farmer: nextProps.initialFarmgood.data.attributes.farmer.id
-        }
+        id: Number(nextProps.initialFarmgood.id),
+        name: nextProps.initialFarmgood.attributes.name,
+        inventory: nextProps.initialFarmgood.attributes.inventory,
+        price: nextProps.initialFarmgood.attributes.price,
+        category: nextProps.initialFarmgood.attributes.category,
+        daysAvailable: nextProps.initialFarmgood.relationships.days.data, 
+        farmer: nextProps.initialFarmgood.attributes.farmer.id
+      }
     })
-  } /*
-  initialFarmgood: {
-          id: 0, //props.location.farmGood.id,
-          name: '', //props.location.farmGood.attributes.name, 
-          inventory: '', //props.location.farmGood.attributes.inventory,
-          price: '', //props.location.farmGood.attributes.price, 
-          category: '', //props.location.farmGood.attributes.category.title,
-          daysAvailable: []//this.props.location.farmGood.relationships.days.data
-        },
-  }*/
+  } 
+
+  if (this.state.initialFarmgood.id != 0) {
+    //// doing this to set initial values in form, but right now it's breaking
+    /// 
+    //debugger
+    console.log("updating form in willreceiveprops")
+    let days_array = []
+    this.selectedCheckboxes = new Set();
+    this.state.initialFarmgood.daysAvailable.map(day => {
+      this.selectedCheckboxes.add(day.name);
+      days_array.push(day.name)
+    })
+    //debugger 
+    this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
+
+    const currentFarmgoodFormData = Object.assign({}, this.state.initialFarmgood, {
+      days_array: days_array 
+    })
+    //debugger 
+
+    console.log(currentFarmgoodFormData)
+    this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
+
+   ////
+  }
+
 }
 
 changeCategory = event => {
@@ -225,13 +242,17 @@ handleCancel = () =>{
 
 render() {
   //<EditFarmGoodCard farmGood={this.props.location.farmGood}/> //THIS MIGHT REPLACE CURRENTLY USED FARMGOODCARD ONE DAY I DUNNO
-  debugger 
   const boxes = this.makeCheckBoxes();
    //eventually need to add category? anything else?
   //debugger 
-  if (this.state.initialFarmgood.id != 0 ) {
-    debugger 
+  console.log(this.props.FarmgoodFormData)
+  console.log(this.state.initialFarmgood.id)
+  //debugger
+  if (this.props.FarmgoodFormData != undefined && this.state.initialFarmgood.id != 0) { //(this.state.initialFarmgood.id != 0 ) {
+    //debugger 
     const { name, farmer, inventory, price, category, id } = this.props.FarmgoodFormData;
+    console.log("loading form")
+    //debugger 
     return (
       <div className="formFarmgood">
         
@@ -278,7 +299,7 @@ render() {
           />
           <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
-            {category}
+            {category.title}
             </DropdownToggle>
             <DropdownMenu value="category" >
                 <DropdownItem header>Category</DropdownItem>
@@ -314,20 +335,14 @@ render() {
 }
 
 const mapStateToProps = state => {
-  
-  if (state.farmGood.data != undefined) {
-    if (state.farmGood.data.length == undefined) {
-      //debugger 
-      return {
-        initialFarmgood: state.farmGood,
-        FarmgoodFormData: state.FarmgoodFormData
-      }
-    }
-  } else {
-    //debugger 
-      return {
-        FarmgoodFormData: state.FarmgoodFormData
-      }
+  console.log("mstp")
+  console.log(state.FarmgoodFormData)
+  console.log(state)
+  //debugger 
+
+  return {
+    initialFarmgood: state.farmGoods.editing.data,
+    FarmgoodFormData: state.FarmgoodFormData
   }
   
 }

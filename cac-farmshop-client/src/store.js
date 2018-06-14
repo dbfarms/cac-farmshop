@@ -5,8 +5,8 @@ import {
 } from 'redux'
 import thunk from 'redux-thunk';
 
-import farmGood from './reducers/farmGoodsReducer'
 import farmGoods from './reducers/farmGoodsReducer'
+import farmGood from './reducers/farmGoodsReducer'
 import farmers from './reducers/farmersReducer'
 import carts from './reducers/carts';
 import cart from './reducers/carts';
@@ -29,9 +29,10 @@ const appReducer = combineReducers({
   cart,
   cartFormData,
   farmers,
+  farmGood,
   farmGoods,
   FarmgoodFormData,
-  farmGood,
+  farmGood, //: single_farmgood,
   EditedFarmgoodFormData,
   days,
   session,
