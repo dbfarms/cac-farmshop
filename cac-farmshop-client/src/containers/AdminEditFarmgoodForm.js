@@ -82,7 +82,7 @@ componentWillMount = () => {
 componentWillReceiveProps(nextProps){
   //debugger 
 
-  if (nextProps.initialFarmgood != undefined) {
+  if (nextProps.initialFarmgood != undefined && nextProps.initialFarmgood.id != this.state.initialFarmgood.id) {
     //debugger 
     this.setState({
       initialFarmgood: {
@@ -97,11 +97,13 @@ componentWillReceiveProps(nextProps){
     })
   } 
 
-  if (this.state.initialFarmgood.id != 0) {
+  //debugger 
+  //if (this.state.initialFarmgood.id != 0) {
     //// doing this to set initial values in form, but right now it's breaking
     /// 
     //debugger
     console.log("updating form in willreceiveprops")
+    //////////LEFT OFF HERE, NOT SURE WHERE TO PUT DAYS_ARRAY
     let days_array = []
     this.selectedCheckboxes = new Set();
     this.state.initialFarmgood.daysAvailable.map(day => {
@@ -109,7 +111,12 @@ componentWillReceiveProps(nextProps){
       days_array.push(day.name)
     })
     //debugger 
-    this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
+    ///////////////////////////////////////////////////////
+        
+   ////
+  //}
+  /*
+  this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
 
     const currentFarmgoodFormData = Object.assign({}, this.state.initialFarmgood, {
       days_array: days_array 
@@ -118,10 +125,7 @@ componentWillReceiveProps(nextProps){
 
     console.log(currentFarmgoodFormData)
     this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
-
-   ////
-  }
-
+    */
 }
 
 changeCategory = event => {
