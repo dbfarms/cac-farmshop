@@ -193,7 +193,7 @@ const mapStateToProps = (state) => {
   //console.log(state)
   //const stateDays = Object.assign([], state.days)
   return ({
-      farmGoods: state.farmGoods,
+      farmGoods: state.farmGoods.all,
       days: state.days 
   })
 }

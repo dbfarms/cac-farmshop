@@ -148,7 +148,7 @@ const mapStateToProps = (state) => {
   //debugger 
   //state.farmGoods.data[0].relationships.farmer.data.id
   return ({
-      farmGoods: state.farmGoods,
+      farmGoods: state.farmGoods.all, //maybe add another {} in fg reducer for specific farmer?
       days: state.days,
       //user: state.user
   })

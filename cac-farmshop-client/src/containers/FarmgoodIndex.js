@@ -140,7 +140,7 @@ const mapStateToProps = state => {
     // for some reason this eventually returns undefined and need to figure out why
     if (state.farmGoods != undefined) {
         return {
-            farmgoods: state.farmGoods
+            farmgoods: state.farmGoods.all
         }
     } else {
         return {

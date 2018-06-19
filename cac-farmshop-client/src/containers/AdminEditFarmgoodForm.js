@@ -55,7 +55,8 @@ toggle(){
 
 componentWillMount = () => {
   //debugger
-
+  console.log("compwillmount")
+  //console.log(this.state.initialFarmgood)
   const routeArray = document.location.href.split('/');
   const farmgoodID = Number(routeArray[routeArray.length - 2])
   const farmerID = Number(routeArray[routeArray.length - 4])
@@ -81,7 +82,6 @@ componentWillMount = () => {
 
 componentWillReceiveProps(nextProps){
   //debugger 
-
   if (nextProps.initialFarmgood != undefined && nextProps.initialFarmgood.id != this.state.initialFarmgood.id) {
     //debugger 
     this.setState({
@@ -115,6 +115,10 @@ componentWillReceiveProps(nextProps){
         
    ////
   //}
+  //var noChanges = true; 
+
+  //this.state.initialFarmgood
+
   /*
   this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
 
@@ -220,10 +224,23 @@ handleEditChange = event => {
 
   const { name, value } = event.target;
   //const id = this.props.location.farmGood.id
-  const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-    [name]: value //, 
-    //id: id 
-  })
+
+  //debugger 
+  let currentFarmgoodFormData 
+  if (this.props.FarmgoodFormData.attributes == undefined ) {
+    currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
+      [name]: value //, 
+      //id: id 
+    })
+  } else {
+    currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData.attributes, {
+      [name]: value //, 
+      //id: id 
+    })
+  }
+
+  //debugger 
+
   this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
 }
 
@@ -248,13 +265,35 @@ render() {
   //<EditFarmGoodCard farmGood={this.props.location.farmGood}/> //THIS MIGHT REPLACE CURRENTLY USED FARMGOODCARD ONE DAY I DUNNO
   const boxes = this.makeCheckBoxes();
    //eventually need to add category? anything else?
-  //debugger 
-  console.log(this.props.FarmgoodFormData)
-  console.log(this.state.initialFarmgood.id)
-  //debugger
+  //console.log(this.props.FarmgoodFormData)
+  //console.log(this.state.initialFarmgood.id)
   if (this.props.FarmgoodFormData != undefined && this.state.initialFarmgood.id != 0) { //(this.state.initialFarmgood.id != 0 ) {
+    let name, farmer, inventory, price, category, id
+    
     //debugger 
-    const { name, farmer, inventory, price, category, id } = this.props.FarmgoodFormData;
+    if (this.props.FarmgoodFormData.category == undefined ) {
+      //name, farmer, inventory, price, category = this.props.FarmgoodFormData.attributes;
+      //let id = Number(this.props.FarmgoodFormData.id)
+      name = this.props.FarmgoodFormData.attributes.name
+      farmer = this.props.FarmgoodFormData.attributes.farmer
+      inventory = this.props.FarmgoodFormData.attributes.inventory
+      price = this.props.FarmgoodFormData.attributes.price
+      category = this.props.FarmgoodFormData.attributes.category.title
+      id = Number(this.props.FarmgoodFormData.id )
+    } else {
+      //debugger 
+      //const { name, farmer, inventory, price, category, id } = this.props.FarmgoodFormData //.attributes;
+
+      name = this.props.FarmgoodFormData.name
+      farmer = this.props.FarmgoodFormData.farmer
+      inventory = this.props.FarmgoodFormData.inventory
+      price = this.props.FarmgoodFormData.price
+      category = this.props.FarmgoodFormData.category 
+      id = Number(this.props.FarmgoodFormData.id )
+
+      //debugger 
+    }
+    //debugger 
     console.log("loading form")
     //debugger 
     return (
@@ -289,7 +328,7 @@ render() {
           <label htmlFor="farmgood_inventory">Quantity available:</label>
           <input
             type="number"
-            onChange={this.handleEditChange}
+            onChange={this.handleEditChange.bind(this)}
             name="inventory"
             value={inventory}
           />
@@ -297,7 +336,7 @@ render() {
           <label htmlFor="farmgood_price">Price:</label>
           <input 
             type="number"
-            onChange={this.handleEditChange}
+            onChange={this.handleEditChange.bind(this)}
             name="price"
             value={price}
           />
@@ -341,12 +380,23 @@ render() {
 const mapStateToProps = state => {
   console.log("mstp")
   console.log(state.FarmgoodFormData)
-  console.log(state)
+  //console.log(state)
   //debugger 
 
-  return {
-    initialFarmgood: state.farmGoods.editing.data,
-    FarmgoodFormData: state.FarmgoodFormData
+  if (state.FarmgoodFormData.name == "") {
+    //debugger 
+    console.log("First place")
+    return {
+      initialFarmgood: state.farmGoods.editing.data,
+      FarmgoodFormData: state.farmGoods.editing.data //.attributes //state.FarmgoodFormData
+    }  
+  } else {
+    console.log("right place")
+    //debugger 
+    return {
+      initialFarmgood: state.farmGoods.editing.data,
+      FarmgoodFormData: state.FarmgoodFormData
+    }
   }
   
 }
