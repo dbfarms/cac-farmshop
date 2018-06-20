@@ -187,6 +187,7 @@ makeCheckBoxes() {
 toggleCheckbox = (event) => {
   
   let days_array
+  debugger 
   if (this.props.FarmgoodFormData.days_array == undefined) {
     days_array = this.props.FarmgoodFormData.relationships["days-available"].data  
   } else {
@@ -284,6 +285,55 @@ handleCancel = () =>{
   this.props.history.push('/farmgoods') 
 }
 
+category(category){
+  return (
+    <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <DropdownToggle caret>
+            {category.title}
+            </DropdownToggle>
+            <DropdownMenu value="category" >
+                <DropdownItem header>Category</DropdownItem>
+                <DropdownItem onClick={() => {
+                    this.changeCategory('Vegetables/Fruit')
+                    }}>Fruit & Vegetables</DropdownItem>
+                <DropdownItem onClick={() => {
+                    this.changeCategory('Meat')
+                    }}>Meat</DropdownItem>
+                 <DropdownItem onClick={() => {
+                    this.changeCategory('Dairy')
+                    }}>Dairy</DropdownItem>
+                 <DropdownItem onClick={() => {
+                    this.changeCategory('Eggs')
+                    }}>Eggs</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+  )
+}
+
+subCategory(subCategory){
+  return (
+    <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <DropdownToggle caret>
+            {subCategory.title}
+            </DropdownToggle>
+            <DropdownMenu value="category" >
+                <DropdownItem header>Category</DropdownItem>
+                <DropdownItem onClick={() => {
+                    this.changeCategory('Vegetables/Fruit')
+                    }}>Fruit & Vegetables</DropdownItem>
+                <DropdownItem onClick={() => {
+                    this.changeCategory('Meat')
+                    }}>Meat</DropdownItem>
+                 <DropdownItem onClick={() => {
+                    this.changeCategory('Dairy')
+                    }}>Dairy</DropdownItem>
+                 <DropdownItem onClick={() => {
+                    this.changeCategory('Eggs')
+                    }}>Eggs</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+  )
+}
 
 render() {
   //<EditFarmGoodCard farmGood={this.props.location.farmGood}/> //THIS MIGHT REPLACE CURRENTLY USED FARMGOODCARD ONE DAY I DUNNO
@@ -296,7 +346,7 @@ render() {
     
     //debugger 
     if (this.props.FarmgoodFormData.relationships) { //.category == undefined ) {
-      debugger 
+      //debugger 
       console.log(this.props.FarmgoodFormData)
       
       name = this.props.FarmgoodFormData.attributes.name
@@ -323,6 +373,10 @@ render() {
     //debugger 
     console.log("loading form")
     //debugger 
+
+    const showCategory = this.category(category)
+    const showSubCategory = this.category(category)
+
     return (
       <div className="formFarmgood">
         
@@ -367,26 +421,8 @@ render() {
             name="price"
             value={price}
           />
-          <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-            <DropdownToggle caret>
-            {category.title}
-            </DropdownToggle>
-            <DropdownMenu value="category" >
-                <DropdownItem header>Category</DropdownItem>
-                <DropdownItem onClick={() => {
-                    this.changeCategory('Vegetables/Fruit')
-                    }}>Fruit & Vegetables</DropdownItem>
-                <DropdownItem onClick={() => {
-                    this.changeCategory('Meat')
-                    }}>Meat</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.changeCategory('Dairy')
-                    }}>Dairy</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.changeCategory('Eggs')
-                    }}>Eggs</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          {showCategory}
+          {showSubCategory}
             {boxes}
             <button type="submit">Edit Farmgood</button>
         </form>
