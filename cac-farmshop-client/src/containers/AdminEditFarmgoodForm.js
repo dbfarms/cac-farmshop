@@ -17,7 +17,6 @@ class AdminEditFarmgoodForm extends Component {
   constructor(props) {
     super(props)
 
-    //debugger
     this.changeCategory = this.changeCategory.bind(this);
     this.toggle = this.toggle.bind(this);
 
@@ -93,6 +92,7 @@ componentWillReceiveProps(nextProps){
         category: nextProps.initialFarmgood.attributes.category,
         daysAvailable: nextProps.initialFarmgood.relationships.days.data, 
         farmer: nextProps.initialFarmgood.attributes.farmer.id
+
       }
     })
   } 
@@ -110,6 +110,11 @@ componentWillReceiveProps(nextProps){
       this.selectedCheckboxes.add(day.name);
       days_array.push(day.name)
     })
+
+    //debugger 
+    if (this.state.FarmgoodFormData) {
+      debugger 
+    }
     //debugger 
     ///////////////////////////////////////////////////////
         
@@ -181,6 +186,15 @@ makeCheckBoxes() {
 
 toggleCheckbox = (event) => {
   
+  let days_array
+  if (this.props.FarmgoodFormData.days_array == undefined) {
+    days_array = this.props.FarmgoodFormData.relationships["days-available"].data  
+  } else {
+    days_array = this.props.FarmgoodFormData.days_array 
+  }
+  
+  //debugger 
+
   if (this.selectedCheckboxes.has(event[0])) {
     this.selectedCheckboxes.delete(event[0]);
     this.days_array = this.props.FarmgoodFormData.days_array.filter(day => day !== event[0])
@@ -208,12 +222,22 @@ toggleCheckbox = (event) => {
     
     this.selectedCheckboxes.add(event[0]);
     
-
-    this.days_array = this.props.FarmgoodFormData.days_array.concat(event[0])
+    //NEED TO CREATED DAYSAVAILABLE AND DAYS_ARRAY FOR INITIAL FARMGOOD BUT IS THIS BEST PLACE FOR IT?
+    /* 
+    if (this.props.FarmgoodFormData.days_array == undefined ) {
+      let currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
+        daysAvailable: [],
+        days_array: []
+      })
+    }
+    */
+    //debugger 
+    days_array = days_array.concat(event[0]) //this.props.FarmgoodFormData.days_array.concat(event[0])
     
+    //debugger 
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
       daysAvailable: this.selectedCheckboxes, //[this.state.days]
-      days_array: this.days_array
+      days_array: days_array
     })
     this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
   }
@@ -271,9 +295,10 @@ render() {
     let name, farmer, inventory, price, category, id
     
     //debugger 
-    if (this.props.FarmgoodFormData.category == undefined ) {
-      //name, farmer, inventory, price, category = this.props.FarmgoodFormData.attributes;
-      //let id = Number(this.props.FarmgoodFormData.id)
+    if (this.props.FarmgoodFormData.relationships) { //.category == undefined ) {
+      debugger 
+      console.log(this.props.FarmgoodFormData)
+      
       name = this.props.FarmgoodFormData.attributes.name
       farmer = this.props.FarmgoodFormData.attributes.farmer
       inventory = this.props.FarmgoodFormData.attributes.inventory
@@ -283,6 +308,8 @@ render() {
     } else {
       //debugger 
       //const { name, farmer, inventory, price, category, id } = this.props.FarmgoodFormData //.attributes;
+
+      console.log(this.props.FarmgoodFormData)
 
       name = this.props.FarmgoodFormData.name
       farmer = this.props.FarmgoodFormData.farmer
@@ -383,9 +410,10 @@ const mapStateToProps = state => {
   //console.log(state)
   //debugger 
 
-  if (state.FarmgoodFormData.name == "") {
+  if (state.FarmgoodFormData.isEditing == false) {
+    //console.log("First place")
+    //console.log(state.farmGoods.editing.data.attributes)
     //debugger 
-    console.log("First place")
     return {
       initialFarmgood: state.farmGoods.editing.data,
       FarmgoodFormData: state.farmGoods.editing.data //.attributes //state.FarmgoodFormData
@@ -393,10 +421,18 @@ const mapStateToProps = state => {
   } else {
     console.log("right place")
     //debugger 
-    return {
-      initialFarmgood: state.farmGoods.editing.data,
-      FarmgoodFormData: state.FarmgoodFormData
+    if (state.FarmgoodFormData.name == "") {
+      return {
+        initialFarmgood: state.farmGoods.editing.data, //.attributes,
+        FarmgoodFormData: state.farmGoods.editing.data
+      }
+    } else {
+      return {
+        initialFarmgood: state.farmGoods.editing.data, //.attributes,
+        FarmgoodFormData: state.FarmgoodFormData
+      }
     }
+    
   }
   
 }
