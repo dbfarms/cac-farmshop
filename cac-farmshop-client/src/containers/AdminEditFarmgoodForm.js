@@ -33,6 +33,7 @@ class AdminEditFarmgoodForm extends Component {
         ],
         days_array: [],
         dropdownOpen: false,
+        dropdownOpenSub: false,
         category: 'category',
         firstDayPush: 0,
         days:"daysAvailable", //THIS IS FOR RAILS PARAMS / FARMGOODFORMDATA
@@ -51,6 +52,12 @@ toggle(){
   this.setState({
       dropdownOpen: !this.state.dropdownOpen,
   });
+}
+
+toggleSub(){
+  this.setState({
+    dropdownOpenSub: !this.state.dropdownOpenSub
+  })
 }
 
 componentWillMount = () => {
@@ -113,9 +120,7 @@ componentWillReceiveProps(nextProps){
       })
     }
     
-    
     //console.log(days_array)
-    //debugger 
     if (this.props.FarmgoodFormData) {
       debugger 
       this.props.updateEditedFarmgoodFormData(this.props.FarmgoodFormData)
@@ -133,10 +138,6 @@ componentWillReceiveProps(nextProps){
       })
       this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
     }
-    
-
-    //debugger 
-
   } 
 
   //if (this.state.initialFarmgood.id != 0) {
@@ -156,12 +157,6 @@ componentWillReceiveProps(nextProps){
         //debugger 
       }
     }
-    
-    ///////////////////////////////////////////////////////
-        
-   ////
-  //}
-  
 }
 
 changeCategory = event => {
@@ -174,6 +169,25 @@ changeCategory = event => {
   })
   const name = this.state.category 
   const value = event 
+  //
+  const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
+    [name]: value
+  })
+  this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
+}
+
+changeSubCategory = event => {
+  //debugger 
+  this.setState({
+    initialFarmgood: {
+      subCategory: event
+    }
+    //value: event
+  })
+  const name = this.state.subCategory 
+  const value = event 
+
+  debugger 
   const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
     [name]: value
   })
@@ -245,12 +259,13 @@ toggleCheckbox = (event) => {
   //debugger 
   console.log(this)
   console.log(event[0])
-
+  
   if (this.selectedCheckboxes.has(event[0])) {
     this.selectedCheckboxes.delete(event[0]);
     days_array = this.props.FarmgoodFormData.relationships.days_array.filter(day => day !== event[0])
     
     //is the below even necessary?
+    
 
     const indexOfDay = this.state.theWeek.map((day, index) => {
       if (event[0] === day[0]) {
@@ -258,20 +273,34 @@ toggleCheckbox = (event) => {
       }
     })
 
+    //ifeel like the below should be breaking... ////////////////////////////////////////////////////////
+    // 
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-     daysAvailable: this.selectedCheckboxes,
-     days_array: this.days_array 
+      relationships: {
+        ...this.props.FarmgoodFormData.relationships,
+        daysAvailable: this.selectedCheckboxes, //[this.state.days]
+        days_array: days_array
+      }
+
+     //daysAvailable: this.selectedCheckboxes,
+     //days_array: this.days_array 
     })
     //debugger 
+    console.log(currentFarmgoodFormData)
     this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
   } else {
     
     this.selectedCheckboxes.add(event[0]);
     //console.log(this.selectedCheckboxes)
+    //console.log(days_array)
+    //debugger 
+    if (this.props.FarmgoodFormData.relationships.days_array) {
+      days_array = this.props.FarmgoodFormData.relationships.days_array.concat(event[0]) 
+    } else {
+      days_array = days_array.concat(event[0])
+    }
+     //this.props.FarmgoodFormData.days_array.concat(event[0])
     
-    days_array = days_array.concat(event[0]) //this.props.FarmgoodFormData.days_array.concat(event[0])
-    
-    //debugger  //check if below works!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
     const currentFarmgoodFormData1 = Object.assign({}, this.props.FarmgoodFormData, {
       relationships: {
         ...this.props.FarmgoodFormData.relationships,
@@ -279,8 +308,6 @@ toggleCheckbox = (event) => {
         days_array: days_array
       }
     })
-
-    //debugger 
 
     this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData1)
   }
@@ -292,32 +319,22 @@ handleEditChange = event => {
   const { name, value } = event.target;
   //const id = this.props.location.farmGood.id
   let currentFarmgoodFormData 
- 
-  //debugger 
   
   if (this.props.FarmgoodFormData.attributes == undefined ) {
-    debugger 
     currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
       [name]: value //, 
       //id: id 
     })
   } else {
-    debugger 
-    //if (name)
+    //debugger 
     currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, { //.attributes, {
       attributes: {
         ...this.props.FarmgoodFormData.attributes,
         [name]: value, //, 
         //days_array: this.props.FarmgoodFormData.relationships["days-available"].data
       },
-      //relationships: {
-      //  ...this.props.relationships,
-      //}
-      //id: id 
     })
   }
-
-  debugger 
 
   this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
 }
@@ -343,7 +360,7 @@ category(category){
   return (
     <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
-            {category.title}
+            {category}
             </DropdownToggle>
             <DropdownMenu value="category" >
                 <DropdownItem header>Category</DropdownItem>
@@ -365,13 +382,15 @@ category(category){
 }
 
 subCategory(subCategory){
+  //NOTES: NEED TO REDESIGN THIS, DROPDOWN WITH EACH OF THE SUBS FOR THAT CATEGORY WITH AN OPTION TO FILL IN NEW ONE THAT 
+  //CREATES A NEW SUBCAT IN RAILS 
   return (
-    <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+    <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpenSub} toggle={this.toggleSub}>
             <DropdownToggle caret>
-            {subCategory.title}
+            {subCategory}
             </DropdownToggle>
-            <DropdownMenu value="category" >
-                <DropdownItem header>Category</DropdownItem>
+            <DropdownMenu value="subCategory" >
+                <DropdownItem header>SubCategory</DropdownItem>
                 <DropdownItem onClick={() => {
                     this.changeCategory('Vegetables/Fruit')
                     }}>Fruit & Vegetables</DropdownItem>
@@ -396,7 +415,7 @@ render() {
   //console.log(this.props.FarmgoodFormData)
   //console.log(this.state.initialFarmgood.id)
   if (this.props.FarmgoodFormData != undefined && this.state.initialFarmgood.id != 0) { //(this.state.initialFarmgood.id != 0 ) {
-    let name, farmer, inventory, price, category, id
+    let name, farmer, inventory, price, category, subCategory, id
     
     //debugger 
     if (this.props.FarmgoodFormData.relationships) { //.category == undefined ) {
@@ -408,6 +427,7 @@ render() {
       inventory = this.props.FarmgoodFormData.attributes.inventory
       price = this.props.FarmgoodFormData.attributes.price
       category = this.props.FarmgoodFormData.attributes.category.title
+      subCategory = this.props.FarmgoodFormData.attributes["sub-category"].title
       id = Number(this.props.FarmgoodFormData.id )
     } else {
       //debugger 
@@ -420,6 +440,7 @@ render() {
       inventory = this.props.FarmgoodFormData.inventory
       price = this.props.FarmgoodFormData.price
       category = this.props.FarmgoodFormData.category 
+      subCategory = this.props.FarmgoodFormData["sub-category"]
       id = Number(this.props.FarmgoodFormData.id )
 
       //debugger 
@@ -431,7 +452,7 @@ render() {
       debugger 
     }
     const showCategory = this.category(category)
-    const showSubCategory = this.category(category)
+    const showSubCategory = this.category(subCategory)
 
     if (this.props.FarmgoodFormData.id != undefined) {
       //debugger 
