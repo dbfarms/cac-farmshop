@@ -23,13 +23,21 @@ class CheckBox extends Component {
     const { isChecked } = this.state;
     let checked = this.state.isChecked
 
-    //debugger 
+    /*
+    if (this.props.item[1] == true ) {
+      debugger 
+    }
+    */
+
     if (this.props.isEditing === true ) {  
       //if (label[1] === true) {
       //  checked = true 
         //this.props.checkedBoxes.add(label[0])
       //}
+      //debugger 
+      //console.log(this.props.checkedBoxes)
       if (this.props.checkedBoxes.has(label[0])) {
+        //debugger
         checked = true 
       } else {
         checked = false 

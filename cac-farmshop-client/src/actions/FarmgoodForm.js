@@ -9,6 +9,7 @@ export const updateFarmgoodFormData = FarmgoodFormData => {
 
   export const updateEditedFarmgoodFormData = FarmgoodFormData => {
     //console.log(FarmgoodFormData)
+    //debugger
     return {
       type: 'UPDATED_FARMGOOD_DATA',
       FarmgoodFormData

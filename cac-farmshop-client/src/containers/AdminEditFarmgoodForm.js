@@ -12,6 +12,7 @@ import { Route } from 'react-router-dom'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { deleteFarmGoods } from '../actions/farmGoods';
 import { Link } from 'react-router-dom';
+import { __esModule } from 'react-redux/lib/components/connectAdvanced';
 
 class AdminEditFarmgoodForm extends Component {
   constructor(props) {
@@ -75,12 +76,13 @@ componentWillMount = () => {
 
   const currentFarmgoodFormData = Object.assign({}, this.state.initialFarmgood, {
     days_array: days_array 
-   })
-   this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
+  })
+  this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
 }
 
 componentWillReceiveProps(nextProps){
   //debugger 
+  console.log(nextProps)
   if (nextProps.initialFarmgood != undefined && nextProps.initialFarmgood.id != this.state.initialFarmgood.id) {
     //debugger 
     this.setState({
@@ -92,49 +94,74 @@ componentWillReceiveProps(nextProps){
         category: nextProps.initialFarmgood.attributes.category,
         daysAvailable: nextProps.initialFarmgood.relationships.days.data, 
         farmer: nextProps.initialFarmgood.attributes.farmer.id
-
       }
     })
-  } 
 
-  //debugger 
-  //if (this.state.initialFarmgood.id != 0) {
-    //// doing this to set initial values in form, but right now it's breaking
-    /// 
-    //debugger
-    console.log("updating form in willreceiveprops")
-    //////////LEFT OFF HERE, NOT SURE WHERE TO PUT DAYS_ARRAY
     let days_array = []
     this.selectedCheckboxes = new Set();
-    this.state.initialFarmgood.daysAvailable.map(day => {
-      this.selectedCheckboxes.add(day.name);
-      days_array.push(day.name)
-    })
+    console.log(this.state.initialFarmgood)
+    if (this.props.FarmgoodFormData != undefined) {
+      debugger
+      this.props.FarmgoodFormData.relationships.days_array.map(day => {
+        this.selectedCheckboxes.add(day.name);
+        days_array.push(day.name)
+      })
+    } else {
+      this.state.initialFarmgood.daysAvailable.map(day => {
+        this.selectedCheckboxes.add(day.name);
+        days_array.push(day.name)
+      })
+    }
+    
+    
+    //console.log(days_array)
+    //debugger 
+    if (this.props.FarmgoodFormData) {
+      debugger 
+      this.props.updateEditedFarmgoodFormData(this.props.FarmgoodFormData)
+
+      const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
+        days_array: days_array 
+      })
+      this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
+
+    } else {
+      this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
+
+      const currentFarmgoodFormData = Object.assign({}, this.state.initialFarmgood, {
+        days_array: days_array 
+      })
+      this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
+    }
+    
 
     //debugger 
-    if (this.state.FarmgoodFormData) {
-      debugger 
-    }
+
+  } 
+
+  //if (this.state.initialFarmgood.id != 0) {
+    console.log("updating form in willreceiveprops")
+    let days_array = []
+    //this.selectedCheckboxes = new Set();
     //debugger 
+    if (this.props.FarmgoodFormData != undefined) {
+      //debugger 
+      if (this.props.FarmgoodFormData.relationships) {
+        //debugger 
+        this.props.FarmgoodFormData.relationships["days-available"].data.map(day => {
+          this.selectedCheckboxes.add(day.name);
+          days_array.push(day.name)
+        })
+      } else {
+        //debugger 
+      }
+    }
+    
     ///////////////////////////////////////////////////////
         
    ////
   //}
-  //var noChanges = true; 
-
-  //this.state.initialFarmgood
-
-  /*
-  this.props.updateEditedFarmgoodFormData(this.state.initialFarmgood)
-
-    const currentFarmgoodFormData = Object.assign({}, this.state.initialFarmgood, {
-      days_array: days_array 
-    })
-    //debugger 
-
-    console.log(currentFarmgoodFormData)
-    this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
-    */
+  
 }
 
 changeCategory = event => {
@@ -157,6 +184,7 @@ makeCheckBoxes() {
   var thisWeek = this.state.theWeek
   //debugger 
   if (this.state.initialFarmgood.relationships != undefined ) {
+    //possibly old code and may never get here?
     var oldDays = this.state.initialFarmgood.relationships.days.data.filter(day => {
       for (let i = 0; i< thisWeek.length; i++) {
           if (day.name === thisWeek[i][0]) {
@@ -166,11 +194,29 @@ makeCheckBoxes() {
           }
       }
     })
+  } else if (this.props.FarmgoodFormData != undefined ) {
+    //debugger
+    if (this.props.FarmgoodFormData["days_array"]) {
+      var oldDays = this.props.FarmgoodFormData["days_array"].filter(day => {
+        for (let i = 0; i< thisWeek.length; i++) {
+          //debugger 
+          if (day === thisWeek[i][0]) { //used to be day.name
+            thisWeek[i][1] = true 
+          } else {
+            thisWeek[i][1] = false 
+          }
+        }
+      })
+    }
+
   }
   
 
  //debugger 
   return thisWeek.map(day => {
+    //debugger 
+    //console.log(this.selectedCheckboxes)
+    //console.log(this.props.FarmgoodFormData["daysAvailable"])
     return (
         <CheckBox 
           item={day} 
@@ -187,25 +233,24 @@ makeCheckBoxes() {
 toggleCheckbox = (event) => {
   
   let days_array
-  debugger 
+  //debugger 
   if (this.props.FarmgoodFormData.days_array == undefined) {
+    //debugger 
     days_array = this.props.FarmgoodFormData.relationships["days-available"].data  
   } else {
+    //debugger 
     days_array = this.props.FarmgoodFormData.days_array 
   }
   
   //debugger 
+  console.log(this)
+  console.log(event[0])
 
   if (this.selectedCheckboxes.has(event[0])) {
     this.selectedCheckboxes.delete(event[0]);
-    this.days_array = this.props.FarmgoodFormData.days_array.filter(day => day !== event[0])
+    days_array = this.props.FarmgoodFormData.relationships.days_array.filter(day => day !== event[0])
     
     //is the below even necessary?
-    this.setState({
-      initialFarmgood: {
-        days_array: this.days_array
-      }
-    })
 
     const indexOfDay = this.state.theWeek.map((day, index) => {
       if (event[0] === day[0]) {
@@ -216,31 +261,28 @@ toggleCheckbox = (event) => {
     const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
      daysAvailable: this.selectedCheckboxes,
      days_array: this.days_array 
-     
     })
+    //debugger 
     this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
   } else {
     
     this.selectedCheckboxes.add(event[0]);
+    //console.log(this.selectedCheckboxes)
     
-    //NEED TO CREATED DAYSAVAILABLE AND DAYS_ARRAY FOR INITIAL FARMGOOD BUT IS THIS BEST PLACE FOR IT?
-    /* 
-    if (this.props.FarmgoodFormData.days_array == undefined ) {
-      let currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-        daysAvailable: [],
-        days_array: []
-      })
-    }
-    */
-    //debugger 
     days_array = days_array.concat(event[0]) //this.props.FarmgoodFormData.days_array.concat(event[0])
     
-    //debugger 
-    const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-      daysAvailable: this.selectedCheckboxes, //[this.state.days]
-      days_array: days_array
+    //debugger  //check if below works!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
+    const currentFarmgoodFormData1 = Object.assign({}, this.props.FarmgoodFormData, {
+      relationships: {
+        ...this.props.FarmgoodFormData.relationships,
+        daysAvailable: this.selectedCheckboxes, //[this.state.days]
+        days_array: days_array
+      }
     })
-    this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
+
+    //debugger 
+
+    this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData1)
   }
 }
 
@@ -249,22 +291,33 @@ handleEditChange = event => {
 
   const { name, value } = event.target;
   //const id = this.props.location.farmGood.id
-
-  //debugger 
   let currentFarmgoodFormData 
+ 
+  //debugger 
+  
   if (this.props.FarmgoodFormData.attributes == undefined ) {
+    debugger 
     currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
       [name]: value //, 
       //id: id 
     })
   } else {
-    currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData.attributes, {
-      [name]: value //, 
+    debugger 
+    //if (name)
+    currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, { //.attributes, {
+      attributes: {
+        ...this.props.FarmgoodFormData.attributes,
+        [name]: value, //, 
+        //days_array: this.props.FarmgoodFormData.relationships["days-available"].data
+      },
+      //relationships: {
+      //  ...this.props.relationships,
+      //}
       //id: id 
     })
   }
 
-  //debugger 
+  debugger 
 
   this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
 }
@@ -286,6 +339,7 @@ handleCancel = () =>{
 }
 
 category(category){
+  console.log(category)
   return (
     <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
@@ -373,63 +427,122 @@ render() {
     //debugger 
     console.log("loading form")
     //debugger 
-
+    if (category == undefined) {
+      debugger 
+    }
     const showCategory = this.category(category)
     const showSubCategory = this.category(category)
 
-    return (
-      <div className="formFarmgood">
-        
-        Edit a Farmgood...
-        <form onSubmit={this.handleEditSubmit.bind(this)}>
-            <div>
-            <label htmlFor="farmgood_id" />
-            <input type="hidden" 
-                    name={this.state.initialFarmgood.id}
-                    value={this.state.initialFarmgood.id}
-                    ref={(input) => { this.actionInput = input }} 
-            />
-            <label htmlFor="farmgood_name">Name of Farm Good:</label>
+    if (this.props.FarmgoodFormData.id != undefined) {
+      //debugger 
+      return (
+        <div className="formFarmgood">
+          
+          Edit a Farmgood...
+          <form onSubmit={this.handleEditSubmit.bind(this)}>
+              <div>
+              <label htmlFor="farmgood_id" />
+              <input type="hidden" 
+                      name={this.props.FarmgoodFormData.id}
+                      value={this.props.FarmgoodFormData.id}
+                      ref={(input) => { this.actionInput = input }} 
+              />
+              <label htmlFor="farmgood_name">Name of Farm Good:</label>
+              <input
+                  type="text"
+                  onChange={this.handleEditChange.bind(this)}
+                  name="name"
+                  value={name}
+              />
+              </div>
+              {/* eventually the id will only be available for admin users to change things for farmers*/}
+              <label htmlFor="farmgood_quantity">Farmer for now (but eventually quantity)":</label>
+              <input
+              type="number"
+              onChange={this.handleEditChange.bind(this)}
+              name="farmer"
+              value={farmer.id}
+              />
+              <br />
+            <label htmlFor="farmgood_inventory">Quantity available:</label>
             <input
-                type="text"
-                onChange={this.handleEditChange.bind(this)}
-                name="name"
-                value={name}
-            />
-            </div>
-            {/* eventually the id will only be available for admin users to change things for farmers*/}
-            <label htmlFor="farmgood_quantity">Farmer for now (but eventually quantity)":</label>
-            <input
-            type="number"
-            onChange={this.handleEditChange.bind(this)}
-            name="farmer"
-            value={this.state.initialFarmgood.farmer.id}
+              type="number"
+              onChange={this.handleEditChange.bind(this)}
+              name="inventory"
+              value={inventory}
             />
             <br />
-          <label htmlFor="farmgood_inventory">Quantity available:</label>
-          <input
-            type="number"
-            onChange={this.handleEditChange.bind(this)}
-            name="inventory"
-            value={inventory}
-          />
-          <br />
-          <label htmlFor="farmgood_price">Price:</label>
-          <input 
-            type="number"
-            onChange={this.handleEditChange.bind(this)}
-            name="price"
-            value={price}
-          />
-          {showCategory}
-          {showSubCategory}
-            {boxes}
-            <button type="submit">Edit Farmgood</button>
-        </form>
-        <button name="remove item" onClick={() => this.handleDelete(this.props.location.farmGood) }>remove item</button> 
-        <button name="cancel edit" onClick={() => this.handleCancel() }>cancel edit</button>
-      </div>
-    )
+            <label htmlFor="farmgood_price">Price:</label>
+            <input 
+              type="number"
+              onChange={this.handleEditChange.bind(this)}
+              name="price"
+              value={price}
+            />
+            {showCategory}
+            {showSubCategory}
+              {boxes}
+              <button type="submit">Edit Farmgood</button>
+          </form>
+          <button name="remove item" onClick={() => this.handleDelete(this.props.location.farmGood) }>remove item</button> 
+          <button name="cancel edit" onClick={() => this.handleCancel() }>cancel edit</button>
+        </div>
+      )
+    } else { 
+      return (
+        <div className="formFarmgood">
+          
+          Edit a Farmgood...
+          <form onSubmit={this.handleEditSubmit.bind(this)}>
+              <div>
+              <label htmlFor="farmgood_id" />
+              <input type="hidden" 
+                      name={this.state.initialFarmgood.id}
+                      value={this.state.initialFarmgood.id}
+                      ref={(input) => { this.actionInput = input }} 
+              />
+              <label htmlFor="farmgood_name">Name of Farm Good:</label>
+              <input
+                  type="text"
+                  onChange={this.handleEditChange.bind(this)}
+                  name="name"
+                  value={name}
+              />
+              </div>
+              {/* eventually the id will only be available for admin users to change things for farmers*/}
+              <label htmlFor="farmgood_quantity">Farmer for now (but eventually quantity)":</label>
+              <input
+              type="number"
+              onChange={this.handleEditChange.bind(this)}
+              name="farmer"
+              value={this.state.initialFarmgood.farmer.id}
+              />
+              <br />
+            <label htmlFor="farmgood_inventory">Quantity available:</label>
+            <input
+              type="number"
+              onChange={this.handleEditChange.bind(this)}
+              name="inventory"
+              value={inventory}
+            />
+            <br />
+            <label htmlFor="farmgood_price">Price:</label>
+            <input 
+              type="number"
+              onChange={this.handleEditChange.bind(this)}
+              name="price"
+              value={price}
+            />
+            {showCategory}
+            {showSubCategory}
+              {boxes}
+              <button type="submit">Edit Farmgood</button>
+          </form>
+          <button name="remove item" onClick={() => this.handleDelete(this.props.location.farmGood) }>remove item</button> 
+          <button name="cancel edit" onClick={() => this.handleCancel() }>cancel edit</button>
+        </div>
+      )
+    }
   } else {
     return (
       <div>
@@ -443,7 +556,7 @@ render() {
 const mapStateToProps = state => {
   console.log("mstp")
   console.log(state.FarmgoodFormData)
-  //console.log(state)
+  console.log(state)
   //debugger 
 
   if (state.FarmgoodFormData.isEditing == false) {
@@ -457,7 +570,7 @@ const mapStateToProps = state => {
   } else {
     console.log("right place")
     //debugger 
-    if (state.FarmgoodFormData.name == "") {
+    if (state.FarmgoodFormData.name == "") { //gonna need to change this
       return {
         initialFarmgood: state.farmGoods.editing.data, //.attributes,
         FarmgoodFormData: state.farmGoods.editing.data
