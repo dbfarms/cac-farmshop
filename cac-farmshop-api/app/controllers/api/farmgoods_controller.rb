@@ -46,7 +46,7 @@ class Api::FarmgoodsController < ApplicationController
         set_farmgood 
         category_name = params["farmGood"]["category"]
         @farmgood.days = []
-        #byebug
+        byebug
         params["farmGood"]["days_array"].each do |day|
             @farmgood.days << Day.find_by(name: day)
         end 

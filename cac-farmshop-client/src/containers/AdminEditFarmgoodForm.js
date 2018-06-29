@@ -159,7 +159,7 @@ componentWillReceiveProps(nextProps){
     }
 }
 
-changeCategory = event => {
+changeCategory = (key, event) => {
   //debugger 
   this.setState({
     initialFarmgood: {
@@ -170,13 +170,18 @@ changeCategory = event => {
   const name = this.state.category 
   const value = event 
   //
+  
+  const updatedCat = {id: key, title: value}
   const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-    [name]: value
+    attributes: {
+      ...this.props.FarmgoodFormData.attributes,
+      [name]: updatedCat, //, 
+    }
   })
   this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
 }
 
-changeSubCategory = event => {
+changeSubCategory = event => { //subcat and cat dropdown are still overlapping for some reason
   //debugger 
   this.setState({
     initialFarmgood: {
@@ -365,6 +370,27 @@ category(category){
             <DropdownMenu value="category" >
                 <DropdownItem header>Category</DropdownItem>
                 <DropdownItem onClick={() => {
+                    this.changeCategory(1, 'Vegetables/Fruit')
+                    }}>Fruit & Vegetables</DropdownItem>
+                <DropdownItem onClick={() => {
+                    this.changeCategory(3, 'Meat')
+                    }}>Meat</DropdownItem>
+                 <DropdownItem onClick={() => {
+                    this.changeCategory(4, 'Dairy')
+                    }}>Dairy</DropdownItem>
+                 <DropdownItem onClick={() => {
+                    this.changeCategory(2, 'Eggs')
+                    }}>Eggs</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+  )
+}
+
+/*
+
+<DropdownMenu value="category" >
+                <DropdownItem header>Category</DropdownItem>
+                <DropdownItem onClick={() => {
                     this.changeCategory('Vegetables/Fruit')
                     }}>Fruit & Vegetables</DropdownItem>
                 <DropdownItem onClick={() => {
@@ -377,9 +403,8 @@ category(category){
                     this.changeCategory('Eggs')
                     }}>Eggs</DropdownItem>
             </DropdownMenu>
-          </Dropdown>
-  )
-}
+
+*/
 
 subCategory(subCategory){
   //NOTES: NEED TO REDESIGN THIS, DROPDOWN WITH EACH OF THE SUBS FOR THAT CATEGORY WITH AN OPTION TO FILL IN NEW ONE THAT 
@@ -411,7 +436,6 @@ subCategory(subCategory){
 render() {
   //<EditFarmGoodCard farmGood={this.props.location.farmGood}/> //THIS MIGHT REPLACE CURRENTLY USED FARMGOODCARD ONE DAY I DUNNO
   const boxes = this.makeCheckBoxes();
-   //eventually need to add category? anything else?
   //console.log(this.props.FarmgoodFormData)
   //console.log(this.state.initialFarmgood.id)
   if (this.props.FarmgoodFormData != undefined && this.state.initialFarmgood.id != 0) { //(this.state.initialFarmgood.id != 0 ) {
