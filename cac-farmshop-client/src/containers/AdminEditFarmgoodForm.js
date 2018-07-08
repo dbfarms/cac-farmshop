@@ -15,6 +15,7 @@ import CheckBox from '../components/common/CheckBox'
 import { Route, Redirect, Link } from 'react-router-dom'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { deleteFarmGoods } from '../actions/farmGoods';
+import {getCategories} from '../actions/CategoryActions';
 //import { Link } from 'react-router-dom';
 
 class AdminEditFarmgoodForm extends Component {
@@ -26,6 +27,7 @@ class AdminEditFarmgoodForm extends Component {
     //debugger
     this.changeCategory = this.changeCategory.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.subCattoggle = this.subCattoggle.bind(this)
 
     if (props.location.farmGood == undefined) {
      // debugger 
@@ -48,7 +50,9 @@ class AdminEditFarmgoodForm extends Component {
         ],
         days_array: [],
         dropdownOpen: false,
+        dropdownSubCatOpen: false,
         category: 'category',
+        categories: this.props.categories,
         firstDayPush: 0,
         days:"daysAvailable", //THIS IS FOR RAILS PARAMS / FARMGOODFORMDATA
         initialFarmgood: {
@@ -67,14 +71,23 @@ class AdminEditFarmgoodForm extends Component {
 
 toggle(){
   this.setState({
-      dropdownOpen: !this.state.dropdownOpen,
+    dropdownOpen: !this.state.dropdownOpen,
   });
+}
+
+subCattoggle(){
+  this.setState({
+    dropdownSubCatOpen: !this.state.dropdownSubCatOpen,
+});
 }
 
 componentWillMount = () => {
   //debugger
 
   //debugger 
+
+  this.props.getCategories();
+
   if (this.state != null) {
     let days_array = []
     this.selectedCheckboxes = new Set();
@@ -93,6 +106,13 @@ componentWillMount = () => {
   } else {
     this.props.history.push('/farmgoods') 
   }
+}
+
+componentWillReceiveProps(nextProps){
+  console.log(nextProps)
+  this.setState({
+    categories: nextProps.categories
+  })
 }
 
 changeCategory = (key, event) => {
@@ -263,110 +283,82 @@ hideSub = (event) => {
 category(category){
   return (
     <Dropdown className="dropdownFGForm" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-            <DropdownToggle caret>
-            {category}
-            </DropdownToggle>
-            <DropdownMenu value="category" >
-                <DropdownItem header>Category</DropdownItem>
-                <DropdownItem onClick={() => {
-                    this.changeCategory(1, 'Vegetables/Fruit')
-                    }}>Fruit & Vegetables</DropdownItem>
-                <DropdownItem onClick={() => {
-                    this.changeCategory(3, 'Meat')
-                    }}>Meat</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.changeCategory(4, 'Dairy')
-                    }}>Dairy</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.changeCategory(2, 'Eggs')
-                    }}>Eggs</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        
-          /*
-      <div>
-        <ul className="fgcatcol">
-        <li>
-          <Dropdown className="dropdownFGForm" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-          <DropdownToggle caret>
-          {category}
-          </DropdownToggle>
-          <DropdownMenu value="category">
-              <DropdownItem header>Category</DropdownItem>
-              <div onMouseLeave={this.hideSub}>
-                <DropdownItem onMouseEnter={() => {
-                  this.showSub(1, 'Vegetables/Fruit')
-                }}
-
-                onClick={() => {
-                    this.changeCategory(1, 'Vegetables/Fruit')
-                    }}>Fruit & Vegetables</DropdownItem>
-              </div>
-              <DropdownItem onClick={() => {
-                  this.changeCategory(3, 'Meat')
-                  }}>Meat</DropdownItem>
-                <DropdownItem onClick={() => {
-                  this.changeCategory(4, 'Dairy')
-                  }}>Dairy</DropdownItem>
-                <DropdownItem onClick={() => {
-                  this.changeCategory(2, 'Eggs')
-                  }}>Eggs</DropdownItem>
-          </DropdownMenu>
-          </Dropdown>
-        </li>
-        {this.state.showSub == true &&
-        <li>
-            <ul>
-              <div className="subPop">
-                test
-              </div>
-            </ul>
-        </li>
-        }
-        </ul>
-      </div>
-      */
+      <DropdownToggle caret>
+      {category}
+      </DropdownToggle>
+      <DropdownMenu value="category" >
+        <DropdownItem header>Category</DropdownItem>
+        <DropdownItem onClick={() => {
+            this.changeCategory(1, 'Vegetables/Fruit')
+            }}>Fruit & Vegetables</DropdownItem>
+        <DropdownItem onClick={() => {
+            this.changeCategory(3, 'Meat')
+            }}>Meat</DropdownItem>
+        <DropdownItem onClick={() => {
+          this.changeCategory(4, 'Dairy')
+          }}>Dairy</DropdownItem>
+        <DropdownItem onClick={() => {
+          this.changeCategory(2, 'Eggs')
+          }}>Eggs</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
   )
 }
 
 subCategory(category, subCategory){
-  //NOTES: NEED TO REDESIGN THIS, DROPDOWN WITH EACH OF THE SUBS FOR THAT CATEGORY WITH AN OPTION TO FILL IN NEW ONE THAT 
-  //CREATES A NEW SUBCAT IN RAILS 
+  //NOTES: 
+  // -NEW option, but don't include for farmers, just admin
+  // -create more subcategories 
+  // -when you swtich categories, subcat needs to be reset
   let state = []
-  switch(category) {
-    case 'Vegetables/Fruit':
-      debugger
-      return (
-        <ul>
-        </ul>
-      )
-    
-    default: 
-      return state
-  }
+  //switch(category) {
+  //  case 'Vegetables/Fruit':
+      const categories = this.state.categories
+      function includeCategory(categories, category) {
+        //debugger
+        return categories.filter( cat => cat.attributes.title == category)
+        
+      }
 
-  return (
-    <Dropdown className="dropdownFGForm" isOpen={this.state.dropdownOpenSub} toggle={this.toggleSub}>
-            <DropdownToggle caret>
+      const selectedCat = includeCategory(categories, category)
+      //debugger
+      console.log(selectedCat)
+      if (selectedCat.length == 0) {
+        return 
+      } else {
+        return (
+          <ul className="fgcatcol">
+            <li>
+              <Dropdown className="dropdownFGForm" isOpen={this.state.dropdownSubCatOpen} toggle={this.subCattoggle}>
+              <DropdownToggle caret>
               {subCategory}
-            </DropdownToggle>
-            <DropdownMenu value="subCategory" >
-                <DropdownItem header>SubCategory</DropdownItem>
-                <DropdownItem onClick={() => {
-                    this.changeCategory('Vegetables/Fruit')
-                    }}>Fruit & Vegetables</DropdownItem>
-                <DropdownItem onClick={() => {
-                    this.changeCategory('Meat')
-                    }}>Meat</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.changeCategory('Dairy')
-                    }}>Dairy</DropdownItem>
-                 <DropdownItem onClick={() => {
-                    this.changeCategory('Eggs')
-                    }}>Eggs</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-  )
+              </DropdownToggle>
+              <DropdownMenu value="subCategory">
+                  <DropdownItem header>SubCategory</DropdownItem>
+                  
+                  {selectedCat[0].attributes["sub-categories"].map((subcat, key) => {
+                    //debugger 
+                    return (
+                      
+                      <li key={key}>
+                      <DropdownItem onClick={() => {
+                        this.changeSubCategory(key, subcat)}}>
+                        {subcat.title}
+                      </DropdownItem>
+                      </li>
+                    )
+                  })}
+              </DropdownMenu>
+              </Dropdown>
+            </li>
+          </ul>
+        )
+      }
+      
+    
+    //default: 
+    //  return state
+  //}
 }
 
 
@@ -451,9 +443,12 @@ render() {
 }
 
 const mapStateToProps = state => {
-return {
-  FarmgoodFormData: state.FarmgoodFormData
-}
+  console.log(state)
+  //debugger 
+  return {
+    FarmgoodFormData: state.FarmgoodFormData,
+    categories: state.categories
+  }
 }
 
 /*
@@ -468,6 +463,7 @@ export default connect(mapStateToProps, {
 updateEditedFarmgoodFormData,
 callToEditFarmgood,
 deleteFarmGoods,
+getCategories,
 //updateFarmgoodFormData,
 })(AdminEditFarmgoodForm);
 

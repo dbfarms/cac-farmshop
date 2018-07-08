@@ -20,6 +20,8 @@ import session from './reducers/sessionReducer';
 import users from './reducers/sessionReducer';
 import customers from './reducers/sessionReducer';
 import orders from './reducers/orderReducer';
+import categories from './reducers/categoryReducer';
+
 //import order from './reducers/orderReducer';
 //import farmerLineItems from './reducers/lineitemsReducer';
 //import farmerOrder from './reducers/orderReducer';
@@ -28,6 +30,7 @@ const appReducer = combineReducers({
   carts,
   cart,
   cartFormData,
+  categories,
   farmers,
   farmGood,
   farmGoods,
