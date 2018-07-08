@@ -224,6 +224,27 @@
   z-index: 1;
 }
 
+.dropdownFGForm {
+  display: block;
+  margin-top: 0px;
+  max-width: 100%;
+  background: rgb(241, 208, 17);
+  z-index: 1;
+}
+
+.fgcatcol {
+  display: inline;
+}
+
+.subPop {
+  transition: transform 100ms ease-in-out;
+  background-color: blue;
+  z-index: 2;
+  width: 100px;
+  height: 100px;
+  display: block;
+}
+
 /*
 @media screen and (min-width: 1594px) {
   .dropdown {

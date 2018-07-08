@@ -60,6 +60,7 @@ class AdminEditFarmgoodForm extends Component {
           daysAvailable: this.props.location.farmGood.relationships.days.data,
           subCategory: props.location.farmGood.attributes["sub-category"].title
         },
+        showSub: false,
     }
     }
 }
@@ -94,29 +95,6 @@ componentWillMount = () => {
   }
 }
 
-/*
-changeCategory = event => {
-  //debugger 
-  this.setState({
-    initialFarmgood: {
-      category: event
-    }
-    //value: event
-  })
-  const name = this.state.category 
-  const value = event 
-  const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-    [name]: value
-  })
-  this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
-}
-*/
-
-/////// need to make below work, swapping out from above. also need to add updated
-// category edit change in form itself from below
-// and add subcat
-//
-
 changeCategory = (key, event) => {
   //debugger 
   this.setState({
@@ -131,10 +109,7 @@ changeCategory = (key, event) => {
   
   const updatedCat = {id: key, title: value}
   const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
-    attributes: {
-      ...this.props.FarmgoodFormData.attributes,
-      [name]: updatedCat, //, 
-    }
+    [name]: value, //, 
   })
   this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
 }
@@ -256,13 +231,38 @@ handleDelete(farmGood){
   
 }
 
-handleCancel = () =>{
+handleCancel = () => {
   this.props.history.push('/farmgoods') 
 }
 
+/*
+showSub(key, event) {
+  //debugger
+  let state = []
+  switch(event) {
+    case 'Vegetables/Fruit':
+      //debugger
+      return (
+        this.setState({
+          showSub: true
+        })
+      )
+    
+    default: 
+      return state
+  }
+}
+
+hideSub = (event) => {
+  this.setState({
+    showSub: false
+  })
+}
+*/
+
 category(category){
   return (
-    <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+    <Dropdown className="dropdownFGForm" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
             {category}
             </DropdownToggle>
@@ -282,16 +282,73 @@ category(category){
                     }}>Eggs</DropdownItem>
             </DropdownMenu>
           </Dropdown>
+        
+          /*
+      <div>
+        <ul className="fgcatcol">
+        <li>
+          <Dropdown className="dropdownFGForm" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+          <DropdownToggle caret>
+          {category}
+          </DropdownToggle>
+          <DropdownMenu value="category">
+              <DropdownItem header>Category</DropdownItem>
+              <div onMouseLeave={this.hideSub}>
+                <DropdownItem onMouseEnter={() => {
+                  this.showSub(1, 'Vegetables/Fruit')
+                }}
+
+                onClick={() => {
+                    this.changeCategory(1, 'Vegetables/Fruit')
+                    }}>Fruit & Vegetables</DropdownItem>
+              </div>
+              <DropdownItem onClick={() => {
+                  this.changeCategory(3, 'Meat')
+                  }}>Meat</DropdownItem>
+                <DropdownItem onClick={() => {
+                  this.changeCategory(4, 'Dairy')
+                  }}>Dairy</DropdownItem>
+                <DropdownItem onClick={() => {
+                  this.changeCategory(2, 'Eggs')
+                  }}>Eggs</DropdownItem>
+          </DropdownMenu>
+          </Dropdown>
+        </li>
+        {this.state.showSub == true &&
+        <li>
+            <ul>
+              <div className="subPop">
+                test
+              </div>
+            </ul>
+        </li>
+        }
+        </ul>
+      </div>
+      */
   )
 }
 
-subCategory(subCategory){
+subCategory(category, subCategory){
   //NOTES: NEED TO REDESIGN THIS, DROPDOWN WITH EACH OF THE SUBS FOR THAT CATEGORY WITH AN OPTION TO FILL IN NEW ONE THAT 
   //CREATES A NEW SUBCAT IN RAILS 
+  let state = []
+  switch(category) {
+    case 'Vegetables/Fruit':
+      debugger
+      return (
+        <ul>
+        </ul>
+      )
+    
+    default: 
+      return state
+  }
+
   return (
-    <Dropdown className="form-dropdown" isOpen={this.state.dropdownOpenSub} toggle={this.toggleSub}>
+    <Dropdown className="dropdownFGForm" isOpen={this.state.dropdownOpenSub} toggle={this.toggleSub}>
             <DropdownToggle caret>
-            {subCategory}
+              {subCategory}
             </DropdownToggle>
             <DropdownMenu value="subCategory" >
                 <DropdownItem header>SubCategory</DropdownItem>
@@ -327,7 +384,7 @@ render() {
     const { name, farmer, inventory, price, category, subCategory, id } = this.props.FarmgoodFormData; //eventually need to add category? anything else?
      
     const showCategory = this.category(category)
-    const showSubCategory = this.category(subCategory)
+    const showSubCategory = this.subCategory(category, subCategory)
     
     return (
       <div className="formFarmgood">
@@ -373,8 +430,14 @@ render() {
             name="price"
             value={price}
           />
-          {showCategory}
-          {showSubCategory}
+          <ul>
+            <li>
+              {showCategory}
+            </li>
+            <li>
+              {showSubCategory}
+            </li>
+          </ul>
           <br />
             {boxes}
             <button type="submit">Edit Farmgood</button>

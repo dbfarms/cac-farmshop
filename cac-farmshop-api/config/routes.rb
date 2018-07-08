@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   
   namespace :api do
     resources :carts
+    resources :categories
     resources :farmers do
       resources :farmgoods, only: [:index, :show]
     end 
