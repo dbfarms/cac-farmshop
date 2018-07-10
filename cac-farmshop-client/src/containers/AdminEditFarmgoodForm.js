@@ -26,6 +26,7 @@ class AdminEditFarmgoodForm extends Component {
 
     //debugger
     this.changeCategory = this.changeCategory.bind(this);
+    this.changeSubCategory = this.changeSubCategory.bind(this);
     this.toggle = this.toggle.bind(this);
     this.subCattoggle = this.subCattoggle.bind(this)
 
@@ -134,7 +135,7 @@ changeCategory = (key, event) => {
   this.props.updateEditedFarmgoodFormData(currentFarmgoodFormData)
 }
 
-changeSubCategory = event => { //subcat and cat dropdown are still overlapping for some reason
+changeSubCategory = (key, event) => { 
   //debugger 
   this.setState({
     initialFarmgood: {
@@ -145,7 +146,7 @@ changeSubCategory = event => { //subcat and cat dropdown are still overlapping f
   const name = this.state.subCategory 
   const value = event 
 
-  debugger 
+  debugger //NOT UPDATING
   const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
     [name]: value
   })
@@ -232,6 +233,9 @@ handleEditChange = event => {
 
   const { name, value } = event.target;
   //const id = this.props.location.farmGood.id
+
+  debugger
+
   const currentFarmgoodFormData = Object.assign({}, this.props.FarmgoodFormData, {
     [name]: value //, 
     //id: id 
@@ -326,9 +330,13 @@ subCategory(category, subCategory){
       if (selectedCat.length == 0) {
         return 
       } else {
+        //debugger 
+        if (category != this.props.location.farmGood.attributes.category.title) {
+          subCategory = "subcategory"
+        }
         return (
           <ul className="fgcatcol">
-            <li>
+            <div>
               <Dropdown className="dropdownFGForm" isOpen={this.state.dropdownSubCatOpen} toggle={this.subCattoggle}>
               <DropdownToggle caret>
               {subCategory}
@@ -341,16 +349,16 @@ subCategory(category, subCategory){
                     return (
                       
                       <li key={key}>
-                      <DropdownItem onClick={() => {
-                        this.changeSubCategory(key, subcat)}}>
-                        {subcat.title}
-                      </DropdownItem>
+                        <DropdownItem onClick={() => {
+                          this.changeSubCategory(key, subcat)}}>
+                          {subcat.title}
+                        </DropdownItem>
                       </li>
                     )
                   })}
               </DropdownMenu>
               </Dropdown>
-            </li>
+            </div>
           </ul>
         )
       }
